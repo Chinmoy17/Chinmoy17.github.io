@@ -1,7 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
+import TravelBlogCard from "./TravelBlogCard";
 
-// Example blog data
 const blogs = [
   {
     title: "Trip to Darjeeling",
@@ -12,7 +12,7 @@ const blogs = [
     caption: "A beautiful sunrise at Tiger Hill, Darjeeling.",
   },
   {
-    title: "Exploring Bandarbans",
+    title: "Exploring Sundarbans",
     images: [
       require("../../Assets/Travel/sundarban1.jpg"),
       require("../../Assets/Travel/sundarban2.jpg"),
@@ -23,30 +23,18 @@ const blogs = [
 
 function TravelBlog() {
   return (
-    <Container className="travel-blog-section" style={{ paddingTop: "80px" }} >
+    <Container className="travel-blog-section" style={{ paddingTop: "80px" }}>
       <h1 className="project-heading">
         My <strong className="purple">Travel Blogs</strong>
       </h1>
       <Row>
         {blogs.map((blog, idx) => (
           <Col md={6} key={idx} style={{ marginBottom: "30px" }}>
-            <Card>
-              <Card.Body>
-                <Card.Title>{blog.title}</Card.Title>
-                <Row>
-                  {blog.images.map((img, i) => (
-                    <Col xs={6} key={i}>
-                      <img
-                        src={img}
-                        alt={blog.title}
-                        style={{ width: "100%", marginBottom: "10px" }}
-                      />
-                    </Col>
-                  ))}
-                </Row>
-                <Card.Text style={{ marginTop: "10px" }}>{blog.caption}</Card.Text>
-              </Card.Body>
-            </Card>
+            <TravelBlogCard
+              title={blog.title}
+              images={blog.images}
+              caption={blog.caption}
+            />
           </Col>
         ))}
       </Row>
