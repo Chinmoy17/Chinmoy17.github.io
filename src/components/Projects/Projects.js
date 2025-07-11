@@ -9,6 +9,8 @@ import chatify from "../../Assets/Projects/chatify.png";
 import suicide from "../../Assets/Projects/suicide.png";
 import bitsOfCode from "../../Assets/Projects/blog.png";
 import agent from "../../Assets/Projects/agent.jpg";
+import vowel from "../../Assets/Projects/vowel.jpg";
+import blog from "../../Assets/Projects/blog.jpg";
 function Projects() {
   return (
     <Container fluid className="project-section">
@@ -34,23 +36,23 @@ function Projects() {
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={bitsOfCode}
+              imgPath={vowel}
               isBlog={false}
-              title="Bits-0f-C0de"
-              description="My personal blog page build with Next.js and Tailwind Css which takes the content from makdown files and renders it using Next.js. Supports dark mode and easy to write blogs using markdown."
-              ghLink="https://github.com/soumyajit4419/Bits-0f-C0de"
-              demoLink="https://blogs.soumya-jit.tech/"
+              title="Bangla Vowel Detection Using Deep Learning"
+              description="This project uses deep learning to detect Bangla vowels from images using the Ekushe dataset. It employs a pre-trained ResNet50 model with data augmentation and preprocessing techniques to boost accuracy. The solution achieves 97.76% test accuracy and includes workflows for training, evaluation, and predicting new images."
+              ghLink="https://github.com/Chinmoy17/Bangla-Vowels-Detection-with-Transfer-Learning-DL"
+              // demoLink="https://blogs.soumya-jit.tech/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={editor}
+              imgPath={blog}
               isBlog={false}
-              title="Editor.io"
-              description="Online code and markdown editor build with react.js. Online Editor which supports html, css, and js code with instant view of website. Online markdown editor for building README file which supports GFM, Custom Html tags with toolbar and instant preview.Both the editor supports auto save of work using Local Storage"
-              ghLink="https://github.com/soumyajit4419/Editor.io"
-              demoLink="https://editor.soumya-jit.tech/"              
+              title="Blog Generator with LLMs"
+              description="This project leverages large language models (LLMs) to generate blog content based on user prompts. It includes features like text formatting, image suggestions, and SEO optimization tips."
+              ghLink="https://github.com/Chinmoy17/Blog_Generator"
+              // demoLink="https://editor.soumya-jit.tech/"              
             />
           </Col>
 

@@ -7,6 +7,10 @@ import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
 import { CgGitFork } from "react-icons/cg";
 import { ImBlog } from "react-icons/im";
+// import { Link } from "react-router-dom";
+
+
+
 import {
   AiFillStar,
   AiOutlineHome,
@@ -94,9 +98,9 @@ function NavBar() {
 
             <Nav.Item>
               <Nav.Link
-                href="https://chinmoy17.github.io/"
-                target="_blank"
-                rel="noreferrer"
+                as={Link}
+                to="/travel-blog"
+                onClick={() => updateExpanded(false)}
               >
                 <ImBlog style={{ marginBottom: "2px" }} /> Blogs
               </Nav.Link>
