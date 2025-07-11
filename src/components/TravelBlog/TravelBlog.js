@@ -12,18 +12,18 @@ const blogs = [
     caption: "A beautiful sunrise at Tiger Hill, Darjeeling.",
   },
   {
-    title: "Exploring Sundarbans",
+    title: "Exploring Bandarbans",
     images: [
       require("../../Assets/Travel/sundarban1.jpg"),
       require("../../Assets/Travel/sundarban2.jpg"),
     ],
-    caption: "The wild beauty of the Sundarbans mangrove forest.",
+    caption: "The wild beauty of the Debota Pahar in Bandarbans.",
   },
 ];
 
 function TravelBlog() {
   return (
-    <Container className="travel-blog-section">
+    <Container className="travel-blog-section" style={{ paddingTop: "80px" }} >
       <h1 className="project-heading">
         My <strong className="purple">Travel Blogs</strong>
       </h1>

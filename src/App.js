@@ -20,7 +20,7 @@ import {
   Navigate
 } from "react-router-dom";
 
-<Route path="/travel-blog" element={<TravelBlog />} />
+{/* <Route path="/travel-blog" element={<TravelBlog />} /> */}
 function App() {
   const [load, upadateLoad] = useState(true);
 
@@ -43,6 +43,7 @@ function App() {
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/travelblog" element={<TravelBlog />} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
         <Footer />
