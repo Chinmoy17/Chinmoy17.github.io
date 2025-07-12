@@ -11,6 +11,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import TravelBlogDetail from "./components/TravelBlog/TravelBlogDetail";
 
 
 import {
@@ -45,6 +46,8 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/travelblog" element={<TravelBlog />} />
           <Route path="*" element={<Navigate to="/"/>} />
+          <Route path="/" element={<TravelBlog />} />
+          <Route path="/blog/:id" element={<TravelBlogDetail />} />
         </Routes>
         <Footer />
       </div>
