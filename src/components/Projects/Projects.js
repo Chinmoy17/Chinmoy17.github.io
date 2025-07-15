@@ -11,6 +11,9 @@ import bitsOfCode from "../../Assets/Projects/blog.png";
 import agent from "../../Assets/Projects/agent.jpg";
 import vowel from "../../Assets/Projects/vowel.jpg";
 import blog from "../../Assets/Projects/blog.jpg";
+import cpu from  "../../Assets/Projects/cpu.gif";
+import stu from "../../Assets/Projects/stu.gif";
+import ap from "../../Assets/Projects/ap.gif";
 function Projects() {
   return (
     <Container fluid className="project-section">
@@ -58,33 +61,32 @@ function Projects() {
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={leaf}
+              imgPath={cpu}
               isBlog={false}
-              title="Plant AI"
-              description="Used the plant disease dataset from Kaggle and trained a image classifer model using 'PyTorch' framework using CNN and Transfer Learning with 38 classes of various plant leaves. The model was successfully able to detect diseased and healthy leaves of 14 unique plants. I was able to achieve an accuracy of 98% by using Resnet34 pretrained model."
-              ghLink="https://github.com/soumyajit4419/Plant_AI"
-              demoLink="https://plant49-ai.herokuapp.com/"
+              title="4-bit Custom CPU Design"
+              description="This project showcases the design and simulation of a custom 4-bit CPU using basic logic gates. It features a 4-bit word size, 3 ALU operations (XOR, Left Shift, ADD), 3 registers (R0–R2), and an 8×15 SRAM for instructions and data. The CPU supports ALU and jump instructions with a simple ISA. Diagrams for the ALU, Control Unit, and memory are included for easy simulation in tools like Logisim. The project serves as an academic demonstration of CPU architecture and can be expanded with more registers, operations, or pipelining."
+              ghLink="https://github.com/Chinmoy17/4-Bit_Custom_CPU_Project?tab=readme-ov-file#4-bit-custom-cpu-design"
+              // demoLink="https://plant49-ai.herokuapp.com/"
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={suicide}
+              imgPath={stu}
               isBlog={false}
-              title="Ai For Social Good"
-              description="Using 'Natural Launguage Processing' for the detection of suicide-related posts and user's suicide ideation in cyberspace  and thus helping in sucide prevention."
-              ghLink="https://github.com/soumyajit4419/AI_For_Social_Good"
+              title="AI in Education: Student Perception & Usage"
+              description="This project analyzes how students perceive and use AI tools in education. It examines survey data from various universities, covering AI familiarity, usage frequency, trust, originality concerns, and faculty-wise trends. Visualizations include box plots, bar charts, crosstabs, and heatmaps highlighting insights on learning experience, tech dependence, and instructor attitudes. A summary table and a demo GIF illustrate key findings. Built with Python, Pandas, Seaborn, and Matplotlib, the project provides a clear look at how AI influences academic performance and student trust."
+              ghLink="https://github.com/Chinmoy17/student-ai-usage-analysis"
               // demoLink="https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley" <--------Please include a demo link here
             />
           </Col>
 
           <Col md={4} className="project-card">
             <ProjectCard
-              imgPath={emotion}
+              imgPath={ap}
               isBlog={false}
-              title="Face Recognition and Emotion Detection"
-              description="Trained a CNN classifier using 'FER-2013 dataset' with Keras and tensorflow backened. The classifier sucessfully predicted the various types of emotions of human. And the highest accuracy obtained with the model was 60.1%.
-              Then used Open-CV to detect the face in an image and then pass the face to the classifer to predict the emotion of a person."
+              title="Ai Painter"
+              description="Trained a GAN model to generate artistic images from sketches. The model learns from a dataset of paintings and can create unique artwork based on user input.This project lets users paint virtually using real-time hand tracking with Mediapipe and OpenCV. Control your brush with simple hand gestures — draw with your index finger, select colors and tools with two fingers, erase, adjust brush size, or draw circles using three fingers. The system supports saving your artwork as an image. It’s built in Python with clear modules for hand tracking and drawing logic. A great demonstration of gesture-based interaction and computer vision, it runs easily with Python, Mediapipe, OpenCV, and NumPy. Contributions and improvements are always welcome!"
               ghLink="https://github.com/soumyajit4419/Face_And_Emotion_Detection"
               // demoLink="https://blogs.soumya-jit.tech/"      <--------Please include a demo link here 
             />

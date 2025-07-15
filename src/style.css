@@ -14,6 +14,43 @@ html {
   --imp-text-color: #c770f0;
 }
 
+/* In TravelBlogCard.css or your global CSS */
+
+/* src/components/TravelBlog/TravelBlogDetail.css */
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.blog-image:hover {
+  transform: scale(1.03);
+}
+
+.video-caption {
+  font-size: 1.2rem; /* Bigger */
+  font-weight: 600;  /* Bolder */
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+  padding: 8px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.video-caption:hover {
+  background: linear-gradient(to right, #ff7e5f, #feb47b); /* Warm gradient */
+  color: #fff;
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+
+
+
 .purple {
   color: var(--imp-text-color) !important;
 }

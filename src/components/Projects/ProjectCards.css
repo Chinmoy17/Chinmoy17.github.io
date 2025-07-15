@@ -1,0 +1,48 @@
+/* Card hover lift and shadow */
+.project-card-view {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-view:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Image subtle zoom on hover */
+.project-card-image-container {
+  overflow: hidden;
+}
+
+.project-card-img {
+  transition: transform 0.4s ease;
+}
+
+.project-card-view:hover .project-card-img {
+  transform: scale(1.05);
+}
+
+/* Project title hover gradient */
+.project-card-title {
+  font-weight: 600;
+  font-size: 1.25rem;
+  display: inline-block;
+  background: linear-gradient(90deg, #7928ca, #ff0080);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.4s ease;
+}
+
+.project-card-view:hover .project-card-title {
+  letter-spacing: 1px;
+  transform: scale(1.05);
+}
+
+/* Optional: Make buttons pop on hover too */
+.project-card-view .btn-primary {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-view .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
