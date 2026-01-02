@@ -55,7 +55,7 @@ function AboutCard() {
             Hi everyone! I’m <span className="purple">Chinmoy Mitra</span> from{" "}
             <span className="purple">Dhaka, Bangladesh</span>.
             <br />
-            I’m currently working as an AI Trainer at Scale AI, where I help train large language models and improve AI systems through data and human feedback.
+            I’ve worked as an AI Trainer at Scale AI, where I help train large language models and improve AI systems through data and human feedback.
             <br />
             I hold a BSc in Computer Science and Engineering from Rajshahi University of Engineering and Technology (RUET).
             <br />
