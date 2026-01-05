@@ -6,12 +6,13 @@ import About from "./components/About/About";
 import Projects from "./components/Projects/Projects";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
-import TravelBlog from "./components/TravelBlog/TravelBlog";
+// Travel blog temporarily disabled
+// import TravelBlog from "./components/TravelBlog/TravelBlog";
 import ScrollToTop from "./components/ScrollToTop";
 import "./style.css";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import TravelBlogDetail from "./components/TravelBlog/TravelBlogDetail";
+// import TravelBlogDetail from "./components/TravelBlog/TravelBlogDetail";
 
 
 import {
@@ -44,10 +45,10 @@ function App() {
           <Route path="/project" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
-          <Route path="/travelblog" element={<TravelBlog />} />
+          { /* Travel Blog routes disabled for now */ }
+          { /* <Route path="/travelblog" element={<TravelBlog />} /> */ }
           <Route path="*" element={<Navigate to="/"/>} />
-          <Route path="/" element={<TravelBlog />} />
-          <Route path="/blog/:id" element={<TravelBlogDetail />} />
+          { /* <Route path="/blog/:id" element={<TravelBlogDetail />} /> */ }
         </Routes>
         <Footer />
       </div>

@@ -24,7 +24,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://github.com/Chinmoy17"
-                style={{ color: "white" }}
+                style={{ color: "var(--color-text)" }}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -44,7 +44,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://www.linkedin.com/in/chinmoy-mitra/"
-                style={{ color: "white" }}
+                style={{ color: "var(--color-text)" }}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -54,7 +54,7 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://www.instagram.com/chinmoy.17/"
-                style={{ color: "white" }}
+                style={{ color: "var(--color-text)" }}
                 target="_blank" 
                 rel="noopener noreferrer"
               >
