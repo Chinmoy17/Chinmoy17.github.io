@@ -209,6 +209,9 @@ function Home2() {
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
+                  data-platform="github"
+                  aria-label="GitHub profile"
+                  title="GitHub"
                 >
                   <AiFillGithub />
                 </a>
@@ -220,6 +223,9 @@ function Home2() {
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
+                  data-platform="linkedin"
+                  aria-label="LinkedIn profile"
+                  title="LinkedIn"
                 >
                   <FaLinkedinIn />
                 </a>
@@ -231,6 +237,9 @@ function Home2() {
                   target="_blank"
                   rel="noreferrer"
                   className="icon-colour home-social-icons"
+                  data-platform="instagram"
+                  aria-label="Instagram profile"
+                  title="Instagram"
                 >
                   <AiFillInstagram />
                 </a>

@@ -99,14 +99,17 @@ function NavBar() {
             { /* Travel Blog link hidden for now */ }
 
             <Nav.Item className="fork-btn">
-              <Button
+              <a
                 href="https://github.com/Chinmoy17/Chinmoy17.github.io"
+                className="nav-repo-link"
                 target="_blank"
-                className="fork-btn-inner"
+                rel="noopener noreferrer"
+                aria-label="Open GitHub repository in new tab"
               >
-                <CgGitFork style={{ fontSize: "1.2em" }} />{" "}
-                <AiFillStar style={{ fontSize: "1.1em" }} />
-              </Button>
+                <CgGitFork className="nav-repo-icon" style={{ fontSize: "1.05em" }} />
+                <AiFillStar className="nav-repo-icon" style={{ fontSize: "1em" }} />
+                <span className="nav-repo-text">Github</span>
+              </a>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>

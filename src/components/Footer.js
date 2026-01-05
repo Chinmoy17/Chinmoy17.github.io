@@ -24,7 +24,10 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://github.com/Chinmoy17"
-                style={{ color: "var(--color-text)" }}
+                className="footer-social-icon"
+                data-platform="github"
+                aria-label="GitHub profile"
+                title="GitHub"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -44,7 +47,10 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://www.linkedin.com/in/chinmoy-mitra/"
-                style={{ color: "var(--color-text)" }}
+                className="footer-social-icon"
+                data-platform="linkedin"
+                aria-label="LinkedIn profile"
+                title="LinkedIn"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
@@ -54,7 +60,10 @@ function Footer() {
             <li className="social-icons">
               <a
                 href="https://www.instagram.com/chinmoy.17/"
-                style={{ color: "var(--color-text)" }}
+                className="footer-social-icon"
+                data-platform="instagram"
+                aria-label="Instagram profile"
+                title="Instagram"
                 target="_blank" 
                 rel="noopener noreferrer"
               >
