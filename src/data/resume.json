@@ -1,0 +1,192 @@
+{
+  "summary": "AI-focused Full‑Stack Developer with experience across web technologies, data analysis, and MLOps. Passionate about building impactful products and modern agent workflows.",
+  "links": {
+    "github": "https://github.com/chinmoy17",
+    "linkedin": "https://www.linkedin.com/in/chinmoy-mitra/",
+    "email": "rudrochinmoy@gmail.com",
+    "portfolio": "https://chinmoy17.github.io/"
+  },
+  "skills": {
+    "groups": [
+      { "name": "Languages", "items": ["C", "C++", "Python", "TypeScript"] },
+      { "name": "ML/AI", "items": ["Deep Learning", "NLP", "RAG Systems", "Transfer Learning", "Transformers", "LLMs", "Computer Vision", "Model Fine-tuning"] },
+      { "name": "Frameworks / Libraries", "items": ["PyTorch", "TensorFlow", "Scikit-learn", "LangChain", "LangGraph", "DSPy", "FastAPI", "Hugging Face"] },
+      { "name": "Cloud Platforms", "items": ["Microsoft Azure (Azure ML, App Service, Functions, Storage, Container Registry)", "Azure Foundry"] },
+      { "name": "DevOps / MLOps", "items": ["Docker", "Git", "CI/CD (Azure DevOps Pipelines)", "API Development", "Model Deployment & Monitoring"] },
+      { "name": "Databases", "items": ["SQL", "FAISS", "Chroma", "Milvus", "Cosmos DB"] },
+      { "name": "Software Practices", "items": ["Agile Methodology", "Cloud Architecture", "Data Visualization", "Statistics", "Requirement Analysis"] }
+    ]
+  },
+  "experience": [
+    {
+      "company": "Dexian Bangladesh",
+      "role": "Application Developer: AI/ML",
+      "type": "Onsite",
+      "location": "Bangladesh",
+      "start": "2025-10-15",
+      "end": null,
+      "highlights": [
+        "Developed AI/ML-powered solutions across multiple products, including Note2Action — an automation system predicting next actions for 600+ Account Managers.",
+        "Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries.",
+        "Designed data processing pipelines, trained and deployed models, and integrated automation workflows to reduce manual workload and accelerate delivery."
+      ]
+    },
+    {
+      "company": "Walton Hi‑Tech Industries",
+      "role": "AI Intern",
+      "type": "Onsite",
+      "location": "Bangladesh",
+      "start": "2025-08-01",
+      "end": "2025-10-09",
+      "notes": "Left Outlier upon joining Walton.",
+      "highlights": [
+        "Contributed to a comprehensive RAG-based chatbot for customer support, order processing, HRMS, product search, and warranty claims.",
+        "Supported end‑to‑end components (retrieval, orchestration, evaluation) to improve internal productivity."
+      ]
+    },
+    {
+      "company": "Outlier",
+      "role": "AI Contributor",
+      "type": "Remote",
+      "location": "",
+      "start": "2024-03-01",
+      "end": "2025-07-31",
+      "highlights": [
+        "Designed high‑quality prompts and responses to improve LLM performance in code generation, refactoring, and summarization.",
+        "Assisted in fine‑tuning workflows via curated datasets and output evaluation.",
+        "Contributed across Swift and Python code contexts; supported audio training pipelines for LLMs."
+      ]
+    },
+    {
+      "company": "Young Learner’s Research Lab",
+      "role": "Research Assistant",
+      "type": "Non‑paid",
+      "location": "",
+      "start": "2024-11-01",
+      "end": "2025-02-28",
+      "highlights": [
+        "Collaborated on abstractive summarization using LLaMA, DeepSeek, and Mixtral.",
+        "Fine‑tuned transformer models on CNN/DailyMail and XSum using LoRA.",
+        "Evaluated with ROUGE and BERTScore to measure summary quality and relevance."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Computer Science and Engineering",
+      "institution": "Rajshahi University of Engineering and Technology (RUET)",
+      "location": "Rajshahi, Bangladesh",
+      "date": "2024-05-01",
+      "cgpa": "3.11/4.00",
+      "coursework": [
+        "Data Structures and Algorithms (C++)",
+        "OOP (C++, Java)",
+        "Artificial Intelligence (Python)",
+        "Neural Networks and Fuzzy Systems (Python)",
+        "Digital Image Processing (Python)",
+        "Linear Algebra with Computational Applications (Python)"
+      ]
+    },
+    {
+      "degree": "Higher Secondary Certificate (H.S.C), Science",
+      "institution": "New Govt. Degree College",
+      "location": "Rajshahi, Bangladesh",
+      "gpa": "5.00/5.00"
+    },
+    {
+      "degree": "Secondary School Certificate (S.S.C), Science",
+      "institution": "Rajshahi Collegiate School",
+      "location": "Rajshahi, Bangladesh",
+      "gpa": "5.00/5.00"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Note2Action — AI-Powered Task Prediction System",
+      "stack": ["Python", "Machine Learning", "NLP", "FastAPI"],
+      "summary": "Analyzes weekly notes from 600+ Account Managers to predict next actions, reducing manual workload and minimizing missed tasks.",
+      "links": {}
+    },
+    {
+      "title": "DemoFactory — AI-driven App Generator",
+      "stack": ["RAG", "LangChain", "Python", "Prompt Engineering", "Deployment"],
+      "summary": "Generates customizable applications (e.g., RAG systems, summarizers) directly from user queries; dynamic module generation and automated deployment for instant demos.",
+      "links": {}
+    },
+    {
+      "title": "Agentic AI: LLM-based Code Agent",
+      "stack": ["OpenAI", "LLaMA2", "Mixtral", "Python", "Prompt Engineering"],
+      "summary": "Automates coding tasks (bug fixing, test generation, code explanation).",
+      "links": {"demo": null, "repo": null}
+    },
+    {
+      "title": "Blog Generator via LLMs",
+      "stack": ["LangChain", "Python", "Prompt Engineering"],
+      "summary": "Modular pipeline with topic prompts, outline generation, fact-checking, and rewriting agents to produce high-quality blogs.",
+      "links": {}
+    },
+    {
+      "title": "AI Painter",
+      "stack": ["Python", "OpenCV", "Mediapipe"],
+      "summary": "Gesture-controlled virtual painting app with real-time hand tracking, customizable tools, and canvas saving.",
+      "links": {}
+    },
+    {
+      "title": "Multilingual PDF Chatbot (RAG System)",
+      "stack": ["Python", "Streamlit", "FastAPI", "FAISS", "OCR", "Gemini LLM"],
+      "summary": "Answers English/Bangla queries from PDFs using a RAG pipeline with FAISS, Gemini LLM, OCR, Streamlit UI, and REST API.",
+      "links": {}
+    },
+    {
+      "title": "Bangla Vowel Detection",
+      "stack": ["Deep Learning", "Transfer Learning"],
+      "summary": "Achieved 97.76% accuracy classifying handwritten Bangla vowels using transfer learning.",
+      "links": {}
+    },
+    {
+      "title": "4-Bit Custom CPU Design",
+      "stack": ["Logisim", "Custom ISA"],
+      "summary": "Designed a 4-bit CPU supporting basic ALU operations and jump instructions with a custom ISA and 8x15 SRAM.",
+      "links": {}
+    },
+    {
+      "title": "Paper Retraction Analysis with NLP",
+      "stack": ["TF-IDF", "Clustering", "Random Forest"],
+      "summary": "Applied BoW and TF‑IDF to analyze retracted papers, achieving ~92% classification accuracy; visualized trends via clustering.",
+      "links": {}
+    }
+  ],
+  "awards": [
+    { "name": "Dutch Bangla Bank Scholarship for Undergraduates", "yearRange": "2019–2023" },
+    { "name": "RUET Technical Scholarship", "years": ["2019", "2022"] },
+    { "name": "Leadership Awards — Class Representative", "detail": "4 consecutive years" },
+    { "name": "RUET Codesmash Intra RUET programming contest — 10th", "year": "2019" },
+    { "name": "RUET GanJam Intra RUET programming contest — Participant", "year": "2020" }
+  ],
+  "publications": [
+    {
+      "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
+      "venue": "IEEE QPAN",
+      "year": 2025,
+      "notes": "Undergraduate Thesis",
+      "summary": "ResNet50 transfer learning model for multiclass MRI brain tumor classification; ~99.50% accuracy and reduced training time.",
+      "link": null,
+      "scholarProfile": "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ"
+    }
+  ],
+  "references": [
+    {
+      "name": "Rizoan Toufiq",
+      "role": "Associate Professor",
+      "institution": "Rajshahi University of Engineering and Technology",
+      "email": "rizoantoufiq@cse.ruet.ac.bd",
+      "phone": "+880-1768496122"
+    },
+    {
+      "name": "Farjana Parvin",
+      "role": "Assistant Professor (Thesis Supervisor)",
+      "institution": "Rajshahi University of Engineering and Technology",
+      "email": "farjana@cse.ruet.ac.bd"
+    }
+  ]
+}

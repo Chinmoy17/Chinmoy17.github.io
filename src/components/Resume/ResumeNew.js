@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Container, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Particle from "../Particle";
-import pdf from "../../Assets/../Assets/Chinmoy_Mitra_pathao.pdf";
+import pdf from "../../Assets/../Assets/Resume_AI_JOB__Chinmoy_Mitra_.pdf";
+// import pdf from "../../Assets/Chinmoy_Mitra_Resume.pdf";
 
 import { AiOutlineDownload } from "react-icons/ai";
 import { Document, Page, pdfjs } from "react-pdf";
@@ -26,46 +27,48 @@ function ResumeNew() {
     <div>
       <Container fluid className="resume-section">
         <Particle />
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button
-            variant="primary"
-            href={pdf}
-            target="_blank"
-            style={{ maxWidth: "250px" }}
-          >
-            <AiOutlineDownload /> &nbsp;Download CV
-          </Button>
-        </Row>
+        <div className="resume-glass-wrapper">
+          <Row style={{ justifyContent: "center", position: "relative" }}>
+            <Button
+              variant="primary"
+              href={pdf}
+              target="_blank"
+              className="resume-download-btn"
+            >
+              <AiOutlineDownload /> &nbsp;Download CV
+            </Button>
+          </Row>
 
-        <Row className="resume justify-content-center">
-          <Document
-            file={pdf}
-            onLoadSuccess={onDocumentLoadSuccess}
-            className="d-flex flex-column align-items-center"
-          >
-            {Array.from(new Array(numPages), (el, index) => (
-              <Page
-                key={`page_${index + 1}`}
-                pageNumber={index + 1}
-                scale={width > 786 ? 1.2 : 0.5} // adjust zoom here
-                renderAnnotationLayer={false}
-                renderTextLayer={false}
-                style={{ marginBottom: "20px" }}
-              />
-            ))}
-          </Document>
-        </Row>
+          <Row className="resume justify-content-center">
+            <Document
+              file={pdf}
+              onLoadSuccess={onDocumentLoadSuccess}
+              className="resume-document d-flex flex-column align-items-center"
+            >
+              {Array.from(new Array(numPages), (el, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  width={Math.min(width - 96, width >= 1440 ? 1280 : 1024)}
+                  renderAnnotationLayer={false}
+                  renderTextLayer={false}
+                  className="resume-page"
+                />
+              ))}
+            </Document>
+          </Row>
 
-        <Row style={{ justifyContent: "center", position: "relative" }}>
-          <Button
-            variant="primary"
-            href={pdf}
-            target="_blank"
-            style={{ maxWidth: "250px" }}
-          >
-            <AiOutlineDownload /> &nbsp;Download CV
-          </Button>
-        </Row>
+          <Row style={{ justifyContent: "center", position: "relative" }}>
+            <Button
+              variant="primary"
+              href={pdf}
+              target="_blank"
+              className="resume-download-btn"
+            >
+              <AiOutlineDownload /> &nbsp;Download CV
+            </Button>
+          </Row>
+        </div>
       </Container>
     </div>
   );

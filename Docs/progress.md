@@ -149,3 +149,41 @@ Never make sweeping changes without explicit approval. Break large tasks into re
 **Last Updated:** January 2, 2026  
 **Current Branch:** dev  
 **Status:** Active Development
+
+## Today's Update — January 5, 2026
+
+**Homepage Foundations**
+- Full-bleed hero: inner container switched to `container-fluid` in Home to remove max-width constraints.
+- Full-height section: `.home-section` uses `min-height: calc(100vh - var(--nav-h))`, vertically centered; added `--nav-h` token.
+- Unified background: introduced `--section-tint` and layered a subtle tint over `var(--color-bg)` for `.home-about-section` to visually merge first and second portions.
+- Navbar repo link: converted to a navy, underlined anchor with focus ring and hover color shift; sticky darken behavior retained.
+- Social icons: rounded-square glass buttons with brand colors (GitHub, LinkedIn, Instagram), hover/focus elevation; wrapped the icons group in a glass container.
+- Accessibility: added `aria-label`/`title` to social anchors; clear focus outlines across interactive elements.
+
+**Data Groundwork (staged, not wired)**
+- Generated `src/data/resume.json` from Docs to serve as the single source-of-truth for Experience, Education, Projects, Publications, and Awards. Rendering will be wired after approval.
+
+## Homepage — Planned Enhancements (Pending Approval)
+- CTAs: add "View CV" and "Contact" buttons in the hero; optional "Download CV" linked to latest PDF.
+- Metrics chips: small, readable counters (e.g., publication count, scholarships, notable projects).
+- Type treatment: optionally replace or tone down typewriter for a concise professional headline; keep Inter scale and maintain contrast ≥ 4.5:1.
+- Visual polish: tune spacing and padding, consider card edge style (flush vs. rounded), adjust `--section-tint` strength, fine-tune icon sizes.
+- Performance: lazy-load hero illustration; ensure CSS is scoped and minimal; respect reduced motion.
+
+## Broader Plan (Experience & Publications)
+- Information Architecture: add `/experience` and `/publications` routes; render from `resume.json`.
+- Experience: timeline with company/role/dates and impact bullets; filters and deep cards for roles (Dexian, Walton, Outlier, YLRL).
+- Publications: single highlighted paper (IEEE QPAN 2025) + Google Scholar link; room for future entries.
+- Design Tokens: refine color system using OKLCH/LCH for perceptual consistency; elevation tiers; spacing scale; accessible focus rings.
+- Interactions: predictable hover/press states, keyboard navigation, reduced motion support.
+
+---
+
+**Last Updated:** January 5, 2026  
+**Focus Area:** Homepage UI and data groundwork  
+**Status:** Ready for next homepage enhancements (awaiting approval)
+
+### Addendum — Resume Page Tweaks (Jan 5, 2026)
+- Filled empty sides by rendering PDF pages at responsive width (`Page width = min(viewport − 96, 1200)`) rather than fixed scale.
+- Wrapped the resume content in a glass container (`.resume-glass-wrapper`) with subtle blur, border, and elevation for a professional look.
+- Added rounded corners and light shadow to PDF pages; download buttons aligned within the glass container.
