@@ -30,6 +30,10 @@ html {
   --glass-bg: rgba(255, 255, 255, 0.6);
   --glass-border: rgba(39, 76, 119, 0.22);
   --glass-blur: 12px;
+  /* Shared section tint (very subtle) */
+  --section-tint: rgba(39, 76, 119, 0.02);
+  /* Fixed navbar height for viewport calculations */
+  --nav-h: 64px;
 }
 
 /* Reusable glass surface */
@@ -335,6 +339,9 @@ button:focus {
   background-color: var(--color-bg);
   padding-bottom: 30px !important;
   padding-top: 30px !important;
+  min-height: calc(100vh - var(--nav-h));
+  display: flex;
+  align-items: center;
 }
 
 .home-content {
@@ -402,7 +409,8 @@ button:focus {
   position: relative;
   padding-bottom: 70px !important;
   padding-top: 70px !important;
-  background: linear-gradient(180deg, rgba(39, 76, 119, 0.06), rgba(39, 76, 119, 0.03));
+  background: linear-gradient(180deg, var(--section-tint), var(--section-tint)), var(--color-bg) !important;
+  background-color: var(--color-bg) !important;
 }
 
 .home-about-description {
