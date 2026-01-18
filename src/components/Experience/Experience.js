@@ -13,7 +13,7 @@ function Experience() {
         <h1 className="project-heading">
           Professional <strong className="purple">Experience</strong>
         </h1>
-        <p style={{ color: "white" }}>
+        <p style={{ color: "var(--color-text)" }}>
           My professional journey in <strong className="purple">Software Engineering</strong> and <strong className="purple">Research</strong>.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
@@ -30,7 +30,7 @@ function Experience() {
                         {exp.company}
                       </Card.Subtitle>
                     </Col>
-                    <Col md={3} style={{ textAlign: "right", color: "#a5a5a5" }}>
+                    <Col md={3} style={{ textAlign: "right", color: "var(--color-text)", opacity: 0.8 }}>
                       <h5>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>
                       <p style={{ fontStyle: "italic" }}>{exp.location} ({exp.type})</p>
                     </Col>
@@ -39,7 +39,7 @@ function Experience() {
                   <div style={{ marginTop: "15px" }}>
                     <ul style={{ paddingLeft: "20px" }}>
                       {exp.highlights.map((point, i) => (
-                        <li key={i} style={{ marginBottom: "8px", fontSize: "1.05em", color: "rgba(255, 255, 255, 0.9)" }}>
+                        <li key={i} style={{ marginBottom: "8px", fontSize: "1.05em" }}>
                           {point}
                         </li>
                       ))}

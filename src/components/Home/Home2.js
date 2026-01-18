@@ -16,39 +16,26 @@ function Home2() {
         <Row>
           <Col md={8} className="home-about-description">
             <h1 style={{ fontSize: "2.6em" }}>
-              LET ME <span className="purple">INTRODUCE</span> MYSELF
+              BRIDGING <span className="purple"> AI </span> AND <span className="purple"> SOFTWARE ENGINEERING </span>
             </h1>
             <p className="home-about-body">
-              A passionate Full Stack Web Developer and AI Researcher.
+              I am an <b>AI Practitioner</b> and <b>Full Stack Engineer</b> dedicated to building intelligent systems that optimize workflows and solve complex problems.
               <br />
-              <br />I am fluent in classics like
+              <br />
+              With a strong foundation in 
               <i>
-                <b className="purple"> Python, C++ and Javascript. </b>
-              </i>
+                <b className="purple"> Computer Science</b>
+              </i>, I bridge the gap between research and production—taking state-of-the-art models from conception to scalable deployment.
               <br />
               <br />
-              My field of Interest's are building new &nbsp;
+              My core focus lies in &nbsp;
               <i>
-                <b className="purple">Web Technologies and Products </b> and
-                also in areas related to{" "}
-                <b className="purple">
-                  Deep Learning and Natural Language Processing.
-                </b>
+                <b className="purple">Machine Learning, NLP,</b> and <b className="purple">Deep Learning</b>
               </i>
+              , with specific expertise in building <b>RAG systems</b> and <b>Agentic Workflows</b>.
               <br />
               <br />
-              Whenever possible, I also apply my passion for developing products
-              with <b className="purple">Node.js</b> and
-              <i>
-                <b className="purple">
-                  {" "}
-                  Modern Javascript Library and Frameworks
-                </b>
-              </i>
-              &nbsp; like
-              <i>
-                <b className="purple"> React.js and Next.js</b>
-              </i>
+              I also leverage modern engineering stacks like <b className="purple">FastAPI</b>, <b className="purple">React.js</b>, and <b className="purple">Docker</b> to create robust, user-centric applications.
             </p>
           </Col>
           <Col md={4} className="myAvtar">
@@ -58,10 +45,12 @@ function Home2() {
                 alt="avatar"
                 className="img-fluid"
                 style={{
-                  width: "250px",
-                  height: "250px",
-                  borderRadius: "30%",
+                  width: "280px",
+                  height: "280px",
+                  borderRadius: "50%",
                   objectFit: "cover",
+                  boxShadow: "0 0 25px 5px rgba(39, 76, 119, 0.6)",
+                  border: "4px solid rgba(255, 255, 255, 0.15)",
                 }}
               />
             </Tilt>

@@ -71,7 +71,7 @@ function Skills() {
             <Col xs={12} md={12} lg={5} key={idx} className="mb-4">
               <Card className="project-card-view" style={{ height: "100%", padding: "10px" }}>
                 <Card.Body>
-                  <div style={{ display: "flex", alignItems: "center", marginBottom: "20px", borderBottom: "1px solid rgba(255,255,255,0.1)", paddingBottom: "10px" }}>
+                  <div style={{ display: "flex", alignItems: "center", marginBottom: "20px", borderBottom: "1px solid var(--glass-border)", paddingBottom: "10px" }}>
                     <span style={{ fontSize: "1.5em", color: "var(--color-accent)", marginRight: "10px" }}>
                       {getCategoryIcon(group.name)}
                     </span>

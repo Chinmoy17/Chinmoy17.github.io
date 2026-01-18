@@ -20,7 +20,7 @@ function Research() {
         <h1 className="project-heading">
           Research <strong className="purple">Highlights</strong>
         </h1>
-        <p style={{ color: "white" }}>
+        <p style={{ color: "var(--color-text)" }}>
           Explorations in <strong className="purple">Machine Learning, NLP,</strong> and <strong className="purple">Computer Vision</strong>.
         </p>
 
@@ -38,8 +38,8 @@ function Research() {
                       {pub.title}
                     </Card.Title>
                     <Card.Subtitle style={{ color: "var(--color-accent)", marginTop: "10px", fontSize: "1.1em" }}>
-                      {pub.venue} <span style={{ color: "white" }}>|</span> {pub.year}
-                      {pub.notes && <span style={{ fontSize: "0.9em", color: "#a5a5a5", marginLeft: "10px" }}>({pub.notes})</span>}
+                      {pub.venue} <span style={{ color: "var(--color-text)" }}>|</span> {pub.year}
+                      {pub.notes && <span style={{ fontSize: "0.9em", color: "var(--color-text)", opacity: 0.7, marginLeft: "10px" }}>({pub.notes})</span>}
                     </Card.Subtitle>
                     <Card.Text style={{ marginTop: "15px", fontSize: "1.05em", lineHeight: "1.6" }}>
                       {pub.summary}
@@ -94,13 +94,13 @@ function Research() {
                           {exp.company}
                         </Card.Subtitle>
                       </Col>
-                      <Col md={3} style={{ textAlign: "right", color: "#a5a5a5" }}>
+                      <Col md={3} style={{ textAlign: "right", color: "var(--color-text)", opacity: 0.8 }}>
                          <h5>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>
                       </Col>
                     </Row>
                     <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>
                       {exp.highlights.map((point, i) => (
-                        <li key={i} style={{ marginBottom: "8px", fontSize: "1.05em", color: "rgba(255, 255, 255, 0.9)" }}>
+                        <li key={i} style={{ marginBottom: "8px", fontSize: "1.05em" }}>
                           {point}
                         </li>
                       ))}
