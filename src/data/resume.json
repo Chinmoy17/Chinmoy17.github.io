@@ -8,13 +8,34 @@
   },
   "skills": {
     "groups": [
-      { "name": "Languages", "items": ["C", "C++", "Python", "TypeScript"] },
-      { "name": "ML/AI", "items": ["Deep Learning", "NLP", "RAG Systems", "Transfer Learning", "Transformers", "LLMs", "Computer Vision", "Model Fine-tuning"] },
-      { "name": "Frameworks / Libraries", "items": ["PyTorch", "TensorFlow", "Scikit-learn", "LangChain", "LangGraph", "DSPy", "FastAPI", "Hugging Face"] },
-      { "name": "Cloud Platforms", "items": ["Microsoft Azure (Azure ML, App Service, Functions, Storage, Container Registry)", "Azure Foundry"] },
-      { "name": "DevOps / MLOps", "items": ["Docker", "Git", "CI/CD (Azure DevOps Pipelines)", "API Development", "Model Deployment & Monitoring"] },
-      { "name": "Databases", "items": ["SQL", "FAISS", "Chroma", "Milvus", "Cosmos DB"] },
-      { "name": "Software Practices", "items": ["Agile Methodology", "Cloud Architecture", "Data Visualization", "Statistics", "Requirement Analysis"] }
+      { 
+        "name": "ML/AI Frameworks", 
+        "items": ["PyTorch", "TensorFlow", "Scikit-learn", "Hugging Face", "LangChain", "OpenCV", "Gradio"] 
+      },
+      { 
+        "name": "Languages", 
+        "items": ["Python", "C++", "C", "TypeScript", "SQL"] 
+      },
+      { 
+        "name": "Cloud & DevOps", 
+        "items": ["Microsoft Azure", "Docker", "Kubernetes", "Git", "Azure DevOps", "CI/CD"] 
+      },
+      { 
+        "name": "Backend & Web", 
+        "items": ["FastAPI", "React", "Node.js", "REST APIs"] 
+      },
+      { 
+        "name": "Databases", 
+        "items": ["PostgreSQL", "Cosmos DB", "FAISS", "ChromaDB", "Milvus"] 
+      },
+      { 
+        "name": "Tools & Platforms", 
+        "items": ["LaTeX (Overleaf)", "Linux", "Postman", "VS Code"] 
+      },
+      { 
+        "name": "Core Concepts", 
+        "items": ["Deep Learning", "NLP", "RAG Systems", "LLMs", "Computer Vision", "Data Structures", "System Design"] 
+      }
     ]
   },
   "experience": [
@@ -76,27 +97,47 @@
       "degree": "Bachelor of Science in Computer Science and Engineering",
       "institution": "Rajshahi University of Engineering and Technology (RUET)",
       "location": "Rajshahi, Bangladesh",
-      "date": "2024-05-01",
+      "date": "2019 - 2024",
       "cgpa": "3.11/4.00",
+      "thesis": {
+        "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
+        "supervisor": "Farjana Parvin (Assistant Professor)",
+        "link": "https://drive.google.com/file/d/1kzqpwjY5HZfmvhRUtEew-HR80HIygxet/view?usp=sharing"
+      },
+      "awards": ["Dutch Bangla Bank Scholarship", "RUET Technical Scholarship"],
+      "leadership": [
+        {
+          "role": "Class Representative (4 Years)",
+          "summary": "Managed academic schedules/routines, bridged faculty-student communication, and organized departmental events."
+        }
+      ],
       "coursework": [
-        "Data Structures and Algorithms (C++)",
-        "OOP (C++, Java)",
-        "Artificial Intelligence (Python)",
-        "Neural Networks and Fuzzy Systems (Python)",
-        "Digital Image Processing (Python)",
-        "Linear Algebra with Computational Applications (Python)"
+        "Artificial Intelligence", 
+        "Neural Networks & Fuzzy Systems", 
+        "Digital Image Processing", 
+        "Digital Signal Processing", 
+        "Operating Systems",
+        "Computer Architecture", 
+        "Compiler Design", 
+        "Network Security", 
+        "Parallel & Distributed Processing", 
+        "VLSI", 
+        "Computer Graphics",
+        "Data Structures & Algorithms"
       ]
     },
     {
       "degree": "Higher Secondary Certificate (H.S.C), Science",
       "institution": "New Govt. Degree College",
       "location": "Rajshahi, Bangladesh",
+      "date": "2016 - 2018",
       "gpa": "5.00/5.00"
     },
     {
       "degree": "Secondary School Certificate (S.S.C), Science",
       "institution": "Rajshahi Collegiate School",
       "location": "Rajshahi, Bangladesh",
+      "date": "2016",
       "gpa": "5.00/5.00"
     }
   ],

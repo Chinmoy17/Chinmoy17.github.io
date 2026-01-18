@@ -14,34 +14,37 @@ function Experience() {
           Professional <strong className="purple">Experience</strong>
         </h1>
         <p style={{ color: "white" }}>
-          Here's where I've worked and what I've built.
+          My professional journey in <strong className="purple">Software Engineering</strong> and <strong className="purple">Research</strong>.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
           {experiences.map((exp, idx) => (
-            <Col md={10} className="project-card" key={idx}>
-              <Card className="project-card-view">
+            <Col md={12} className="project-card" key={idx} style={{ marginBottom: "20px" }}>
+              <Card className="project-card-view" style={{ textAlign: "left" }}>
                 <Card.Body>
-                  <Card.Title style={{ fontSize: "1.5em" }}>
-                    {exp.role}
-                  </Card.Title>
-                  <Card.Subtitle className="mb-2" style={{ color: "#a788dd" }}>
-                    {exp.company} • {exp.type}
-                    {exp.location && ` • ${exp.location}`}
-                  </Card.Subtitle>
-                  <Card.Text style={{ fontSize: "0.9em", opacity: 0.8 }}>
-                    {new Date(exp.start).toLocaleDateString("en-US", { 
-                      year: "numeric", 
-                      month: "short" 
-                    })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { 
-                      year: "numeric", 
-                      month: "short" 
-                    }) : "Present"}
-                  </Card.Text>
-                  <ul style={{ textAlign: "left", paddingLeft: "20px" }}>
-                    {exp.highlights.map((point, i) => (
-                      <li key={i} style={{ marginBottom: "10px" }}>{point}</li>
-                    ))}
-                  </ul>
+                  <Row>
+                    <Col md={9}>
+                      <Card.Title style={{ fontSize: "1.7em", fontWeight: "bold" }}>
+                        {exp.role}
+                      </Card.Title>
+                      <Card.Subtitle className="mb-2" style={{ color: "var(--color-accent)", fontSize: "1.2em" }}>
+                        {exp.company}
+                      </Card.Subtitle>
+                    </Col>
+                    <Col md={3} style={{ textAlign: "right", color: "#a5a5a5" }}>
+                      <h5>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>
+                      <p style={{ fontStyle: "italic" }}>{exp.location} ({exp.type})</p>
+                    </Col>
+                  </Row>
+                  
+                  <div style={{ marginTop: "15px" }}>
+                    <ul style={{ paddingLeft: "20px" }}>
+                      {exp.highlights.map((point, i) => (
+                        <li key={i} style={{ marginBottom: "8px", fontSize: "1.05em", color: "rgba(255, 255, 255, 0.9)" }}>
+                          {point}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </Card.Body>
               </Card>
             </Col>
