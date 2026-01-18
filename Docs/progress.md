@@ -187,3 +187,21 @@ Never make sweeping changes without explicit approval. Break large tasks into re
 - Filled empty sides by rendering PDF pages at responsive width (`Page width = min(viewport − 96, 1200)`) rather than fixed scale.
 - Wrapped the resume content in a glass container (`.resume-glass-wrapper`) with subtle blur, border, and elevation for a professional look.
 - Added rounded corners and light shadow to PDF pages; download buttons aligned within the glass container.
+
+---
+
+**Last Updated:** January 18, 2026
+**Focus Area:** Homepage Branding & Structural Overhaul
+**Status:** Reviewing Homepage Redesign
+
+## Update — January 18, 2026
+
+**Major Architecture & Branding Overhaul**
+- **Navigation Structure**: Removed `About` page; promoted `Experience`, `Education`, `Skills`, `Research` to main navbar.
+- **Academic Theme**: Implemented "Academic Navy" theme with glassmorphism; fixed high-contrast visibility issues.
+- **Homepage Redesign**: 
+  - Updated branding to professional "Bridging AI Research & Engineering" narrative.
+  - Replaced avatar with rounded-square style.
+  - Added 3-column "Areas of Expertise" grid (Generative AI, Full Stack, Research).
+  - Introduction of expanded 8-badge tech stack strip.
+- **Technical Fixes**: Resolved `SiHuggingface` import errors; fixed GitHub Pages routing (404 redirects).
