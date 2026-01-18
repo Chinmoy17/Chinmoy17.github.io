@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import Preloader from "../src/components/Pre";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
-import About from "./components/About/About";
+import Experience from "./components/Experience/Experience";
+import Education from "./components/Education/Education";
+import Skills from "./components/Skills/Skills";
+import Research from "./components/Research/Research";
 import Projects from "./components/Projects/Projects";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
@@ -42,8 +45,11 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/experience" element={<Experience />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/skills" element={<Skills />} />
+          <Route path="/research" element={<Research />} />
           <Route path="/project" element={<Projects />} />
-          <Route path="/about" element={<About />} />
           <Route path="/resume" element={<Resume />} />
           { /* Travel Blog routes disabled for now */ }
           { /* <Route path="/travelblog" element={<TravelBlog />} /> */ }
