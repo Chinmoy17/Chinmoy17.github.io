@@ -51,3 +51,35 @@
   box-shadow: var(--shadow-1);
   filter: brightness(0.95);
 }
+
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.project-card-view .btn-outline-primary {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.project-card-view .btn-outline-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-1);
+  filter: brightness(0.98);
+}
+
+.project-card-private {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+  background: rgba(39, 76, 119, 0.08);
+  border: 1px solid rgba(39, 76, 119, 0.22);
+}

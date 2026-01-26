@@ -29,6 +29,12 @@ function Experience() {
                       <Card.Subtitle className="mb-2" style={{ color: "var(--color-accent)", fontSize: "1.2em" }}>
                         {exp.company}
                       </Card.Subtitle>
+
+                      {exp.summary ? (
+                        <div style={{ marginTop: "10px", color: "var(--color-text)", opacity: 0.92, fontSize: "1.05em" }}>
+                          {exp.summary}
+                        </div>
+                      ) : null}
                     </Col>
                     <Col md={3} style={{ textAlign: "right", color: "var(--color-text)", opacity: 0.8 }}>
                       <h5>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>

@@ -7,6 +7,7 @@ import Education from "./components/Education/Education";
 import Skills from "./components/Skills/Skills";
 import Research from "./components/Research/Research";
 import Projects from "./components/Projects/Projects";
+import ProjectDetail from "./components/Projects/ProjectDetail";
 import Footer from "./components/Footer";
 import Resume from "./components/Resume/ResumeNew";
 // Travel blog temporarily disabled
@@ -50,6 +51,7 @@ function App() {
           <Route path="/skills" element={<Skills />} />
           <Route path="/research" element={<Research />} />
           <Route path="/project" element={<Projects />} />
+          <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/resume" element={<Resume />} />
           { /* Travel Blog routes disabled for now */ }
           { /* <Route path="/travelblog" element={<TravelBlog />} /> */ }

@@ -46,10 +46,15 @@
       "location": "Bangladesh",
       "start": "2025-10-15",
       "end": null,
+      "summary": "Build and ship agentic AI and evaluation-driven LLM systems for enterprise workflows, with an emphasis on reliability, measurable quality, and production readiness.",
       "highlights": [
         "Developed AI/ML-powered solutions across multiple products, including Note2Action — an automation system predicting next actions for 600+ Account Managers.",
-        "Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries.",
-        "Designed data processing pipelines, trained and deployed models, and integrated automation workflows to reduce manual workload and accelerate delivery."
+        "Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries (internal/SSO).",
+        "Designed agentic workflows and RAG pipelines with a strong focus on correctness, controllability, and real-world usability.",
+        "Implemented evaluation-driven iteration for prompts and LLM behaviors (test sets, rubrics, regressions) to improve quality before rollout.",
+        "Developed end-to-end data and model pipelines: data preparation, training/experimentation, deployment integration, and automation workflows.",
+        "Partnered with stakeholders (e.g., Account Managers) to translate ambiguous business needs into clear problem statements, measurable acceptance criteria, and usable UX flows.",
+        "Produced clear technical documentation and handoff notes to support maintainability, onboarding, and cross-team collaboration."
       ]
     },
     {
@@ -143,58 +148,181 @@
   ],
   "projects": [
     {
+      "id": "note2action",
+      "slug": "note2action",
+      "visibility": "private",
+      "featured": true,
       "title": "Note2Action — AI-Powered Task Prediction System",
       "stack": ["Python", "Machine Learning", "NLP", "FastAPI"],
       "summary": "Analyzes weekly notes from 600+ Account Managers to predict next actions, reducing manual workload and minimizing missed tasks.",
-      "links": {}
+      "links": {},
+      "caseStudy": {
+        "problem": "Account Managers log weekly notes, but next actions are often missed or manually tracked across tools.",
+        "methods": [
+          "Defined a task taxonomy and labeling workflow for historical notes.",
+          "Built an ML/NLP pipeline to infer likely next actions from free-form text.",
+          "Integrated predictions into an internal workflow to support day-to-day execution."
+        ],
+        "results": [
+          "Improved action follow-through by making next steps visible and structured.",
+          "Reduced manual effort for action planning and triage."
+        ],
+        "constraints": [
+          "Internal system (SSO). Code and product access are private."
+        ]
+      }
     },
     {
+      "id": "demofactory",
+      "slug": "demofactory-dspy",
+      "visibility": "private",
+      "featured": true,
       "title": "DemoFactory — AI-driven App Generator",
       "stack": ["RAG", "LangChain", "Python", "Prompt Engineering", "Deployment"],
       "summary": "Generates customizable applications (e.g., RAG systems, summarizers) directly from user queries; dynamic module generation and automated deployment for instant demos.",
-      "links": {}
+      "links": {},
+      "caseStudy": {
+        "problem": "Internal teams needed a fast way to generate, customize, and deploy demo-grade apps from natural language requests.",
+        "methods": [
+          "Designed a prompt-to-app workflow that maps user intent to app templates/modules.",
+          "Implemented evaluation-driven iteration for prompt strategies and LLM behaviors.",
+          "Automated packaging and deployment steps to shorten time-to-demo."
+        ],
+        "results": [
+          "Reduced friction to prototype and share demo experiences across teams.",
+          "Enabled consistent quality via evaluation and regression checks."
+        ],
+        "constraints": [
+          "Internal system (SSO). Code and deployments are private."
+        ]
+      }
     },
     {
+      "id": "agentflow",
+      "slug": "agentflow",
+      "visibility": "private",
+      "featured": true,
       "title": "Agentic AI: LLM-based Code Agent",
       "stack": ["OpenAI", "LLaMA2", "Mixtral", "Python", "Prompt Engineering"],
       "summary": "Automates coding tasks (bug fixing, test generation, code explanation).",
-      "links": {"demo": null, "repo": null}
+      "links": {"demo": null, "repo": null},
+      "caseStudy": {
+        "problem": "Build a reliable agentic workflow that turns natural-language intent into correct code changes with safeguards.",
+        "methods": [
+          "Structured the agent workflow into planning → execution → verification steps.",
+          "Added tooling hooks for code context retrieval and validation.",
+          "Used evaluation loops to iterate on prompts and reduce regressions."
+        ],
+        "results": [
+          "Faster iteration on code tasks with improved consistency and guardrails.",
+          "Clearer developer experience via explainability and structured outputs."
+        ],
+        "constraints": [
+          "Some work is internal/private; public code links may be unavailable."
+        ]
+      }
     },
     {
+      "id": "blog-generator",
+      "slug": "blog-generator-llms",
+      "visibility": "public",
       "title": "Blog Generator via LLMs",
       "stack": ["LangChain", "Python", "Prompt Engineering"],
       "summary": "Modular pipeline with topic prompts, outline generation, fact-checking, and rewriting agents to produce high-quality blogs.",
-      "links": {}
+      "links": {"repo": "https://github.com/Chinmoy17/Blog_Generator"},
+      "caseStudy": {
+        "problem": "Generate structured, readable blog posts from a short user prompt while keeping quality and consistency.",
+        "methods": [
+          "Built a modular pipeline (topic → outline → draft → rewrite) with clear intermediate artifacts.",
+          "Added optional fact-check and style constraints to improve output consistency."
+        ]
+      }
     },
     {
+      "id": "ai-painter",
+      "slug": "ai-painter",
+      "visibility": "public",
       "title": "AI Painter",
       "stack": ["Python", "OpenCV", "Mediapipe"],
       "summary": "Gesture-controlled virtual painting app with real-time hand tracking, customizable tools, and canvas saving.",
-      "links": {}
+      "links": {},
+      "caseStudy": {
+        "problem": "Enable natural, gesture-based drawing interactions using a webcam without specialized hardware.",
+        "methods": [
+          "Used hand landmark tracking to interpret drawing and tool-selection gestures.",
+          "Implemented a canvas pipeline with brush controls, erasing, and export."
+        ]
+      }
     },
     {
+      "id": "pdf-chatbot",
+      "slug": "multilingual-pdf-chatbot-rag",
+      "visibility": "public",
       "title": "Multilingual PDF Chatbot (RAG System)",
       "stack": ["Python", "Streamlit", "FastAPI", "FAISS", "OCR", "Gemini LLM"],
       "summary": "Answers English/Bangla queries from PDFs using a RAG pipeline with FAISS, Gemini LLM, OCR, Streamlit UI, and REST API.",
-      "links": {}
+      "links": {},
+      "caseStudy": {
+        "problem": "Answer questions from documents across multiple languages, including OCR-heavy PDFs.",
+        "methods": [
+          "Built an ingestion pipeline with OCR + chunking + embeddings.",
+          "Implemented retrieval + answer generation with a simple API + UI."
+        ]
+      }
     },
     {
+      "id": "bangla-vowel",
+      "slug": "bangla-vowel-detection",
+      "visibility": "public",
       "title": "Bangla Vowel Detection",
       "stack": ["Deep Learning", "Transfer Learning"],
       "summary": "Achieved 97.76% accuracy classifying handwritten Bangla vowels using transfer learning.",
-      "links": {}
+      "links": {"repo": "https://github.com/Chinmoy17/Bangla-Vowels-Detection-with-Transfer-Learning-DL"},
+      "caseStudy": {
+        "problem": "Classify handwritten Bangla vowels accurately with limited labeled data.",
+        "methods": [
+          "Used transfer learning with strong augmentation and careful preprocessing.",
+          "Tracked accuracy and error patterns across classes to iterate on training."
+        ],
+        "results": [
+          "97.76% test accuracy on the Ekushe dataset (reported)."
+        ]
+      }
     },
     {
+      "id": "custom-cpu",
+      "slug": "4-bit-custom-cpu",
+      "visibility": "public",
       "title": "4-Bit Custom CPU Design",
       "stack": ["Logisim", "Custom ISA"],
       "summary": "Designed a 4-bit CPU supporting basic ALU operations and jump instructions with a custom ISA and 8x15 SRAM.",
-      "links": {}
+      "links": {"repo": "https://github.com/Chinmoy17/4-Bit_Custom_CPU_Project?tab=readme-ov-file#4-bit-custom-cpu-design"},
+      "caseStudy": {
+        "problem": "Demonstrate CPU architecture fundamentals by designing a small but complete ISA + datapath.",
+        "methods": [
+          "Designed ALU, control unit, registers, and memory model.",
+          "Built a minimal ISA supporting ALU and jump instructions."
+        ]
+      }
     },
     {
+      "id": "paper-retraction-nlp",
+      "slug": "paper-retraction-analysis-nlp",
+      "visibility": "public",
       "title": "Paper Retraction Analysis with NLP",
       "stack": ["TF-IDF", "Clustering", "Random Forest"],
       "summary": "Applied BoW and TF‑IDF to analyze retracted papers, achieving ~92% classification accuracy; visualized trends via clustering.",
-      "links": {}
+      "links": {},
+      "caseStudy": {
+        "problem": "Analyze retracted-paper text signals and classify categories using classical NLP baselines.",
+        "methods": [
+          "Vectorized text via BoW/TF-IDF and evaluated multiple classifiers.",
+          "Used clustering and visualization to explore trends and groupings."
+        ],
+        "results": [
+          "~92% classification accuracy (reported)."
+        ]
+      }
     }
   ],
   "awards": [
