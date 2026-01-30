@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Badge } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Particle from "../Particle";
 import resumeData from "../../data/resume.json";
 
@@ -18,18 +18,38 @@ function ProjectTemplate({
   children,
 }) {
   const isPrivate = project?.visibility && project.visibility !== "public";
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    // More reliable than a plain <Link> if something is intercepting clicks.
+    navigate("/project");
+  };
 
   return (
     <Container fluid className="project-section">
       <Particle />
       <Container className="project-container-wide">
-        {/* Back link at top */}
-        <Link className="project-detail-back" to="/project">
-          &lt; Back to Projects
-        </Link>
+        <div className="project-topbar">
+          <button type="button" className="project-back-btn" onClick={handleBack}>
+             Back to Projects
+          </button>
 
-        {/* Custom hero section passed by component */}
-        {heroSection}
+          <div className="project-topbar-actions">
+            {project?.links?.demo ? (
+              <a className="project-topbar-action" href={project.links.demo} target="_blank" rel="noreferrer">
+                Live Demo
+              </a>
+            ) : null}
+            {project?.links?.repo ? (
+              <a className="project-topbar-action" href={project.links.repo} target="_blank" rel="noreferrer">
+                Source
+              </a>
+            ) : null}
+            <Link className="project-topbar-action" to="/project">
+              All Projects
+            </Link>
+          </div>
+        </div>
 
         <div className="project-layout">
           {/* LEFT Sidebar - Sticky, no internal scroll */}
@@ -97,6 +117,8 @@ function ProjectTemplate({
           {/* Main Content - FULL WIDTH */}
           <main className="project-content-col">
             <article className={`project-content project-content-${variant}`}>
+              {/* Custom hero section passed by component */}
+              {heroSection}
               {children}
             </article>
           </main>
