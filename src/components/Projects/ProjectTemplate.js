@@ -1,6 +1,24 @@
 import React from "react";
 import { Container, Badge } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  FiArrowLeft,
+  FiExternalLink,
+  FiGithub,
+  FiMessageCircle,
+  FiPlay,
+  FiLock,
+  FiCode,
+  FiSearch,
+} from "react-icons/fi";
+import {
+  SiDocker,
+  SiFastapi,
+  SiMicrosoftazure,
+  SiOpenai,
+  SiReact,
+  SiTypescript,
+} from "react-icons/si";
 import Particle from "../Particle";
 import resumeData from "../../data/resume.json";
 
@@ -20,6 +38,18 @@ function ProjectTemplate({
   const isPrivate = project?.visibility && project.visibility !== "public";
   const navigate = useNavigate();
 
+  const iconForStackItem = (value) => {
+    const text = String(value || "");
+    if (/azure/i.test(text)) return SiMicrosoftazure;
+    if (/openai/i.test(text)) return SiOpenai;
+    if (/fastapi/i.test(text)) return SiFastapi;
+    if (/react/i.test(text)) return SiReact;
+    if (/typescript/i.test(text)) return SiTypescript;
+    if (/docker/i.test(text)) return SiDocker;
+    if (/serper|search/i.test(text)) return FiSearch;
+    return FiCode;
+  };
+
   const handleBack = () => {
     // More reliable than a plain <Link> if something is intercepting clicks.
     navigate("/project");
@@ -31,21 +61,25 @@ function ProjectTemplate({
       <Container className="project-container-wide">
         <div className="project-topbar">
           <button type="button" className="project-back-btn" onClick={handleBack}>
-             Back to Projects
+            <FiArrowLeft className="project-inline-icon" aria-hidden="true" />
+            Back to Projects
           </button>
 
           <div className="project-topbar-actions">
             {project?.links?.demo ? (
               <a className="project-topbar-action" href={project.links.demo} target="_blank" rel="noreferrer">
+                <FiPlay className="project-inline-icon" aria-hidden="true" />
                 Live Demo
               </a>
             ) : null}
             {project?.links?.repo ? (
               <a className="project-topbar-action" href={project.links.repo} target="_blank" rel="noreferrer">
+                <FiGithub className="project-inline-icon" aria-hidden="true" />
                 Source
               </a>
             ) : null}
             <Link className="project-topbar-action" to="/project">
+              <FiExternalLink className="project-inline-icon" aria-hidden="true" />
               All Projects
             </Link>
           </div>
@@ -80,16 +114,19 @@ function ProjectTemplate({
                   <div className="project-sidebar-title">Quick Links</div>
                   {project?.links?.repo && (
                     <a className="project-sidebar-link" href={project.links.repo} target="_blank" rel="noreferrer">
-                      <span className="link-icon">↗</span> View Source
+                      <FiGithub className="project-inline-icon" aria-hidden="true" />
+                      View Source
                     </a>
                   )}
                   {project?.links?.demo && (
                     <a className="project-sidebar-link" href={project.links.demo} target="_blank" rel="noreferrer">
-                      <span className="link-icon">▶</span> Live Demo
+                      <FiPlay className="project-inline-icon" aria-hidden="true" />
+                      Live Demo
                     </a>
                   )}
                   <a className="project-sidebar-link" href={resumeData.links?.linkedin} target="_blank" rel="noreferrer">
-                    <span className="link-icon">→</span> Get in Touch
+                    <FiMessageCircle className="project-inline-icon" aria-hidden="true" />
+                    Get in Touch
                   </a>
                 </div>
 
@@ -97,17 +134,22 @@ function ProjectTemplate({
                 <div className="project-sidebar-card project-sidebar-stack-card">
                   <div className="project-sidebar-title">Built With</div>
                   <div className="project-sidebar-tags">
-                    {(project?.stack || []).slice(0, 8).map((t) => (
-                      <Badge key={t} className="project-sidebar-tag">
-                        {t}
-                      </Badge>
-                    ))}
+                    {(project?.stack || []).slice(0, 8).map((t) => {
+                      const Icon = iconForStackItem(t);
+                      return (
+                        <Badge key={t} className="project-sidebar-tag">
+                          <Icon className="project-tag-icon" aria-hidden="true" />
+                          {t}
+                        </Badge>
+                      );
+                    })}
                   </div>
                 </div>
 
                 {isPrivate && (
                   <div className="project-sidebar-notice">
-                    🔒 Internal project
+                    <FiLock className="project-inline-icon" aria-hidden="true" />
+                    Internal project
                   </div>
                 )}
               </div>

@@ -1628,6 +1628,12 @@ button:focus {
   transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
 }
 
+.project-inline-icon {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
 .project-topbar-action:hover {
   background: rgba(var(--color-primary-rgb), 0.10);
   border-color: rgba(var(--color-primary-rgb), 0.32);
@@ -1773,13 +1779,6 @@ button:focus {
   border: 1px solid transparent;
 }
 
-.project-sidebar-link .link-icon {
-  font-size: 0.85rem;
-  color: var(--imp-text-color);
-  opacity: 0.7;
-  transition: transform 0.2s ease;
-}
-
 .project-sidebar-link:hover {
   background: rgba(var(--color-primary-rgb), 0.1);
   color: var(--imp-text-color);
@@ -1843,9 +1842,11 @@ button:focus {
   }
 }
 
-.project-sidebar-link:hover .link-icon {
+
+.project-sidebar-link:hover .project-inline-icon {
   opacity: 1;
-  transform: translateX(3px);
+  transform: translateX(2px);
+  transition: transform 0.2s ease;
 }
 
 /* Tech Stack Card */
@@ -1859,14 +1860,23 @@ button:focus {
   gap: 6px;
 }
 
-.project-sidebar-tag {
-  background: rgba(var(--color-primary-rgb), 0.1) !important;
+.project-sidebar-tag.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: rgba(var(--color-primary-rgb), 0.10) !important;
   color: var(--imp-text-color) !important;
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 4px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.22);
+}
+
+.project-sidebar-tag.badge .project-tag-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.9;
 }
 
 /* Private Notice */

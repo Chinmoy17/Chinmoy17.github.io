@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { Badge } from "react-bootstrap";
 import ProjectTemplate from "../../ProjectTemplate";
 import data from "./data";
@@ -9,6 +10,54 @@ import styles from "./AgentFlow.module.css";
  * A blog-style case study for the AgentFlow AI workflow platform.
  */
 function AgentFlowProject() {
+  const [lightbox, setLightbox] = useState(null);
+  const [zoom, setZoom] = useState(1);
+
+  const openLightbox = (payload) => {
+    setZoom(1);
+    setLightbox(payload);
+  };
+  const closeLightbox = () => setLightbox(null);
+
+  const zoomIn = () => setZoom((z) => Math.min(z + 0.25, 4));
+  const zoomOut = () => setZoom((z) => Math.max(z - 0.25, 0.5));
+  const resetZoom = () => setZoom(1);
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+    if (e.deltaY < 0) zoomIn();
+    else zoomOut();
+  };
+
+  useEffect(() => {
+    if (!lightbox) return;
+
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") closeLightbox();
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [lightbox]);
+
+  const zoomProps = (src, alt, caption) => ({
+    role: "button",
+    tabIndex: 0,
+    onClick: () => openLightbox({ src, alt, caption }),
+    onKeyDown: (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openLightbox({ src, alt, caption });
+      }
+    },
+  });
+
   // Build table of contents
   const toc = [
     { id: "hook", title: "Overview" },
@@ -20,6 +69,10 @@ function AgentFlowProject() {
     { id: "outcomes", title: "Results" },
     { id: "next", title: "What's Next" },
   ];
+
+  const heroImageSrc = "/assets/projects/agentflow/Gemini_Generated_Image_c7prgrc7prgrc7pr.png";
+  const heroImageAlt = "AgentFlow 3D Concept - Tool Gateway Service";
+  const heroImageCaption = "AgentFlow: A unified gateway where AI agents discover and orchestrate tools dynamically";
 
   // Custom Hero Section
   const heroSection = (
@@ -45,12 +98,14 @@ function AgentFlowProject() {
       {/* Hero Image - 3D Conceptual */}
       <div className={styles.heroImageWrapper}>
         <img
-          src="/assets/projects/agentflow/Gemini_Generated_Image_c7prgrc7prgrc7pr.png"
-          alt="AgentFlow 3D Concept - Tool Gateway Service"
+          src={heroImageSrc}
+          alt={heroImageAlt}
           className={styles.heroImage}
+          loading="lazy"
+          {...zoomProps(heroImageSrc, heroImageAlt, heroImageCaption)}
         />
         <div className={styles.heroImageCaption}>
-          AgentFlow: A unified gateway where AI agents discover and orchestrate tools dynamically
+          {heroImageCaption}
         </div>
       </div>
 
@@ -174,6 +229,12 @@ function AgentFlowProject() {
               src="/assets/projects/agentflow/Untitled diagram-2026-01-16-082542.png"
               alt="AgentFlow Architecture Diagram"
               className={styles.workflowImage}
+              loading="lazy"
+              {...zoomProps(
+                "/assets/projects/agentflow/Untitled diagram-2026-01-16-082542.png",
+                "AgentFlow Architecture Diagram",
+                "The layered architecture: frontend, orchestration, and modular services"
+              )}
             />
             <p className={styles.workflowCaption}>
               The layered architecture: frontend, orchestration, and modular services
@@ -209,7 +270,12 @@ function AgentFlowProject() {
                   </div>
                   {step.image && (
                     <div className={styles.expStepImage}>
-                      <img src={step.image} alt={step.title} loading="lazy" />
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        loading="lazy"
+                        {...zoomProps(step.image, step.title, step.caption)}
+                      />
                       {step.caption && <span className={styles.expStepCaption}>{step.caption}</span>}
                     </div>
                   )}
@@ -301,11 +367,66 @@ function AgentFlowProject() {
                 src="/assets/projects/agentflow/Gemini_Generated_Image_3gx6fp3gx6fp3gx6.png"
                 alt="Tool Gateway Service Vision"
                 loading="lazy"
+                {...zoomProps(
+                  "/assets/projects/agentflow/Gemini_Generated_Image_3gx6fp3gx6fp3gx6.png",
+                  "Tool Gateway Service Vision",
+                  "The vision: a centralized gateway where any internal tool or external API plugs in and becomes discoverable."
+                )}
               />
             </div>
           </div>
         </section>
       </div>
+
+      {lightbox && createPortal(
+        <div
+          className={styles.lightboxOverlay}
+          onMouseDown={closeLightbox}
+          onWheel={handleWheel}
+          role="dialog"
+          aria-modal="true"
+        >
+          {/* Close button */}
+          <button
+            type="button"
+            className={styles.lightboxClose}
+            onClick={closeLightbox}
+            aria-label="Close image"
+          >
+            ×
+          </button>
+
+          {/* Zoom controls */}
+          <div className={styles.lightboxControls} onMouseDown={(e) => e.stopPropagation()}>
+            <button type="button" onClick={zoomOut} aria-label="Zoom out" disabled={zoom <= 0.5}>−</button>
+            <button type="button" onClick={resetZoom} className={styles.zoomLevel}>{Math.round(zoom * 100)}%</button>
+            <button type="button" onClick={zoomIn} aria-label="Zoom in" disabled={zoom >= 4}>+</button>
+          </div>
+
+          {/* Image container */}
+          <div
+            className={styles.lightboxDialog}
+            onMouseDown={(e) => e.stopPropagation()}
+            style={{ cursor: zoom > 1 ? 'grab' : 'default' }}
+          >
+            <img
+              src={lightbox.src}
+              alt={lightbox.alt || ""}
+              className={styles.lightboxImage}
+              style={{ transform: `scale(${zoom})` }}
+              draggable={false}
+            />
+          </div>
+
+          {/* Caption */}
+          {lightbox.caption ? (
+            <div className={styles.lightboxCaption} onMouseDown={(e) => e.stopPropagation()}>
+              {lightbox.caption}
+            </div>
+          ) : null}
+        </div>,
+        document.body
+      )}
     </ProjectTemplate>
   );
 }
