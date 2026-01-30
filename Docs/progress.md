@@ -205,3 +205,35 @@ Never make sweeping changes without explicit approval. Break large tasks into re
   - Added 3-column "Areas of Expertise" grid (Generative AI, Full Stack, Research).
   - Introduction of expanded 8-badge tech stack strip.
 - **Technical Fixes**: Resolved `SiHuggingface` import errors; fixed GitHub Pages routing (404 redirects).
+
+---
+
+**Last Updated:** January 26, 2026  
+**Focus Area:** Project case studies (AgentFlow)
+
+## Update — January 26, 2026
+
+**Project Case Studies → Blog-Style Pages**
+- Upgraded project detail pages to read like a blog post (hero image, narrative intro, TL;DR callout, on-page TOC, better typography).
+- Added per-project layout flexibility via `caseStudy.layout` in `src/data/resume.json` (each project page can be structured differently).
+
+**AgentFlow Case Study (Featured)**
+- Added a story-driven intro at the top (no heading) focused on the real business problem: demos/POCs taking weeks can cost deals; AgentFlow enables prompt-to-app demos + instant deployment for client-facing validation.
+- Incorporated visuals into the narrative:
+  - Architecture diagram used inside the “How it works” section.
+  - Tool Gateway vision image used in the “What’s next” section.
+- Implemented a screenshot walkthrough using the `Agentlfow Info/SS/` flow.
+  - Walkthrough steps render with text on the left and the screenshot on the right.
+  - Screenshot sizing is controlled via CSS (fixed right-column width with responsive fallback).
+
+**Assets + Styling**
+- Copied AgentFlow images/screenshots into `public/assets/projects/agentflow/` for stable public paths.
+- Added styling for:
+  - Hero image presentation (figure + caption).
+  - Two-column step walkthrough layout and custom screenshot sizing.
+
+**Key Files Updated**
+- `src/components/Projects/ProjectDetail.js`
+- `src/data/resume.json`
+- `src/style.css`
+- `public/assets/projects/agentflow/*`

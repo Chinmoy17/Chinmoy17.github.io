@@ -3,10 +3,28 @@ import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import Particle from "../Particle";
 import resumeData from "../../data/resume.json";
 import { BsFileEarmarkPdf } from "react-icons/bs";
+import ProjectCard from "../Projects/ProjectCards";
+
+import vowel from "../../Assets/Projects/vowel.jpg";
+import stu from "../../Assets/Projects/stu.gif";
+import agent from "../../Assets/Projects/agent.jpg";
+
+const coverById = {
+  "bangla-vowel": vowel,
+  "student-ai-usage": stu,
+};
+
+function getCoverForResearchItem(item) {
+  return coverById[item.id] || agent;
+}
 
 function Research() {
   // Safe check if publications exists
   const pubs = resumeData.publications || [];
+
+  const researchProjects = Array.isArray(resumeData.projects)
+    ? resumeData.projects.filter((p) => p.category === "research")
+    : [];
   
   // Specific filter for the lab experience
   const researchExp = resumeData.experience.filter(
@@ -107,6 +125,33 @@ function Research() {
                     </ul>
                   </Card.Body>
                 </Card>
+              </Col>
+            ))}
+          </Row>
+        )}
+
+        {/* Research Projects / Case Studies */}
+        {researchProjects.length > 0 && (
+          <Row style={{ justifyContent: "center", marginTop: "28px", paddingBottom: "10px" }}>
+            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "20px" }}>
+              Research <strong className="purple">Projects</strong>
+            </h2>
+            <p style={{ color: "var(--color-text)", textAlign: "left", paddingLeft: "15px", marginTop: "-8px" }}>
+              Case studies and analyses tied to ML/DL and applied research.
+            </p>
+
+            {researchProjects.map((p) => (
+              <Col md={4} className="project-card" key={p.id || p.slug || p.title}>
+                <ProjectCard
+                  imgPath={getCoverForResearchItem(p)}
+                  isBlog={false}
+                  title={p.title}
+                  description={p.summary}
+                  ghLink={p.visibility === "public" ? p.links?.repo : null}
+                  demoLink={p.visibility === "public" ? p.links?.demo : null}
+                  visibility={p.visibility}
+                  caseStudyLink={p.slug ? `/project/${p.slug}` : null}
+                />
               </Col>
             ))}
           </Row>

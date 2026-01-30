@@ -1,6 +1,6 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import ProjectCard from "./ProjectCards";
+import { Container, Row, Col, Card, Badge, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import Particle from "../Particle";
 import resumeData from "../../data/resume.json";
 
@@ -23,7 +23,9 @@ function getCoverForProject(project) {
 }
 
 function Projects() {
-  const projects = Array.isArray(resumeData.projects) ? [...resumeData.projects] : [];
+  const projects = Array.isArray(resumeData.projects)
+    ? resumeData.projects.filter((p) => (p.category || "project") === "project")
+    : [];
   projects.sort((a, b) => {
     const aFeatured = a.featured ? 1 : 0;
     const bFeatured = b.featured ? 1 : 0;
@@ -42,20 +44,91 @@ function Projects() {
           Click any project to read a full case study (problem, methods, results). Public code links are shown only when available.
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
-          {projects.map((p) => (
-            <Col md={4} className="project-card" key={p.id || p.slug || p.title}>
-              <ProjectCard
-                imgPath={getCoverForProject(p)}
-                isBlog={false}
-                title={p.title}
-                description={p.summary}
-                ghLink={p.visibility === "public" ? p.links?.repo : null}
-                demoLink={p.visibility === "public" ? p.links?.demo : null}
-                visibility={p.visibility}
-                caseStudyLink={p.slug ? `/project/${p.slug}` : null}
-              />
-            </Col>
-          ))}
+          {projects.map((p) => {
+            const isPrivate = p.visibility && p.visibility !== "public";
+            const cover = getCoverForProject(p);
+            const caseStudyLink = p.slug ? `/project/${p.slug}` : "/project";
+
+            return (
+              <Col md={12} className="project-card" key={p.id || p.slug || p.title} style={{ marginBottom: "20px" }}>
+                <Card className="project-card-view" style={{ textAlign: "left" }}>
+                  <Card.Body>
+                    <Row>
+                      <Col md={3} style={{ marginBottom: "12px" }}>
+                        <img
+                          src={cover}
+                          alt={p.title}
+                          style={{
+                            width: "100%",
+                            borderRadius: "12px",
+                            border: "1px solid var(--color-border)",
+                            boxShadow: "var(--shadow-1)",
+                            objectFit: "cover",
+                            maxHeight: "140px",
+                          }}
+                        />
+                      </Col>
+
+                      <Col md={7}>
+                        <Card.Title style={{ fontSize: "1.6em", fontWeight: "bold" }}>{p.title}</Card.Title>
+
+                        <div style={{ marginTop: "10px", display: "flex", flexWrap: "wrap", gap: "8px" }}>
+                          {isPrivate ? (
+                            <Badge bg="secondary" style={{ borderRadius: "999px", padding: "6px 10px", fontWeight: 700 }}>
+                              Private / SSO
+                            </Badge>
+                          ) : (
+                            <Badge bg="success" style={{ borderRadius: "999px", padding: "6px 10px", fontWeight: 700 }}>
+                              Public
+                            </Badge>
+                          )}
+
+                          {(p.stack || []).slice(0, 6).map((t) => (
+                            <Badge
+                              key={t}
+                              bg="light"
+                              text="dark"
+                              style={{ borderRadius: "999px", padding: "6px 10px", border: "1px solid var(--color-border)" }}
+                            >
+                              {t}
+                            </Badge>
+                          ))}
+                        </div>
+
+                        <Card.Text style={{ marginTop: "12px", fontSize: "1.05em", lineHeight: 1.65 }}>
+                          {p.summary}
+                        </Card.Text>
+                      </Col>
+
+                      <Col md={2} style={{ textAlign: "right" }}>
+                        <Button
+                          as={Link}
+                          to={caseStudyLink}
+                          variant="primary"
+                          className="viewbtn"
+                          style={{ marginLeft: 0, width: "100%" }}
+                        >
+                          Read case study
+                        </Button>
+
+                        {!isPrivate && p.links?.repo ? (
+                          <Button
+                            variant="outline-primary"
+                            href={p.links.repo}
+                            target="_blank"
+                            rel="noreferrer"
+                            style={{ marginTop: "10px", width: "100%" }}
+                          >
+                            GitHub
+                          </Button>
+                        ) : null}
+                      </Col>
+                    </Row>
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+          })}
         </Row>
       </Container>
     </Container>
