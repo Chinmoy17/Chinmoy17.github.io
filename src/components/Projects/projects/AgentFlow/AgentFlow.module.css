@@ -1,0 +1,661 @@
+/* AgentFlow Project - Premium Case Study Styles */
+
+/* ===== HERO SECTION ===== */
+.hero {
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroTop {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--imp-text-color);
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.heroBadges {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.heroBadgePrivate {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  color: white !important;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.heroBadgeType {
+  background: rgba(var(--color-primary-rgb), 0.15) !important;
+  color: var(--imp-text-color) !important;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+/* Hero Hook / Tagline */
+.heroHook {
+  text-align: center;
+  max-width: 800px;
+  margin: 32px auto;
+}
+
+.heroTagline {
+  font-size: 1.4rem;
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.heroHighlight {
+  color: var(--imp-text-color);
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+/* Hero Image */
+.heroImageWrapper {
+  text-align: center;
+  margin: 40px 0;
+}
+
+.heroImage {
+  max-width: 100%;
+  max-height: 500px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--color-border);
+}
+
+.heroImageCaption {
+  margin-top: 16px;
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Hero Stats */
+.heroStats {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.heroStat {
+  text-align: center;
+  padding: 20px 32px;
+  background: var(--color-card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--color-border);
+  min-width: 160px;
+}
+
+.heroStatValue {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--imp-text-color);
+  margin-bottom: 4px;
+}
+
+.heroStatLabel {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ===== CONTENT AREA ===== */
+.content {
+  width: 100%;
+}
+
+.section {
+  margin-bottom: 64px;
+  scroll-margin-top: 110px;
+}
+
+.sectionTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--imp-text-color);
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.sectionIcon {
+  font-size: 1.5rem;
+}
+
+/* ===== TL;DR BOX ===== */
+.tldr {
+  display: flex;
+  gap: 20px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
+  border-left: 4px solid var(--imp-text-color);
+  border-radius: 12px;
+  padding: 24px 28px;
+}
+
+.tldrIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.tldrContent {
+  flex: 1;
+}
+
+.tldrTitle {
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--imp-text-color);
+  margin-bottom: 12px;
+}
+
+.tldrList {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.tldrList li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+/* ===== PROBLEM SECTION ===== */
+.problemCard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 24px;
+}
+
+.problemScenario,
+.problemPain {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.problemScenario h3,
+.problemPain h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--imp-text-color);
+  margin-bottom: 16px;
+}
+
+.problemScenario p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.problemPain ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.problemPain li {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.problemBottom {
+  text-align: center;
+  padding: 24px;
+  background: rgba(239, 68, 68, 0.08);
+  border-radius: 12px;
+  border-left: 4px solid #ef4444;
+}
+
+.problemQuote {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* ===== SOLUTION SECTION ===== */
+.solutionIntro {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  text-align: center;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.solutionIntro p {
+  color: var(--color-text);
+}
+
+.solutionFeatures {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.featureCard {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 28px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.featureCard h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--imp-text-color);
+  margin-bottom: 12px;
+}
+
+.featureCard p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ===== WORKFLOW SECTION ===== */
+.workflowDiagram {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.workflowImage {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-border);
+}
+
+.workflowCaption {
+  margin-top: 12px;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.workflowSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.workflowStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  transition: transform 0.2s ease;
+}
+
+.workflowStep:hover {
+  transform: translateX(8px);
+}
+
+.workflowStepNumber {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--imp-text-color) 0%, #8b5cf6 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.workflowStepText {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  padding-top: 8px;
+}
+
+/* ===== EXPERIENCE SECTION ===== */
+.experienceIntro {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  margin-bottom: 32px;
+}
+
+.experienceSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.expStep {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  align-items: center;
+  padding: 32px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+}
+
+.expStep:nth-child(even) {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.expStep:nth-child(even) .expStepContent {
+  order: 2;
+}
+
+.expStep:nth-child(even) .expStepImage {
+  order: 1;
+}
+
+.expStepTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--imp-text-color);
+  margin-bottom: 12px;
+}
+
+.expStepText {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.expStepImage {
+  text-align: center;
+}
+
+.expStepImage img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--color-border);
+  transition: transform 0.3s ease;
+}
+
+.expStepImage img:hover {
+  transform: scale(1.03);
+}
+
+.expStepCaption {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* ===== ARCHITECTURE SECTION ===== */
+.archGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.archCard {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 20px 24px;
+  border-left: 4px solid var(--imp-text-color);
+}
+
+.archCard p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.toolDiscovery {
+  background: rgba(var(--color-primary-rgb), 0.05);
+  border-radius: 16px;
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.toolDiscovery h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--imp-text-color);
+  margin-bottom: 16px;
+}
+
+.toolDiscovery p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.toolDiscovery ul {
+  padding-left: 24px;
+}
+
+.toolDiscovery li {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+/* ===== RESULTS SECTION ===== */
+.resultsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.resultCard {
+  display: flex;
+  gap: 16px;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.resultCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.resultIcon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.resultCard p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.constraints {
+  background: rgba(251, 191, 36, 0.1);
+  border-left: 4px solid #f59e0b;
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+/* ===== WHAT'S NEXT SECTION ===== */
+.nextContent {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.nextText p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: var(--color-text);
+  margin-bottom: 16px;
+}
+
+.nextText h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--imp-text-color);
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.nextText ul {
+  padding-left: 20px;
+}
+
+.nextText li {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 8px;
+  color: var(--color-text);
+}
+
+.nextImage img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-border);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+  .solutionFeatures {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroTagline {
+    font-size: 1.2rem;
+  }
+
+  .heroHighlight {
+    font-size: 1.3rem;
+  }
+
+  .heroStats {
+    gap: 24px;
+  }
+
+  .problemCard {
+    grid-template-columns: 1fr;
+  }
+
+  .expStep,
+  .expStep:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+
+  .expStep:nth-child(even) .expStepContent,
+  .expStep:nth-child(even) .expStepImage {
+    order: unset;
+  }
+
+  .nextContent {
+    grid-template-columns: 1fr;
+  }
+
+  .resultsGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 1.75rem;
+  }
+
+  .solutionFeatures {
+    grid-template-columns: 1fr;
+  }
+
+  .heroStats {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .heroStat {
+    width: 100%;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+
+  .tldr {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .archGrid {
+    grid-template-columns: 1fr;
+  }
+}

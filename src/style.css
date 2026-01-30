@@ -1561,3 +1561,359 @@ button:focus {
   font-size: 0.95em;
   line-height: 1.45;
 }
+
+/* ================================= */
+/* NEW: Project Template with LEFT Sidebar */
+/* ================================= */
+
+.project-container-wide {
+  max-width: 1400px;
+}
+
+.project-layout {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  margin-top: 24px;
+}
+
+.project-sidebar-col {
+  position: sticky;
+  top: 100px;
+  flex: 0 0 240px;
+  width: 240px;
+  max-width: 240px;
+  /* No internal scrolling - scrolls with page */
+  height: auto;
+  overflow: visible;
+  align-self: flex-start;
+  min-height: calc(100vh - 120px);
+}
+
+.project-content-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.project-sidebar-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: calc(100vh - 120px);
+  padding-bottom: 24px;
+}
+
+.project-sidebar-card {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-1);
+  padding: 20px;
+}
+
+/* TOC Card - Main navigation */
+.project-sidebar-toc-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.project-sidebar-title {
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--imp-text-color);
+  margin-bottom: 16px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+/* TOC Links - Professional but inviting */
+.project-sidebar-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-sidebar-toc-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text);
+  font-size: 0.9rem;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  margin-left: -3px;
+}
+
+.project-sidebar-toc-link .toc-number {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--imp-text-color);
+  opacity: 0.5;
+  min-width: 20px;
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+}
+
+.project-sidebar-toc-link .toc-text {
+  font-weight: 500;
+}
+
+.project-sidebar-toc-link:hover {
+  background: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--imp-text-color);
+  border-left-color: var(--imp-text-color);
+  transform: translateX(4px);
+}
+
+.project-sidebar-toc-link:hover .toc-number {
+  opacity: 1;
+}
+
+/* Quick Links Card */
+.project-sidebar-links-card {
+  padding: 16px;
+}
+
+.project-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  margin: 0 -12px;
+}
+
+.project-sidebar-link .link-icon {
+  font-size: 0.85rem;
+  color: var(--imp-text-color);
+  opacity: 0.7;
+  transition: transform 0.2s ease;
+}
+
+.project-sidebar-link:hover {
+  background: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--imp-text-color);
+}
+
+.project-sidebar-link:hover .link-icon {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+/* Tech Stack Card */
+.project-sidebar-stack-card {
+  padding: 16px;
+}
+
+.project-sidebar-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.project-sidebar-tag {
+  background: rgba(var(--color-primary-rgb), 0.1) !important;
+  color: var(--imp-text-color) !important;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.2);
+}
+
+/* Private Notice */
+.project-sidebar-notice {
+  padding: 12px 16px;
+  background: rgba(251, 191, 36, 0.08);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Section divider inside combined cards */
+.project-sidebar-section {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.project-sidebar-section:last-child {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.project-sidebar-main .project-sidebar-title {
+  margin-bottom: 10px;
+  font-size: 0.8rem;
+}
+
+.project-sidebar-kv {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Compact inline key-value style */
+.project-sidebar-kv-compact {
+  gap: 8px;
+}
+
+.project-sidebar-kv-row-inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.project-sidebar-kv-row-inline .project-sidebar-kv-key {
+  font-weight: 600;
+  color: var(--color-text);
+  opacity: 0.8;
+  font-size: inherit;
+}
+
+.project-sidebar-kv-row-inline .project-sidebar-kv-val {
+  color: var(--color-text);
+  font-size: inherit;
+}
+
+.project-sidebar-kv-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.project-sidebar-kv-key {
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--color-text);
+  opacity: 0.7;
+}
+
+.project-sidebar-kv-val {
+  font-size: 0.95rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+.project-sidebar-toc {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.project-sidebar-toc-link {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  border-left: 2px solid transparent;
+}
+
+.project-sidebar-toc-link:hover {
+  background: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--imp-text-color);
+  border-left-color: var(--imp-text-color);
+}
+
+.project-sidebar-link {
+  display: block;
+  color: var(--imp-text-color);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 0;
+  transition: opacity 0.2s ease;
+}
+
+.project-sidebar-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.project-sidebar-muted {
+  color: var(--color-text);
+  opacity: 0.6;
+  font-size: 0.9rem;
+}
+
+.project-content {
+  background-color: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(120%);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-1);
+  padding: 40px 48px;
+}
+
+/* Responsive adjustments for left sidebar layout */
+@media (max-width: 991px) {
+  .project-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .project-sidebar-col {
+    position: static;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+    order: 2;
+    margin-top: 16px;
+  }
+
+  .project-content-col {
+    order: 1;
+    width: 100%;
+  }
+
+  .project-sidebar-left {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .project-sidebar-card {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .project-sidebar-toc-link {
+    padding: 8px 10px;
+  }
+
+  .project-content {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 576px) {
+  .project-sidebar-left {
+    flex-direction: column;
+  }
+
+  .project-sidebar-card {
+    min-width: 100%;
+  }
+
+  .project-content {
+    padding: 20px;
+  }
+}
