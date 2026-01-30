@@ -108,7 +108,7 @@ function Projects() {
                           className="viewbtn"
                           style={{ marginLeft: 0, width: "100%" }}
                         >
-                          Read case study
+                          Explore Project →
                         </Button>
 
                         {!isPrivate && p.links?.repo ? (

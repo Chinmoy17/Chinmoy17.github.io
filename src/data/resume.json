@@ -342,6 +342,23 @@
       }
     },
     {
+      "id": "pdf-chatbot",
+      "slug": "multilingual-pdf-chatbot-rag",
+      "visibility": "public",
+      "category": "project",
+      "title": "Multilingual PDF Chatbot (RAG System)",
+      "stack": ["Python", "Streamlit", "FastAPI", "FAISS", "OCR", "Gemini LLM"],
+      "summary": "Answers English/Bangla queries from PDFs using a RAG pipeline with FAISS, Gemini LLM, OCR, Streamlit UI, and REST API.",
+      "links": {"repo": "https://github.com/Chinmoy17/PDF-ALAP"},
+      "caseStudy": {
+        "problem": "Answer questions from documents across multiple languages, including OCR-heavy PDFs.",
+        "methods": [
+          "Built an ingestion pipeline with OCR + chunking + embeddings.",
+          "Implemented retrieval + answer generation with a simple API + UI."
+        ]
+      }
+    },
+    {
       "id": "blog-generator",
       "slug": "blog-generator-llms",
       "visibility": "public",
@@ -372,23 +389,6 @@
         "methods": [
           "Used hand landmark tracking to interpret drawing and tool-selection gestures.",
           "Implemented a canvas pipeline with brush controls, erasing, and export."
-        ]
-      }
-    },
-    {
-      "id": "pdf-chatbot",
-      "slug": "multilingual-pdf-chatbot-rag",
-      "visibility": "public",
-      "category": "project",
-      "title": "Multilingual PDF Chatbot (RAG System)",
-      "stack": ["Python", "Streamlit", "FastAPI", "FAISS", "OCR", "Gemini LLM"],
-      "summary": "Answers English/Bangla queries from PDFs using a RAG pipeline with FAISS, Gemini LLM, OCR, Streamlit UI, and REST API.",
-      "links": {},
-      "caseStudy": {
-        "problem": "Answer questions from documents across multiple languages, including OCR-heavy PDFs.",
-        "methods": [
-          "Built an ingestion pipeline with OCR + chunking + embeddings.",
-          "Implemented retrieval + answer generation with a simple API + UI."
         ]
       }
     },

@@ -7,6 +7,7 @@ import { lazy } from "react";
 
 // Lazy-load dedicated project components
 const AgentFlowProject = lazy(() => import("./projects/AgentFlow"));
+const PDFAlapProject = lazy(() => import("./projects/PDFAlap"));
 
 /**
  * Registry mapping slug → lazy component
@@ -14,8 +15,8 @@ const AgentFlowProject = lazy(() => import("./projects/AgentFlow"));
  */
 const projectRegistry = {
   agentflow: AgentFlowProject,
+  "multilingual-pdf-chatbot-rag": PDFAlapProject,
   // "blog-generator-llms": lazy(() => import("./projects/BlogGenerator")),
-  // "multilingual-pdf-chatbot-rag": lazy(() => import("./projects/PDFChatbot")),
   // Add more as needed...
 };
 

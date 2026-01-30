@@ -237,3 +237,109 @@ Never make sweeping changes without explicit approval. Break large tasks into re
 - `src/data/resume.json`
 - `src/style.css`
 - `public/assets/projects/agentflow/*`
+
+---
+
+**Last Updated:** January 31, 2026  
+**Focus Area:** AgentFlow Case Study — Premium UX Polish
+
+## Update — January 31, 2026
+
+### AgentFlow Project Page — Complete Overhaul
+
+**Architecture Refactor**
+- Migrated from generic JSON-driven renderer to **dedicated per-project React components**
+- Created `ProjectTemplate.js` as a shared wrapper providing consistent layout, navigation, and sidebar
+- AgentFlow is now a standalone component at `src/components/Projects/projects/AgentFlow/index.js`
+- Supports unique layouts, custom sections, and project-specific styling per project
+
+**Layout & Navigation**
+- **Left Sidebar** (sticky): Contents (TOC), Quick Links, Built With tags, internal project notice
+- **Topbar**: Back to Projects button + action links (Live Demo, Source, All Projects)
+- **Full-width content area**: Removed Bootstrap grid constraints for cleaner flex layout
+- **Responsive behavior**: Sidebar scrollable on small height/width screens; collapses gracefully on mobile
+
+**Visual Polish**
+- **Professional icons** via `react-icons` (Feather + Simple Icons): back button, quick links, tech stack badges
+- **"Built With" chips**: Subtle gradient pills with tech-specific icons (Azure, OpenAI, FastAPI, React, etc.)
+- **Project Scope section**: Replaced "TL;DR" with clean "Project Scope" header + checkmark grid layout
+- **Step numbers**: Gradient badge numbers (1, 2, 3...) before each experience step title
+
+**Experience Section — Story Flow**
+- **Alternating layout**: Odd steps = text left + image right; Even steps = image left + text right
+- **Card hover effects**: Subtle lift and shadow on hover for engagement
+- **Image constraints**: `max-height: 400px` to prevent tall screenshots from dominating
+- **Clean spacing**: 56px gap between steps for visual breathing room
+
+**Fullscreen Image Viewer (Lightbox)**
+- **React Portal**: Renders at `document.body` level to cover entire viewport
+- **Dark overlay**: `rgba(0,0,0,0.9)` background, no blur (keeps image sharp)
+- **Zoom controls**: Mouse wheel + button controls (−/+), zoom level indicator (50%–400%)
+- **Close options**: Click outside, press ESC, or × button
+- **Smooth transitions**: Transform-based zoom with 150ms easing
+
+**Files Created/Modified**
+- `src/components/Projects/ProjectTemplate.js` — Shared project page wrapper
+- `src/components/Projects/projects/AgentFlow/index.js` — Dedicated AgentFlow component
+- `src/components/Projects/projects/AgentFlow/AgentFlow.module.css` — Project-specific styles
+- `src/components/Projects/projects/AgentFlow/data.js` — AgentFlow metadata
+- `src/style.css` — Global project layout styles (sidebar, topbar, responsive)
+
+---
+
+## Current Site State
+
+### Completed Features ✅
+- **Homepage**: Professional hero, Areas of Expertise grid, tech stack strip, glass social icons
+- **Navigation**: Experience, Education, Skills, Research, Projects, Resume routes
+- **Projects List**: Card grid with cover images linking to `/project/:slug`
+- **AgentFlow Case Study**: Full blog-style page with:
+  - Hero section (badges, tagline, 3D concept image)
+  - Project Scope overview
+  - Problem/Solution narrative
+  - How It Works (architecture diagram)
+  - Experience walkthrough (6 steps with screenshots)
+  - Architecture deep-dive
+  - Results & metrics
+  - What's Next vision
+- **Image Lightbox**: Click any image → fullscreen view with zoom controls
+- **Resume Page**: Glass container, responsive PDF rendering
+- **Responsive Design**: Works on desktop, tablet, mobile; handles small viewports
+
+### Design System
+- **Theme**: Academic Navy with glassmorphism accents
+- **Typography**: Inter font family, clear hierarchy
+- **Colors**: `--imp-text-color` (purple accent), `--color-card-bg`, `--color-border`
+- **Icons**: react-icons (Feather for UI, Simple Icons for tech logos)
+
+---
+
+## Next Steps & Intent
+
+### Immediate (Polish & QA)
+1. **Test cross-browser**: Verify lightbox and layout on Chrome, Firefox, Safari, Edge
+2. **Mobile testing**: Ensure touch gestures work for lightbox (pinch-to-zoom consideration)
+3. **Performance audit**: Check image loading, bundle size, Lighthouse score
+4. **Accessibility review**: Keyboard navigation, focus management, screen reader testing
+
+### Short-term (Content)
+1. **Add more project case studies**: Apply same dedicated component pattern to other projects
+2. **Finalize content**: Review AgentFlow copy for typos, tighten narrative
+3. **Update resume.json**: Ensure all project metadata is current
+
+### Medium-term (Features)
+1. **Project filtering/tags**: Filter projects by tech stack or category on `/project`
+2. **Dark/Light theme toggle**: Respect system preference + manual override
+3. **Search**: Global search across projects, blog, resume content
+4. **Contact form**: Simple email form or Calendly integration
+
+### Long-term (Growth)
+1. **Blog/Technical Writing**: Dedicated blog section for articles
+2. **Analytics**: Privacy-respecting analytics (Plausible or Umami)
+3. **CI/CD**: Automated builds and preview deployments
+4. **SEO**: Meta tags, Open Graph, structured data for projects
+
+---
+
+**Status:** AgentFlow case study complete and polished  
+**Next Focus:** Cross-browser testing, then additional project pages
