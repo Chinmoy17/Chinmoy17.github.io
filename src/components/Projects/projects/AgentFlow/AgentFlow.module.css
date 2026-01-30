@@ -152,44 +152,63 @@
   font-size: 1.5rem;
 }
 
-/* ===== TL;DR BOX ===== */
-.tldr {
+/* ===== PROJECT SCOPE (TOP SECTION) ===== */
+.scopeSection {
+  margin-bottom: 48px;
+  scroll-margin-top: 110px;
+}
+
+.scope {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, rgba(139, 92, 246, 0.04) 100%);
+  border: 1px solid rgba(var(--color-primary-rgb), 0.15);
+  border-radius: 16px;
+  padding: 28px 32px;
+}
+
+.scopeHeader {
   display: flex;
-  gap: 20px;
-  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.05) 100%);
-  border-left: 4px solid var(--imp-text-color);
-  border-radius: 12px;
-  padding: 24px 28px;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(var(--color-primary-rgb), 0.12);
 }
 
-.tldrIcon {
-  font-size: 2rem;
-  flex-shrink: 0;
+.scopeIcon {
+  font-size: 1.6rem;
 }
 
-.tldrContent {
-  flex: 1;
-}
-
-.tldrTitle {
+.scopeTitle {
+  font-size: 1.3rem;
   font-weight: 700;
-  font-size: 1rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
   color: var(--imp-text-color);
-  margin-bottom: 12px;
-}
-
-.tldrList {
   margin: 0;
-  padding-left: 20px;
+  letter-spacing: 0.02em;
 }
 
-.tldrList li {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  margin-bottom: 8px;
+.scopeList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.scopeList li {
+  position: relative;
+  font-size: 1rem;
+  line-height: 1.6;
   color: var(--color-text);
+  padding-left: 24px;
+}
+
+.scopeList li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--imp-text-color);
+  font-weight: 700;
 }
 
 /* ===== PROBLEM SECTION ===== */
@@ -383,18 +402,53 @@
 .experienceSteps {
   display: flex;
   flex-direction: column;
-  gap: 48px;
+  gap: 56px;
 }
 
 .expStep {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 40px;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
   align-items: center;
-  padding: 32px;
+  padding: 36px 40px;
   background: var(--color-card-bg);
   border: 1px solid var(--color-border);
-  border-radius: 16px;
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.expStep:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12);
+}
+
+/* Alternating layout - image on right for odd, image on left for even */
+.expStep:nth-child(even) {
+  grid-template-columns: 1.4fr 1fr;
+}
+
+.expStep:nth-child(even) .expStepContent {
+  order: 2;
+}
+
+.expStep:nth-child(even) .expStepImage {
+  order: 1;
+}
+
+/* Step number badge */
+.expStepNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--imp-text-color) 0%, #8b5cf6 100%);
+  color: white;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 
 .expStep:nth-child(even) {
@@ -410,35 +464,45 @@
 }
 
 .expStepTitle {
-  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  font-size: 1.35rem;
   font-weight: 700;
   color: var(--imp-text-color);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .expStepText {
   font-size: 1.05rem;
-  line-height: 1.7;
+  line-height: 1.8;
   color: var(--color-text);
   margin: 0;
+  padding-left: 44px; /* Align with title text after number */
 }
 
 .expStepImage {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .expStepImage img {
   max-width: 100%;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  max-height: 400px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 14px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--color-border);
   cursor: zoom-in;
-  transition: transform 0.3s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .expStepImage img:hover {
-  transform: scale(1.03);
-  box-shadow: 0 14px 44px rgba(0, 0, 0, 0.18);
+  transform: scale(1.02) translateY(-4px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
 }
 
 .expStepCaption {
@@ -765,11 +829,21 @@
   .expStep,
   .expStep:nth-child(even) {
     grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 24px;
   }
 
   .expStep:nth-child(even) .expStepContent,
   .expStep:nth-child(even) .expStepImage {
     order: unset;
+  }
+
+  .expStepText {
+    padding-left: 0;
+  }
+
+  .expStepImage img {
+    max-height: 320px;
   }
 
   .nextContent {
@@ -803,9 +877,12 @@
     font-size: 1.5rem;
   }
 
-  .tldr {
-    flex-direction: column;
-    text-align: center;
+  .scope {
+    padding: 20px 24px;
+  }
+
+  .scopeList {
+    grid-template-columns: 1fr;
   }
 
   .archGrid {

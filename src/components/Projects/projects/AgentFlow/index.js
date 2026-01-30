@@ -136,18 +136,18 @@ function AgentFlowProject() {
       variant="immersive"
     >
       <div className={styles.content}>
-        {/* TL;DR Section */}
-        <section id="hook" className={styles.section}>
-          <div className={styles.tldr}>
-            <div className={styles.tldrIcon}>💡</div>
-            <div className={styles.tldrContent}>
-              <div className={styles.tldrTitle}>TL;DR</div>
-              <ul className={styles.tldrList}>
-                {data.tldr.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+        {/* Project Scope */}
+        <section id="hook" className={styles.scopeSection}>
+          <div className={styles.scope}>
+            <div className={styles.scopeHeader}>
+              <span className={styles.scopeIcon}>🎯</span>
+              <h2 className={styles.scopeTitle}>Project Scope</h2>
             </div>
+            <ul className={styles.scopeList}>
+              {data.tldr.map((item, i) => (
+                <li key={i}>{item}</li>
+              ))}
+            </ul>
           </div>
         </section>
 
@@ -265,7 +265,10 @@ function AgentFlowProject() {
               ?.steps?.map((step, i) => (
                 <div key={i} className={styles.expStep}>
                   <div className={styles.expStepContent}>
-                    <h3 className={styles.expStepTitle}>{step.title}</h3>
+                    <h3 className={styles.expStepTitle}>
+                      <span className={styles.expStepNumber}>{i + 1}</span>
+                      {step.title}
+                    </h3>
                     <p className={styles.expStepText}>{step.text}</p>
                   </div>
                   {step.image && (
