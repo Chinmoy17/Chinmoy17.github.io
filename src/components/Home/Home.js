@@ -38,9 +38,9 @@ function Home() {
 
               <div style={{ paddingLeft: 50, paddingTop: 20, textAlign: "left" }}>
                 <p className="home-about-body" style={{ fontSize: "1.2em", lineHeight: "1.6", color: "var(--color-text)" }}>
-                  I’m an <b className="purple">Application Developer (AI/ML)</b> at <b>Dexian</b>, building agentic AI features and evaluation-driven LLM systems for real production workflows.
+                  I build <b className="purple">agentic AI features</b> and <b className="purple">evaluation-driven LLM systems</b> for real production workflows.
                   <br /><br />
-                  My focus is making LLM/RAG pipelines <b>reliable</b>: measurable quality, predictable latency/cost, and clean engineering.
+                  My focus is making LLM pipelines <b>reliable</b>: measurable quality, predictable latency/cost, and clean engineering.
                   <br /><br />
                   I enjoy translating cutting-edge research into production—validating new ideas through case studies, then engineering them into dependable systems. I’ve published in <b>IEEE</b> and am currently working toward new publications.
                 </p>

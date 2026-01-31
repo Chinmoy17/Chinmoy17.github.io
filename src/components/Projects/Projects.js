@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 import Particle from "../Particle";
 import resumeData from "../../data/resume.json";
 
-import agent from "../../Assets/Projects/agent.jpg";
 import vowel from "../../Assets/Projects/vowel.jpg";
 import blog from "../../Assets/Projects/blog.jpg";
 import cpu from "../../Assets/Projects/cpu.gif";
 import ap from "../../Assets/Projects/ap.gif";
 
+// AgentFlow and PDF-ALAP use public assets path for actual project screenshots
 const coverById = {
-  agentflow: agent,
+  agentflow: "/assets/projects/agentflow/Screenshot 2026-01-26 162743.png",
+  "pdf-chatbot": "/assets/projects/pdf-alap/demo.png",
   "bangla-vowel": vowel,
   "blog-generator": blog,
   "custom-cpu": cpu,
@@ -19,19 +20,13 @@ const coverById = {
 };
 
 function getCoverForProject(project) {
-  return coverById[project.id] || agent;
+  return coverById[project.id] || blog; // fallback to blog image
 }
 
 function Projects() {
   const projects = Array.isArray(resumeData.projects)
     ? resumeData.projects.filter((p) => (p.category || "project") === "project")
     : [];
-  projects.sort((a, b) => {
-    const aFeatured = a.featured ? 1 : 0;
-    const bFeatured = b.featured ? 1 : 0;
-    if (aFeatured !== bFeatured) return bFeatured - aFeatured;
-    return (a.title || "").localeCompare(b.title || "");
-  });
 
   return (
     <Container fluid className="project-section">
@@ -80,6 +75,21 @@ function Projects() {
                           ) : (
                             <Badge bg="success" style={{ borderRadius: "999px", padding: "6px 10px", fontWeight: 700 }}>
                               Public
+                            </Badge>
+                          )}
+
+                          {p.tier && (
+                            <Badge 
+                              style={{ 
+                                borderRadius: "999px", 
+                                padding: "6px 12px", 
+                                fontWeight: 700,
+                                backgroundColor: "var(--color-accent)",
+                                color: "white",
+                                border: "none"
+                              }}
+                            >
+                              {p.tier}
                             </Badge>
                           )}
 

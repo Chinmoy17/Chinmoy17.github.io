@@ -343,3 +343,109 @@ Never make sweeping changes without explicit approval. Break large tasks into re
 
 **Status:** AgentFlow case study complete and polished  
 **Next Focus:** Cross-browser testing, then additional project pages
+
+---
+
+## Update — January 31, 2026 (Session 2)
+
+### PDF-ALAP Case Study — Complete Build
+
+**New Project Component**
+- Created dedicated case study component at `src/components/Projects/projects/PDFAlap/`
+- Files: `index.js`, `data.js`, `PDFAlap.module.css`
+- Follows same architecture pattern as AgentFlow (ProjectTemplate wrapper, dedicated styling)
+
+**Content & Narrative**
+- Full technical deep-dive pulled from GitHub repository (Chinmoy17/PDF-Alap)
+- Story-driven intro: Built for learning RAG systems, now production-ready for freshers/students
+- Sections: Problem, Solution Architecture, Technical Deep-Dive, Features, Results, Future Roadmap
+- Architecture diagram using Mermaid-style visual explanation
+- Code snippets for key implementations (PDF processing, vector store, query chain)
+
+**Styling Standardization**
+- Fixed all colors to use Academic Navy theme (`--color-accent: #274C77`)
+- Badge colors corrected (navy background + white text for visibility)
+- Button text changed to "Explore Project →" for consistency
+- CSS Module with proper spacing, typography, and responsive behavior
+
+### Projects Page — Major Restructuring
+
+**Project Order Fixed**
+- Discovered `Projects.js` had sorting logic that overrode JSON order
+- Removed the `projects.sort()` block entirely
+- Projects now display in exact JSON order: AgentFlow → PDF-ALAP → Note2Action → DemoFactory → Blog Generator → AI Painter → Custom CPU
+
+**Research Projects Separated**
+- Removed 3 research-focused entries from projects list:
+  - Bangla Vowel Recognition
+  - Paper Retraction NLP Analysis  
+  - Student AI Usage Survey
+- These will be displayed on the Research page instead
+
+**Tier Badges Added**
+- New `tier` field in resume.json for project classification
+- AgentFlow: "Enterprise" badge (navy highlight)
+- PDF-ALAP: "Learning Project" badge (navy highlight)
+- Helps visitors understand project scope and complexity at a glance
+
+**Project Card Images Fixed**
+- AgentFlow: Changed from generic `agent.jpg` to actual screenshot (`Screenshot 2026-01-26 162743.png`)
+- PDF-ALAP: Added mapping to use `demo.png` from project assets
+- Both now show real product screenshots instead of placeholder images
+
+### Files Created/Modified
+- `src/components/Projects/projects/PDFAlap/index.js` — New case study component
+- `src/components/Projects/projects/PDFAlap/data.js` — Project metadata
+- `src/components/Projects/projects/PDFAlap/PDFAlap.module.css` — Project-specific styles
+- `src/components/Projects/Projects.js` — Removed sorting, added tier badges, fixed image mappings
+- `src/components/Projects/projectRegistry.js` — Added PDF-ALAP lazy import
+- `src/data/resume.json` — Added tier fields, reordered projects, removed research items
+- `public/assets/projects/pdf-alap/` — Project screenshots (demo.png, screenshot1.png, etc.)
+
+---
+
+## Current Project List (Ordered)
+
+| # | Project | Tier | Visibility | Case Study |
+|---|---------|------|------------|------------|
+| 1 | AgentFlow | Enterprise | Private/SSO | ✅ Complete |
+| 2 | PDF-ALAP (Multilingual PDF Chatbot) | Learning Project | Public | ✅ Complete |
+| 3 | Note2Action | — | Private/SSO | ❌ Pending |
+| 4 | DemoFactory | — | Private/SSO | ❌ Pending |
+| 5 | Blog Generator via LLMs | — | Public | ❌ Pending |
+| 6 | AI Painter | — | Public | ❌ Pending |
+| 7 | 4-Bit Custom CPU | — | Public | ❌ Pending |
+
+---
+
+## Next Session — Motives & Priorities
+
+### Immediate (Case Studies)
+1. **Note2Action Case Study** — Private enterprise tool, need to craft narrative without exposing internals
+2. **DemoFactory Case Study** — Similar approach, highlight capabilities without sensitive details
+3. **Blog Generator Case Study** — Public repo, can show code and technical details
+4. **AI Painter Case Study** — Fun creative project, show GAN/diffusion work
+5. **Custom CPU Case Study** — Hardware/assembly focus, educational project
+
+### Content Generation
+- Need to generate/create cover images for remaining projects (Note2Action, DemoFactory)
+- Consider creating architecture diagrams for each project
+- Screenshots may need to be mocked or styled for private projects
+
+### Research Page
+- Wire up the 3 research projects (Bangla Vowel, Paper Retraction, Student AI Usage)
+- Design research card layout (publication-style with citations)
+- Add Google Scholar link integration
+
+### Polish & Deployment
+1. Run production build and test all routes
+2. Verify all images load correctly
+3. Test responsive behavior on mobile
+4. Deploy to GitHub Pages
+5. Verify 404 redirects work for SPA routing
+
+---
+
+**Last Updated:** January 31, 2026  
+**Session Focus:** PDF-ALAP case study + Projects page restructuring  
+**Status:** 2/7 case studies complete, ready for remaining projects

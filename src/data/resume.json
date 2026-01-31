@@ -1,4 +1,4 @@
-﻿{
+{
   "summary": "AI-focused Full‑Stack Developer with experience across web technologies, data analysis, and MLOps. Passionate about building impactful products and modern agent workflows.",
   "links": {
     "github": "https://github.com/chinmoy17",
@@ -8,33 +8,78 @@
   },
   "skills": {
     "groups": [
-      { 
-        "name": "ML/AI Frameworks", 
-        "items": ["PyTorch", "TensorFlow", "Scikit-learn", "Hugging Face", "LangChain", "OpenCV", "Gradio"] 
+      {
+        "name": "ML/AI Frameworks",
+        "items": [
+          "PyTorch",
+          "TensorFlow",
+          "Scikit-learn",
+          "Hugging Face",
+          "LangChain",
+          "OpenCV",
+          "Gradio"
+        ]
       },
-      { 
-        "name": "Languages", 
-        "items": ["Python", "C++", "C", "TypeScript", "SQL"] 
+      {
+        "name": "Languages",
+        "items": [
+          "Python",
+          "C++",
+          "C",
+          "TypeScript",
+          "SQL"
+        ]
       },
-      { 
-        "name": "Cloud & DevOps", 
-        "items": ["Microsoft Azure", "Docker", "Kubernetes", "Git", "Azure DevOps", "CI/CD"] 
+      {
+        "name": "Cloud & DevOps",
+        "items": [
+          "Microsoft Azure",
+          "Docker",
+          "Kubernetes",
+          "Git",
+          "Azure DevOps",
+          "CI/CD"
+        ]
       },
-      { 
-        "name": "Backend & Web", 
-        "items": ["FastAPI", "React", "Node.js", "REST APIs"] 
+      {
+        "name": "Backend & Web",
+        "items": [
+          "FastAPI",
+          "React",
+          "Node.js",
+          "REST APIs"
+        ]
       },
-      { 
-        "name": "Databases", 
-        "items": ["PostgreSQL", "Cosmos DB", "FAISS", "ChromaDB", "Milvus"] 
+      {
+        "name": "Databases",
+        "items": [
+          "PostgreSQL",
+          "Cosmos DB",
+          "FAISS",
+          "ChromaDB",
+          "Milvus"
+        ]
       },
-      { 
-        "name": "Tools & Platforms", 
-        "items": ["LaTeX (Overleaf)", "Linux", "Postman", "VS Code"] 
+      {
+        "name": "Tools & Platforms",
+        "items": [
+          "LaTeX (Overleaf)",
+          "Linux",
+          "Postman",
+          "VS Code"
+        ]
       },
-      { 
-        "name": "Core Concepts", 
-        "items": ["Deep Learning", "NLP", "RAG Systems", "LLMs", "Computer Vision", "Data Structures", "System Design"] 
+      {
+        "name": "Core Concepts",
+        "items": [
+          "Deep Learning",
+          "NLP",
+          "RAG Systems",
+          "LLMs",
+          "Computer Vision",
+          "Data Structures",
+          "System Design"
+        ]
       }
     ]
   },
@@ -109,7 +154,10 @@
         "supervisor": "Farjana Parvin (Assistant Professor)",
         "link": "https://drive.google.com/file/d/1kzqpwjY5HZfmvhRUtEew-HR80HIygxet/view?usp=sharing"
       },
-      "awards": ["Dutch Bangla Bank Scholarship", "RUET Technical Scholarship"],
+      "awards": [
+        "Dutch Bangla Bank Scholarship",
+        "RUET Technical Scholarship"
+      ],
       "leadership": [
         {
           "role": "Class Representative (4 Years)",
@@ -117,16 +165,16 @@
         }
       ],
       "coursework": [
-        "Artificial Intelligence", 
-        "Neural Networks & Fuzzy Systems", 
-        "Digital Image Processing", 
-        "Digital Signal Processing", 
+        "Artificial Intelligence",
+        "Neural Networks & Fuzzy Systems",
+        "Digital Image Processing",
+        "Digital Signal Processing",
         "Operating Systems",
-        "Computer Architecture", 
-        "Compiler Design", 
-        "Network Security", 
-        "Parallel & Distributed Processing", 
-        "VLSI", 
+        "Computer Architecture",
+        "Compiler Design",
+        "Network Security",
+        "Parallel & Distributed Processing",
+        "VLSI",
         "Computer Graphics",
         "Data Structures & Algorithms"
       ]
@@ -148,67 +196,28 @@
   ],
   "projects": [
     {
-      "id": "note2action",
-      "slug": "note2action",
-      "visibility": "private",
-      "category": "project",
-      "featured": true,
-      "title": "Note2Action — AI-Powered Task Prediction System",
-      "stack": ["Python", "Machine Learning", "NLP", "FastAPI"],
-      "summary": "Analyzes weekly notes from 600+ Account Managers to predict next actions, reducing manual workload and minimizing missed tasks.",
-      "links": {},
-      "caseStudy": {
-        "problem": "Account Managers log weekly notes, but next actions are often missed or manually tracked across tools.",
-        "methods": [
-          "Defined a task taxonomy and labeling workflow for historical notes.",
-          "Built an ML/NLP pipeline to infer likely next actions from free-form text.",
-          "Integrated predictions into an internal workflow to support day-to-day execution."
-        ],
-        "results": [
-          "Improved action follow-through by making next steps visible and structured.",
-          "Reduced manual effort for action planning and triage."
-        ],
-        "constraints": [
-          "Internal system (SSO). Code and product access are private."
-        ]
-      }
-    },
-    {
-      "id": "demofactory",
-      "slug": "demofactory-dspy",
-      "visibility": "private",
-      "category": "project",
-      "featured": true,
-      "title": "DemoFactory — AI-driven App Generator",
-      "stack": ["RAG", "LangChain", "Python", "Prompt Engineering", "Deployment"],
-      "summary": "Generates customizable applications (e.g., RAG systems, summarizers) directly from user queries; dynamic module generation and automated deployment for instant demos.",
-      "links": {},
-      "caseStudy": {
-        "problem": "Internal teams needed a fast way to generate, customize, and deploy demo-grade apps from natural language requests.",
-        "methods": [
-          "Designed a prompt-to-app workflow that maps user intent to app templates/modules.",
-          "Implemented evaluation-driven iteration for prompt strategies and LLM behaviors.",
-          "Automated packaging and deployment steps to shorten time-to-demo."
-        ],
-        "results": [
-          "Reduced friction to prototype and share demo experiences across teams.",
-          "Enabled consistent quality via evaluation and regression checks."
-        ],
-        "constraints": [
-          "Internal system (SSO). Code and deployments are private."
-        ]
-      }
-    },
-    {
       "id": "agentflow",
       "slug": "agentflow",
       "visibility": "private",
       "category": "project",
       "featured": true,
       "title": "AgentFlow — Modular AI Workflow Orchestration Platform",
-      "stack": ["Azure OpenAI", "FastAPI", "React + TypeScript", "LangChain + FAISS", "DSPy (GEPA)", "Azure Container Apps", "Docker", "Serper API", "SSO/JWT"],
+      "stack": [
+        "Azure OpenAI",
+        "FastAPI",
+        "React + TypeScript",
+        "LangChain + FAISS",
+        "DSPy (GEPA)",
+        "Azure Container Apps",
+        "Docker",
+        "Serper API",
+        "SSO/JWT"
+      ],
       "summary": "A modular AI workflow platform for internal teams: chat + web search, SharePoint RAG, email summarization, and self-service deployments to Azure Container Apps (SSO/private).",
-      "links": {"demo": null, "repo": null},
+      "links": {
+        "demo": null,
+        "repo": null
+      },
       "caseStudy": {
         "layout": {
           "variant": "immersive",
@@ -323,7 +332,7 @@
             ]
           },
           {
-            "title": "What’s next: Tool Gateway Service",
+            "title": "What's next: Tool Gateway Service",
             "image": "/assets/projects/agentflow/Gemini_Generated_Image_c7prgrc7prgrc7pr.png",
             "caption": "The vision: a centralized gateway where any internal tool or external API plugs in and becomes discoverable.",
             "content": "Right now, AgentFlow works beautifully for our core use cases. But as we add more clients and more custom integrations, the tool registry is becoming a bottleneck.\n\nThe next evolution is a Tool Gateway Service: a unified layer that handles tool registration, auth/permissions, observability, rate limiting, and error handling. Think of it as an API gateway, but for AI agent tools. Any team can publish a tool (internal microservice or external API), and agents can discover and use it—no central coordination required.",
@@ -339,7 +348,8 @@
           "Publish a concise \"capability matrix\" for chat/search/RAG/email/deploy",
           "Document Tool Gateway milestones and rollout plan"
         ]
-      }
+      },
+      "tier": "Enterprise"
     },
     {
       "id": "pdf-chatbot",
@@ -347,14 +357,87 @@
       "visibility": "public",
       "category": "project",
       "title": "Multilingual PDF Chatbot (RAG System)",
-      "stack": ["Python", "Streamlit", "FastAPI", "FAISS", "OCR", "Gemini LLM"],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "FastAPI",
+        "FAISS",
+        "OCR",
+        "Gemini LLM"
+      ],
       "summary": "Answers English/Bangla queries from PDFs using a RAG pipeline with FAISS, Gemini LLM, OCR, Streamlit UI, and REST API.",
-      "links": {"repo": "https://github.com/Chinmoy17/PDF-ALAP"},
+      "links": {
+        "repo": "https://github.com/Chinmoy17/PDF-ALAP"
+      },
       "caseStudy": {
         "problem": "Answer questions from documents across multiple languages, including OCR-heavy PDFs.",
         "methods": [
           "Built an ingestion pipeline with OCR + chunking + embeddings.",
           "Implemented retrieval + answer generation with a simple API + UI."
+        ]
+      },
+      "tier": "Learning Project"
+    },
+    {
+      "id": "note2action",
+      "slug": "note2action",
+      "visibility": "private",
+      "category": "project",
+      "featured": true,
+      "title": "Note2Action — AI-Powered Task Prediction System",
+      "stack": [
+        "Python",
+        "Machine Learning",
+        "NLP",
+        "FastAPI"
+      ],
+      "summary": "Analyzes weekly notes from 600+ Account Managers to predict next actions, reducing manual workload and minimizing missed tasks.",
+      "links": {},
+      "caseStudy": {
+        "problem": "Account Managers log weekly notes, but next actions are often missed or manually tracked across tools.",
+        "methods": [
+          "Defined a task taxonomy and labeling workflow for historical notes.",
+          "Built an ML/NLP pipeline to infer likely next actions from free-form text.",
+          "Integrated predictions into an internal workflow to support day-to-day execution."
+        ],
+        "results": [
+          "Improved action follow-through by making next steps visible and structured.",
+          "Reduced manual effort for action planning and triage."
+        ],
+        "constraints": [
+          "Internal system (SSO). Code and product access are private."
+        ]
+      }
+    },
+    {
+      "id": "demofactory",
+      "slug": "demofactory-dspy",
+      "visibility": "private",
+      "category": "project",
+      "featured": true,
+      "title": "DemoFactory — AI-driven App Generator",
+      "stack": [
+        "RAG",
+        "LangChain",
+        "Python",
+        "Prompt Engineering",
+        "Deployment"
+      ],
+      "summary": "Generates customizable applications (e.g., RAG systems, summarizers) directly from user queries; dynamic module generation and automated deployment for instant demos.",
+      "links": {},
+      "caseStudy": {
+        "problem": "Internal teams needed a fast way to generate, customize, and deploy demo-grade apps from natural language requests.",
+        "methods": [
+          "Designed a prompt-to-app workflow that maps user intent to app templates/modules.",
+          "Implemented evaluation-driven iteration for prompt strategies and LLM behaviors.",
+          "Automated packaging and deployment steps to shorten time-to-demo."
+        ],
+        "results": [
+          "Reduced friction to prototype and share demo experiences across teams.",
+          "Enabled consistent quality via evaluation and regression checks."
+        ],
+        "constraints": [
+          "Internal system (SSO). Code and deployments are private."
         ]
       }
     },
@@ -364,13 +447,19 @@
       "visibility": "public",
       "category": "project",
       "title": "Blog Generator via LLMs",
-      "stack": ["LangChain", "Python", "Prompt Engineering"],
+      "stack": [
+        "LangChain",
+        "Python",
+        "Prompt Engineering"
+      ],
       "summary": "Modular pipeline with topic prompts, outline generation, fact-checking, and rewriting agents to produce high-quality blogs.",
-      "links": {"repo": "https://github.com/Chinmoy17/Blog_Generator"},
+      "links": {
+        "repo": "https://github.com/Chinmoy17/Blog_Generator"
+      },
       "caseStudy": {
         "problem": "Generate structured, readable blog posts from a short user prompt while keeping quality and consistency.",
         "methods": [
-          "Built a modular pipeline (topic → outline → draft → rewrite) with clear intermediate artifacts.",
+          "Built a modular pipeline (topic  outline  draft  rewrite) with clear intermediate artifacts.",
           "Added optional fact-check and style constraints to improve output consistency."
         ]
       }
@@ -381,7 +470,11 @@
       "visibility": "public",
       "category": "project",
       "title": "AI Painter",
-      "stack": ["Python", "OpenCV", "Mediapipe"],
+      "stack": [
+        "Python",
+        "OpenCV",
+        "Mediapipe"
+      ],
       "summary": "Gesture-controlled virtual painting app with real-time hand tracking, customizable tools, and canvas saving.",
       "links": {},
       "caseStudy": {
@@ -393,34 +486,19 @@
       }
     },
     {
-      "id": "bangla-vowel",
-      "slug": "bangla-vowel-detection",
-      "visibility": "public",
-      "category": "research",
-      "title": "Bangla Vowel Detection",
-      "stack": ["Deep Learning", "Transfer Learning"],
-      "summary": "Achieved 97.76% accuracy classifying handwritten Bangla vowels using transfer learning.",
-      "links": {"repo": "https://github.com/Chinmoy17/Bangla-Vowels-Detection-with-Transfer-Learning-DL"},
-      "caseStudy": {
-        "problem": "Classify handwritten Bangla vowels accurately with limited labeled data.",
-        "methods": [
-          "Used transfer learning with strong augmentation and careful preprocessing.",
-          "Tracked accuracy and error patterns across classes to iterate on training."
-        ],
-        "results": [
-          "97.76% test accuracy on the Ekushe dataset (reported)."
-        ]
-      }
-    },
-    {
       "id": "custom-cpu",
       "slug": "4-bit-custom-cpu",
       "visibility": "public",
       "category": "project",
       "title": "4-Bit Custom CPU Design",
-      "stack": ["Logisim", "Custom ISA"],
+      "stack": [
+        "Logisim",
+        "Custom ISA"
+      ],
       "summary": "Designed a 4-bit CPU supporting basic ALU operations and jump instructions with a custom ISA and 8x15 SRAM.",
-      "links": {"repo": "https://github.com/Chinmoy17/4-Bit_Custom_CPU_Project?tab=readme-ov-file#4-bit-custom-cpu-design"},
+      "links": {
+        "repo": "https://github.com/Chinmoy17/4-Bit_Custom_CPU_Project?tab=readme-ov-file#4-bit-custom-cpu-design"
+      },
       "caseStudy": {
         "problem": "Demonstrate CPU architecture fundamentals by designing a small but complete ISA + datapath.",
         "methods": [
@@ -428,57 +506,32 @@
           "Built a minimal ISA supporting ALU and jump instructions."
         ]
       }
-    },
-    {
-      "id": "paper-retraction-nlp",
-      "slug": "paper-retraction-analysis-nlp",
-      "visibility": "public",
-      "category": "research",
-      "title": "Paper Retraction Analysis with NLP",
-      "stack": ["TF-IDF", "Clustering", "Random Forest"],
-      "summary": "Applied BoW and TF‑IDF to analyze retracted papers, achieving ~92% classification accuracy; visualized trends via clustering.",
-      "links": {},
-      "caseStudy": {
-        "problem": "Analyze retracted-paper text signals and classify categories using classical NLP baselines.",
-        "methods": [
-          "Vectorized text via BoW/TF-IDF and evaluated multiple classifiers.",
-          "Used clustering and visualization to explore trends and groupings."
-        ],
-        "results": [
-          "~92% classification accuracy (reported)."
-        ]
-      }
-    },
-    {
-      "id": "student-ai-usage",
-      "slug": "student-ai-usage-analysis",
-      "visibility": "public",
-      "category": "research",
-      "featured": false,
-      "title": "AI in Education: Student Perception & Usage",
-      "stack": ["Python", "Pandas", "Seaborn", "Matplotlib", "EDA"],
-      "summary": "Analyzed university survey data to understand how students perceive and use AI tools in education (trust, frequency, originality concerns, and faculty-wise trends).",
-      "links": {"repo": "https://github.com/Chinmoy17/student-ai-usage-analysis"},
-      "caseStudy": {
-        "problem": "Understand student adoption patterns, trust signals, and academic integrity concerns around AI tool usage.",
-        "methods": [
-          "Cleaned and standardized survey responses across institutions and cohorts.",
-          "Performed exploratory analysis with crosstabs, distributions, and trend visualizations.",
-          "Summarized key findings across trust, dependence, perceived learning impact, and instructor attitudes."
-        ],
-        "results": [
-          "Clear qualitative insights into adoption and trust patterns across groups.",
-          "Reusable analysis templates and visualizations for reporting."
-        ]
-      }
     }
   ],
   "awards": [
-    { "name": "Dutch Bangla Bank Scholarship for Undergraduates", "yearRange": "2019–2023" },
-    { "name": "RUET Technical Scholarship", "years": ["2019", "2022"] },
-    { "name": "Leadership Awards — Class Representative", "detail": "4 consecutive years" },
-    { "name": "RUET Codesmash Intra RUET programming contest — 10th", "year": "2019" },
-    { "name": "RUET GanJam Intra RUET programming contest — Participant", "year": "2020" }
+    {
+      "name": "Dutch Bangla Bank Scholarship for Undergraduates",
+      "yearRange": "2019–2023"
+    },
+    {
+      "name": "RUET Technical Scholarship",
+      "years": [
+        "2019",
+        "2022"
+      ]
+    },
+    {
+      "name": "Leadership Awards — Class Representative",
+      "detail": "4 consecutive years"
+    },
+    {
+      "name": "RUET Codesmash Intra RUET programming contest — 10th",
+      "year": "2019"
+    },
+    {
+      "name": "RUET GanJam Intra RUET programming contest — Participant",
+      "year": "2020"
+    }
   ],
   "publications": [
     {
@@ -507,7 +560,3 @@
     }
   ]
 }
-
-
-
-
