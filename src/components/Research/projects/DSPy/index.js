@@ -120,6 +120,10 @@ const DSPyOptimization = () => {
                 </div>
               </div>
               <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Organization</span>
+                <span className={styles.metaValue}>Bytemethod AI (A Dexian Company)</span>
+              </div>
+              <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Domain</span>
                 <span className={styles.metaValue}>Legal RAG</span>
               </div>
