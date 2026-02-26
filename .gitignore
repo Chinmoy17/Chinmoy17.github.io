@@ -27,3 +27,7 @@ yarn-error.log*
 
 Server/node_modules
 Server/config.js
+
+# Claude temporary files
+tmpclaude-*
+**/tmpclaude-*

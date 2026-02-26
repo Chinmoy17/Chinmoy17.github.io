@@ -6,6 +6,7 @@ import Experience from "./components/Experience/Experience";
 import Education from "./components/Education/Education";
 import Skills from "./components/Skills/Skills";
 import Research from "./components/Research/Research";
+import ResearchDetail from "./components/Research/ResearchDetail";
 import Projects from "./components/Projects/Projects";
 import ProjectDetail from "./components/Projects/ProjectDetail";
 import Footer from "./components/Footer";
@@ -50,6 +51,7 @@ function App() {
           <Route path="/education" element={<Education />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/research" element={<Research />} />
+          <Route path="/research/:slug" element={<ResearchDetail />} />
           <Route path="/project" element={<Projects />} />
           <Route path="/project/:slug" element={<ProjectDetail />} />
           <Route path="/resume" element={<Resume />} />

@@ -506,6 +506,82 @@
           "Built a minimal ISA supporting ALU and jump instructions."
         ]
       }
+    },
+    {
+      "id": "paper-retraction-analysis",
+      "slug": "paper-retraction-analysis",
+      "visibility": "public",
+      "category": "research",
+      "title": "Understanding Paper Retractions: EDA & NLP Analysis",
+      "stack": [
+        "Python",
+        "Scikit-learn",
+        "NLTK",
+        "Pandas",
+        "TF-IDF",
+        "K-Means",
+        "Random Forest"
+      ],
+      "summary": "Comprehensive analysis of scientific paper retractions using exploratory data analysis and NLP techniques. Engineered 22 binary features from retraction reasons, applied K-means clustering to discover patterns, and achieved 64.5% accuracy on multi-class classification with Random Forest.",
+      "metrics": [
+        "35,215 papers analyzed",
+        "64.5% best accuracy",
+        "22 engineered features",
+        "5 distinct clusters"
+      ],
+      "links": {
+        "repo": "https://github.com/Chinmoy17/Paper-Retraction-Analysis-with-EDA-and-NLP"
+      }
+    },
+    {
+      "id": "liver-disease-prediction",
+      "slug": "liver-disease-prediction",
+      "visibility": "public",
+      "category": "research",
+      "title": "Liver Disease Prediction Using Machine Learning",
+      "stack": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Machine Learning",
+        "Classification",
+        "Feature Engineering"
+      ],
+      "summary": "Comparative analysis of machine learning algorithms for predicting liver disease from patient data. Evaluated multiple classification models and feature engineering techniques to achieve optimal diagnostic accuracy.",
+      "metrics": [
+        "99.47% accuracy",
+        "4 models tested",
+        "11 clinical features",
+        "0.99 F1-score"
+      ],
+      "links": {
+        "repo": "https://github.com/Chinmoy17/Liver-Disease-Prediction-With-Machine-Learning"
+      }
+    },
+    {
+      "id": "dspy-rag-optimization",
+      "slug": "dspy-rag-optimization",
+      "visibility": "public",
+      "category": "research",
+      "title": "DSPy RAG Optimization: Taming Trial-and-Error in Production Systems",
+      "stack": [
+        "DSPy",
+        "RAGAS",
+        "LangChain",
+        "FastAPI",
+        "React",
+        "Azure OpenAI",
+        "FAISS",
+        "Python"
+      ],
+      "summary": "Collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal—demonstrating how initial constraints affect whether you gain accuracy or efficiency.",
+      "metrics": [
+        "38% cost reduction",
+        "3.2× latency improvement",
+        "+9.6% accuracy (Bootstrap)",
+        "Production deployed"
+      ],
+      "links": {}
     }
   ],
   "awards": [
