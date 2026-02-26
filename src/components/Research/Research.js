@@ -82,8 +82,8 @@ function Research() {
 
         {/* Research Projects / Case Studies - Academic Style (No Images) */}
         {researchProjects.length > 0 && (
-          <Row style={{ justifyContent: "center", marginTop: "28px", paddingBottom: "10px" }}>
-            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "20px" }}>
+          <Row style={{ justifyContent: "center", marginTop: "10px", paddingBottom: "10px" }}>
+            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
               Research <strong className="purple">Projects</strong>
             </h2>
             <p style={{ color: "var(--color-text)", textAlign: "left", paddingLeft: "15px", marginTop: "-8px", fontSize: "1.05em" }}>
@@ -211,8 +211,8 @@ function Research() {
 
         {/* Research Experience Section - moved to bottom */}
         {researchExp.length > 0 && (
-          <Row style={{ justifyContent: "center", marginTop: "30px" }}>
-            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "20px" }}>
+          <Row style={{ justifyContent: "center", marginTop: "10px" }}>
+            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
               Research <strong className="purple">Experience</strong>
             </h2>
             {researchExp.map((exp, idx) => (

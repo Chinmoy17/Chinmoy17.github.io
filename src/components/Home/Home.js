@@ -200,7 +200,7 @@ function Home() {
               </p>
             </Col>
 
-            <Col md={4} style={{ marginTop: "14px" }}>
+            <Col md={6} style={{ marginTop: "14px" }}>
               <div className="home-featured-card glass-surface home-featured-card-animated">
                 <div className="home-featured-kicker">🚀 Enterprise AI</div>
                 <h3 className="home-featured-card-title">AgentFlow</h3>
@@ -218,7 +218,25 @@ function Home() {
               </div>
             </Col>
 
-            <Col md={4} style={{ marginTop: "14px" }}>
+            <Col md={6} style={{ marginTop: "14px" }}>
+              <div className="home-featured-card glass-surface home-featured-card-animated">
+                <div className="home-featured-kicker">🔬 Research Study</div>
+                <h3 className="home-featured-card-title">DSPy RAG Optimization</h3>
+                <p className="home-featured-card-body">
+                  Collaborative study on automatic prompt optimization in production RAG systems. <b>38% cost reduction, 3.2× faster, +9.6% accuracy</b> with DSPy.
+                </p>
+                <div className="home-featured-tags">
+                  <span className="home-tag">DSPy</span>
+                  <span className="home-tag">RAGAS</span>
+                  <span className="home-tag">Azure OpenAI</span>
+                </div>
+                <Link className="home-featured-link" to="/research/dspy-rag-optimization">
+                  Read Case Study →
+                </Link>
+              </div>
+            </Col>
+
+            <Col md={6} style={{ marginTop: "14px" }}>
               <div className="home-featured-card glass-surface home-featured-card-animated">
                 <div className="home-featured-kicker">🤖 ML/NLP</div>
                 <h3 className="home-featured-card-title">Note2Action</h3>
@@ -236,7 +254,7 @@ function Home() {
               </div>
             </Col>
 
-            <Col md={4} style={{ marginTop: "14px" }}>
+            <Col md={6} style={{ marginTop: "14px" }}>
               <div className="home-featured-card glass-surface home-featured-card-animated">
                 <div className="home-featured-kicker">📄 Open Source</div>
                 <h3 className="home-featured-card-title">PDF-ALAP (RAG)</h3>

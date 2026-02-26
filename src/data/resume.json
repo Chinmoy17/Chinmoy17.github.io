@@ -508,6 +508,31 @@
       }
     },
     {
+      "id": "dspy-rag-optimization",
+      "slug": "dspy-rag-optimization",
+      "visibility": "public",
+      "category": "research",
+      "title": "DSPy RAG Optimization: Taming Trial-and-Error in Production Systems",
+      "stack": [
+        "DSPy",
+        "RAGAS",
+        "LangChain",
+        "FastAPI",
+        "React",
+        "Azure OpenAI",
+        "FAISS",
+        "Python"
+      ],
+      "summary": "Collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal—demonstrating how initial constraints affect whether you gain accuracy or efficiency.",
+      "metrics": [
+        "38% cost reduction",
+        "3.2× latency improvement",
+        "+9.6% accuracy (Bootstrap)",
+        "Production deployed"
+      ],
+      "links": {}
+    },
+    {
       "id": "paper-retraction-analysis",
       "slug": "paper-retraction-analysis",
       "visibility": "public",
@@ -557,31 +582,6 @@
       "links": {
         "repo": "https://github.com/Chinmoy17/Liver-Disease-Prediction-With-Machine-Learning"
       }
-    },
-    {
-      "id": "dspy-rag-optimization",
-      "slug": "dspy-rag-optimization",
-      "visibility": "public",
-      "category": "research",
-      "title": "DSPy RAG Optimization: Taming Trial-and-Error in Production Systems",
-      "stack": [
-        "DSPy",
-        "RAGAS",
-        "LangChain",
-        "FastAPI",
-        "React",
-        "Azure OpenAI",
-        "FAISS",
-        "Python"
-      ],
-      "summary": "Collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal—demonstrating how initial constraints affect whether you gain accuracy or efficiency.",
-      "metrics": [
-        "38% cost reduction",
-        "3.2× latency improvement",
-        "+9.6% accuracy (Bootstrap)",
-        "Production deployed"
-      ],
-      "links": {}
     }
   ],
   "awards": [
