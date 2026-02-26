@@ -2,7 +2,6 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import myImg from "../../Assets/avatar.png";
-import Tilt from "react-parallax-tilt";
 import Particle from "../Particle";
 import Type from "./Type";
 import {
@@ -11,10 +10,25 @@ import {
   AiOutlineMail,
   AiOutlineDownload,
 } from "react-icons/ai";
-import { FaLinkedinIn, FaBrain, FaServer, FaCode, FaGraduationCap, FaFileAlt } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
 import { SiGooglescholar } from "react-icons/si";
 
 function Home() {
+  const researchInterests = [
+    "Large Language Models",
+    "LLM Agents",
+    "Computer Vision",
+    "Human-LLM Interaction",
+    "AI in Healthcare",
+    "Trustworthy AI",
+    "Machine Learning Applications",
+    "Medical AI",
+    "Multi-Agent Systems",
+    "Natural Language Processing",
+    "Deep Learning Algorithms",
+    "RAG Systems"
+  ];
+
   return (
     <section>
       <Container fluid className="home-section" id="home">
@@ -22,7 +36,7 @@ function Home() {
         <Container className="home-content">
           {/* ========== HERO SECTION ========== */}
           <Row>
-            <Col md={7} className="home-header">
+            <Col md={8} className="home-header">
               <h1 style={{ paddingBottom: 15 }} className="heading">
                 Hi There!{" "}
                 <span className="wave" role="img" aria-labelledby="wave">
@@ -39,16 +53,21 @@ function Home() {
                 <span className="purple">Application Developer (AI/ML)</span> @ Dexian Bangladesh
               </p>
 
-              <div style={{ paddingLeft: 50, paddingTop: 20, textAlign: "left" }}>
-                {/* Punchy Value Proposition */}
-                <p className="home-about-body" style={{ fontSize: "1.2em", lineHeight: "1.7", color: "var(--color-text)" }}>
-                  I ship <b className="purple">production-ready AI systems</b>—from agentic workflows and RAG pipelines to evaluation-driven LLM applications.
+              <div style={{ paddingLeft: 50, paddingTop: 15, textAlign: "left" }}>
+                {/* Descriptive Introduction */}
+                <p className="home-about-body" style={{ fontSize: "1.1em", lineHeight: "1.7", color: "var(--color-text)", marginBottom: "18px" }}>
+                  My expertise lies in designing and developing <b className="purple">AI-powered applications</b>, with a particular focus on <b className="purple">Large Language Models (LLMs)</b>, agentic workflows, and evaluation-driven systems. I specialize in building <b className="purple">production-ready RAG pipelines</b>, multi-agent architectures, and enterprise AI solutions that bridge research and real-world deployment.
                 </p>
-                <p className="home-about-body" style={{ fontSize: "1.1em", lineHeight: "1.6", color: "var(--color-text)", marginTop: "-10px" }}>
-                  My work bridges <b>research and engineering</b>: I take cutting-edge ideas (DSPy, MCP, fine-tuning), validate them rigorously, and turn them into <b>reliable, measurable systems</b> for enterprise use.
+
+                <p className="home-about-body" style={{ fontSize: "1.05em", lineHeight: "1.6", color: "var(--color-text)", marginBottom: "18px" }}>
+                  Currently at <b>Dexian Bangladesh</b>, I develop AI/ML solutions including <b>Note2Action</b> (AI task prediction for 600+ Account Managers), <b>AgentFlow</b> (modular AI workflow platform), and <b>BM Product Accelerator</b> (generates POCs from PRD prompts). My work emphasizes reliability, measurable quality, and production readiness.
                 </p>
-                
-                <div style={{ marginTop: 25, marginBottom: 25 }}>
+
+                <p className="home-about-body" style={{ fontSize: "1.05em", lineHeight: "1.6", color: "var(--color-text)", marginBottom: "20px" }}>
+                  I hold a <b>B.Sc. in Computer Science and Engineering</b> from RUET with <b>IEEE publication</b> on brain tumor classification achieving ~99.50% accuracy. My research bridges engineering and academia through DSPy optimization, MCP patterns, and fine-tuning methodologies.
+                </p>
+
+                <div style={{ marginTop: 20, marginBottom: 25 }}>
                   <Type />
                 </div>
 
@@ -60,8 +79,8 @@ function Home() {
                   <Link className="home-cta" to="/research">
                     Research & Publications
                   </Link>
-                  <Link 
-                    className="home-cta home-cta-download" 
+                  <Link
+                    className="home-cta home-cta-download"
                     to="/resume"
                     title="View Resume"
                   >
@@ -69,312 +88,130 @@ function Home() {
                     Resume
                   </Link>
                 </div>
-
-                <div className="home-connect-label">Connect with me</div>
-
-                <ul className="home-about-social-links" style={{ justifyContent: "left", paddingTop: 10 }}>
-                  <li className="social-icons">
-                    <a
-                      href="https://github.com/chinmoy17"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                      data-platform="github"
-                      aria-label="github"
-                      title="GitHub"
-                    >
-                      <AiFillGithub />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="https://www.linkedin.com/in/chinmoy-mitra/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                      data-platform="linkedin"
-                      aria-label="linkedin"
-                      title="LinkedIn"
-                    >
-                      <FaLinkedinIn />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                      data-platform="scholar"
-                      aria-label="Google Scholar"
-                      title="Google Scholar"
-                    >
-                      <SiGooglescholar />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="https://www.instagram.com/chinmoy.17/"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="icon-colour home-social-icons"
-                      data-platform="instagram"
-                      aria-label="instagram"
-                      title="Instagram"
-                    >
-                      <AiFillInstagram />
-                    </a>
-                  </li>
-                  <li className="social-icons">
-                    <a
-                      href="mailto:rudrochinmoy@gmail.com"
-                      className="icon-colour home-social-icons"
-                      data-platform="email"
-                      aria-label="email"
-                      title="Email"
-                    >
-                      <AiOutlineMail />
-                    </a>
-                  </li>
-                </ul>
               </div>
             </Col>
 
-            <Col md={5} style={{ paddingBottom: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <Tilt>
-                <img
-                  src={myImg}
-                  alt="Chinmoy Mitra"
-                  className="img-fluid"
-                  style={{ 
-                    maxHeight: "350px", 
-                    borderRadius: "20px", 
-                    border: "5px solid rgba(255,255,255,0.1)",
-                    boxShadow: "0 0 30px rgba(39, 76, 119, 0.4)"
-                  }}
-                />
-              </Tilt>
+            <Col md={4} style={{ paddingBottom: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>
+              <img
+                src={myImg}
+                alt="Chinmoy Mitra"
+                className="img-fluid"
+                style={{
+                  maxHeight: "280px",
+                  borderRadius: "12px",
+                  border: "3px solid rgba(255,255,255,0.1)"
+                }}
+              />
             </Col>
           </Row>
 
-          {/* ========== RESEARCH HIGHLIGHT (for Professors) ========== */}
-          <Row style={{ marginTop: "40px", marginBottom: "30px" }}>
+          {/* ========== EXPERTISE & RESEARCH INTERESTS (MERGED) ========== */}
+          <Row style={{ marginTop: "30px", marginBottom: "25px" }}>
             <Col md={12}>
-              <div className="home-research-banner glass-surface">
-                <div className="home-research-badge">
-                  <FaGraduationCap style={{ marginRight: 8 }} />
-                  IEEE Published • RUET CSE Graduate
-                </div>
-                <h3 className="home-research-title">
-                  Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data
-                </h3>
-                <p className="home-research-desc">
-                  ResNet50 transfer learning achieving <b>~99.50% accuracy</b> on multiclass MRI brain tumor classification. 
-                  Published at <b>IEEE QPAN 2025</b>.
-                </p>
-                <div className="home-research-links">
-                  <a 
-                    href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="home-research-link"
-                  >
-                    <SiGooglescholar style={{ marginRight: 6 }} /> Google Scholar
-                  </a>
-                  <Link to="/research" className="home-research-link">
-                    <FaFileAlt style={{ marginRight: 6 }} /> More Research →
-                  </Link>
-                </div>
-              </div>
+              <h2 style={{ fontSize: "1.6em", marginBottom: "15px", color: "var(--color-text)", fontWeight: "bold" }}>
+                Expertise & <strong className="purple">Research Interests</strong>
+              </h2>
+              <Row>
+                <Col md={6}>
+                  <h4 style={{ fontSize: "1.1em", color: "var(--color-accent)", marginBottom: "10px" }}>Core Skills</h4>
+                  <ul style={{ color: "var(--color-text)", lineHeight: "1.8", paddingLeft: "20px", margin: 0 }}>
+                    <li>Generative AI & LLMs (RAG, Agentic Workflows, DSPy)</li>
+                    <li>Full-Stack Engineering (FastAPI, React, Docker, Azure)</li>
+                    <li>ML/DL & Computer Vision (PyTorch, TensorFlow, OpenCV)</li>
+                    <li>IEEE Published Researcher</li>
+                  </ul>
+                </Col>
+                <Col md={6}>
+                  <h4 style={{ fontSize: "1.1em", color: "var(--color-accent)", marginBottom: "10px" }}>Research Interests</h4>
+                  <ul style={{ color: "var(--color-text)", lineHeight: "1.8", paddingLeft: "20px", margin: 0 }}>
+                    {researchInterests.slice(0, 6).map((interest, idx) => (
+                      <li key={idx}>{interest}</li>
+                    ))}
+                  </ul>
+                </Col>
+              </Row>
             </Col>
           </Row>
 
           {/* ========== FEATURED WORK SECTION ========== */}
-          <Row style={{ marginTop: "35px", marginBottom: "30px" }}>
+          <Row style={{ marginTop: "25px", marginBottom: "20px" }}>
             <Col md={12}>
-              <h2 className="home-featured-title">
+              <h2 style={{ fontSize: "1.6em", marginBottom: "15px", color: "var(--color-text)", fontWeight: "bold" }}>
                 Featured <strong className="purple">Work</strong>
               </h2>
-              <p className="home-featured-subtitle">
-                Production-grade AI systems I've built and shipped.
-              </p>
             </Col>
 
-            <Col md={6} style={{ marginTop: "14px" }}>
-              <div className="home-featured-card glass-surface home-featured-card-animated">
-                <div className="home-featured-kicker">🚀 Enterprise AI</div>
-                <h3 className="home-featured-card-title">AgentFlow</h3>
-                <p className="home-featured-card-body">
-                  Modular AI workflow platform: prompt-to-app deployment, dynamic tool discovery (MCP-inspired), RAG/Chat/Search capabilities. <b>Demo in minutes, not weeks.</b>
+            <Col md={6} style={{ marginTop: "10px" }}>
+              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)" }}>
+                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>AgentFlow</h3>
+                <p style={{ fontSize: "0.95em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
+                  Prompt-to-app deployment, MCP-inspired tool discovery. Demo in minutes.
                 </p>
-                <div className="home-featured-tags">
-                  <span className="home-tag">Azure OpenAI</span>
-                  <span className="home-tag">DSPy</span>
-                  <span className="home-tag">FastAPI</span>
-                </div>
-                <Link className="home-featured-link" to="/project/agentflow">
-                  View Case Study →
+                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/project/agentflow">
+                  Case Study →
                 </Link>
               </div>
             </Col>
 
-            <Col md={6} style={{ marginTop: "14px" }}>
-              <div className="home-featured-card glass-surface home-featured-card-animated">
-                <div className="home-featured-kicker">🔬 Research Study</div>
-                <h3 className="home-featured-card-title">DSPy RAG Optimization</h3>
-                <p className="home-featured-card-body">
-                  Collaborative study on automatic prompt optimization in production RAG systems. <b>38% cost reduction, 3.2× faster, +9.6% accuracy</b> with DSPy.
+            <Col md={6} style={{ marginTop: "10px" }}>
+              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)" }}>
+                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>DSPy RAG Optimization</h3>
+                <p style={{ fontSize: "0.95em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
+                  38% cost reduction, 3.2× faster, +9.6% accuracy with automatic prompt optimization.
                 </p>
-                <div className="home-featured-tags">
-                  <span className="home-tag">DSPy</span>
-                  <span className="home-tag">RAGAS</span>
-                  <span className="home-tag">Azure OpenAI</span>
-                </div>
-                <Link className="home-featured-link" to="/research/dspy-rag-optimization">
-                  Read Case Study →
+                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/research/dspy-rag-optimization">
+                  Case Study →
                 </Link>
               </div>
             </Col>
 
-            <Col md={6} style={{ marginTop: "14px" }}>
-              <div className="home-featured-card glass-surface home-featured-card-animated">
-                <div className="home-featured-kicker">🤖 ML/NLP</div>
-                <h3 className="home-featured-card-title">Note2Action</h3>
-                <p className="home-featured-card-body">
-                  AI-powered task prediction from 600+ Account Managers' weekly notes. NLP pipeline that infers next actions from free-form text.
-                </p>
-                <div className="home-featured-tags">
-                  <span className="home-tag">NLP</span>
-                  <span className="home-tag">ML Pipeline</span>
-                  <span className="home-tag">Production</span>
-                </div>
-                <Link className="home-featured-link" to="/project">
-                  Explore Projects →
-                </Link>
-              </div>
-            </Col>
-
-            <Col md={6} style={{ marginTop: "14px" }}>
-              <div className="home-featured-card glass-surface home-featured-card-animated">
-                <div className="home-featured-kicker">📄 Open Source</div>
-                <h3 className="home-featured-card-title">PDF-ALAP (RAG)</h3>
-                <p className="home-featured-card-body">
-                  Multilingual PDF Chatbot with English/Bangla support. FAISS vector store, OCR pipeline, Gemini LLM, FastAPI backend.
-                </p>
-                <div className="home-featured-tags">
-                  <span className="home-tag">RAG</span>
-                  <span className="home-tag">FAISS</span>
-                  <span className="home-tag">OCR</span>
-                </div>
-                <Link className="home-featured-link" to="/project/multilingual-pdf-chatbot-rag">
-                  View Project →
-                </Link>
-              </div>
+            <Col md={12} style={{ marginTop: "12px" }}>
+              <Link to="/project" style={{ fontSize: "0.95em", color: "var(--color-accent)" }}>
+                View all projects →
+              </Link>
             </Col>
           </Row>
 
-          {/* ========== EXPERTISE SECTION ========== */}
-          <Row style={{ marginTop: "50px", marginBottom: "40px", justifyContent: "center", gap: "20px" }}>
-            <h2 style={{ fontSize: "2.4em", marginBottom: "10px", marginTop: "20px", color: "var(--color-text)", fontWeight: "bold" }}>
-              Core <strong className="purple">Expertise</strong>
-            </h2>
-
-            <p className="home-expertise-intro">
-              Where I focus my energy—bridging cutting-edge AI research with production engineering.
-            </p>
-            
-            <Col md={3} className="home-expertise-card glass-surface home-expertise-card-animated">
-               <div className="home-expertise-icon"><FaBrain /></div>
-               <h3 className="home-expertise-title">Generative AI & LLMs</h3>
-               <p className="home-expertise-desc">
-                 Building <b>Agentic Workflows</b>, RAG pipelines, prompt optimization (DSPy), and evaluation-driven LLM systems for enterprise.
-               </p>
-               <div className="home-expertise-tech">
-                 LangChain • Azure OpenAI • DSPy • FAISS
-               </div>
-              <Link className="home-expertise-link" to="/project">Explore Projects →</Link>
-            </Col>
-
-            <Col md={3} className="home-expertise-card glass-surface home-expertise-card-animated">
-               <div className="home-expertise-icon"><FaServer /></div>
-               <h3 className="home-expertise-title">Full-Stack Engineering</h3>
-               <p className="home-expertise-desc">
-                 End-to-end application development: REST APIs, containerization, cloud deployment, and modern frontend frameworks.
-               </p>
-               <div className="home-expertise-tech">
-                 FastAPI • React • Docker • Azure
-               </div>
-              <Link className="home-expertise-link" to="/project">Explore Projects →</Link>
-            </Col>
-            
-            <Col md={3} className="home-expertise-card glass-surface home-expertise-card-animated">
-               <div className="home-expertise-icon"><FaCode /></div>
-               <h3 className="home-expertise-title">ML/DL & Research</h3>
-               <p className="home-expertise-desc">
-                 <b>IEEE published</b> researcher. Computer Vision, Transfer Learning, and translating research papers into working systems.
-               </p>
-               <div className="home-expertise-tech">
-                 PyTorch • TensorFlow • OpenCV • Hugging Face
-               </div>
-              <Link className="home-expertise-link" to="/research">View Research →</Link>
-            </Col>
-          </Row>
-
-          {/* ========== CONTACT / GET IN TOUCH SECTION ========== */}
-          <Row style={{ marginTop: "40px", marginBottom: "30px" }}>
+          {/* ========== CONTACT SECTION ========== */}
+          <Row style={{ marginTop: "30px", marginBottom: "30px" }}>
             <Col md={12}>
-              <div className="home-contact-section glass-surface">
-                <h2 className="home-contact-title">
-                  Let's <strong className="purple">Connect</strong>
-                </h2>
-                <p className="home-contact-subtitle">
-                  Whether you're a <b>professor</b> exploring research collaboration, a <b>recruiter</b> looking for AI/ML talent, or a <b>fellow engineer</b> wanting to discuss ideas—I'd love to hear from you.
-                </p>
-                
-                <div className="home-contact-methods">
-                  <a 
-                    href="mailto:rudrochinmoy@gmail.com" 
-                    className="home-contact-card home-contact-email"
-                  >
-                    <AiOutlineMail className="home-contact-icon" />
-                    <div>
-                      <span className="home-contact-label">Email</span>
-                      <span className="home-contact-value">rudrochinmoy@gmail.com</span>
-                    </div>
-                  </a>
-                  
-                  <a 
-                    href="https://www.linkedin.com/in/chinmoy-mitra/" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="home-contact-card"
-                  >
-                    <FaLinkedinIn className="home-contact-icon" style={{ color: "#0a66c2" }} />
-                    <div>
-                      <span className="home-contact-label">LinkedIn</span>
-                      <span className="home-contact-value">in/chinmoy-mitra</span>
-                    </div>
-                  </a>
-                  
-                  <a 
-                    href="https://github.com/chinmoy17" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="home-contact-card"
-                  >
-                    <AiFillGithub className="home-contact-icon" />
-                    <div>
-                      <span className="home-contact-label">GitHub</span>
-                      <span className="home-contact-value">chinmoy17</span>
-                    </div>
-                  </a>
-                </div>
+              <h2 style={{ fontSize: "1.6em", color: "var(--color-text)", marginBottom: "15px", fontWeight: "bold" }}>
+                Let's <strong className="purple">Connect</strong>
+              </h2>
+              <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "8px" }}>
+                I am always open to discussing new opportunities, research collaborations, or simply having a conversation.
+              </p>
+              <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "20px" }}>
+                Whether you are a <b>professor</b> exploring potential research candidates, a <b>recruiter</b> seeking AI/ML talent, or a <b>fellow engineer</b> interested in collaboration — I would be happy to connect.
+              </p>
 
-                <p className="home-contact-note">
-                  <b>For Academic Inquiries:</b> I'm open to research collaborations in Generative AI, NLP, and Computer Vision. 
-                  Feel free to reach out via email with your proposal.
-                </p>
-              </div>
+              <ul className="home-about-social-links" style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", gap: "15px", flexWrap: "wrap" }}>
+                <li className="social-icons">
+                  <a href="https://github.com/chinmoy17" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="GitHub">
+                    <AiFillGithub />
+                  </a>
+                </li>
+                <li className="social-icons">
+                  <a href="https://www.linkedin.com/in/chinmoy-mitra/" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="LinkedIn">
+                    <FaLinkedinIn />
+                  </a>
+                </li>
+                <li className="social-icons">
+                  <a href="mailto:rudrochinmoy@gmail.com" className="icon-colour home-social-icons" title="Email">
+                    <AiOutlineMail />
+                  </a>
+                </li>
+                <li className="social-icons">
+                  <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="Google Scholar">
+                    <SiGooglescholar />
+                  </a>
+                </li>
+                <li className="social-icons">
+                  <a href="https://www.instagram.com/chinmoy.17/" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="Instagram">
+                    <AiFillInstagram />
+                  </a>
+                </li>
+              </ul>
             </Col>
           </Row>
 

@@ -235,6 +235,10 @@
         },
         "atAGlance": {
           "role": "Application Developer (AI/ML)",
+          "supervisor": {
+            "name": "Dr. Bushra Chowdhury",
+            "linkedin": "https://www.linkedin.com/in/bushra-chowdhury-972604149/"
+          },
           "scope": "Designed and built core platform capabilities: orchestration services, RAG/search/summarization integrations, and self-service deployment workflow to provision isolated demo instances.",
           "stack": "FastAPI • Azure OpenAI • DSPy (GEPA) • LangChain + FAISS • Azure Container Apps • React/TS"
         },
@@ -524,6 +528,10 @@
         "Python"
       ],
       "summary": "Collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal—demonstrating how initial constraints affect whether you gain accuracy or efficiency.",
+      "supervisor": {
+        "name": "Dr. Bushra Chowdhury",
+        "linkedin": "https://www.linkedin.com/in/bushra-chowdhury-972604149/"
+      },
       "metrics": [
         "38% cost reduction",
         "3.2× latency improvement",

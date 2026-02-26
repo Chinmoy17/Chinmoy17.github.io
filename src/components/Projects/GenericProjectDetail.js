@@ -322,6 +322,20 @@ function GenericProjectDetail({ slug }) {
                       <div className="project-detail-kv-val">{atAGlance.role}</div>
                     </div>
                   ) : null}
+                  {atAGlance.supervisor ? (
+                    <div className="project-detail-kv-row">
+                      <div className="project-detail-kv-key">Supervisor</div>
+                      <div className="project-detail-kv-val">
+                        {atAGlance.supervisor.linkedin ? (
+                          <a href={atAGlance.supervisor.linkedin} target="_blank" rel="noreferrer" style={{ color: "var(--color-accent)" }}>
+                            {atAGlance.supervisor.name} ↗
+                          </a>
+                        ) : (
+                          atAGlance.supervisor.name
+                        )}
+                      </div>
+                    </div>
+                  ) : null}
                   {atAGlance.stack ? (
                     <div className="project-detail-kv-row">
                       <div className="project-detail-kv-key">Stack</div>

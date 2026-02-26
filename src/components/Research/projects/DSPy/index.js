@@ -124,6 +124,17 @@ const DSPyOptimization = () => {
                 <span className={styles.metaValue}>Bytemethod AI (A Dexian Company)</span>
               </div>
               <div className={styles.metaItem}>
+                <span className={styles.metaLabel}>Supervisor</span>
+                <a
+                  href="https://www.linkedin.com/in/bushra-chowdhury-972604149/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.authorLink}
+                >
+                  Dr. Bushra Chowdhury ↗
+                </a>
+              </div>
+              <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Domain</span>
                 <span className={styles.metaValue}>Legal RAG</span>
               </div>

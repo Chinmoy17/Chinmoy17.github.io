@@ -346,7 +346,7 @@ button:focus {
 }
 
 .home-content {
-  padding: 9rem 0 2rem !important;
+  padding: 5rem 0 2rem !important;
   color: var(--color-text);
   text-align: left;
   background-color: var(--glass-bg);
@@ -744,6 +744,25 @@ button:focus {
   font-weight: 600;
   opacity: 0.85;
   margin-bottom: 8px;
+}
+
+/* Quick Expertise Chips (Hero area) */
+.home-expertise-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: rgba(39, 76, 119, 0.12);
+  border: 1px solid rgba(39, 76, 119, 0.2);
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+  color: var(--color-accent);
+  transition: all 0.2s ease;
+}
+
+.home-expertise-chip:hover {
+  background: rgba(39, 76, 119, 0.2);
+  transform: translateY(-1px);
 }
 
 /* ========== CONTACT SECTION ========== */
