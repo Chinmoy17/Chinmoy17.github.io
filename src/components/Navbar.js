@@ -78,30 +78,20 @@ function NavBar() {
             <Nav.Item>
               <Nav.Link
                 as={Link}
-                to="/education"
-                onClick={() => updateExpanded(false)}
-              >
-                <MdSchool style={{ marginBottom: "2px" }} /> Education
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
-                to="/skills"
-                onClick={() => updateExpanded(false)}
-              >
-                <FaTools style={{ marginBottom: "2px" }} /> Skills
-              </Nav.Link>
-            </Nav.Item>
-
-            <Nav.Item>
-              <Nav.Link
-                as={Link}
                 to="/research"
                 onClick={() => updateExpanded(false)}
               >
                 <MdLightbulb style={{ marginBottom: "2px" }} /> Research
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/education"
+                onClick={() => updateExpanded(false)}
+              >
+                <MdSchool style={{ marginBottom: "2px" }} /> Education
               </Nav.Link>
             </Nav.Item>
 
@@ -125,6 +115,16 @@ function NavBar() {
                 onClick={() => updateExpanded(false)}
               >
                 <CgFileDocument style={{ marginBottom: "2px" }} /> Resume
+              </Nav.Link>
+            </Nav.Item>
+
+            <Nav.Item>
+              <Nav.Link
+                as={Link}
+                to="/skills"
+                onClick={() => updateExpanded(false)}
+              >
+                <FaTools style={{ marginBottom: "2px" }} /> Skills
               </Nav.Link>
             </Nav.Item>
 

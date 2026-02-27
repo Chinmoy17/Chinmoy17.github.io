@@ -6,7 +6,6 @@ import Particle from "../Particle";
 import Type from "./Type";
 import {
   AiFillGithub,
-  AiFillInstagram,
   AiOutlineMail,
   AiOutlineDownload,
 } from "react-icons/ai";
@@ -14,20 +13,7 @@ import { FaLinkedinIn } from "react-icons/fa";
 import { SiGooglescholar } from "react-icons/si";
 
 function Home() {
-  const researchInterests = [
-    "Large Language Models",
-    "LLM Agents",
-    "Computer Vision",
-    "Human-LLM Interaction",
-    "AI in Healthcare",
-    "Trustworthy AI",
-    "Machine Learning Applications",
-    "Medical AI",
-    "Multi-Agent Systems",
-    "Natural Language Processing",
-    "Deep Learning Algorithms",
-    "RAG Systems"
-  ];
+  // Research interests are now in prose form below
 
   return (
     <section>
@@ -56,15 +42,15 @@ function Home() {
               <div style={{ paddingLeft: 50, paddingTop: 15, textAlign: "left" }}>
                 {/* Descriptive Introduction */}
                 <p className="home-about-body" style={{ fontSize: "1.1em", lineHeight: "1.7", color: "var(--color-text)", marginBottom: "18px" }}>
-                  My expertise lies in designing and developing <b className="purple">AI-powered applications</b>, with a particular focus on <b className="purple">Large Language Models (LLMs)</b>, agentic workflows, and evaluation-driven systems. I specialize in building <b className="purple">production-ready RAG pipelines</b>, multi-agent architectures, and enterprise AI solutions that bridge research and real-world deployment.
+                  I am an AI/ML Application Developer at <b>Dexian Bangladesh</b> and a published researcher specializing in the intersection of <b className="purple">Large Language Models (LLMs)</b> and <b className="purple">Medical Deep Learning</b>. I bridge the gap between theoretical research and production-grade systems, focusing on agentic workflows, RAG pipelines, and evaluation-driven optimization.
                 </p>
 
                 <p className="home-about-body" style={{ fontSize: "1.05em", lineHeight: "1.6", color: "var(--color-text)", marginBottom: "18px" }}>
-                  Currently at <b>Dexian Bangladesh</b>, I develop AI/ML solutions including <b>Note2Action</b> (AI task prediction for 600+ Account Managers), <b>AgentFlow</b> (modular AI workflow platform), and <b>BM Product Accelerator</b> (generates POCs from PRD prompts). My work emphasizes reliability, measurable quality, and production readiness.
+                  Currently, I lead the development of high-impact AI solutions, including <b>Note2Action</b>—a task-prediction system supporting 600+ managers—and <b>AgentFlow</b>, a prompt-to-deployment engine. My recent optimization study using DSPy achieved a 38% cost reduction while maintaining measurable accuracy gains. My technical stack spans the full lifecycle: from PyTorch and FastAPI to Azure MLOps and React.
                 </p>
 
                 <p className="home-about-body" style={{ fontSize: "1.05em", lineHeight: "1.6", color: "var(--color-text)", marginBottom: "20px" }}>
-                  I hold a <b>B.Sc. in Computer Science and Engineering</b> from RUET with <b>IEEE publication</b> on brain tumor classification achieving ~99.50% accuracy. My research bridges engineering and academia through DSPy optimization, MCP patterns, and fine-tuning methodologies.
+                  I hold a <b>B.Sc. in CSE</b> from RUET. My undergraduate thesis on Multiclass Brain Tumor Classification (accepted at IEEE QPAN 2025) achieved 99.50% accuracy through innovative transfer learning. I am now actively seeking <b className="purple">PhD opportunities</b> where I can apply my experience in Agentic AI and Multimodal LLMs to solve complex, high-stakes challenges in Healthcare and Cybersecurity.
                 </p>
 
                 <div style={{ marginTop: 20, marginBottom: 25 }}>
@@ -73,11 +59,11 @@ function Home() {
 
                 {/* CTA Row with Resume Download */}
                 <div className="home-cta-row" aria-label="Primary actions">
-                  <Link className="home-cta home-cta-primary" to="/project">
-                    View Projects
-                  </Link>
-                  <Link className="home-cta" to="/research">
+                  <Link className="home-cta home-cta-primary" to="/research">
                     Research & Publications
+                  </Link>
+                  <Link className="home-cta" to="/project">
+                    Engineering Projects
                   </Link>
                   <Link
                     className="home-cta home-cta-download"
@@ -105,31 +91,27 @@ function Home() {
             </Col>
           </Row>
 
-          {/* ========== EXPERTISE & RESEARCH INTERESTS (MERGED) ========== */}
+          {/* ========== RESEARCH INTERESTS ========== */}
           <Row style={{ marginTop: "30px", marginBottom: "25px" }}>
             <Col md={12}>
-              <h2 style={{ fontSize: "1.6em", marginBottom: "15px", color: "var(--color-text)", fontWeight: "bold" }}>
-                Expertise & <strong className="purple">Research Interests</strong>
+              <h2 style={{ fontSize: "1.6em", marginBottom: "8px", color: "var(--color-text)", fontWeight: "bold" }}>
+                Research <strong className="purple">Interests</strong>
               </h2>
-              <Row>
-                <Col md={6}>
-                  <h4 style={{ fontSize: "1.1em", color: "var(--color-accent)", marginBottom: "10px" }}>Core Skills</h4>
-                  <ul style={{ color: "var(--color-text)", lineHeight: "1.8", paddingLeft: "20px", margin: 0 }}>
-                    <li>Generative AI & LLMs (RAG, Agentic Workflows, DSPy)</li>
-                    <li>Full-Stack Engineering (FastAPI, React, Docker, Azure)</li>
-                    <li>ML/DL & Computer Vision (PyTorch, TensorFlow, OpenCV)</li>
-                    <li>IEEE Published Researcher</li>
-                  </ul>
-                </Col>
-                <Col md={6}>
-                  <h4 style={{ fontSize: "1.1em", color: "var(--color-accent)", marginBottom: "10px" }}>Research Interests</h4>
-                  <ul style={{ color: "var(--color-text)", lineHeight: "1.8", paddingLeft: "20px", margin: 0 }}>
-                    {researchInterests.slice(0, 6).map((interest, idx) => (
-                      <li key={idx}>{interest}</li>
-                    ))}
-                  </ul>
-                </Col>
-              </Row>
+              <p style={{ color: "var(--color-accent)", fontSize: "1.1em", fontWeight: "600", marginBottom: "16px", fontStyle: "italic" }}>
+                Reliable & Multimodal Intelligent Systems
+              </p>
+              
+              <p style={{ color: "var(--color-text)", lineHeight: "1.8", fontSize: "1.02em", marginBottom: "14px" }}>
+                <b className="purple">Generative AI & LLM Optimization:</b> I work on evaluation-driven frameworks (DSPy, LangGraph, RAGAS) to move beyond stochastic prompting toward measurable, agentic workflows. I architect RAG-based automation and rapid prototyping platforms requiring high-fidelity generation and logical consistency.
+              </p>
+
+              <p style={{ color: "var(--color-text)", lineHeight: "1.8", fontSize: "1.02em", marginBottom: "14px" }}>
+                <b className="purple">Medical AI & Multimodal Diagnostics:</b> My thesis on MRI Brain Tumor Classification (IEEE QPAN 2025) achieved 99.50% accuracy via transfer learning. I'm exploring how foundation models can integrate multiple clinical modalities to enhance diagnostic decision support.
+              </p>
+
+              <p style={{ color: "var(--color-text)", lineHeight: "1.8", fontSize: "1.02em", margin: 0 }}>
+                <b className="purple">Emerging Interest — AI in Cybersecurity:</b> I'm actively studying the dual role of LLMs in security: agentic systems for automated vulnerability detection and repair, alongside defenses against adversarial attacks on LLM-integrated software.
+              </p>
             </Col>
           </Row>
 
@@ -141,25 +123,37 @@ function Home() {
               </h2>
             </Col>
 
-            <Col md={6} style={{ marginTop: "10px" }}>
-              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)" }}>
-                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>AgentFlow</h3>
-                <p style={{ fontSize: "0.95em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
-                  Prompt-to-app deployment, MCP-inspired tool discovery. Demo in minutes.
+            <Col md={4} style={{ marginTop: "10px" }}>
+              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)", height: "100%" }}>
+                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>DSPy RAG Optimization</h3>
+                <p style={{ fontSize: "0.9em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
+                  38% cost reduction, 3.2× faster. Collaborative study on automatic prompt optimization.
                 </p>
-                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/project/agentflow">
-                  Case Study →
+                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/research/dspy-rag-optimization">
+                  Research →
                 </Link>
               </div>
             </Col>
 
-            <Col md={6} style={{ marginTop: "10px" }}>
-              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)" }}>
-                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>DSPy RAG Optimization</h3>
-                <p style={{ fontSize: "0.95em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
-                  38% cost reduction, 3.2× faster, +9.6% accuracy with automatic prompt optimization.
+            <Col md={4} style={{ marginTop: "10px" }}>
+              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)", height: "100%" }}>
+                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>Note2Action</h3>
+                <p style={{ fontSize: "0.9em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
+                  AI task prediction serving 600+ Account Managers. NLP pipeline from notes to actions.
                 </p>
-                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/research/dspy-rag-optimization">
+                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/project">
+                  Projects →
+                </Link>
+              </div>
+            </Col>
+
+            <Col md={4} style={{ marginTop: "10px" }}>
+              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)", height: "100%" }}>
+                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>AgentFlow</h3>
+                <p style={{ fontSize: "0.9em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
+                  Prompt-to-deployment platform. Ship demos in minutes, not weeks.
+                </p>
+                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/project/agentflow">
                   Case Study →
                 </Link>
               </div>
@@ -178,11 +172,11 @@ function Home() {
               <h2 style={{ fontSize: "1.6em", color: "var(--color-text)", marginBottom: "15px", fontWeight: "bold" }}>
                 Let's <strong className="purple">Connect</strong>
               </h2>
-              <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "8px" }}>
-                I am always open to discussing new opportunities, research collaborations, or simply having a conversation.
+              <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "12px" }}>
+                I’m always open to research discussions and collaboration—especially around LLMs, medical AI, multimodal learning, and evaluation-driven ML systems.
               </p>
               <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "20px" }}>
-                Whether you are a <b>professor</b> exploring potential research candidates, a <b>recruiter</b> seeking AI/ML talent, or a <b>fellow engineer</b> interested in collaboration — I would be happy to connect.
+                I’m also open to industry collaborations, consulting, and building production AI systems with teams who care about measurable quality.
               </p>
 
               <ul className="home-about-social-links" style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", gap: "15px", flexWrap: "wrap" }}>
@@ -204,11 +198,6 @@ function Home() {
                 <li className="social-icons">
                   <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="Google Scholar">
                     <SiGooglescholar />
-                  </a>
-                </li>
-                <li className="social-icons">
-                  <a href="https://www.instagram.com/chinmoy.17/" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="Instagram">
-                    <AiFillInstagram />
                   </a>
                 </li>
               </ul>
