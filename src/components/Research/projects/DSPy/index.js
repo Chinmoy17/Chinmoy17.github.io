@@ -9,6 +9,7 @@ import { createPortal } from "react-dom";
 import { Container } from "react-bootstrap";
 import Particle from "../../../Particle";
 import styles from "./DSPy.module.css";
+import ByteMethodLogo from "./logoofbmai-removebg-preview.png";
 
 // Table of Contents sections
 const sections = [
@@ -105,6 +106,21 @@ const DSPyOptimization = () => {
 
             {/* Sidebar Metadata */}
             <div className={styles.sidebarMeta}>
+              {/* ByteMethod AI Logo */}
+              <div className={styles.organizationLogo}>
+                <a
+                  href="https://bytemethod.ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="ByteMethod AI"
+                >
+                  <img 
+                    src={ByteMethodLogo} 
+                    alt="ByteMethod AI" 
+                    className={styles.bytemethodLogo}
+                  />
+                </a>
+              </div>
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Authors</span>
                 <div className={styles.authorList}>
@@ -121,7 +137,15 @@ const DSPyOptimization = () => {
               </div>
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Organization</span>
-                <span className={styles.metaValue}>Bytemethod AI (A Dexian Company)</span>
+                <a
+                  href="https://bytemethod.ai/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.authorLink}
+                >
+                  ByteMethod AI ↗
+                </a>
+                <span className={styles.metaSubValue}>(A Dexian Company)</span>
               </div>
               <div className={styles.metaItem}>
                 <span className={styles.metaLabel}>Supervisor</span>
@@ -230,15 +254,25 @@ const DSPyOptimization = () => {
             </h2>
 
             <p className={styles.leadParagraph}>
-              Building RAG systems for enterprise clients—legal compliance, medical documentation,
-              business intelligence—typically means weeks of prompt tweaking. DSPy, from Stanford NLP,
+              At{" "}
+              <a
+                href="https://bytemethod.ai/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.inlineLink}
+              >
+                ByteMethod AI
+              </a>
+              , we build RAG systems for enterprise clients—legal compliance, medical documentation,
+              business intelligence. This typically means weeks of prompt tweaking. DSPy, from Stanford NLP,
               promises to automate this. We put it to the test.
             </p>
 
             <p className={styles.paragraph}>
-              This case study documents a parallel experiment: two engineers, same corpus, same evaluation
-              framework, but deliberately different starting conditions. The goal was to understand not just
-              <em> if</em> DSPy works, but <em>how</em> the optimization behaves across different initial setups.
+              This case study, conducted under the supervision of Dr. Bushra Chowdhury, documents a parallel 
+              experiment: two engineers, same corpus, same evaluation framework, but deliberately different 
+              starting conditions. The goal was to understand not just <em>if</em> DSPy works, but{" "}
+              <em>how</em> the optimization behaves across different initial setups.
             </p>
 
             <div className={styles.tldrBox}>
@@ -263,7 +297,7 @@ const DSPyOptimization = () => {
             </h2>
 
             <p className={styles.paragraph}>
-              Every RAG project we've built follows the same frustrating pattern: craft a prompt,
+              At ByteMethod AI, every RAG project we've built follows the same frustrating pattern: craft a prompt,
               test it, observe failures, tweak, repeat. The cycle continues until the deadline arrives
               or the client signs off—whichever comes first.
             </p>
