@@ -28,7 +28,7 @@ const agentFlowData = {
 
   // Case Study Content
   tldr: [
-    "In the AI boom, demo turnaround time = competitive advantage. We built AgentFlow to ship POCs in minutes, not weeks.",
+    "In the AI boom demo turnaround time = competitive advantage. We built AgentFlow to ship POCs in minutes, not weeks.",
     "Prompt-to-app workflow: describe what you need, pick capabilities (RAG/Chat/Search), deploy to Azure Container Apps instantly.",
     "Sales teams close deals faster; engineering teams harden later. Win-win.",
   ],
