@@ -17,11 +17,11 @@ function Education() {
         <Row>
           {educationList.map((edu, index) => (
             <Col xs={12} className="mb-4" key={index}>
-              <Card className="project-card-view" style={{ textAlign: "left", padding: "20px 25px" }}>
+              <Card className="project-card-view" style={{ textAlign: "left", padding: "16px" }}>
                 <Card.Body>
                   <Row className="align-items-center">
                     <Col lg={9} md={8}>
-                      <h3 style={{ fontSize: "1.8em", fontWeight: "700", color: "var(--color-text)" }}>{edu.degree}</h3>
+                      <h3 style={{ fontSize: "clamp(1.2em, 4vw, 1.8em)", fontWeight: "700", color: "var(--color-text)" }}>{edu.degree}</h3>
                       <h5 style={{ color: "var(--color-accent)", fontWeight: "600", marginTop: "10px" }}>
                         <FaUniversity style={{ marginBottom: "4px", marginRight: "8px" }} />
                         {edu.institution}

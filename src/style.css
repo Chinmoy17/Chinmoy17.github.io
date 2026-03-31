@@ -224,6 +224,9 @@ button:focus {
   .navbar-nav .nav-item a::after {
     display: none !important;
   }
+  .navbar-nav .nav-item {
+    margin-left: 0 !important;
+  }
 }
 .navbar-brand {
   color: var(--color-text) !important;
@@ -1113,6 +1116,19 @@ button:focus {
   padding-left: 25px !important;
   padding-right: 25px !important;
   height: auto !important;
+}
+
+@media (max-width: 767px) {
+  .project-section {
+    padding-top: 100px !important;
+  }
+
+  .project-card {
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
 }
 
 .project-card-view {

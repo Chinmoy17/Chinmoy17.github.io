@@ -134,7 +134,7 @@ function Skills() {
         </h1>
         
         <p className="skills-subtitle">
-          Hover for details • Click to see projects
+          Tap or hover for details
         </p>
 
         {/* Filter Buttons */}
@@ -196,6 +196,8 @@ function Skills() {
                             key={i}
                             placement="top"
                             overlay={renderTooltip(skill)}
+                            trigger={["hover", "focus", "click"]}
+                            rootClose
                             delay={{ show: 200, hide: 100 }}
                           >
                             {skillPill}

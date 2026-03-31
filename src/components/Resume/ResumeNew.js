@@ -16,7 +16,10 @@ function ResumeNew() {
   const [numPages, setNumPages] = useState(null);
 
   useEffect(() => {
-    setWidth(window.innerWidth);
+    const handleResize = () => setWidth(window.innerWidth);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -49,7 +52,7 @@ function ResumeNew() {
                 <Page
                   key={`page_${index + 1}`}
                   pageNumber={index + 1}
-                  width={Math.min(width - 96, width >= 1440 ? 1280 : 1024)}
+                  width={Math.min(width - (width < 768 ? 48 : 96), width >= 1440 ? 1280 : 1024)}
                   renderAnnotationLayer={false}
                   renderTextLayer={false}
                   className="resume-page"

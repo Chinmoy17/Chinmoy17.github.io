@@ -32,14 +32,14 @@ function Research() {
         {/* Publications Section */}
         {pubs.length > 0 && (
           <Row style={{ justifyContent: "center", paddingBottom: "30px" }}>
-            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px" }}>
+            <h2 className="project-heading" style={{ fontSize: "clamp(1.4em, 4vw, 2.0em)", textAlign: "left", paddingLeft: "15px" }}>
               Selected <strong className="purple">Publications</strong>
             </h2>
             {pubs.map((pub, idx) => (
               <Col md={12} className="project-card" key={idx} style={{ marginBottom: "20px" }}>
                 <Card className="project-card-view" style={{ textAlign: "left" }}>
                   <Card.Body>
-                    <Card.Title style={{ fontSize: "1.6em", fontWeight: "bold" }}>
+                    <Card.Title style={{ fontSize: "clamp(1.1em, 3.5vw, 1.6em)", fontWeight: "bold" }}>
                       {pub.title}
                     </Card.Title>
                     <Card.Subtitle style={{ color: "var(--color-accent)", marginTop: "10px", fontSize: "1.1em" }}>
@@ -83,7 +83,7 @@ function Research() {
         {/* Research Projects / Case Studies - Academic Style (No Images) */}
         {researchProjects.length > 0 && (
           <Row style={{ justifyContent: "center", marginTop: "10px", paddingBottom: "10px" }}>
-            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
+            <h2 className="project-heading" style={{ fontSize: "clamp(1.4em, 4vw, 2.0em)", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
               Research <strong className="purple">Projects</strong>
             </h2>
             <p style={{ color: "var(--color-text)", textAlign: "left", paddingLeft: "15px", marginTop: "-8px", fontSize: "1.05em" }}>
@@ -95,7 +95,7 @@ function Research() {
                 <Card className="project-card-view" style={{ textAlign: "left" }}>
                   <Card.Body style={{ padding: "24px 28px" }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
-                      <div style={{ flex: "1", minWidth: "280px" }}>
+                      <div style={{ flex: "1", minWidth: "0" }}>
                         <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
                           <span style={{
                             background: "var(--color-accent)",
@@ -212,7 +212,7 @@ function Research() {
         {/* Research Experience Section - moved to bottom */}
         {researchExp.length > 0 && (
           <Row style={{ justifyContent: "center", marginTop: "10px" }}>
-            <h2 className="project-heading" style={{ fontSize: "2.0em", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
+            <h2 className="project-heading" style={{ fontSize: "clamp(1.4em, 4vw, 2.0em)", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
               Research <strong className="purple">Experience</strong>
             </h2>
             {researchExp.map((exp, idx) => (
@@ -221,15 +221,15 @@ function Research() {
                   <Card.Body>
                     <Row>
                       <Col md={9}>
-                        <Card.Title style={{ fontSize: "1.6em", fontWeight: "bold" }}>
+                        <Card.Title style={{ fontSize: "clamp(1.1em, 3.5vw, 1.6em)", fontWeight: "bold" }}>
                           {exp.role}
                         </Card.Title>
                         <Card.Subtitle style={{ color: "var(--color-accent)", fontSize: "1.2em", marginBottom: "10px" }}>
                           {exp.company}
                         </Card.Subtitle>
                       </Col>
-                      <Col md={3} style={{ textAlign: "right", color: "var(--color-text)", opacity: 0.8 }}>
-                         <h5>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>
+                      <Col md={3} className="text-md-end mt-2 mt-md-0" style={{ color: "var(--color-text)", opacity: 0.8 }}>
+                         <h5 style={{ fontSize: "clamp(0.85em, 2.5vw, 1em)" }}>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>
                       </Col>
                     </Row>
                     <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>

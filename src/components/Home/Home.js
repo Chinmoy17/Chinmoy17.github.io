@@ -1,9 +1,7 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import myImg from "../../Assets/avatar.png";
-import Particle from "../Particle";
-import Type from "./Type";
+import resumeData from "../../data/resume.json";
+import avatarImg from "../../Assets/avatar.png";
 import {
   AiFillGithub,
   AiOutlineMail,
@@ -11,201 +9,221 @@ import {
 } from "react-icons/ai";
 import { FaLinkedinIn } from "react-icons/fa";
 import { SiGooglescholar } from "react-icons/si";
+import styles from "./Home.module.css";
 
 function Home() {
-  // Research interests are now in prose form below
+  const featuredProjects = resumeData.projects.filter((p) => p.featured);
+  const scholarUrl = resumeData.publications?.[0]?.scholarProfile;
+
+  const handleNavClick = (e, targetId) => {
+    e.preventDefault();
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <section>
-      <Container fluid className="home-section" id="home">
-        <Particle />
-        <Container className="home-content">
-          {/* ========== HERO SECTION ========== */}
-          <Row>
-            <Col md={8} className="home-header">
-              <h1 style={{ paddingBottom: 15 }} className="heading">
-                Hi There!{" "}
-                <span className="wave" role="img" aria-labelledby="wave">
-                  👋🏻
-                </span>
-              </h1>
+    <section className={styles.page}>
+      {/* ===== LEFT SIDEBAR ===== */}
+      <aside className={styles.sidebar}>
+        <div className={styles.sidebarInner}>
+          <img
+            src={avatarImg}
+            alt="Chinmoy Mitra"
+            className={styles.avatar}
+          />
 
-              <h1 className="heading-name">
-                I'M
-                <strong className="main-name"> CHINMOY MITRA</strong>
-              </h1>
+          <h1 className={styles.name}>Chinmoy Mitra</h1>
+          <p className={styles.title}>
+            AI/ML Application Developer &amp; Researcher
+          </p>
+          <p className={styles.affiliation}>Dexian Bangladesh</p>
 
-              <p className="home-role-line">
-                <span className="purple">Application Developer (AI/ML)</span> @ Dexian Bangladesh
-              </p>
+          <div className={styles.socialRow}>
+            <a
+              href={resumeData.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+            >
+              <AiFillGithub />
+            </a>
+            <a
+              href={resumeData.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn />
+            </a>
+            {scholarUrl && (
+              <a
+                href={scholarUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Google Scholar"
+              >
+                <SiGooglescholar />
+              </a>
+            )}
+            <a
+              href={`mailto:${resumeData.links.email}`}
+              aria-label="Email"
+            >
+              <AiOutlineMail />
+            </a>
+          </div>
 
-              <div style={{ paddingLeft: 50, paddingTop: 15, textAlign: "left" }}>
-                {/* Descriptive Introduction */}
-                <p className="home-about-body" style={{ fontSize: "1.1em", lineHeight: "1.7", color: "var(--color-text)", marginBottom: "18px" }}>
-                  I am an AI/ML Application Developer at <b>Dexian Bangladesh</b> and a published researcher specializing in the intersection of <b className="purple">Large Language Models (LLMs)</b> and <b className="purple">Medical Deep Learning</b>. I bridge the gap between theoretical research and production-grade systems, focusing on agentic workflows, RAG pipelines, and evaluation-driven optimization.
-                </p>
+          <hr className={styles.divider} />
 
-                <p className="home-about-body" style={{ fontSize: "1.05em", lineHeight: "1.6", color: "var(--color-text)", marginBottom: "18px" }}>
-                  Currently, I lead the development of high-impact AI solutions, including <b>Note2Action</b>—a task-prediction system supporting 600+ managers—and <b>AgentFlow</b>, a prompt-to-deployment engine. My recent optimization study using DSPy achieved a 38% cost reduction while maintaining measurable accuracy gains. My technical stack spans the full lifecycle: from PyTorch and FastAPI to Azure MLOps and React.
-                </p>
+          <nav className={styles.sideNav}>
+            <a
+              href="#about"
+              className={styles.sideNavLink}
+              onClick={(e) => handleNavClick(e, "about")}
+            >
+              About
+            </a>
+            <a
+              href="#research-interests"
+              className={styles.sideNavLink}
+              onClick={(e) => handleNavClick(e, "research-interests")}
+            >
+              Research Interests
+            </a>
+            <a
+              href="#selected-work"
+              className={styles.sideNavLink}
+              onClick={(e) => handleNavClick(e, "selected-work")}
+            >
+              Selected Work
+            </a>
+            <a
+              href="#news"
+              className={styles.sideNavLink}
+              onClick={(e) => handleNavClick(e, "news")}
+            >
+              News
+            </a>
+          </nav>
 
-                <p className="home-about-body" style={{ fontSize: "1.05em", lineHeight: "1.6", color: "var(--color-text)", marginBottom: "20px" }}>
-                  I hold a <b>B.Sc. in CSE</b> from RUET. My undergraduate thesis on Multiclass Brain Tumor Classification (accepted at IEEE QPAN 2025) achieved 99.50% accuracy through innovative transfer learning. I am now actively seeking <b className="purple">PhD opportunities</b> where I can apply my experience in Agentic AI and Multimodal LLMs to solve complex, high-stakes challenges in Healthcare and Cybersecurity.
-                </p>
+          <Link to="/resume" className={styles.cvButton}>
+            <AiOutlineDownload /> Download CV
+          </Link>
+        </div>
+      </aside>
 
-                <div style={{ marginTop: 20, marginBottom: 25 }}>
-                  <Type />
-                </div>
+      {/* ===== MAIN CONTENT ===== */}
+      <main className={styles.main}>
+        {/* --- About --- */}
+        <section id="about" className={styles.section}>
+          <h2 className={styles.sectionTitle}>About</h2>
+          <p className={styles.aboutText}>
+            I am an AI/ML Application Developer at{" "}
+            <strong className={styles.accent}>Dexian Bangladesh</strong> and a
+            published researcher working at the intersection of{" "}
+            <strong className={styles.accent}>Large Language Models</strong> and{" "}
+            <strong className={styles.accent}>Medical Deep Learning</strong>. I
+            build production-grade systems — agentic workflows, RAG pipelines,
+            and evaluation-driven optimization frameworks.
+          </p>
+          <p className={styles.aboutText}>
+            My recent work includes <strong>Note2Action</strong>, a
+            task-prediction system supporting 600+ managers, and{" "}
+            <strong>AgentFlow</strong>, a prompt-to-deployment engine. A
+            collaborative DSPy optimization study achieved 38% cost reduction
+            while maintaining measurable accuracy gains. My technical stack spans
+            the full lifecycle: from PyTorch and FastAPI to Azure MLOps and
+            React.
+          </p>
+          <p className={styles.aboutText}>
+            I hold a B.Sc. in CSE from RUET. My undergraduate thesis on
+            Multiclass Brain Tumor Classification (accepted at IEEE QPAN 2025)
+            achieved 99.50% accuracy via transfer learning. I am actively
+            seeking{" "}
+            <strong className={styles.accent}>PhD opportunities</strong> in
+            Agentic AI and Multimodal LLMs applied to Healthcare and
+            Cybersecurity.
+          </p>
+        </section>
 
-                {/* CTA Row with Resume Download */}
-                <div className="home-cta-row" aria-label="Primary actions">
-                  <Link className="home-cta home-cta-primary" to="/research">
-                    Research & Publications
-                  </Link>
-                  <Link className="home-cta" to="/project">
-                    Engineering Projects
-                  </Link>
-                  <Link
-                    className="home-cta home-cta-download"
-                    to="/resume"
-                    title="View Resume"
-                  >
-                    <AiOutlineDownload style={{ marginRight: 6 }} />
-                    Resume
-                  </Link>
-                </div>
-              </div>
-            </Col>
+        {/* --- Research Interests --- */}
+        <section id="research-interests" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Research Interests</h2>
+          <ul className={styles.interestList}>
+            <li className={styles.interestItem}>
+              <strong>Generative AI &amp; LLM Optimization</strong> —
+              Evaluation-driven frameworks (DSPy, LangGraph, RAGAS) for
+              measurable agentic workflows, RAG automation, and rapid
+              prototyping platforms.
+            </li>
+            <li className={styles.interestItem}>
+              <strong>Medical AI &amp; Multimodal Diagnostics</strong> —
+              Transfer learning for MRI classification, integrating foundation
+              models across clinical modalities for diagnostic decision support.
+            </li>
+            <li className={styles.interestItem}>
+              <strong>AI in Cybersecurity</strong> — Agentic systems for
+              automated vulnerability detection and repair, defenses against
+              adversarial attacks on LLM-integrated software.
+            </li>
+          </ul>
+        </section>
 
-            <Col md={4} style={{ paddingBottom: 20, display: "flex", justifyContent: "center", alignItems: "center" }}>
-              <img
-                src={myImg}
-                alt="Chinmoy Mitra"
-                className="img-fluid"
-                style={{
-                  maxHeight: "280px",
-                  borderRadius: "12px",
-                  border: "3px solid rgba(255,255,255,0.1)"
-                }}
-              />
-            </Col>
-          </Row>
-
-          {/* ========== RESEARCH INTERESTS ========== */}
-          <Row style={{ marginTop: "30px", marginBottom: "25px" }}>
-            <Col md={12}>
-              <h2 style={{ fontSize: "1.6em", marginBottom: "8px", color: "var(--color-text)", fontWeight: "bold" }}>
-                Research <strong className="purple">Interests</strong>
-              </h2>
-              <p style={{ color: "var(--color-accent)", fontSize: "1.1em", fontWeight: "600", marginBottom: "16px", fontStyle: "italic" }}>
-                Reliable & Multimodal Intelligent Systems
-              </p>
-              
-              <p style={{ color: "var(--color-text)", lineHeight: "1.8", fontSize: "1.02em", marginBottom: "14px" }}>
-                <b className="purple">Generative AI & LLM Optimization:</b> I work on evaluation-driven frameworks (DSPy, LangGraph, RAGAS) to move beyond stochastic prompting toward measurable, agentic workflows. I architect RAG-based automation and rapid prototyping platforms requiring high-fidelity generation and logical consistency.
-              </p>
-
-              <p style={{ color: "var(--color-text)", lineHeight: "1.8", fontSize: "1.02em", marginBottom: "14px" }}>
-                <b className="purple">Medical AI & Multimodal Diagnostics:</b> My thesis on MRI Brain Tumor Classification (IEEE QPAN 2025) achieved 99.50% accuracy via transfer learning. I'm exploring how foundation models can integrate multiple clinical modalities to enhance diagnostic decision support.
-              </p>
-
-              <p style={{ color: "var(--color-text)", lineHeight: "1.8", fontSize: "1.02em", margin: 0 }}>
-                <b className="purple">Emerging Interest — AI in Cybersecurity:</b> I'm actively studying the dual role of LLMs in security: agentic systems for automated vulnerability detection and repair, alongside defenses against adversarial attacks on LLM-integrated software.
-              </p>
-            </Col>
-          </Row>
-
-          {/* ========== FEATURED WORK SECTION ========== */}
-          <Row style={{ marginTop: "25px", marginBottom: "20px" }}>
-            <Col md={12}>
-              <h2 style={{ fontSize: "1.6em", marginBottom: "15px", color: "var(--color-text)", fontWeight: "bold" }}>
-                Featured <strong className="purple">Work</strong>
-              </h2>
-            </Col>
-
-            <Col md={4} style={{ marginTop: "10px" }}>
-              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)", height: "100%" }}>
-                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>DSPy RAG Optimization</h3>
-                <p style={{ fontSize: "0.9em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
-                  38% cost reduction, 3.2× faster. Collaborative study on automatic prompt optimization.
-                </p>
-                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/research/dspy-rag-optimization">
-                  Research →
+        {/* --- Selected Work --- */}
+        <section id="selected-work" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Selected Work</h2>
+          <div className={styles.workGrid}>
+            {featuredProjects.map((project) => (
+              <div key={project.id} className={styles.workCard}>
+                <h3 className={styles.workCardTitle}>{project.title}</h3>
+                <p className={styles.workCardDesc}>{project.summary}</p>
+                <Link
+                  to={`/project/${project.slug}`}
+                  className={styles.workCardLink}
+                >
+                  View details &rarr;
                 </Link>
               </div>
-            </Col>
+            ))}
+          </div>
+        </section>
 
-            <Col md={4} style={{ marginTop: "10px" }}>
-              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)", height: "100%" }}>
-                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>Note2Action</h3>
-                <p style={{ fontSize: "0.9em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
-                  AI task prediction serving 600+ Account Managers. NLP pipeline from notes to actions.
-                </p>
-                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/project">
-                  Projects →
-                </Link>
-              </div>
-            </Col>
-
-            <Col md={4} style={{ marginTop: "10px" }}>
-              <div style={{ padding: "14px 18px", borderRadius: "8px", border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "rgba(255,255,255,0.02)", height: "100%" }}>
-                <h3 style={{ fontSize: "1.1em", color: "var(--color-accent)", margin: "0 0 8px 0" }}>AgentFlow</h3>
-                <p style={{ fontSize: "0.9em", color: "var(--color-text)", margin: "0 0 10px 0", lineHeight: "1.5" }}>
-                  Prompt-to-deployment platform. Ship demos in minutes, not weeks.
-                </p>
-                <Link style={{ fontSize: "0.9em", color: "var(--color-accent)" }} to="/project/agentflow">
-                  Case Study →
-                </Link>
-              </div>
-            </Col>
-
-            <Col md={12} style={{ marginTop: "12px" }}>
-              <Link to="/project" style={{ fontSize: "0.95em", color: "var(--color-accent)" }}>
-                View all projects →
-              </Link>
-            </Col>
-          </Row>
-
-          {/* ========== CONTACT SECTION ========== */}
-          <Row style={{ marginTop: "30px", marginBottom: "30px" }}>
-            <Col md={12}>
-              <h2 style={{ fontSize: "1.6em", color: "var(--color-text)", marginBottom: "15px", fontWeight: "bold" }}>
-                Let's <strong className="purple">Connect</strong>
-              </h2>
-              <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "12px" }}>
-                I’m always open to research discussions and collaboration—especially around LLMs, medical AI, multimodal learning, and evaluation-driven ML systems.
-              </p>
-              <p style={{ fontSize: "1em", color: "var(--color-text)", opacity: 0.9, marginBottom: "20px" }}>
-                I’m also open to industry collaborations, consulting, and building production AI systems with teams who care about measurable quality.
-              </p>
-
-              <ul className="home-about-social-links" style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", gap: "15px", flexWrap: "wrap" }}>
-                <li className="social-icons">
-                  <a href="https://github.com/chinmoy17" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="GitHub">
-                    <AiFillGithub />
-                  </a>
-                </li>
-                <li className="social-icons">
-                  <a href="https://www.linkedin.com/in/chinmoy-mitra/" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="LinkedIn">
-                    <FaLinkedinIn />
-                  </a>
-                </li>
-                <li className="social-icons">
-                  <a href="mailto:rudrochinmoy@gmail.com" className="icon-colour home-social-icons" title="Email">
-                    <AiOutlineMail />
-                  </a>
-                </li>
-                <li className="social-icons">
-                  <a href="https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ" target="_blank" rel="noreferrer" className="icon-colour home-social-icons" title="Google Scholar">
-                    <SiGooglescholar />
-                  </a>
-                </li>
-              </ul>
-            </Col>
-          </Row>
-
-        </Container>
-      </Container>
+        {/* --- News --- */}
+        <section id="news" className={styles.section}>
+          <h2 className={styles.sectionTitle}>News</h2>
+          <ul className={styles.newsList}>
+            <li className={styles.newsItem}>
+              <span className={styles.newsDate}>2025</span>
+              <span>
+                Paper accepted at IEEE QPAN 2025 — Multiclass Brain Tumor
+                Classification via Transfer Learning (99.50% accuracy)
+              </span>
+            </li>
+            <li className={styles.newsItem}>
+              <span className={styles.newsDate}>2025</span>
+              <span>
+                Completed DSPy RAG optimization study — 38% cost reduction, 3.2x
+                faster inference in production
+              </span>
+            </li>
+            <li className={styles.newsItem}>
+              <span className={styles.newsDate}>2024</span>
+              <span>
+                Joined Dexian Bangladesh as AI/ML Application Developer —
+                building Note2Action, AgentFlow, and DemoFactory
+              </span>
+            </li>
+            <li className={styles.newsItem}>
+              <span className={styles.newsDate}>2024</span>
+              <span>
+                Graduated B.Sc. in Computer Science &amp; Engineering from RUET
+              </span>
+            </li>
+          </ul>
+        </section>
+      </main>
     </section>
   );
 }
