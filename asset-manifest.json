@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.20d2fb43.css",
-    "main.js": "/static/js/main.e3895f45.js",
+    "main.css": "/static/css/main.5a249cc6.css",
+    "main.js": "/static/js/main.ec78926d.js",
     "static/js/770.8f5d5610.chunk.js": "/static/js/770.8f5d5610.chunk.js",
     "static/css/889.9d5a6dc3.chunk.css": "/static/css/889.9d5a6dc3.chunk.css",
     "static/js/889.10ed94ce.chunk.js": "/static/js/889.10ed94ce.chunk.js",
@@ -26,8 +26,8 @@
     "static/media/logoofbmai-removebg-preview.png": "/static/media/logoofbmai-removebg-preview.cab7cc3ae0def752c407.png",
     "index.html": "/index.html",
     "static/media/pre.svg": "/static/media/pre.4410c5baaa673cc131da.svg",
-    "main.20d2fb43.css.map": "/static/css/main.20d2fb43.css.map",
-    "main.e3895f45.js.map": "/static/js/main.e3895f45.js.map",
+    "main.5a249cc6.css.map": "/static/css/main.5a249cc6.css.map",
+    "main.ec78926d.js.map": "/static/js/main.ec78926d.js.map",
     "770.8f5d5610.chunk.js.map": "/static/js/770.8f5d5610.chunk.js.map",
     "889.9d5a6dc3.chunk.css.map": "/static/css/889.9d5a6dc3.chunk.css.map",
     "889.10ed94ce.chunk.js.map": "/static/js/889.10ed94ce.chunk.js.map",
@@ -43,7 +43,7 @@
     "9.21447b3c.chunk.js.map": "/static/js/9.21447b3c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.20d2fb43.css",
-    "static/js/main.e3895f45.js"
+    "static/css/main.5a249cc6.css",
+    "static/js/main.ec78926d.js"
   ]
 }
