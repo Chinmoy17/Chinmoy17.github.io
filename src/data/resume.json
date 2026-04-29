@@ -196,6 +196,90 @@
   ],
   "projects": [
     {
+      "id": "rfp-platform",
+      "slug": "rfp-platform",
+      "visibility": "private",
+      "category": "project",
+      "featured": true,
+      "title": "RFP Platform — End-to-End Government Proposal Automation",
+      "tier": "Enterprise",
+      "stack": [
+        "FastAPI",
+        "Python 3.12",
+        "Claude Agent SDK",
+        "GPT-4.1",
+        "Azure Document Intelligence",
+        "React 18 + TypeScript",
+        "Azure SQL",
+        "Docker",
+        "Azure App Service"
+      ],
+      "summary": "AI-powered enterprise platform automating the full government RFP lifecycle: SAM.gov scraping, document analysis, company profiling, 14-section proposal generation, and PowerPoint creation. 117 Python files, 55 React/TS files, 30+ endpoints.",
+      "links": {
+        "demo": null,
+        "repo": null
+      },
+      "caseStudy": {
+        "layout": {
+          "variant": "immersive",
+          "showAside": true,
+          "showToc": true
+        },
+        "tldr": [
+          "Automates end-to-end government RFP lifecycle for ByteMethod AI / Dexian.",
+          "Multi-model AI fleet: Claude Opus, Sonnet, GPT-4.1, Azure Doc Intelligence.",
+          "PageIndex QA over vector RAG: 80% token savings.",
+          "Sole developer: 117 Python files, 55 React/TS files, full Azure deployment."
+        ],
+        "hero": {
+          "src": null,
+          "caption": "Architecture diagrams and system design visualizations."
+        },
+        "atAGlance": {
+          "role": "Application Developer (AI/ML)",
+          "supervisor": {
+            "name": "Dr. Bushra Chowdhury",
+            "linkedin": "https://www.linkedin.com/in/bushra-chowdhury-972604149/"
+          },
+          "scope": "Sole developer — full-stack design and implementation of the entire platform.",
+          "stack": "FastAPI · Python 3.12 · Claude Agent SDK · GPT-4.1 · React 18/TS · Azure SQL · Docker"
+        },
+        "intro": "Government RFP responses take teams 2-4 weeks per proposal. We built a platform that does it in under 7 minutes — from document analysis to 14-section compliant proposal.",
+        "workflow": [
+          "Scrape SAM.gov for opportunities matching NAICS codes",
+          "Ingest and analyze RFP documents with Azure Document Intelligence + PageIndex QA",
+          "Build structured company profiles from past performance documents",
+          "Generate 14-section proposals using Claude Agent SDK with SSE streaming",
+          "Create executive PowerPoint decks from proposal content",
+          "Track costs and token usage across all AI operations"
+        ],
+        "methods": [
+          "Claude Agent SDK for iterative proposal writing.",
+          "PageIndex QA over vector RAG: 80% token savings.",
+          "SSE Event Bus for real-time streaming.",
+          "Multi-model fleet for cost-optimized AI routing.",
+          "18 regex sanitization patterns for safe document output.",
+          "Multi-stage Docker build: Node + Python.",
+          "Fire-and-forget cost logging."
+        ],
+        "results": [
+          "3-7 minutes vs 2-4 weeks manual effort.",
+          "80% token savings with PageIndex QA.",
+          "40% cost reduction through multi-model fleet.",
+          "Single-developer delivery of enterprise platform."
+        ],
+        "constraints": [
+          "Private enterprise project. No source code or screenshots available."
+        ],
+        "sections": [],
+        "nextUpdates": [
+          "Evaluation-driven prompt iteration",
+          "Multi-tenant support",
+          "RAG hybrid approach"
+        ]
+      }
+    },
+    {
       "id": "agentflow",
       "slug": "agentflow",
       "visibility": "private",

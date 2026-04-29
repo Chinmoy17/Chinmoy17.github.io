@@ -6,6 +6,7 @@
 import { lazy } from "react";
 
 // Lazy-load dedicated project components
+const RFPPlatformProject = lazy(() => import("./projects/RFPPlatform"));
 const AgentFlowProject = lazy(() => import("./projects/AgentFlow"));
 const PDFAlapProject = lazy(() => import("./projects/PDFAlap"));
 
@@ -14,6 +15,7 @@ const PDFAlapProject = lazy(() => import("./projects/PDFAlap"));
  * Add new projects here as they get dedicated components
  */
 const projectRegistry = {
+  "rfp-platform": RFPPlatformProject,
   agentflow: AgentFlowProject,
   "multilingual-pdf-chatbot-rag": PDFAlapProject,
   // "blog-generator-llms": lazy(() => import("./projects/BlogGenerator")),
