@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import resumeData from "../../data/resume.json";
 import avatarImg from "../../Assets/avatar.png";
+import { Reveal } from "../utils/Reveal";
 import {
   MdOutlinePsychology,
   MdOutlineMedicalServices,
@@ -11,7 +12,7 @@ import { FaGraduationCap, FaAward, FaBookOpen } from "react-icons/fa";
 
 function Home() {
   const experience = resumeData.experience;
-  const education = resumeData.education[0]; // BSc only
+  const education = resumeData.education[0];
   const publication = resumeData.publications[0];
 
   const formatDate = (dateStr) => {
@@ -20,7 +21,6 @@ function Home() {
     return d.toLocaleString("default", { month: "short", year: "numeric" });
   };
 
-  // One-line impact summaries for each role (progressive disclosure)
   const impactLines = {
     "Dexian Bangladesh": "AI automation for 600+ Account Managers",
     "Walton Hi\u2011Tech Industries": "Enterprise RAG chatbot for multiple business functions",
@@ -33,7 +33,7 @@ function Home() {
       {/* ===== HERO SECTION ===== */}
       <section className="mb-xl flex flex-col md:flex-row items-center gap-16">
         {/* Photo */}
-        <div className="w-full md:w-1/3 shrink-0 max-w-[300px]">
+        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[300px]">
           <div className="border border-surface-variant p-2 bg-surface-container-low">
             <img
               src={avatarImg}
@@ -41,39 +41,46 @@ function Home() {
               className="w-full h-auto object-cover aspect-[3/4]"
             />
           </div>
-        </div>
+        </Reveal>
 
         {/* Content */}
         <div className="w-full md:w-2/3">
-          <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-4 tracking-[0.1em]">
-            AI/ML Application Developer & Researcher
-          </p>
-          <h1 className="font-newsreader text-h1 text-ink mb-6">
-            Chinmoy Mitra
-          </h1>
-          <div className="h-[1px] w-16 bg-ink mb-6"></div>
-          <p className="font-inter text-body-lg text-on-surface-variant max-w-2xl">
-            Specializing in the architectural design of Large Language Models
-            (LLMs) and advanced Medical Deep Learning systems. Bridging the gap
-            between cutting-edge academic research and robust, scalable
-            production environments.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Link
-              to="/project"
-              className="bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] hover:bg-surface hover:text-ink border border-ink transition-colors duration-200 no-underline"
-            >
-              View Projects
-            </Link>
-            <a
-              href="/resume.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
-            >
-              Download CV
-            </a>
-          </div>
+          <Reveal delay={100}>
+            <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-4 tracking-[0.1em]">
+              AI/ML Application Developer & Researcher
+            </p>
+          </Reveal>
+          <Reveal delay={200}>
+            <h1 className="font-newsreader text-h1 text-ink mb-6">
+              Chinmoy Mitra
+            </h1>
+          </Reveal>
+          <Reveal delay={300}>
+            <div className="h-[1px] w-16 bg-ink mb-6"></div>
+            <p className="font-inter text-body-lg text-on-surface-variant max-w-2xl">
+              Full-Stack AI Developer & Collaborative Researcher (2+ Years Exp).
+              Architecting end-to-end pipelines and integrating advanced LLMs, RAG
+              systems, and agentic workflows into scalable enterprise solutions.
+            </p>
+          </Reveal>
+          <Reveal delay={400}>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link
+                to="/project"
+                className="bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] hover:bg-surface hover:text-ink border border-ink transition-colors duration-200 no-underline"
+              >
+                View Projects
+              </Link>
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
+              >
+                Download CV
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -86,48 +93,51 @@ function Home() {
 
       {/* ===== BENTO GRID: RESEARCH INTERESTS ===== */}
       <section className="mb-xl grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Generative AI & LLMs — spans 2 cols */}
-        <div className="col-span-1 md:col-span-2 border border-surface-variant bg-surface-container-low p-md">
-          <div className="flex items-center gap-3 mb-4">
-            <MdOutlinePsychology className="text-ink text-2xl" />
-            <h3 className="font-newsreader text-h3 text-ink">
-              Generative AI & LLMs
-            </h3>
+        <Reveal delay={100} className="col-span-1 md:col-span-2">
+          <div className="border border-surface-variant bg-surface-container-low p-md h-full">
+            <div className="flex items-center gap-3 mb-4">
+              <MdOutlinePsychology className="text-ink text-2xl" />
+              <h3 className="font-newsreader text-h3 text-ink">
+                Generative AI & LLMs
+              </h3>
+            </div>
+            <p className="font-inter text-body-md text-on-surface-variant">
+              Exploring novel architectures for Large Language Models to improve
+              reasoning capabilities, reduce hallucination rates, and optimize
+              inference performance for real-time applications.
+            </p>
           </div>
-          <p className="font-inter text-body-md text-on-surface-variant">
-            Exploring novel architectures for Large Language Models to improve
-            reasoning capabilities, reduce hallucination rates, and optimize
-            inference performance for real-time applications.
-          </p>
-        </div>
+        </Reveal>
 
-        {/* Medical Deep Learning */}
-        <div className="col-span-1 border border-surface-variant bg-surface-container-low p-md">
-          <div className="flex items-center gap-3 mb-4">
-            <MdOutlineMedicalServices className="text-ink text-2xl" />
-            <h3 className="font-newsreader text-h3 text-ink">
-              Medical Deep Learning
-            </h3>
+        <Reveal delay={200} className="col-span-1">
+          <div className="border border-surface-variant bg-surface-container-low p-md h-full">
+            <div className="flex items-center gap-3 mb-4">
+              <MdOutlineMedicalServices className="text-ink text-2xl" />
+              <h3 className="font-newsreader text-h3 text-ink">
+                Medical Deep Learning
+              </h3>
+            </div>
+            <p className="font-inter text-body-md text-on-surface-variant">
+              Applying advanced neural networks to complex diagnostic imaging and
+              patient data analysis.
+            </p>
           </div>
-          <p className="font-inter text-body-md text-on-surface-variant">
-            Applying advanced neural networks to complex diagnostic imaging and
-            patient data analysis.
-          </p>
-        </div>
+        </Reveal>
 
-        {/* Cybersecurity — spans 2 cols */}
-        <div className="col-span-1 md:col-span-2 border border-surface-variant bg-surface-container-low p-md">
-          <div className="flex items-center gap-3 mb-4">
-            <MdOutlineSecurity className="text-ink text-2xl" />
-            <h3 className="font-newsreader text-h3 text-ink">
-              Cybersecurity
-            </h3>
+        <Reveal delay={300} className="col-span-1 md:col-span-2">
+          <div className="border border-surface-variant bg-surface-container-low p-md h-full">
+            <div className="flex items-center gap-3 mb-4">
+              <MdOutlineSecurity className="text-ink text-2xl" />
+              <h3 className="font-newsreader text-h3 text-ink">
+                Cybersecurity
+              </h3>
+            </div>
+            <p className="font-inter text-body-md text-on-surface-variant">
+              Integrating machine learning models into robust security pipelines
+              for anomaly detection and threat intelligence.
+            </p>
           </div>
-          <p className="font-inter text-body-md text-on-surface-variant">
-            Integrating machine learning models into robust security pipelines
-            for anomaly detection and threat intelligence.
-          </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* ===== PROFESSIONAL TRAJECTORY DIVIDER ===== */}
@@ -143,14 +153,15 @@ function Home() {
           {experience.map((exp, index) => (
             <React.Fragment key={index}>
               {/* Date column */}
-              <div className="md:col-span-3 text-left md:text-right">
+              <Reveal delay={index * 100} className="md:col-span-3 text-left md:text-right">
                 <p className="font-inter text-label-caps text-on-surface-variant pt-2 uppercase tracking-[0.1em]">
                   {formatDate(exp.start)} — {formatDate(exp.end)}
                 </p>
-              </div>
+              </Reveal>
 
               {/* Content column */}
-              <div
+              <Reveal
+                delay={index * 100 + 50}
                 className={`md:col-span-9 border-l border-surface-variant pl-8 relative ${
                   index < experience.length - 1 ? "pb-10" : ""
                 }`}
@@ -171,20 +182,22 @@ function Home() {
                 <p className="font-inter text-body-md text-on-surface-variant opacity-80">
                   {impactLines[exp.company] || exp.highlights?.[0] || ""}
                 </p>
-              </div>
+              </Reveal>
             </React.Fragment>
           ))}
         </div>
 
         {/* Link to About */}
-        <div className="mt-8 md:ml-[25%] pl-8">
-          <Link
-            to="/about"
-            className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline"
-          >
-            View full background &rarr;
-          </Link>
-        </div>
+        <Reveal delay={500}>
+          <div className="mt-8 md:ml-[25%] pl-8">
+            <Link
+              to="/about"
+              className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline"
+            >
+              View full background &rarr;
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       {/* ===== EDUCATION & CREDENTIALS DIVIDER ===== */}
@@ -199,85 +212,93 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Main education */}
           <div className="md:col-span-7">
-            <div className="flex items-start gap-3 mb-3">
-              <FaGraduationCap className="text-ink text-xl mt-1 shrink-0" />
-              <div>
-                <h3 className="font-newsreader text-h3 text-ink mb-1">
-                  B.Sc. in Computer Science & Engineering
-                </h3>
-                <p className="font-inter text-body-md text-on-surface-variant">
-                  Rajshahi University of Engineering & Technology (RUET)
-                </p>
-                <p className="font-inter text-body-md text-on-surface-variant opacity-80">
-                  {education.date} &middot; CGPA: {education.cgpa}
-                </p>
+            <Reveal delay={100}>
+              <div className="flex items-start gap-3 mb-3">
+                <FaGraduationCap className="text-ink text-xl mt-1 shrink-0" />
+                <div>
+                  <h3 className="font-newsreader text-h3 text-ink mb-1">
+                    B.Sc. in Computer Science & Engineering
+                  </h3>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    Rajshahi University of Engineering & Technology (RUET)
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant opacity-80">
+                    {education.date} &middot; CGPA: {education.cgpa}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* Thesis */}
-            <div className="flex items-start gap-3 mt-6 mb-3">
-              <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
-              <div>
-                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
-                  Thesis
-                </p>
-                <p className="font-inter text-body-md text-ink">
-                  {education.thesis.title}
-                </p>
-              </div>
-            </div>
-
-            {/* Publication */}
-            {publication && (
-              <div className="flex items-start gap-3 mt-6">
+            <Reveal delay={200}>
+              <div className="flex items-start gap-3 mt-6 mb-3">
                 <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
                 <div>
                   <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
-                    Publication
+                    Thesis
                   </p>
                   <p className="font-inter text-body-md text-ink">
-                    {publication.title}
+                    {education.thesis.title}
                   </p>
-                  <p className="font-inter text-body-md text-on-surface-variant">
-                    {publication.venue}, {publication.year} &middot; {publication.summary.split(";")[0]}
-                  </p>
-                  {publication.scholarProfile && (
-                    <a
-                      href={publication.scholarProfile}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline inline-block mt-2"
-                    >
-                      Google Scholar &rarr;
-                    </a>
-                  )}
                 </div>
               </div>
+            </Reveal>
+
+            {/* Publication */}
+            {publication && (
+              <Reveal delay={300}>
+                <div className="flex items-start gap-3 mt-6">
+                  <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
+                  <div>
+                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                      Publication
+                    </p>
+                    <p className="font-inter text-body-md text-ink">
+                      {publication.title}
+                    </p>
+                    <p className="font-inter text-body-md text-on-surface-variant">
+                      {publication.venue}, {publication.year} &middot;{" "}
+                      {publication.summary.split(";")[0]}
+                    </p>
+                    {publication.scholarProfile && (
+                      <a
+                        href={publication.scholarProfile}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline inline-block mt-2"
+                      >
+                        Google Scholar &rarr;
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </Reveal>
             )}
           </div>
 
           {/* Awards sidebar */}
           <div className="md:col-span-5">
-            <div className="flex items-center gap-2 mb-4">
-              <FaAward className="text-ink text-lg" />
-              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-                Awards & Scholarships
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {resumeData.awards.slice(0, 3).map((award, i) => (
-                <span
-                  key={i}
-                  className="font-inter text-[0.8rem] text-on-surface-variant border border-surface-variant px-3 py-1.5 bg-surface-container-low inline-block"
-                >
-                  {award.name}
-                </span>
-              ))}
-            </div>
+            <Reveal delay={200}>
+              <div className="flex items-center gap-2 mb-4">
+                <FaAward className="text-ink text-lg" />
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+                  Awards & Scholarships
+                </p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {resumeData.awards.slice(0, 3).map((award, i) => (
+                  <span
+                    key={i}
+                    className="font-inter text-[0.8rem] text-on-surface-variant border border-surface-variant px-3 py-1.5 bg-surface-container-low inline-block"
+                  >
+                    {award.name}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
-
     </main>
   );
 }

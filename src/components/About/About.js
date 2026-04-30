@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import resumeData from "../../data/resume.json";
+import { Reveal } from "../utils/Reveal";
 import {
   FaBriefcase,
-  FaGraduationCap,
   FaAward,
-  FaBookOpen,
   FaMapMarkerAlt,
   FaChevronDown,
   FaChevronUp,
@@ -108,7 +106,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
     const parts = text.split(/\*\*(.*?)\*\*/g);
     return parts.map((part, i) =>
       i % 2 === 1 ? (
-        <strong key={i} className="text-ink">
+        <strong key={i} className="text-ink font-semibold">
           {part}
         </strong>
       ) : (
@@ -118,102 +116,101 @@ function ExperienceEntry({ exp, defaultExpanded }) {
   };
 
   return (
-    <div className="border border-surface-variant bg-surface-container-low p-md mb-6">
-      {/* Header */}
-      <div className="flex items-start gap-4">
-        {logo ? (
-          <img
-            src={logo}
-            alt={exp.company}
-            className="w-12 h-12 object-contain border border-surface-variant shrink-0"
-          />
-        ) : (
-          <div className="w-12 h-12 border border-surface-variant flex items-center justify-center bg-surface shrink-0">
-            <FaBriefcase className="text-on-surface-variant" />
-          </div>
-        )}
-        <div className="flex-1">
-          <div className="flex flex-wrap items-center gap-2 mb-1">
-            <h3 className="font-newsreader text-h3 text-ink">{exp.role}</h3>
+    <article className="relative mb-24 last:mb-0">
+      {/* Timeline marker — horizontal dash */}
+      <div
+        className={`hidden md:block absolute -left-[33px] top-[14px] w-4 h-px ${
+          isCurrentRole ? "bg-ink" : "bg-surface-variant"
+        }`}
+      ></div>
+
+      {/* Header: Role + Date on same baseline */}
+      <header className="mb-3">
+        <div className="flex items-center justify-between gap-4 mb-1">
+          <div className="flex items-center gap-3">
+            {logo && (
+              <img
+                src={logo}
+                alt={exp.company}
+                className="w-10 h-10 object-contain border border-surface-variant shrink-0"
+              />
+            )}
+            <h3 className="font-newsreader text-h3 text-ink leading-none">{exp.role}</h3>
             {isCurrentRole && (
-              <span className="font-inter text-[0.65rem] uppercase tracking-[0.1em] bg-ink text-on-ink px-2 py-0.5">
-                Current
+              <span className="font-inter text-[0.6rem] uppercase tracking-[0.1em] bg-ink text-on-ink px-1.5 py-0.5">
+                Now
               </span>
             )}
           </div>
-          <p className="font-inter text-body-md text-on-surface-variant">
-            {exp.company}
-          </p>
-          <div className="flex flex-wrap items-center gap-4 mt-2 font-inter text-[0.8rem] text-on-surface-variant opacity-80">
-            <span>
-              {formatDate(exp.start)} — {formatDate(exp.end)}
-            </span>
-            {exp.location && (
-              <span className="flex items-center gap-1">
-                <FaMapMarkerAlt className="text-[0.7rem]" />
-                {exp.location}
-              </span>
-            )}
-            <span className="border border-surface-variant px-2 py-0.5 text-[0.7rem] uppercase tracking-wider">
-              {exp.type}
-            </span>
-          </div>
+          <span className="font-inter text-[0.8rem] text-on-surface-variant shrink-0 hidden sm:block">
+            {formatDate(exp.start)} — {formatDate(exp.end)}
+          </span>
         </div>
-      </div>
+        <div className="flex flex-wrap items-center gap-3 font-inter text-body-md text-on-surface-variant ml-[52px]">
+          <span>{exp.company}</span>
+          {exp.location && (
+            <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/60">
+              <FaMapMarkerAlt className="text-[0.6rem]" />
+              {exp.location}
+            </span>
+          )}
+          <span className="font-inter text-[0.8rem] text-on-surface-variant sm:hidden">
+            {formatDate(exp.start)} — {formatDate(exp.end)}
+          </span>
+        </div>
+      </header>
 
-      {/* Summary */}
-      <p className="font-inter text-body-md text-on-surface-variant mt-4">
-        {exp.summary}
-      </p>
+      {/* Content area with nested left border */}
+      <div className="pl-0 md:pl-5 md:border-l md:border-surface-variant pt-2">
+        {/* Summary */}
+        <p className="font-inter text-body-md text-on-surface-variant/80 max-w-3xl leading-relaxed mb-4">
+          {exp.summary}
+        </p>
 
-      {/* Tech Stack */}
-      {exp.techStack && (
-        <div className="flex flex-wrap gap-2 mt-4">
-          {exp.techStack.map((tech, i) => (
+        {/* Tech Stack + Toggle in same row */}
+        <div className="flex flex-wrap items-center gap-2 mb-1">
+          {exp.techStack && exp.techStack.map((tech, i) => (
             <span
               key={i}
-              className="font-inter text-[0.75rem] text-ink border border-surface-variant px-2 py-0.5 bg-surface"
+              className="font-inter text-[0.7rem] text-on-surface-variant border border-surface-variant px-2.5 py-1 bg-surface-container-low"
             >
               {tech}
             </span>
           ))}
-        </div>
-      )}
 
-      {/* Highlights - collapsible */}
-      {exp.highlights && exp.highlights.length > 0 && (
-        <div className="mt-4">
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="font-inter text-[0.8rem] text-on-surface-variant flex items-center gap-2 hover:text-ink transition-colors bg-transparent border-none cursor-pointer p-0"
-          >
-            {expanded ? (
-              <>
-                Hide details <FaChevronUp className="text-[0.6rem]" />
-              </>
-            ) : (
-              <>
-                Show {exp.highlights.length} key achievements{" "}
-                <FaChevronDown className="text-[0.6rem]" />
-              </>
-            )}
-          </button>
-
-          {expanded && (
-            <ul className="mt-3 space-y-2 list-none pl-0">
-              {exp.highlights.map((h, i) => (
-                <li
-                  key={i}
-                  className="font-inter text-body-md text-on-surface-variant pl-4 border-l-2 border-surface-variant"
-                >
-                  {parseHighlight(h)}
-                </li>
-              ))}
-            </ul>
+          {/* Contributions toggle — inline after tech stack */}
+          {exp.highlights && exp.highlights.length > 0 && (
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="font-inter text-[0.75rem] text-ink/60 flex items-center gap-1.5 hover:text-ink transition-colors bg-transparent border-none cursor-pointer p-0 ml-1"
+            >
+              <span className="border-b border-dotted border-ink/40 pb-px">
+                {expanded ? "Hide details" : "See details"}
+              </span>
+              {expanded ? (
+                <FaChevronUp className="text-[0.5rem]" />
+              ) : (
+                <FaChevronDown className="text-[0.5rem]" />
+              )}
+            </button>
           )}
         </div>
-      )}
-    </div>
+
+        {/* Highlights - collapsible */}
+        {expanded && exp.highlights && exp.highlights.length > 0 && (
+          <ul className="mt-5 space-y-4 list-none pl-0 pb-2">
+            {exp.highlights.map((h, i) => (
+              <li
+                key={i}
+                className="font-inter text-body-md text-on-surface-variant/80 pl-5 border-l-2 border-surface-variant leading-relaxed"
+              >
+                {parseHighlight(h)}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </article>
   );
 }
 
@@ -227,96 +224,126 @@ function About() {
     <main className="max-w-container mx-auto px-8 pt-24 pb-xl">
       {/* Page Title */}
       <section className="mb-xl">
-        <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-4 tracking-[0.1em]">
-          Background
-        </p>
-        <h1 className="font-newsreader text-h1 text-ink mb-6">
-          About Me
-        </h1>
-        <div className="h-[1px] w-16 bg-ink mb-6"></div>
-        <p className="font-inter text-body-lg text-on-surface-variant max-w-3xl">
-          {resumeData.summary}
-        </p>
+        <Reveal>
+          <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-4 tracking-[0.1em]">
+            Background
+          </p>
+          <h1 className="font-newsreader text-h1 text-ink mb-6">
+            About Me
+          </h1>
+          <div className="h-[1px] w-16 bg-ink mb-6"></div>
+          <p className="font-inter text-body-lg text-on-surface-variant max-w-3xl">
+            {resumeData.summary}
+          </p>
+        </Reveal>
       </section>
 
       {/* ===== EXPERIENCE SECTION ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Experience
-        </span>
-      </div>
+      <Reveal>
+        <div className="w-full h-px bg-surface-variant mb-md"></div>
+        <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+          Professional Tenure
+        </p>
+      </Reveal>
 
-      <section className="mb-xl">
-        {experiences.map((exp, index) => (
-          <ExperienceEntry
-            key={index}
-            exp={exp}
-            defaultExpanded={index === 0}
-          />
-        ))}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
+        {/* Left Column: Sticky Section Title */}
+        <div className="md:col-span-3">
+          <Reveal>
+            <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+              Experience
+            </h2>
+          </Reveal>
+        </div>
+
+        {/* Right Column: Timeline Content */}
+        <div className="md:col-span-9 relative pl-0 md:pl-8">
+          {/* Vertical timeline line */}
+          <div className="hidden md:block absolute left-0 top-2 bottom-0 w-px bg-surface-variant"></div>
+
+          {experiences.map((exp, index) => (
+            <Reveal key={index} delay={index * 100}>
+              <ExperienceEntry
+                exp={exp}
+                defaultExpanded={index === 0}
+              />
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* ===== EDUCATION SECTION ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Education
-        </span>
-      </div>
+      <Reveal>
+        <div className="w-full h-px bg-surface-variant mb-md"></div>
+        <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+          Scholarly Background
+        </p>
+      </Reveal>
 
-      <section className="mb-xl">
-        {education.map((edu, index) => (
-          <div
-            key={index}
-            className="border border-surface-variant bg-surface-container-low p-md mb-6"
-          >
-            <div className="flex items-start gap-3">
-              <FaGraduationCap className="text-ink text-xl mt-1 shrink-0" />
-              <div className="flex-1">
-                <h3 className="font-newsreader text-h3 text-ink mb-1">
-                  {edu.degree}
-                </h3>
-                <p className="font-inter text-body-md text-on-surface-variant">
-                  {edu.institution}
-                </p>
-                <div className="flex flex-wrap items-center gap-4 mt-2 font-inter text-[0.8rem] text-on-surface-variant opacity-80">
-                  <span>{edu.date}</span>
-                  {edu.location && (
-                    <span className="flex items-center gap-1">
-                      <FaMapMarkerAlt className="text-[0.7rem]" />
-                      {edu.location}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
+        {/* Left Column: Sticky Section Title */}
+        <div className="md:col-span-3">
+          <Reveal>
+            <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+              Academic Foundations
+            </h2>
+          </Reveal>
+        </div>
+
+        {/* Right Column: Education Content */}
+        <div className="md:col-span-9">
+          {education.map((edu, index) => (
+            <Reveal key={index} delay={index * 100}>
+              <div className="border border-surface-variant bg-surface-container-lowest p-md mb-6 last:mb-0">
+                <header className="mb-4 border-b border-surface-variant pb-3">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-1">
+                    <h3 className="font-newsreader text-h3 text-ink">
+                      {edu.degree}
+                    </h3>
+                    <span className="font-inter text-[0.8rem] text-on-surface-variant shrink-0">
+                      {edu.date}
                     </span>
-                  )}
-                  {(edu.cgpa || edu.gpa) && (
-                    <span>{edu.cgpa || `GPA: ${edu.gpa}`}</span>
-                  )}
-                </div>
+                  </div>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    {edu.institution}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-4 mt-2 font-inter text-[0.8rem] text-on-surface-variant/60">
+                    {edu.location && (
+                      <span className="flex items-center gap-1">
+                        <FaMapMarkerAlt className="text-[0.7rem]" />
+                        {edu.location}
+                      </span>
+                    )}
+                    {(edu.cgpa || edu.gpa) && (
+                      <span>{edu.cgpa || `GPA: ${edu.gpa}`}</span>
+                    )}
+                  </div>
+                </header>
 
-                {/* Thesis */}
                 {edu.thesis && (
-                  <div className="mt-4 pl-4 border-l-2 border-surface-variant">
-                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">
+                  <div className="mb-4">
+                    <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">
                       Thesis
-                    </p>
+                    </h4>
                     <p className="font-inter text-body-md text-ink">
                       {edu.thesis.title}
                     </p>
-                    <p className="font-inter text-[0.8rem] text-on-surface-variant">
+                    <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">
                       Supervisor: {edu.thesis.supervisor}
                     </p>
                   </div>
                 )}
 
-                {/* Coursework */}
                 {edu.coursework && (
-                  <div className="mt-4">
-                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                  <div className="mb-4">
+                    <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
                       Key Coursework
-                    </p>
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {edu.coursework.map((course, i) => (
                         <span
                           key={i}
-                          className="font-inter text-[0.75rem] text-on-surface-variant border border-surface-variant px-2 py-0.5 bg-surface"
+                          className="font-inter text-[0.75rem] text-on-surface-variant border border-surface-variant px-2.5 py-1 bg-background"
                         >
                           {course}
                         </span>
@@ -325,17 +352,16 @@ function About() {
                   </div>
                 )}
 
-                {/* Awards within education */}
                 {edu.awards && (
-                  <div className="mt-4">
-                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                  <div>
+                    <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
                       Awards
-                    </p>
+                    </h4>
                     <div className="flex flex-wrap gap-2">
                       {edu.awards.map((award, i) => (
                         <span
                           key={i}
-                          className="font-inter text-[0.75rem] text-ink border border-surface-variant px-2.5 py-1 bg-surface"
+                          className="font-inter text-[0.75rem] text-ink border border-surface-variant px-2.5 py-1 bg-background"
                         >
                           <FaAward className="inline mr-1 text-[0.65rem]" />
                           {award}
@@ -345,33 +371,40 @@ function About() {
                   </div>
                 )}
               </div>
-            </div>
-          </div>
-        ))}
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* ===== PUBLICATION SECTION ===== */}
       {publication && (
         <>
-          <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-            <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-              Publication
-            </span>
-          </div>
+          <Reveal>
+            <div className="w-full h-px bg-surface-variant mb-md"></div>
+            <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+              Research Output
+            </p>
+          </Reveal>
 
-          <section className="mb-xl">
-            <div className="border border-surface-variant bg-surface-container-low p-md">
-              <div className="flex items-start gap-3">
-                <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
-                <div>
-                  <h3 className="font-newsreader text-h3 text-ink mb-2">
+          <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
+            <div className="md:col-span-3">
+              <Reveal>
+                <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+                  Publication
+                </h2>
+              </Reveal>
+            </div>
+            <div className="md:col-span-9">
+              <Reveal delay={100}>
+                <div className="border border-surface-variant bg-surface-container-lowest p-md">
+                  <h3 className="font-newsreader text-h3 text-ink mb-3">
                     {publication.title}
                   </h3>
                   <p className="font-inter text-body-md text-on-surface-variant">
                     {publication.venue}, {publication.year} &middot;{" "}
                     {publication.notes}
                   </p>
-                  <p className="font-inter text-body-md text-on-surface-variant mt-2">
+                  <p className="font-inter text-body-md text-on-surface-variant/80 mt-3 leading-relaxed">
                     {publication.summary}
                   </p>
                   {publication.scholarProfile && (
@@ -379,91 +412,114 @@ function About() {
                       href={publication.scholarProfile}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline inline-block mt-3"
+                      className="font-inter text-body-md text-ink border-b border-ink/40 pb-0.5 hover:border-ink transition-colors no-underline inline-block mt-4"
                     >
                       Google Scholar Profile &rarr;
                     </a>
                   )}
                 </div>
-              </div>
+              </Reveal>
             </div>
           </section>
         </>
       )}
 
       {/* ===== SKILLS SECTION ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Technical Skills
-        </span>
-      </div>
+      <Reveal>
+        <div className="w-full h-px bg-surface-variant mb-md"></div>
+        <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+          Technical Proficiency
+        </p>
+      </Reveal>
 
-      <section className="mb-xl">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skills.map((group, i) => (
-            <div key={i} className="border border-surface-variant bg-surface-container-low p-md">
-              <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-3">
-                {group.name}
-              </h4>
-              <div className="flex flex-wrap gap-2">
-                {group.items.map((skill, j) => (
-                  <span
-                    key={j}
-                    className="font-inter text-[0.8rem] text-ink border border-surface-variant px-2.5 py-1 bg-surface"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-          ))}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
+        <div className="md:col-span-3">
+          <Reveal>
+            <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+              Skills
+            </h2>
+          </Reveal>
+        </div>
+        <div className="md:col-span-9">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {skills.map((group, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <div>
+                  <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-3 border-b border-surface-variant pb-2">
+                    {group.name}
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((skill, j) => (
+                      <span
+                        key={j}
+                        className="font-inter text-[0.8rem] text-ink border border-surface-variant px-2.5 py-1 bg-surface-container-low"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===== AWARDS SECTION ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Awards & Recognition
-        </span>
-      </div>
+      <Reveal>
+        <div className="w-full h-px bg-surface-variant mb-md"></div>
+        <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+          Recognition
+        </p>
+      </Reveal>
 
-      <section className="mb-xl">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {awards.map((award, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-3 border border-surface-variant bg-surface-container-low px-md py-4"
-            >
-              <FaAward className="text-ink shrink-0" />
-              <div>
-                <p className="font-inter text-body-md text-ink">
-                  {award.name}
-                </p>
-                {(award.yearRange || award.year) && (
-                  <p className="font-inter text-[0.8rem] text-on-surface-variant">
-                    {award.yearRange || award.year}
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
+      <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
+        <div className="md:col-span-3">
+          <Reveal>
+            <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+              Awards
+            </h2>
+          </Reveal>
+        </div>
+        <div className="md:col-span-9">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {awards.map((award, i) => (
+              <Reveal key={i} delay={i * 80}>
+                <div className="flex items-center gap-3 border border-surface-variant bg-surface-container-lowest px-5 py-4">
+                  <FaAward className="text-ink shrink-0" />
+                  <div>
+                    <p className="font-inter text-body-md text-ink">
+                      {award.name}
+                    </p>
+                    {(award.yearRange || award.year) && (
+                      <p className="font-inter text-[0.8rem] text-on-surface-variant">
+                        {award.yearRange || award.year}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ===== DOWNLOAD CV ===== */}
-      <div className="text-center py-lg border-t border-surface-variant">
-        <p className="font-inter text-body-md text-on-surface-variant mb-4">
-          Want the full details?
-        </p>
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] hover:bg-surface hover:text-ink border border-ink transition-colors duration-200 no-underline inline-block"
-        >
-          Download Resume (PDF)
-        </a>
-      </div>
+      <Reveal>
+        <div className="text-center py-lg border-t border-surface-variant">
+          <p className="font-inter text-body-md text-on-surface-variant mb-4">
+            Want the full details?
+          </p>
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] hover:bg-surface hover:text-ink border border-ink transition-colors duration-200 no-underline inline-block"
+          >
+            Download Resume (PDF)
+          </a>
+        </div>
+      </Reveal>
     </main>
   );
 }
