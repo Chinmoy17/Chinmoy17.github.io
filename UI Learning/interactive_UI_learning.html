@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UI Psychology Lab — Theory + Practice</title>
+<style>
+  :root {
+    --bg:#0b0d10; --surface:#14171c; --surface-2:#1c2026; --border:#2a2f37;
+    --text:#e6e8eb; --text-dim:#8b919a; --text-dimmer:#6b7280;
+    --accent:#6366f1; --accent-hover:#7c7ff5;
+    --success:#10b981; --danger:#ef4444; --warning:#f59e0b;
+    --mono:ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif;
+       background:var(--bg);color:var(--text);line-height:1.65;font-size:15px;-webkit-font-smoothing:antialiased}
+  .layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+  aside{background:var(--surface);border-right:1px solid var(--border);padding:24px 16px;
+        position:sticky;top:0;height:100vh;overflow-y:auto}
+  aside h1{font-size:14px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--text-dim)}
+  aside p.subtitle{font-size:12px;color:var(--text-dim);margin-bottom:24px}
+  nav ul{list-style:none}
+  nav a{display:block;padding:8px 12px;color:var(--text-dim);text-decoration:none;
+        border-radius:6px;font-size:13px;transition:all .15s;cursor:pointer}
+  nav a:hover{background:var(--surface-2);color:var(--text)}
+  nav a.active{background:var(--accent);color:#fff}
+  main{padding:48px 56px;max-width:920px}
+  section{display:none;animation:fade .3s}
+  section.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  h2{font-size:34px;font-weight:700;margin-bottom:8px;letter-spacing:-.02em}
+  .lede{font-size:17px;color:var(--text-dim);margin-bottom:24px;max-width:70ch}
+  h3{font-size:20px;margin:36px 0 12px;font-weight:600;letter-spacing:-.01em}
+  h4{font-size:15px;margin:18px 0 8px;font-weight:600;color:var(--text)}
+  p{margin-bottom:14px;max-width:72ch}
+  ul,ol{margin:8px 0 14px 24px;max-width:72ch}
+  li{margin-bottom:6px}
+  strong{color:#fff}
+  em{color:#d1d5db}
+
+  /* Section header chip */
+  .chip{display:inline-block;font-size:11px;font-weight:600;letter-spacing:1px;
+        text-transform:uppercase;color:var(--accent);background:rgba(99,102,241,.12);
+        padding:4px 10px;border-radius:99px;margin-bottom:16px}
+
+  /* Theory block */
+  .theory{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+          padding:24px;margin:16px 0 24px;border-left:3px solid var(--accent)}
+  .theory h4:first-child{margin-top:0}
+
+  /* Demo block */
+  .demo{background:var(--surface);border:1px solid var(--border);border-radius:8px;
+        padding:24px;margin:16px 0 24px}
+  .demo-label{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);
+              margin-bottom:12px;font-weight:600}
+
+  /* Rules block */
+  .rules{background:linear-gradient(135deg,rgba(16,185,129,.06),rgba(16,185,129,.01));
+         border:1px solid rgba(16,185,129,.25);border-radius:8px;padding:20px 24px;margin:16px 0}
+  .rules-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;
+               color:var(--success);font-weight:700;margin-bottom:12px}
+  .rules ul{margin-left:18px}
+  .rules li{margin-bottom:10px}
+  .rules code{background:rgba(16,185,129,.1);color:#6ee7b7}
+
+  /* Anti-pattern block */
+  .anti{background:linear-gradient(135deg,rgba(239,68,68,.05),rgba(239,68,68,.01));
+        border:1px solid rgba(239,68,68,.22);border-radius:8px;padding:20px 24px;margin:16px 0}
+  .anti-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;
+              color:var(--danger);font-weight:700;margin-bottom:12px}
+  .anti ul{margin-left:18px}
+  .anti li{margin-bottom:10px}
+  .anti code{background:rgba(239,68,68,.1);color:#fca5a5}
+
+  /* Decision table */
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:14px}
+  th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border)}
+  th{color:var(--text-dim);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px}
+  td:first-child{font-weight:600;color:#fff}
+
+  /* Buttons */
+  button.btn{background:var(--accent);color:#fff;border:none;padding:10px 18px;border-radius:6px;
+             font-size:14px;font-weight:500;cursor:pointer;transition:all .15s}
+  button.btn:hover{background:var(--accent-hover);transform:translateY(-1px)}
+  button.btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  button.btn.ghost:hover{background:var(--surface-2)}
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  code{font-family:var(--mono);background:var(--surface-2);padding:2px 6px;border-radius:4px;font-size:.9em}
+  pre{background:var(--surface-2);padding:14px;border-radius:6px;overflow-x:auto;
+      font-family:var(--mono);font-size:13px;margin:12px 0;border:1px solid var(--border)}
+
+  /* Demo elements */
+  .dot-grid{display:grid;grid-template-columns:repeat(15,1fr);gap:8px}
+  .dot{width:16px;height:16px;border-radius:50%;background:#5b6270}
+  .dot.target{background:var(--danger);cursor:pointer}
+  .dot.target.shape{border-radius:0;background:#5b6270;cursor:pointer}
+  .gestalt-item{width:14px;height:14px;background:var(--accent);border-radius:50%}
+  .hier-card{background:#fff;color:#1a1a1a;padding:24px;border-radius:8px;transition:all .3s}
+  .hier-card.flat *{font-size:14px!important;font-weight:400!important;color:#555!important;margin:4px 0!important}
+  .squint-target{background:#fff;color:#111;padding:30px;border-radius:8px;transition:filter .3s}
+  .squint-target.blur{filter:blur(6px)}
+  .fitts-area{position:relative;height:240px;background:var(--surface-2);border-radius:6px;overflow:hidden}
+  .fitts-target{position:absolute;background:var(--accent);color:#fff;border:none;border-radius:4px;
+                cursor:pointer;font-weight:500;transition:background .1s}
+  .fitts-target:hover{background:var(--accent-hover)}
+  .hicks-options{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+  .hicks-options button{background:var(--surface-2);color:var(--text);border:1px solid var(--border);
+                        padding:8px 14px;border-radius:4px;cursor:pointer;font-size:13px}
+  .hicks-options button:hover{border-color:var(--accent)}
+  .contrast-demo{padding:24px;border-radius:6px;transition:all .2s}
+  input[type=range]{width:100%}
+  input[type=color]{width:60px;height:36px;border:1px solid var(--border);border-radius:4px;background:none;cursor:pointer}
+  .typo-sample{background:#fff;color:#1a1a1a;padding:32px;border-radius:8px;transition:all .2s}
+  .price-tier{background:var(--surface-2);padding:20px;border-radius:6px;border:2px solid var(--border);text-align:center}
+  .price-tier.featured{border-color:var(--accent);transform:scale(1.05)}
+  .price-tier .price{font-size:28px;font-weight:700;margin:8px 0}
+  .price-tier .name{color:var(--text-dim);font-size:13px;text-transform:uppercase;letter-spacing:1px}
+  .aff-button-flat{background:#6366f1;color:#fff;padding:12px 20px;border:none;font-size:14px;cursor:pointer}
+  .aff-button-deep{background:linear-gradient(180deg,#7c7ff5,#4f52d8);color:#fff;padding:12px 20px;border:none;
+                   border-radius:6px;font-size:14px;cursor:pointer;
+                   box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 2px 4px rgba(0,0,0,.3)}
+  .aff-button-deep:active{transform:translateY(1px)}
+  .feedback-demo button{margin-right:8px;margin-bottom:8px}
+  .feedback-status{margin-top:12px;font-size:13px;color:var(--text-dim);min-height:20px}
+  .stat{display:inline-block;background:var(--surface-2);padding:8px 14px;border-radius:6px;
+        font-family:var(--mono);font-size:13px;margin-right:8px;margin-bottom:8px}
+  .stat strong{color:var(--accent)}
+  .heatmap{position:relative;background:#fff;color:#1a1a1a;padding:24px;border-radius:8px;line-height:1.6}
+  .heatmap.show-heat::before{content:'';position:absolute;inset:0;pointer-events:none;border-radius:8px;
+    background:
+      radial-gradient(ellipse 80% 8% at 0% 8%,rgba(239,68,68,.5),transparent 60%),
+      radial-gradient(ellipse 60% 6% at 0% 22%,rgba(239,68,68,.4),transparent 60%),
+      radial-gradient(ellipse 12% 60% at 2% 50%,rgba(239,68,68,.35),transparent 60%)}
+  .halo-card{background:#fff;color:#111;padding:20px;border-radius:8px;font-family:-apple-system,sans-serif}
+  .halo-card.bad{font-family:"Comic Sans MS",cursive;background:#ffeb3b;border:3px dashed red;
+                 padding:15px;border-radius:0}
+  .halo-card.bad h4{color:blue;text-decoration:underline}
+  .halo-card.bad button{background:lime;color:red;padding:5px;border:2px ridge purple}
+  .toggle-row{display:flex;gap:12px;align-items:center;margin:12px 0;flex-wrap:wrap}
+  label.slider-label{display:block;font-size:12px;color:var(--text-dim);margin-bottom:4px;
+                     text-transform:uppercase;letter-spacing:.5px}
+  select,input[type=text]{background:var(--surface-2);color:var(--text);border:1px solid var(--border);
+                          padding:8px 12px;border-radius:4px;font-family:inherit}
+  footer{padding:32px 0;color:var(--text-dim);font-size:13px;border-top:1px solid var(--border);margin-top:64px}
+  @media(max-width:768px){.layout{grid-template-columns:1fr}aside{position:relative;height:auto}main{padding:24px}}
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <h1>UI Psychology Lab</h1>
+    <p class="subtitle">Theory + interactive practice</p>
+    <nav><ul>
+      <li><a data-target="intro" class="active">Introduction</a></li>
+      <li><a data-target="preattentive">1. Pre-attentive Vision</a></li>
+      <li><a data-target="gestalt">2. Gestalt Principles</a></li>
+      <li><a data-target="cogload">3. Cognitive Load</a></li>
+      <li><a data-target="hierarchy">4. Visual Hierarchy</a></li>
+      <li><a data-target="squint">5. Squint Test</a></li>
+      <li><a data-target="fitts">6. Fitts's Law</a></li>
+      <li><a data-target="hicks">7. Hick's Law</a></li>
+      <li><a data-target="typography">8. Typography</a></li>
+      <li><a data-target="color">9. Color & Contrast</a></li>
+      <li><a data-target="fpattern">10. F-Pattern</a></li>
+      <li><a data-target="affordance">11. Affordance</a></li>
+      <li><a data-target="feedback">12. Feedback Latency</a></li>
+      <li><a data-target="anchoring">13. Anchoring Bias</a></li>
+      <li><a data-target="halo">14. Halo Effect</a></li>
+      <li><a data-target="finale">Synthesis</a></li>
+    </ul></nav>
+  </aside>
+
+  <main>
+
+    <!-- INTRO -->
+    <section id="intro" class="active">
+      <span class="chip">Start here</span>
+      <h2>The Psychology of UI</h2>
+      <p class="lede">An interactive lab built on a single thesis: <strong>a UI is not a visual artifact, it's a cognitive prosthetic</strong>. Every pixel either reduces or increases the mental work a user does to translate intent into action.</p>
+
+      <h3>How each chapter is structured</h3>
+      <p>You'll see four layers per topic:</p>
+      <ol>
+        <li><strong>Theory</strong> — what's happening in the brain and why this principle exists.</li>
+        <li><strong>Demo</strong> — interactive experience so you <em>feel</em> the principle.</li>
+        <li><strong>What to do</strong> — concrete rules you apply to your code.</li>
+        <li><strong>Anti-patterns</strong> — what fails and why.</li>
+      </ol>
+
+      <h3>The mental model to adopt</h3>
+      <p>Imagine the user as a <strong>fast, lazy, biased pattern-matcher with a 4-slot working memory operating on 200ms reflexes</strong>. They don't read — they recognize. They don't analyze — they react. Your job is to cooperate with that brain.</p>
+
+      <p>Click any chapter in the sidebar to start.</p>
+    </section>
+
+    <!-- 1. PRE-ATTENTIVE -->
+    <section id="preattentive">
+      <span class="chip">Chapter 1 · Perception</span>
+      <h2>Pre-attentive Vision</h2>
+      <p class="lede">Your visual cortex processes color, motion, orientation, and size <em>before</em> conscious attention engages — within ~200ms. Designing with this in mind is the difference between a UI that feels effortless and one that feels exhausting.</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>Vision happens in stages: <strong>(1) pre-attentive</strong> (~50ms, automatic feature detection), <strong>(2) attentive</strong> (~200–500ms, focused selection), <strong>(3) cognitive interpretation</strong> (500ms+, meaning assignment, requires working memory).</p>
+        <p>Pre-attentive features include color hue, intensity, size, orientation, motion, and curvature. The brain detects these <em>in parallel</em> across the entire visual field — no scanning required.</p>
+        <p><strong>Conjunction search</strong> (e.g., "find the red square among red circles and blue squares") <em>fails</em> the pre-attentive system — it requires serial scanning. This is why icons that differ only by combination of features are slow to find.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo: Find the red dot vs find the square</div>
+        <p style="margin-bottom:16px">Click each target as fast as you can. Notice the time difference.</p>
+        <div id="dotgrid1" class="dot-grid"></div>
+        <div id="dotresult1" style="margin-top:16px"></div>
+        <button class="btn ghost" onclick="resetDots('dotgrid1','color')" style="margin-top:12px">Reset color test</button>
+        <hr style="margin:24px 0;border:none;border-top:1px solid var(--border)">
+        <p style="margin-bottom:16px">Now find the <em>square</em> (shape, not color):</p>
+        <div id="dotgrid2" class="dot-grid"></div>
+        <div id="dotresult2" style="margin-top:16px"></div>
+        <button class="btn ghost" onclick="resetDots('dotgrid2','shape')" style="margin-top:12px">Reset shape test</button>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Differentiate primary CTAs by color, not just label.</strong> A blue "Save" among gray "Cancel/Edit/Delete" buttons is found in &lt;200ms. The same buttons all gray with different labels take 1–2s to scan.</li>
+          <li><strong>Use saturation as a hierarchy lever.</strong> Saturated colors say "look here." Reserve them for ~5% of the screen. The rest should be muted (Stripe, Linear, Vercel all follow this).</li>
+          <li><strong>For status indication (online dot, unread badge), rely on color first.</strong> A red dot on a notification icon is processed pre-attentively; a number "3" requires reading.</li>
+          <li><strong>Use motion sparingly but powerfully.</strong> Motion is the strongest pre-attentive feature — it commands attention against the user's will. Reserve it for genuinely critical events (errors, new messages), never decorative loops.</li>
+          <li><strong>Test with the "5-second find" rule:</strong> Show your screen for 5 seconds. Can a stranger identify the primary action? If not, your pre-attentive design has failed.</li>
+        </ul>
+      </div>
+
+      <div class="anti">
+        <div class="anti-title">✗ Anti-patterns</div>
+        <ul>
+          <li><strong>Mystery icon toolbars</strong> (16 monochrome icons in a row). Conjunction search fails — users hover one-by-one to find what they need.</li>
+          <li><strong>Three "primary" buttons of equal weight.</strong> When everything pops, nothing pops. The eye has no salience signal and defaults to scanning left-to-right.</li>
+          <li><strong>Decorative animations on landing pages</strong> (particles, looping gradients). They consume the user's involuntary attention budget so your CTA gets less.</li>
+          <li><strong>Brand red = error red.</strong> Now error states blend into branding. Functional pre-attentive signals get drowned out.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 2. GESTALT -->
+    <section id="gestalt">
+      <span class="chip">Chapter 2 · Perception</span>
+      <h2>Gestalt Principles</h2>
+      <p class="lede">"The whole is greater than the sum of its parts." Identical elements group into different meanings based purely on their spatial relationships.</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>Gestalt psychology (Wertheimer, Köhler, Koffka, ~1920s) discovered that the visual system performs <strong>automatic grouping</strong> as part of perception itself. You don't see "8 dots" — you see "two rows of 4" or "four columns of 2", depending on spacing. The grouping is involuntary.</p>
+        <p>Key laws relevant to UI:</p>
+        <ul>
+          <li><strong>Proximity:</strong> close = related</li>
+          <li><strong>Similarity:</strong> same color/shape/size = same function</li>
+          <li><strong>Common region:</strong> shared boundary = grouped</li>
+          <li><strong>Closure:</strong> brain completes incomplete shapes</li>
+          <li><strong>Continuity:</strong> eye follows lines and curves</li>
+          <li><strong>Figure/ground:</strong> separates foreground from background</li>
+        </ul>
+        <p>These aren't aesthetic preferences. They're how the visual cortex literally constructs the scene before you become conscious of it.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo 1: Proximity — same elements, different meaning</div>
+        <p style="margin-bottom:16px">Move the slider. Watch your perception of "rows" vs "grid" change.</p>
+        <label class="slider-label">Horizontal gap: <span id="proxVal">8</span>px</label>
+        <input type="range" id="proxSlider" min="2" max="60" value="8">
+        <div id="proxDemo" style="margin-top:24px;display:grid;gap:12px"></div>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo 2: Similarity overrides position</div>
+        <p style="margin-bottom:16px">Toggle on similarity. With identical colors → 4×4 grid. With color groups → columns. Spacing is identical.</p>
+        <button class="btn ghost" onclick="toggleSimilarity()">Toggle similarity</button>
+        <div id="simDemo" style="margin-top:24px;display:grid;grid-template-columns:repeat(4,24px);gap:8px"></div>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Form labels and inputs:</strong> place labels within ~8px of their input. Floating labels at equal distance from two fields cause errors. Rule: distance from label to its input must be smaller than distance to anything else.</li>
+          <li><strong>Spacing between groups:</strong> use ~2× the inner spacing. If items inside a group are 8px apart, groups should be 16–24px apart. The 2× ratio is what the brain reads as "different group."</li>
+          <li><strong>Card-based layouts</strong> exploit common region. When unrelated information must coexist on a screen, wrap each cluster in a card to prevent cross-group confusion.</li>
+          <li><strong>Reuse style for same function.</strong> All destructive actions: same red. All primary actions: same blue. Similarity is a contract — break it and trust collapses.</li>
+          <li><strong>Use alignment as continuity.</strong> Aligning elements creates invisible "rails" the eye follows. This is why grids work — they multiply continuity cues across the whole screen.</li>
+        </ul>
+      </div>
+
+      <div class="anti">
+        <div class="anti-title">✗ Anti-patterns</div>
+        <ul>
+          <li><strong>Equidistant labels:</strong> a label floating equally between two fields belongs to neither — users guess and often pick wrong.</li>
+          <li><strong>Inconsistent button colors for same action.</strong> If "Save" is blue on one screen and green on another, users believe they do different things.</li>
+          <li><strong>Borders everywhere.</strong> Over-bordering fights closure — the brain doesn't need lines if proximity already groups things. Whitespace is cheaper and cleaner.</li>
+          <li><strong>Misaligned columns by 1–3px.</strong> Worse than obviously broken — the brain notices the inconsistency subliminally and the page "feels off."</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. COGNITIVE LOAD -->
+    <section id="cogload">
+      <span class="chip">Chapter 3 · Cognition</span>
+      <h2>Cognitive Load Theory</h2>
+      <p class="lede">Working memory holds ~4 chunks. Every unexplained icon, jargon term, or context switch spends from this finite budget. Bad UI is bad accounting.</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>John Sweller's Cognitive Load Theory (1988) splits mental effort into three types:</p>
+        <ul>
+          <li><strong>Intrinsic load:</strong> inherent task difficulty (filing taxes is hard, period).</li>
+          <li><strong>Extraneous load:</strong> load from <em>poor presentation</em> — the load you create.</li>
+          <li><strong>Germane load:</strong> load from learning/schema-building (productive).</li>
+        </ul>
+        <p>Cowan (2001) revised Miller's famous "7±2" downward to <strong>~4 chunks</strong> for true working memory. Anything beyond that is offloaded to recognition (seeing it on screen) or external memory (notes, scratchpads).</p>
+        <p>Your job: <strong>ruthlessly minimize extraneous load</strong>, leaving the user's working memory free for their actual goal.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo: Working memory test</div>
+        <p style="margin-bottom:16px">A 7-digit sequence appears for 2 seconds. Try to recall it.</p>
+        <button class="btn" onclick="startMemoryTest()">Start test</button>
+        <div id="memoryDisplay" style="font-family:var(--mono);font-size:24px;margin:16px 0;min-height:32px;letter-spacing:8px"></div>
+        <input type="text" id="memoryInput" placeholder="Type what you saw" style="display:none;font-family:var(--mono)">
+        <button class="btn ghost" id="memoryCheck" onclick="checkMemory()" style="display:none;margin-left:8px">Check</button>
+        <div id="memoryResult" style="margin-top:12px"></div>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Recognition over recall.</strong> If a user must remember something between screens, surface it (breadcrumbs, summary panels, "review your order"). Show, don't ask them to remember.</li>
+          <li><strong>Chunk long forms.</strong> 30 fields on one page = catastrophic. 30 fields in 5 sections of 6 = manageable. Sections create cognitive "bookmarks."</li>
+          <li><strong>Progressive disclosure.</strong> Show the 80% case by default; hide advanced options behind "Show more." This is why settings panels have "Advanced" sections.</li>
+          <li><strong>Auto-fill, auto-detect, auto-format.</strong> Don't make users type their address when their browser knows it. Don't make them format a phone number. Every avoided keystroke is working-memory recovered.</li>
+          <li><strong>One primary action per screen.</strong> Multiple primaries fragment attention and force System 2 evaluation ("which should I click?").</li>
+          <li><strong>Use familiar patterns.</strong> A hamburger means menu. A magnifying glass means search. Reusing schemas means the user spends zero load learning your UI.</li>
+        </ul>
+      </div>
+
+      <div class="anti">
+        <div class="anti-title">✗ Anti-patterns</div>
+        <ul>
+          <li><strong>Wizard with no progress indicator.</strong> User must remember "what step am I on, what's left." Add <code>Step 3 of 5</code>.</li>
+          <li><strong>Modal-on-modal.</strong> Stacks context the user must hold. By the time they're 3 modals deep, they don't remember why they started.</li>
+          <li><strong>Cryptic error codes:</strong> <code>Error 0x80070005</code>. Forces user to research; pure extraneous load. Replace with: <em>"You don't have permission. Ask your admin or try logging in again."</em></li>
+          <li><strong>Verification codes that don't autofill.</strong> Forces user to memorize 6 digits across two apps. Use OTP autofill APIs.</li>
+          <li><strong>Re-asking known information.</strong> If you know their email from signup, never ask again. Persistence reduces load.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. HIERARCHY -->
+    <section id="hierarchy">
+      <span class="chip">Chapter 4 · Attention</span>
+      <h2>Visual Hierarchy</h2>
+      <p class="lede">Hierarchy is the deliberate manipulation of pre-attentive features so the brain processes elements in the order you intend. Without hierarchy, the user's eye wanders.</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>The eye is drawn to elements with greater <strong>visual weight</strong> — a function of size, contrast, color saturation, isolation (whitespace around it), and position. The element with the most weight is processed first; subsequent elements form a descending sequence.</p>
+        <p>Hierarchy works because the brain is metabolic-cost-averse: it processes the highest-signal element first to extract maximum information per joule. If everything has equal weight, the brain has no thermodynamic shortcut and falls back to slow scanning.</p>
+        <p>Three levels of hierarchy is the sweet spot: <strong>dominant, secondary, tertiary</strong>. More than three flattens into noise.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo: Toggle hierarchy on/off</div>
+        <p style="margin-bottom:16px">Identical content, ~10× cognitive effort difference. Notice how your eye behaves.</p>
+        <button class="btn ghost" onclick="document.getElementById('hierCard').classList.toggle('flat')">Toggle hierarchy</button>
+        <div id="hierCard" class="hier-card" style="margin-top:16px">
+          <div style="font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px">New Release</div>
+          <h3 style="font-size:24px;margin:4px 0 8px;color:#111">Pro Plan</h3>
+          <p style="color:#555;margin-bottom:16px">Everything you need to ship faster.</p>
+          <div style="font-size:32px;font-weight:700;color:#111">\$29<span style="font-size:14px;color:#888;font-weight:400">/mo</span></div>
+          <button class="btn" style="margin-top:16px">Start free trial</button>
+        </div>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Define a hierarchy contract:</strong> on every screen, decide which element is dominant (the "hero"), which 1–2 are secondary, and which are tertiary. Everything else is body.</li>
+          <li><strong>Use a typographic scale.</strong> Pick a ratio (1.25 or 1.333) and stick to it: 12, 15, 18, 22, 28, 35. The brain reads proportional differences pre-attentively.</li>
+          <li><strong>Use weight + size together.</strong> A 24px bold heading beats a 32px regular one for hierarchy. Weight is cheaper than size and crowds the layout less.</li>
+          <li><strong>Whitespace amplifies importance.</strong> Surround your primary CTA with empty space. Isolation = importance.</li>
+          <li><strong>One color "loud" per screen.</strong> If your CTA is saturated purple, everything else should be grayscale or muted. Saturation budget is small.</li>
+        </ul>
+
+        <h4>Decision table — choosing emphasis</h4>
+        <table>
+          <tr><th>Goal</th><th>Best lever</th><th>Why</th></tr>
+          <tr><td>Make something pop</td><td>Color contrast</td><td>Strongest pre-attentive signal</td></tr>
+          <tr><td>Show importance ranking</td><td>Size + weight</td><td>Cumulative, scales well</td></tr>
+          <tr><td>Group/separate sections</td><td>Whitespace</td><td>No visual noise added</td></tr>
+          <tr><td>Convey status/state</td><td>Color + icon</td><td>Redundant encoding for accessibility</td></tr>
+          <tr><td>De-emphasize without removing</td><td>Reduced opacity / smaller / muted</td><td>Keeps info accessible</td></tr>
+        </table>
+      </div>
+
+      <div class="anti">
+        <div class="anti-title">✗ Anti-patterns</div>
+        <ul>
+          <li><strong>Equal-weight CTAs:</strong> "Save" and "Cancel" both bold blue buttons. Add visual hierarchy — one solid, one outlined.</li>
+          <li><strong>Decorative > functional:</strong> hero illustration the size of the screen, CTA tiny in the corner.</li>
+          <li><strong>5+ font sizes:</strong> hierarchy collapses into noise. Stick to 4–5 scale steps max.</li>
+          <li><strong>Bold body text:</strong> if everything is bold, nothing is.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 5. SQUINT -->
+    <section id="squint">
+      <span class="chip">Chapter 5 · Attention</span>
+      <h2>The Squint Test</h2>
+      <p class="lede">A diagnostic tool. Squint at any UI until details blur. The shapes that remain are your <em>real</em> visual hierarchy. If your CTA disappears but a decoration pops, the hierarchy is inverted.</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>Squinting strips away high-frequency detail (text, icons, fine borders) and leaves only low-frequency information (luminance blobs, large color regions). This simulates the user's <em>peripheral vision</em> and the first 50ms of perception.</p>
+        <p>If your hierarchy works at low resolution, it will work at full resolution too. The reverse isn't true: a UI that only "reads" at full focus has failed the speed test.</p>
+        <p>This is also called the <strong>5-second test</strong> in usability research: show a screen for 5 seconds, ask the user what they remember. The blobs they describe are their squint-test perception.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo: Squint mode</div>
+        <p style="margin-bottom:16px">Toggle blur. The CTA should still be findable. The decorative text should fade.</p>
+        <button class="btn ghost" onclick="document.getElementById('squintTarget').classList.toggle('blur')">Toggle squint</button>
+        <div id="squintTarget" class="squint-target" style="margin-top:16px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px">
+            <strong style="font-size:18px">Acme</strong>
+            <div style="display:flex;gap:16px;font-size:13px;color:#555">
+              <span>Features</span><span>Pricing</span><span>Docs</span><span>Sign in</span>
+            </div>
+          </div>
+          <h2 style="font-size:36px;color:#111;margin-bottom:12px">Build interfaces faster.</h2>
+          <p style="color:#555;max-width:60ch;margin-bottom:24px">A component library for serious teams.</p>
+          <button class="btn" style="padding:14px 28px;font-size:15px">Get started free →</button>
+          <span style="margin-left:12px;color:#888;font-size:13px">No credit card required</span>
+        </div>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Run the squint test on every screen before shipping.</strong> Browsers can simulate this with <code>filter: blur(6px)</code> in DevTools.</li>
+          <li><strong>The dominant element should remain visible</strong> when blurred — that's correct hierarchy.</li>
+          <li><strong>If two elements pop equally when blurred</strong>, you have competing primaries. Demote one.</li>
+          <li><strong>If your logo dominates the squint test</strong>, your branding is louder than your value proposition. Usually wrong on landing pages.</li>
+          <li><strong>Apply it to dark mode and light mode separately.</strong> Hierarchy can collapse in one theme even if it works in the other.</li>
+        </ul>
+      </div>
+
+      <div class="anti">
+        <div class="anti-title">✗ Anti-patterns</div>
+        <ul>
+          <li><strong>Hero image dominates, CTA disappears under blur.</strong> The image is winning the user's attention; the conversion goal is invisible.</li>
+          <li><strong>Logo + nav + hero + CTA all visible at squint.</strong> Too many priorities; user has no anchor.</li>
+          <li><strong>"Sign up" link in body text matches the visual weight of the actual CTA button.</strong> Demote it visually or remove it.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 6. FITTS -->
+    <section id="fitts">
+      <span class="chip">Chapter 6 · Interaction</span>
+      <h2>Fitts's Law</h2>
+      <p class="lede">Time to acquire a target = <code>a + b · log₂(D/W + 1)</code>, where D is distance and W is target size. Bigger and closer = faster. This isn't a guideline — it's a measured law of motor control.</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>Paul Fitts (1954) showed that pointing tasks have a logarithmic relationship between speed and the difficulty index <code>log₂(D/W + 1)</code>. The law applies to mice, fingers, eye gaze, even foot pedals.</p>
+        <p>Practical consequences:</p>
+        <ul>
+          <li><strong>Doubling target size</strong> reduces acquisition time more than halving distance.</li>
+          <li><strong>Screen edges have effectively infinite size</strong> — the cursor stops there. This is why macOS puts the menu bar at the top edge, and why "close" buttons often live in corners.</li>
+          <li><strong>Mobile thumb zones:</strong> the bottom-center of phone screens is the easiest reach; top corners are the hardest.</li>
+          <li><strong>Cursor proximity matters:</strong> a button near where the user's cursor already is gets clicked faster than one across the screen.</li>
+        </ul>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo: Click 10 targets, change the size</div>
+        <p style="margin-bottom:16px">Try size 20, then 80. The time difference is the law made visible.</p>
+        <div class="toggle-row">
+          <label class="slider-label" style="margin:0">Size:</label>
+          <input type="range" id="fittsSize" min="20" max="120" value="40" style="width:200px">
+          <span id="fittsSizeVal" class="stat">40px</span>
+        </div>
+        <div class="fitts-area" id="fittsArea">
+          <button class="fitts-target" id="fittsTarget">Click</button>
+        </div>
+        <div style="margin-top:12px">
+          <span class="stat">Hits: <strong id="fittsHits">0</strong>/10</span>
+          <span class="stat">Avg: <strong id="fittsAvg">—</strong> ms</span>
+          <button class="btn ghost" onclick="resetFitts()">Reset</button>
+        </div>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Touch targets ≥ 44×44px</strong> (Apple HIG) or 48×48dp (Material). This isn't aesthetic — below this, error rates spike.</li>
+          <li><strong>Place primary actions where the cursor/finger already is.</strong> "Save" buttons should follow the form; modal "Confirm" should be near the modal's content, not far away.</li>
+          <li><strong>Use screen edges for global actions.</strong> Browser back, OS menu bar, mobile home indicator — these are infinite-edge real estate.</li>
+          <li><strong>Mobile: put primary actions in the bottom thumb zone</strong> (bottom 25% of screen). Top-bar nav requires thumb gymnastics on large phones.</li>
+          <li><strong>Increase hit area beyond visual size</strong> for icon buttons: a 16×16px icon can have a 44×44px clickable area via padding. Don't force users to aim precisely.</li>
+        </ul>
+
+        <h4>Reference table — minimum sizes</h4>
+        <table>
+          <tr><th>Context</th><th>Min target</th><th>Recommended</th></tr>
+          <tr><td>Mobile (iOS)</td><td>44pt</td><td>48pt+</td></tr>
+          <tr><td>Mobile (Android)</td><td>48dp</td><td>56dp for primary</td></tr>
+          <tr><td>Desktop dense</td><td>24px</td><td>32px</td></tr>
+          <tr><td>Desktop primary CTA</td><td>40px</td><td>48–56px</td></tr>
+        </table>
+      </div>
+
+      <div class="anti">
+        <div class="anti-title">✗ Anti-patterns</div>
+        <ul>
+          <li><strong>Tiny "x" close buttons.</strong> A 12×12px close button has 4× the error rate of a 24×24px one.</li>
+          <li><strong>"Confirm" placed far from the dialog content.</strong> Increases D in Fitts's equation, slows decisions.</li>
+          <li><strong>Important nav links at the top of a long mobile screen.</strong> Forces thumb stretching that hurts retention.</li>
+          <li><strong>Icon-only buttons with no padding around the icon.</strong> Visually small AND functionally small. Always pad the hit area.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. HICKS -->
+    <section id="hicks">
+      <span class="chip">Chapter 7 · Decision</span>
+      <h2>Hick's Law</h2>
+      <p class="lede">Decision time = <code>a + b · log₂(n)</code>. More choices means slower decisions — and beyond a threshold, no decision at all (analysis paralysis).</p>
+
+      <div class="theory">
+        <h4>The Theory</h4>
+        <p>Hick (1952) measured that response time grows logarithmically with the number of equally likely choices. This is information-theoretic: the user is essentially performing binary search through their options.</p>
+        <p><strong>The critical insight:</strong> the law assumes <em>equal-weighted, flat</em> choices. Two design strategies break the law in your favor:</p>
+        <ul>
+          <li><strong>Chunking:</strong> 20 options in 4 groups of 5 → cost is <code>log₂(4) + log₂(5) ≈ 4.3</code> bits, vs. <code>log₂(20) ≈ 4.3</code> bits flat. Same total bits but the user perceives it as easier because each step has fewer options.</li>
+          <li><strong>Defaults / recommendations:</strong> a "Recommended" badge or pre-selected option collapses the decision to "accept default or override?" — effectively n=2.</li>
+        </ul>
+        <p>Sheena Iyengar's <em>Jam Study</em> (2000) famously showed 24 jam varieties produced 10× <em>fewer</em> purchases than 6 varieties. More choice ≠ more conversion.</p>
+      </div>
+
+      <div class="demo">
+        <div class="demo-label">Demo: Find "Settings"</div>
+        <p style="margin-bottom:16px">Time yourself across different option counts. Notice the (logarithmic) slowdown.</p>
+        <div class="toggle-row">
+          <button class="btn ghost" onclick="hicksRun(3)">3 options</button>
+          <button class="btn ghost" onclick="hicksRun(8)">8 options</button>
+          <button class="btn ghost" onclick="hicksRun(20)">20 options</button>
+        </div>
+        <div id="hicksContainer" class="hicks-options"></div>
+        <div id="hicksResult"></div>
+      </div>
+
+      <div class="rules">
+        <div class="rules-title">✓ What to do</div>
+        <ul>
+          <li><strong>Top-level nav: 5–7 items.</strong> Beyond 7, scan time exceeds patience. If you have more, group under categories.</li>
+          <li><strong>Pricing tiers: 3, max 4.</strong> Three is the magic number — it allows anchoring (cheap/middle/expensive) without overwhelming.</li>
+          <li><strong>Pre-select smart defaults.</strong> Default selected = decision avoided. But: pick defaults that benefit the user, not just you.</li>
+          <li><strong>Use "Most popular" / "Recommended" badges</strong> to collapse decisions. They exploit social proof + guide attention.</li>
+          <li><strong>Progressive disclosure for advanced options.</strong> 80% of users want the simple path; surface that. Hide complexity behind "Advanced" or "More options."</li>
+          <li><strong>Onboarding: one decision per screen.</strong> Don't ask for name, role, team size, plan, and goals on one form. Split it.</li>
+          <li><strong>Long lists: add search + categories.</strong>
