@@ -5,7 +5,6 @@ import avatarImg from "../../Assets/avatar.png";
 import { Reveal } from "../utils/Reveal";
 import {
   MdOutlinePsychology,
-  MdOutlineMedicalServices,
   MdOutlineSecurity,
 } from "react-icons/md";
 import { FaGraduationCap, FaAward, FaBookOpen } from "react-icons/fa";
@@ -126,19 +125,19 @@ function Home() {
             <Reveal delay={200}>
               <div className="border-b border-surface-variant pb-8">
                 <div className="flex items-center gap-2 mb-2">
-                  <MdOutlineMedicalServices className="text-ink text-lg" />
+                  <MdOutlineSecurity className="text-ink text-lg" />
                   <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
-                    Medical Deep Learning
+                    RFP Platform
                   </h3>
                 </div>
                 <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
-                  Thesis on transfer learning for brain tumor classification (VGG16, ResNet50, InceptionV3). Published at IEEE QPAN 2025.
+                  Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries. End-to-end proposal automation with agentic orchestration.
                 </p>
                 <Link
-                  to="/research"
+                  to="/project"
                   className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
                 >
-                  Read Research &rarr;
+                  View Projects &rarr;
                 </Link>
               </div>
             </Reveal>
@@ -146,14 +145,20 @@ function Home() {
             <Reveal delay={300}>
               <div>
                 <div className="flex items-center gap-2 mb-2">
-                  <MdOutlineSecurity className="text-ink text-lg" />
+                  <MdOutlinePsychology className="text-ink text-lg" />
                   <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
-                    Cybersecurity & Infrastructure
+                    DSPy & Evaluation-Driven LLMs
                   </h3>
                 </div>
-                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed">
-                  Integrating ML models into security pipelines for anomaly detection and threat intelligence. Background in network security and secure system architecture.
+                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
+                  Implemented evaluation-driven iteration for prompts and LLM behaviors — test sets, rubrics, and regression suites to improve quality before rollout. Programmatic prompt optimization over manual engineering.
                 </p>
+                <Link
+                  to="/research/dspy-rag-optimization"
+                  className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                >
+                  Read Research &rarr;
+                </Link>
               </div>
             </Reveal>
           </div>
@@ -305,14 +310,14 @@ function Home() {
                   Awards & Scholarships
                 </p>
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="space-y-3">
                 {resumeData.awards.slice(0, 3).map((award, i) => (
-                  <span
+                  <p
                     key={i}
-                    className="font-inter text-[0.8rem] text-on-surface-variant border border-surface-variant px-3 py-1.5 bg-surface-container-low inline-block"
+                    className="font-inter text-body-md text-on-surface-variant pl-4 border-l-2 border-surface-variant"
                   >
                     {award.name}
-                  </span>
+                  </p>
                 ))}
               </div>
             </Reveal>

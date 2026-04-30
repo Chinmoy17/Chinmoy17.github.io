@@ -230,7 +230,7 @@ function About() {
   const education = resumeData.education;
   const publication = resumeData.publications[0];
   const awards = resumeData.awards;
-  const skills = resumeData.skills.groups;
+
 
   return (
     <main className="max-w-container mx-auto px-8 pt-24 pb-xl">
@@ -415,14 +415,15 @@ function About() {
             <div className="md:col-span-3">
               <Reveal>
                 <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
-                  Publication
+                  Research
                 </h2>
               </Reveal>
             </div>
-            <div className="md:col-span-9">
+            <div className="md:col-span-9 space-y-12">
+              {/* IEEE Publication */}
               <Reveal delay={100}>
-                <div className="border border-surface-variant bg-surface-container-lowest p-md">
-                  <h3 className="font-newsreader text-h3 text-ink mb-3">
+                <article>
+                  <h3 className="font-newsreader text-h3 text-ink mb-2">
                     {publication.title}
                   </h3>
                   <p className="font-inter text-body-md text-on-surface-variant">
@@ -442,7 +443,28 @@ function About() {
                       Google Scholar Profile &rarr;
                     </a>
                   )}
-                </div>
+                </article>
+              </Reveal>
+
+              {/* DSPy Research */}
+              <Reveal delay={200}>
+                <article>
+                  <h3 className="font-newsreader text-h3 text-ink mb-2">
+                    DSPy RAG Optimization: Taming Trial-and-Error in Production Systems
+                  </h3>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    Collaborative Research, 2024 &middot; Applied AI / Prompt Optimization
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant/80 mt-3 leading-relaxed">
+                    A collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal — demonstrating how initial constraints affect whether you gain accuracy or efficiency. Programmatic prompt optimization over manual engineering.
+                  </p>
+                  <a
+                    href="/research/dspy-rag-optimization"
+                    className="font-inter text-body-md text-ink border-b border-ink/40 pb-0.5 hover:border-ink transition-colors no-underline inline-block mt-4"
+                  >
+                    Read Full Research &rarr;
+                  </a>
+                </article>
               </Reveal>
             </div>
           </section>
@@ -461,31 +483,123 @@ function About() {
         <div className="md:col-span-3">
           <Reveal>
             <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
-              Skills
+              Technical Stack
             </h2>
           </Reveal>
         </div>
         <div className="md:col-span-9">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {skills.map((group, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div>
-                  <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-3 border-b border-surface-variant pb-2">
-                    {group.name}
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {group.items.map((skill, j) => (
-                      <span
-                        key={j}
-                        className="font-inter text-[0.8rem] text-ink border border-surface-variant px-2.5 py-1 bg-surface-container-low"
-                      >
-                        {skill}
-                      </span>
-                    ))}
-                  </div>
+          <Reveal delay={50}>
+            <p className="font-inter text-body-md text-on-surface-variant mb-12 max-w-2xl">
+              An architectural overview of core competencies, focusing on foundational systems, modern frameworks, and applied artificial intelligence.
+            </p>
+          </Reveal>
+
+          <div className="space-y-14">
+            {/* Intelligence & Frameworks */}
+            <Reveal delay={100}>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="md:col-span-4">
+                  <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                    Intelligence &<br className="hidden md:block" /> Frameworks
+                  </h3>
                 </div>
-              </Reveal>
-            ))}
+                <div className="md:col-span-8 space-y-3">
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">PyTorch</span> &nbsp;/ Deep Learning & Model Training
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">TensorFlow</span> &nbsp;/ Production Deployment
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">Hugging Face Transformers</span> &nbsp;/ NLP Architectures
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">LangChain & LlamaIndex</span> &nbsp;/ LLM Orchestration
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">DSPy</span> &nbsp;/ Programmatic Prompt Optimization
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">Scikit-learn</span> &nbsp;/ Classical ML & Evaluation
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Systems & Architecture */}
+            <Reveal delay={200}>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="md:col-span-4">
+                  <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                    Systems &<br className="hidden md:block" /> Architecture
+                  </h3>
+                </div>
+                <div className="md:col-span-8 space-y-3">
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">Microsoft Azure</span> &nbsp;/ Cloud Infrastructure
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">Docker & Kubernetes</span> &nbsp;/ Container Orchestration
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">FastAPI</span> &nbsp;/ High-Performance APIs
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">CI/CD (Azure DevOps)</span> &nbsp;/ Deployment Pipelines
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">React & Node.js</span> &nbsp;/ Interface Engineering
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Data Layer */}
+            <Reveal delay={300}>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="md:col-span-4">
+                  <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                    Data &<br className="hidden md:block" /> Storage
+                  </h3>
+                </div>
+                <div className="md:col-span-8 space-y-3">
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">PostgreSQL & Cosmos DB</span> &nbsp;/ Relational & Document Stores
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">FAISS & ChromaDB</span> &nbsp;/ Vector Search & Retrieval
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">Milvus & Pinecone</span> &nbsp;/ Scalable Vector Databases
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+            {/* Core Foundations */}
+            <Reveal delay={400}>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="md:col-span-4">
+                  <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                    Core<br className="hidden md:block" /> Foundations
+                  </h3>
+                </div>
+                <div className="md:col-span-8 space-y-3">
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">Python</span> &nbsp;/ Data Science & Backend
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">TypeScript</span> &nbsp;/ Typed Application Logic
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">C++</span> &nbsp;/ High-Performance Computing
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">SQL</span> &nbsp;/ Data Querying & Analytics
+                  </p>
+                </div>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -507,24 +621,48 @@ function About() {
           </Reveal>
         </div>
         <div className="md:col-span-9">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {awards.map((award, i) => (
-              <Reveal key={i} delay={i * 80}>
-                <div className="flex items-center gap-3 border border-surface-variant bg-surface-container-lowest px-5 py-4">
-                  <FaAward className="text-ink shrink-0" />
-                  <div>
-                    <p className="font-inter text-body-md text-ink">
-                      {award.name}
-                    </p>
-                    {(award.yearRange || award.year) && (
-                      <p className="font-inter text-[0.8rem] text-on-surface-variant">
-                        {award.yearRange || award.year}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </Reveal>
-            ))}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+
+            <Reveal delay={80}>
+              <div className="border-t border-ink pt-4">
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Scholarship</p>
+                <p className="font-newsreader text-[1.25rem] text-ink leading-snug">Dutch Bangla Bank Scholarship for Undergraduates</p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">2019 – 2023 &middot; 4 years consecutive</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={160}>
+              <div className="border-t border-surface-variant pt-4">
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Scholarship</p>
+                <p className="font-newsreader text-[1.25rem] text-ink leading-snug">RUET Technical Scholarship</p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">2019, 2022</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={240}>
+              <div className="border-t border-surface-variant pt-4">
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Leadership</p>
+                <p className="font-newsreader text-[1.25rem] text-ink leading-snug">Class Representative</p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">Leadership Award &middot; 4 consecutive years</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={320}>
+              <div className="border-t border-surface-variant pt-4">
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Competition</p>
+                <p className="font-newsreader text-[1.25rem] text-ink leading-snug">RUET Codesmash — 10th Place</p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">Intra-RUET Programming Contest &middot; 2019</p>
+              </div>
+            </Reveal>
+
+            <Reveal delay={400}>
+              <div className="border-t border-surface-variant pt-4">
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Competition</p>
+                <p className="font-newsreader text-[1.25rem] text-ink leading-snug">RUET GanJam — Participant</p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">Intra-RUET Programming Contest &middot; 2020</p>
+              </div>
+            </Reveal>
+
           </div>
         </div>
       </section>
