@@ -1,252 +1,252 @@
 import React from "react";
-import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Particle from "../Particle";
 import resumeData from "../../data/resume.json";
-import { BsFileEarmarkPdf, BsGithub, BsArrowRight } from "react-icons/bs";
+import { Reveal } from "../utils/Reveal";
 
 function Research() {
-  // Safe check if publications exists
   const pubs = resumeData.publications || [];
-
-  const researchProjects = Array.isArray(resumeData.projects)
-    ? resumeData.projects.filter((p) => p.category === "research")
-    : [];
-  
-  // Specific filter for the lab experience
-  const researchExp = resumeData.experience.filter(
-    exp => exp.company.includes("Research Lab") || exp.role.includes("Research")
+  const researchProjects = (resumeData.projects || []).filter(
+    (p) => p.category === "research"
+  );
+  const researchExp = resumeData.experience.find(
+    (e) => e.company.includes("Research Lab") || e.role.includes("Research")
   );
 
   return (
-    <Container fluid className="project-section">
-      <Particle />
-      <Container>
-        <h1 className="project-heading">
-          Research <strong className="purple">Highlights</strong>
-        </h1>
-        <p style={{ color: "var(--color-text)" }}>
-          Explorations in <strong className="purple">Machine Learning, NLP,</strong> and <strong className="purple">Computer Vision</strong>.
-        </p>
+    <main className="max-w-container mx-auto px-8 pt-24 pb-16">
 
-        {/* Publications Section */}
-        {pubs.length > 0 && (
-          <Row style={{ justifyContent: "center", paddingBottom: "30px" }}>
-            <h2 className="project-heading" style={{ fontSize: "clamp(1.4em, 4vw, 2.0em)", textAlign: "left", paddingLeft: "15px" }}>
-              Selected <strong className="purple">Publications</strong>
-            </h2>
-            {pubs.map((pub, idx) => (
-              <Col md={12} className="project-card" key={idx} style={{ marginBottom: "20px" }}>
-                <Card className="project-card-view" style={{ textAlign: "left" }}>
-                  <Card.Body>
-                    <Card.Title style={{ fontSize: "clamp(1.1em, 3.5vw, 1.6em)", fontWeight: "bold" }}>
-                      {pub.title}
-                    </Card.Title>
-                    <Card.Subtitle style={{ color: "var(--color-accent)", marginTop: "10px", fontSize: "1.1em" }}>
-                      {pub.venue} <span style={{ color: "var(--color-text)" }}>|</span> {pub.year}
-                      {pub.notes && <span style={{ fontSize: "0.9em", color: "var(--color-text)", opacity: 0.7, marginLeft: "10px" }}>({pub.notes})</span>}
-                    </Card.Subtitle>
-                    <Card.Text style={{ marginTop: "15px", fontSize: "1.05em", lineHeight: "1.6" }}>
-                      {pub.summary}
-                    </Card.Text>
+      {/* ===== HEADER ===== */}
+      <section className="mb-xl">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-end">
+          <div className="md:col-span-7">
+            <Reveal>
+              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-4">
+                Research & Publications
+              </p>
+            </Reveal>
+            <Reveal delay={100}>
+              <h1 className="font-newsreader text-h1 text-ink mb-6">
+                Investigations
+              </h1>
+            </Reveal>
+            <Reveal delay={200}>
+              <div className="h-[1px] w-16 bg-ink mb-6"></div>
+              <p className="font-inter text-body-lg text-on-surface-variant max-w-xl">
+                Exploring the intersection of LLM evaluation, RAG systems, and applied ML — where academic rigour meets production constraints.
+              </p>
+            </Reveal>
+          </div>
 
-                    <div style={{ marginTop: "15px" }}>
-                      {pub.scholarProfile && (
-                        <Button
-                          variant="primary"
-                          href={pub.scholarProfile}
-                          target="_blank"
-                          className="viewbtn"
-                          style={{ marginLeft: "0", marginRight: "10px" }}
-                        >
-                          Google Scholar
-                        </Button>
-                      )}
-                      {pub.link && (
-                        <Button
-                          variant="primary"
-                          href={pub.link}
-                          target="_blank"
-                          className="viewbtn"
-                        >
-                          <BsFileEarmarkPdf /> Paper/Thesis
-                        </Button>
-                      )}
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
+          {/* Focus areas — right column */}
+          <Reveal delay={300} className="md:col-span-5">
+            <div className="space-y-4 border-l border-surface-variant pl-8">
+              <div>
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">Primary Focus</p>
+                <p className="font-newsreader text-[1.2rem] text-ink">LLM Evaluation & Prompt Optimization</p>
+              </div>
+              <div>
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">Secondary Focus</p>
+                <p className="font-newsreader text-[1.2rem] text-ink">Medical Deep Learning & Imaging</p>
+              </div>
+              <div>
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">Active Interest</p>
+                <p className="font-newsreader text-[1.2rem] text-ink">NLP, Abstractive Summarization, RAG</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
 
-        {/* Research Projects / Case Studies - Academic Style (No Images) */}
-        {researchProjects.length > 0 && (
-          <Row style={{ justifyContent: "center", marginTop: "10px", paddingBottom: "10px" }}>
-            <h2 className="project-heading" style={{ fontSize: "clamp(1.4em, 4vw, 2.0em)", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
-              Research <strong className="purple">Projects</strong>
-            </h2>
-            <p style={{ color: "var(--color-text)", textAlign: "left", paddingLeft: "15px", marginTop: "-8px", fontSize: "1.05em" }}>
-              In-depth case studies and analyses exploring NLP, computer vision, and machine learning.
-            </p>
+      {/* ===== RESEARCH STUDIES ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Research Studies
+        </span>
+      </div>
 
-            {researchProjects.map((p, idx) => (
-              <Col md={12} className="project-card" key={p.id || p.slug || p.title} style={{ marginBottom: "16px" }}>
-                <Card className="project-card-view" style={{ textAlign: "left" }}>
-                  <Card.Body style={{ padding: "24px 28px" }}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: "12px" }}>
-                      <div style={{ flex: "1", minWidth: "0" }}>
-                        <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "8px" }}>
-                          <span style={{
-                            background: "var(--color-accent)",
-                            color: "white",
-                            padding: "4px 10px",
-                            borderRadius: "4px",
-                            fontSize: "0.8rem",
-                            fontWeight: "600"
-                          }}>
-                            {idx + 1}
-                          </span>
-                          <Card.Title style={{ fontSize: "1.4em", fontWeight: "700", margin: 0, color: "var(--color-text)" }}>
-                            {p.title}
-                          </Card.Title>
-                        </div>
+      <section className="mb-xl">
+        {researchProjects.map((p, i) => (
+          <Reveal key={p.id} delay={i * 80}>
+            <article className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-10 group">
 
-                        <div style={{ display: "flex", flexWrap: "wrap", gap: "6px", marginTop: "12px", marginBottom: "12px" }}>
-                          {p.stack?.slice(0, 6).map((tech, i) => (
-                            <span key={i} style={{
-                              background: "rgba(39, 76, 119, 0.08)",
-                              color: "var(--color-accent)",
-                              padding: "3px 10px",
-                              borderRadius: "4px",
-                              fontSize: "0.8rem",
-                              fontWeight: "500",
-                              border: "1px solid rgba(39, 76, 119, 0.15)"
-                            }}>
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
+              {/* Index */}
+              <div className="md:col-span-1">
+                <span className="font-newsreader text-[2rem] text-on-surface-variant/30 leading-none select-none">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+              </div>
 
-                        <Card.Text style={{ fontSize: "1.02em", lineHeight: "1.65", color: "var(--color-text)", opacity: 0.85, marginBottom: "12px" }}>
-                          {p.summary}
-                        </Card.Text>
+              {/* Content */}
+              <div className="md:col-span-8">
+                {/* Meta */}
+                <div className="flex flex-wrap items-center gap-3 mb-3">
+                  <span className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+                    {p.id === "dspy-rag-optimization"
+                      ? "Collaborative Study"
+                      : p.id === "paper-retraction-analysis"
+                      ? "NLP Analysis"
+                      : "ML Research"}
+                  </span>
+                  <span className="text-on-surface-variant/40 text-xs">·</span>
+                  <span className="font-inter text-label-caps text-on-surface-variant/60 uppercase tracking-[0.1em]">
+                    {p.visibility === "public" ? "Open Access" : "Private"}
+                  </span>
+                </div>
 
-                        {/* Metrics badges - the hook! */}
-                        {p.metrics && p.metrics.length > 0 && (
-                          <div style={{
-                            display: "flex",
-                            flexWrap: "wrap",
-                            gap: "10px",
-                            marginTop: "14px",
-                            paddingTop: "12px",
-                            borderTop: "1px solid rgba(39, 76, 119, 0.15)"
-                          }}>
-                            {p.metrics.map((metric, i) => (
-                              <span key={i} style={{
-                                display: "inline-flex",
-                                alignItems: "center",
-                                gap: "4px",
-                                background: "rgba(39, 76, 119, 0.06)",
-                                color: "var(--color-text)",
-                                padding: "5px 12px",
-                                borderRadius: "6px",
-                                fontSize: "0.85rem",
-                                fontWeight: "600",
-                                border: "1px solid rgba(39, 76, 119, 0.12)"
-                              }}>
-                                <span style={{ color: "var(--color-accent)", fontSize: "1.1em" }}>●</span>
-                                {metric}
-                              </span>
-                            ))}
-                          </div>
-                        )}
+                {/* Title */}
+                <h2 className="font-newsreader text-h3 text-ink mb-3 group-hover:opacity-80 transition-opacity">
+                  {p.title}
+                </h2>
+
+                {/* Stack */}
+                <p className="font-inter text-[0.8rem] text-on-surface-variant/70 mb-4">
+                  {(p.stack || []).slice(0, 6).join(" · ")}
+                </p>
+
+                {/* Summary */}
+                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-5">
+                  {p.summary}
+                </p>
+
+                {/* Metrics — the editorial highlight */}
+                {p.metrics && p.metrics.length > 0 && (
+                  <div className="flex flex-wrap gap-x-6 gap-y-2 pt-4 border-t border-surface-variant">
+                    {p.metrics.map((m, j) => (
+                      <div key={j} className="flex items-baseline gap-1.5">
+                        <span className="font-inter text-[0.7rem] text-on-surface-variant/40 uppercase tracking-widest">—</span>
+                        <span className="font-inter text-[0.85rem] font-medium text-ink">{m}</span>
                       </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-                      <div style={{ display: "flex", gap: "10px", flexShrink: 0, alignSelf: "flex-start" }}>
-                        {p.visibility === "public" && p.links?.repo && (
-                          <Button
-                            variant="outline-primary"
-                            href={p.links.repo}
-                            target="_blank"
-                            style={{
-                              borderColor: "var(--color-accent)",
-                              color: "var(--color-accent)",
-                              fontWeight: "500",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "6px"
-                            }}
-                          >
-                            <BsGithub /> Code
-                          </Button>
-                        )}
-                        {p.slug && (
-                          <Link
-                            to={`/research/${p.slug}`}
-                            style={{
-                              background: "var(--color-accent)",
-                              color: "white",
-                              padding: "8px 16px",
-                              borderRadius: "6px",
-                              textDecoration: "none",
-                              fontWeight: "600",
-                              display: "flex",
-                              alignItems: "center",
-                              gap: "6px",
-                              fontSize: "0.95rem"
-                            }}
-                          >
-                            Read Paper <BsArrowRight />
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
+              {/* Links */}
+              <div className="md:col-span-3 flex flex-col justify-start items-start md:items-end gap-3 pt-1">
+                {p.slug && (
+                  <Link
+                    to={`/research/${p.slug}`}
+                    className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                  >
+                    Read Paper &rarr;
+                  </Link>
+                )}
+                {p.visibility === "public" && p.links?.repo && (
+                  <a
+                    href={p.links.repo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
+                  >
+                    GitHub &rarr;
+                  </a>
+                )}
+              </div>
 
-        {/* Research Experience Section - moved to bottom */}
-        {researchExp.length > 0 && (
-          <Row style={{ justifyContent: "center", marginTop: "10px" }}>
-            <h2 className="project-heading" style={{ fontSize: "clamp(1.4em, 4vw, 2.0em)", textAlign: "left", paddingLeft: "15px", marginTop: "0px" }}>
-              Research <strong className="purple">Experience</strong>
-            </h2>
-            {researchExp.map((exp, idx) => (
-              <Col md={12} className="project-card" key={idx} style={{ marginBottom: "20px" }}>
-                <Card className="project-card-view" style={{ textAlign: "left" }}>
-                  <Card.Body>
-                    <Row>
-                      <Col md={9}>
-                        <Card.Title style={{ fontSize: "clamp(1.1em, 3.5vw, 1.6em)", fontWeight: "bold" }}>
-                          {exp.role}
-                        </Card.Title>
-                        <Card.Subtitle style={{ color: "var(--color-accent)", fontSize: "1.2em", marginBottom: "10px" }}>
-                          {exp.company}
-                        </Card.Subtitle>
-                      </Col>
-                      <Col md={3} className="text-md-end mt-2 mt-md-0" style={{ color: "var(--color-text)", opacity: 0.8 }}>
-                         <h5 style={{ fontSize: "clamp(0.85em, 2.5vw, 1em)" }}>{new Date(exp.start).toLocaleDateString("en-US", { year: "numeric", month: "long" })} - {exp.end ? new Date(exp.end).toLocaleDateString("en-US", { year: "numeric", month: "long" }) : "Present"}</h5>
-                      </Col>
-                    </Row>
-                    <ul style={{ paddingLeft: "20px", marginTop: "10px" }}>
-                      {exp.highlights.map((point, i) => (
-                        <li key={i} style={{ marginBottom: "8px", fontSize: "1.05em" }}>
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))}
-          </Row>
-        )}
-      </Container>
-    </Container>
+            </article>
+          </Reveal>
+        ))}
+      </section>
+
+      {/* ===== PUBLICATIONS ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Publications
+        </span>
+      </div>
+
+      <section className="mb-xl">
+        {pubs.map((pub, i) => (
+          <Reveal key={i} delay={i * 80}>
+            <article className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-10">
+
+              {/* Year / Venue */}
+              <div className="md:col-span-3">
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] leading-relaxed">
+                  {pub.year}<br />
+                  {pub.venue}<br />
+                  <span className="opacity-60">{pub.notes}</span>
+                </p>
+              </div>
+
+              {/* Content */}
+              <div className="md:col-span-6">
+                <h2 className="font-newsreader text-h3 text-ink mb-4 leading-snug">
+                  {pub.title}
+                </h2>
+                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed">
+                  {pub.summary}
+                </p>
+              </div>
+
+              {/* Links */}
+              <div className="md:col-span-3 flex flex-col justify-start items-start md:items-end gap-3">
+                {pub.scholarProfile && (
+                  <a
+                    href={pub.scholarProfile}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                  >
+                    Google Scholar &rarr;
+                  </a>
+                )}
+                {pub.link && (
+                  <a
+                    href={pub.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
+                  >
+                    Paper &rarr;
+                  </a>
+                )}
+              </div>
+
+            </article>
+          </Reveal>
+        ))}
+      </section>
+
+      {/* ===== RESEARCH EXPERIENCE ===== */}
+      {researchExp && (
+        <>
+          <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
+            <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+              Research Experience
+            </span>
+          </div>
+
+          <section className="mb-xl">
+            <Reveal>
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <div className="md:col-span-3">
+                  <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] leading-relaxed">
+                    {new Date(researchExp.start).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                    {" — "}
+                    {researchExp.end
+                      ? new Date(researchExp.end).toLocaleDateString("en-US", { month: "short", year: "numeric" })
+                      : "Present"}
+                  </p>
+                </div>
+                <div className="md:col-span-9">
+                  <h2 className="font-newsreader text-h3 text-ink mb-1">{researchExp.role}</h2>
+                  <p className="font-inter text-body-md text-on-surface-variant mb-6">{researchExp.company}</p>
+                  <div className="space-y-3">
+                    {researchExp.highlights.map((h, i) => (
+                      <p key={i} className="font-inter text-body-md text-on-surface-variant leading-relaxed pl-4 border-l border-surface-variant">
+                        {h}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Reveal>
+          </section>
+        </>
+      )}
+
+    </main>
   );
 }
 
