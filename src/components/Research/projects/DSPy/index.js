@@ -1,1051 +1,1054 @@
-/**
- * DSPy RAG Optimization Study
- * A collaborative study on prompt optimization in production RAG systems
- * Industry-grade technical case study format
- */
-import React, { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { createPortal } from "react-dom";
-import { Container } from "react-bootstrap";
-import Particle from "../../../Particle";
-import styles from "./DSPy.module.css";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FiArrowLeft } from "react-icons/fi";
+import { Reveal } from "../../../utils/Reveal";
 import ByteMethodLogo from "./logoofbmai-removebg-preview.png";
 
-// Table of Contents sections
-const sections = [
-  { id: "overview", title: "Overview", number: "1" },
-  { id: "the-problem", title: "The Problem", number: "2" },
-  { id: "our-approach", title: "Our Approach", number: "3" },
-  { id: "architecture", title: "Architecture", number: "4" },
-  { id: "two-paths", title: "Two Paths", number: "5" },
-  { id: "results", title: "Results", number: "6" },
-  { id: "takeaways", title: "Takeaways", number: "7" },
-  { id: "whats-next", title: "What's Next", number: "8" },
+const toc = [
+  { id: "overview",     label: "Overview"     },
+  { id: "problem",      label: "The Problem"  },
+  { id: "approach",     label: "Our Approach" },
+  { id: "architecture", label: "Architecture" },
+  { id: "two-paths",    label: "Two Paths"    },
+  { id: "results",      label: "Results"      },
+  { id: "takeaways",    label: "Takeaways"    },
+  { id: "next",         label: "What's Next"  },
 ];
 
-const DSPyOptimization = () => {
-  const [activeSection, setActiveSection] = useState("overview");
-  const [lightbox, setLightbox] = useState({ open: false, src: "", caption: "" });
-
-  // Intersection Observer for active section
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-100px 0px -60% 0px" }
-    );
-
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToSection = useCallback((sectionId) => {
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, []);
-
-  const openLightbox = (src, caption) => {
-    setLightbox({ open: true, src, caption });
-  };
-
-  const closeLightbox = () => {
-    setLightbox({ open: false, src: "", caption: "" });
-  };
-
-  // Close lightbox on Escape
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") closeLightbox();
-    };
-    if (lightbox.open) {
-      document.addEventListener("keydown", handleKeyDown);
-    }
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [lightbox.open]);
+function DSPyOptimization() {
+  const navigate = useNavigate();
 
   return (
-    <Container fluid className="project-section">
-      <Particle />
-
-      <div className={styles.pageWrapper}>
-        {/* Left Sidebar */}
-        <aside className={styles.sidebar}>
-          <div className={styles.sidebarContent}>
-            <Link to="/research" className={styles.backLink}>
-              ← Back to Research
-            </Link>
-
-            {/* Table of Contents */}
-            <nav className={styles.tocNav}>
-              <div className={styles.tocTitle}>Contents</div>
-              <ul className={styles.tocList}>
-                {sections.map(({ id, title, number }) => (
-                  <li key={id}>
-                    <button
-                      className={`${styles.tocItem} ${activeSection === id ? styles.tocItemActive : ""}`}
-                      onClick={() => scrollToSection(id)}
-                    >
-                      <span className={styles.tocNumber}>{number}</span>
-                      <span className={styles.tocText}>{title}</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            {/* Sidebar Metadata */}
-            <div className={styles.sidebarMeta}>
-              {/* ByteMethod AI Logo */}
-              <div className={styles.organizationLogo}>
-                <a
-                  href="https://bytemethod.ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title="ByteMethod AI"
-                >
-                  <img 
-                    src={ByteMethodLogo} 
-                    alt="ByteMethod AI" 
-                    className={styles.bytemethodLogo}
-                  />
-                </a>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Authors</span>
-                <div className={styles.authorList}>
-                  <span className={styles.metaValue}>Chinmoy Mitra</span>
-                  <a
-                    href="https://notmeher.github.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.authorLink}
-                  >
-                    Mehedi Hasan Nipu ↗
-                  </a>
-                </div>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Organization</span>
-                <a
-                  href="https://bytemethod.ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.authorLink}
-                >
-                  ByteMethod AI ↗
-                </a>
-                <span className={styles.metaSubValue}>(A Dexian Company)</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Supervisor</span>
-                <a
-                  href="https://www.linkedin.com/in/bushra-chowdhury-972604149/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.authorLink}
-                >
-                  Dr. Bushra Chowdhury ↗
-                </a>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Domain</span>
-                <span className={styles.metaValue}>Legal RAG</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Status</span>
-                <span className={styles.metaValue}>Production</span>
-              </div>
-              <div className={styles.metaItem}>
-                <span className={styles.metaLabel}>Year</span>
-                <span className={styles.metaValue}>2026</span>
-              </div>
-            </div>
-          </div>
-        </aside>
-
-        {/* Main Content */}
-        <main className={styles.mainContent}>
-          {/* Hero Header */}
-          <header className={styles.heroHeader}>
-            <div className={styles.heroBadge}>Case Study</div>
-            <h1 className={styles.heroTitle}>
-              Taming Trial-and-Error in Production RAG Systems
-            </h1>
-            <p className={styles.heroSubtitle}>
-              A parallel experiment comparing DSPy's automatic prompt optimization strategies—revealing that
-              <span className={styles.heroHighlight}> initial constraints shape whether you optimize for accuracy or efficiency</span>
-            </p>
-            <div className={styles.heroAuthors}>
-              <div className={styles.authorChip}>
-                <span className={styles.authorAvatar}>CM</span>
-                <span>Chinmoy Mitra</span>
-              </div>
-              <span className={styles.authorDivider}>&</span>
-              <a
-                href="https://notmeher.github.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.authorChip}
-              >
-                <span className={styles.authorAvatar}>MN</span>
-                <span>Mehedi Hasan Nipu</span>
-              </a>
-            </div>
-            <div className={styles.heroTags}>
-              <span className={styles.heroTag}>DSPy 2.5+</span>
-              <span className={styles.heroTag}>RAGAS v0.4</span>
-              <span className={styles.heroTag}>LangChain</span>
-              <span className={styles.heroTag}>Azure OpenAI GPT-4o</span>
-              <span className={styles.heroTag}>FAISS</span>
-            </div>
-
-            {/* Collaborator CTA */}
-            <div className={styles.collaboratorCta}>
-              <span className={styles.collaboratorText}>
-                This study was conducted in collaboration with <strong>Mehedi Hasan Nipu</strong>
-              </span>
-              <a
-                href="https://notmeher.github.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.collaboratorButton}
-              >
-                Visit Nipu's Portfolio →
-              </a>
-            </div>
-          </header>
-
-          {/* Quick Stats */}
-          <div className={styles.quickStats}>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>38%</span>
-              <span className={styles.statLabel}>Cost Reduction</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>3.2×</span>
-              <span className={styles.statLabel}>Faster Response</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>+9.6%</span>
-              <span className={styles.statLabel}>Accuracy Gain</span>
-            </div>
-            <div className={styles.statCard}>
-              <span className={styles.statValue}>2</span>
-              <span className={styles.statLabel}>Approaches Tested</span>
-            </div>
-          </div>
-
-          {/* Overview Section */}
-          <section id="overview" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>1</span>
-              Overview
-            </h2>
-
-            <p className={styles.leadParagraph}>
-              At{" "}
-              <a
-                href="https://bytemethod.ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.inlineLink}
-              >
-                ByteMethod AI
-              </a>
-              , we build RAG systems for enterprise clients—legal compliance, medical documentation,
-              business intelligence. This typically means weeks of prompt tweaking. DSPy, from Stanford NLP,
-              promises to automate this. We put it to the test.
-            </p>
-
-            <p className={styles.paragraph}>
-              This case study, conducted under the supervision of Dr. Bushra Chowdhury, documents a parallel 
-              experiment: two engineers, same corpus, same evaluation framework, but deliberately different 
-              starting conditions. The goal was to understand not just <em>if</em> DSPy works, but{" "}
-              <em>how</em> the optimization behaves across different initial setups.
-            </p>
-
-            <div className={styles.tldrBox}>
-              <div className={styles.tldrHeader}>
-                <span className={styles.tldrIcon}>⚡</span>
-                <span className={styles.tldrTitle}>TL;DR</span>
-              </div>
-              <ul className={styles.tldrList}>
-                <li>DSPy delivers measurable improvements—but the <strong>type</strong> of improvement depends on your starting point</li>
-                <li>A naive, constrained prompt led to <strong>efficiency gains</strong> (38% cost reduction, 3.2× latency improvement)</li>
-                <li>A rich, detailed prompt led to <strong>accuracy gains</strong> (5-7% improvement across RAGAS metrics)</li>
-                <li>Both approaches produced production-deployable systems</li>
-              </ul>
-            </div>
-          </section>
-
-          {/* The Problem Section */}
-          <section id="the-problem" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>2</span>
-              The Problem
-            </h2>
-
-            <p className={styles.paragraph}>
-              At ByteMethod AI, every RAG project we've built follows the same frustrating pattern: craft a prompt,
-              test it, observe failures, tweak, repeat. The cycle continues until the deadline arrives
-              or the client signs off—whichever comes first.
-            </p>
-
-            {/* Problem Visualization */}
-            <div className={styles.problemFlow}>
-              <div className={styles.problemStep}>
-                <div className={styles.problemIcon}>📝</div>
-                <div className={styles.problemLabel}>Write Prompt</div>
-              </div>
-              <div className={styles.flowArrow}>→</div>
-              <div className={styles.problemStep}>
-                <div className={styles.problemIcon}>🧪</div>
-                <div className={styles.problemLabel}>Test Queries</div>
-              </div>
-              <div className={styles.flowArrow}>→</div>
-              <div className={styles.problemStep}>
-                <div className={styles.problemIcon}>❌</div>
-                <div className={styles.problemLabel}>Find Failures</div>
-              </div>
-              <div className={styles.flowArrow}>→</div>
-              <div className={styles.problemStep}>
-                <div className={styles.problemIcon}>🔧</div>
-                <div className={styles.problemLabel}>Tweak Prompt</div>
-              </div>
-              <div className={styles.flowArrowLoop}>↩️ Repeat for weeks</div>
-            </div>
-
-            <div className={styles.painPoints}>
-              <div className={styles.painPoint}>
-                <div className={styles.painPointHeader}>
-                  <span className={styles.painPointIcon}>💸</span>
-                  <h4>Resource Drain</h4>
-                </div>
-                <p>Weeks of engineering time spent on subjective prompt iterations</p>
-              </div>
-              <div className={styles.painPoint}>
-                <div className={styles.painPointHeader}>
-                  <span className={styles.painPointIcon}>🎯</span>
-                  <h4>No Clear Target</h4>
-                </div>
-                <p>Clients don't know what "good" looks like until they see the final product</p>
-              </div>
-              <div className={styles.painPoint}>
-                <div className={styles.painPointHeader}>
-                  <span className={styles.painPointIcon}>📊</span>
-                  <h4>Missing Metrics</h4>
-                </div>
-                <p>Without ground truth, teams iterate blindly with no measurable progress</p>
-              </div>
-              <div className={styles.painPoint}>
-                <div className={styles.painPointHeader}>
-                  <span className={styles.painPointIcon}>🐌</span>
-                  <h4>Slow Delivery</h4>
-                </div>
-                <p>Trial-and-error delays deployments and frustrates stakeholders</p>
-              </div>
-            </div>
-
-            <div className={styles.questionBox}>
-              <p>
-                <strong>The question we wanted to answer:</strong> Can DSPy's automatic prompt
-                optimization replace this manual cycle? And if so—does it matter how we start?
-              </p>
-            </div>
-          </section>
-
-          {/* Our Approach Section */}
-          <section id="our-approach" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>3</span>
-              Our Approach
-            </h2>
-
-            <p className={styles.paragraph}>
-              We designed a controlled experiment: same legal document corpus, same evaluation
-              framework (RAGAS), same infrastructure—but deliberately different starting conditions.
-            </p>
-
-            {/* Experiment Design */}
-            <div className={styles.experimentDesign}>
-              <div className={styles.experimentShared}>
-                <h4 className={styles.experimentHeader}>Shared Foundation</h4>
-                <div className={styles.sharedItems}>
-                  <div className={styles.sharedItem}>
-                    <span className={styles.sharedIcon}>📄</span>
-                    <div>
-                      <strong>Document Corpus</strong>
-                      <p>Model Inter-American Law on Access to Public Information (114 pages, ~139 chunks)</p>
-                    </div>
-                  </div>
-                  <div className={styles.sharedItem}>
-                    <span className={styles.sharedIcon}>🧠</span>
-                    <div>
-                      <strong>LLM Backend</strong>
-                      <p>Azure OpenAI GPT-4o (generation) + text-embedding-3-large (3072-dim)</p>
-                    </div>
-                  </div>
-                  <div className={styles.sharedItem}>
-                    <span className={styles.sharedIcon}>📊</span>
-                    <div>
-                      <strong>Evaluation</strong>
-                      <p>RAGAS v0.4 (Answer Accuracy, Context Relevance, Response Groundedness)</p>
-                    </div>
-                  </div>
-                  <div className={styles.sharedItem}>
-                    <span className={styles.sharedIcon}>🔍</span>
-                    <div>
-                      <strong>Retrieval</strong>
-                      <p>FAISS IndexFlatL2 | Top-K=6 | Chunk: 1200 chars, 300 overlap</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className={styles.experimentVariables}>
-                <h4 className={styles.experimentHeader}>Variables</h4>
-                <div className={styles.variableGrid}>
-                  <div className={styles.variableCard}>
-                    <span className={styles.variableLabel}>Initial Prompt</span>
-                    <span className={styles.variableDesc}>Naive vs. Rich</span>
-                  </div>
-                  <div className={styles.variableCard}>
-                    <span className={styles.variableLabel}>Constraints</span>
-                    <span className={styles.variableDesc}>Tight vs. Tolerant</span>
-                  </div>
-                  <div className={styles.variableCard}>
-                    <span className={styles.variableLabel}>Sample Size</span>
-                    <span className={styles.variableDesc}>12 vs. 50</span>
-                  </div>
-                  <div className={styles.variableCard}>
-                    <span className={styles.variableLabel}>Optimization</span>
-                    <span className={styles.variableDesc}>Different configs</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Architecture Section */}
-          <section id="architecture" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>4</span>
-              Architecture
-            </h2>
-
-            <p className={styles.paragraph}>
-              Both experiments shared a common architecture—a full-stack RAG system with
-              React frontend, FastAPI backend, and DSPy optimization layer.
-            </p>
-
-            {/* System Architecture Diagram */}
-            <div className={styles.architectureDiagram}>
-              <div className={styles.archTitle}>System Architecture</div>
-
-              <div className={styles.archLayers}>
-                {/* Frontend Layer */}
-                <div className={styles.archLayer}>
-                  <div className={styles.archLayerLabel}>Client Layer</div>
-                  <div className={styles.archLayerContent}>
-                    <div className={styles.archBox} data-type="frontend">
-                      <span className={styles.archBoxIcon}>🖥️</span>
-                      <span className={styles.archBoxTitle}>React Frontend</span>
-                      <span className={styles.archBoxDetail}>Vite + Tailwind</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.archConnector}>
-                  <div className={styles.archArrowDown}></div>
-                  <span className={styles.archConnectorLabel}>REST API</span>
-                </div>
-
-                {/* API Layer */}
-                <div className={styles.archLayer}>
-                  <div className={styles.archLayerLabel}>API Layer</div>
-                  <div className={styles.archLayerContent}>
-                    <div className={styles.archBox} data-type="api">
-                      <span className={styles.archBoxIcon}>⚡</span>
-                      <span className={styles.archBoxTitle}>FastAPI</span>
-                      <span className={styles.archBoxDetail}>Async REST Endpoints</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.archConnector}>
-                  <div className={styles.archArrowDown}></div>
-                </div>
-
-                {/* Core Engine Layer */}
-                <div className={styles.archLayer}>
-                  <div className={styles.archLayerLabel}>Core Engine</div>
-                  <div className={styles.archLayerContent}>
-                    <div className={styles.archBoxGroup}>
-                      <div className={styles.archBox} data-type="rag">
-                        <span className={styles.archBoxIcon}>🔗</span>
-                        <span className={styles.archBoxTitle}>LangChain RAG</span>
-                        <span className={styles.archBoxDetail}>Baseline</span>
-                      </div>
-                      <div className={styles.archBox} data-type="dspy">
-                        <span className={styles.archBoxIcon}>🧪</span>
-                        <span className={styles.archBoxTitle}>DSPy RAG</span>
-                        <span className={styles.archBoxDetail}>ChainOfThought</span>
-                      </div>
-                      <div className={styles.archBox} data-type="eval">
-                        <span className={styles.archBoxIcon}>📊</span>
-                        <span className={styles.archBoxTitle}>RAGAS</span>
-                        <span className={styles.archBoxDetail}>Evaluation</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.archConnector}>
-                  <div className={styles.archArrowDown}></div>
-                </div>
-
-                {/* Optimizer Layer */}
-                <div className={styles.archLayer}>
-                  <div className={styles.archLayerLabel}>Optimization Layer</div>
-                  <div className={styles.archLayerContent}>
-                    <div className={styles.archBoxGroup}>
-                      <div className={styles.archBox} data-type="optimizer">
-                        <span className={styles.archBoxIcon}>🚀</span>
-                        <span className={styles.archBoxTitle}>BootstrapFewShot</span>
-                        <span className={styles.archBoxDetail}>Few-shot demos</span>
-                      </div>
-                      <div className={styles.archBox} data-type="optimizer">
-                        <span className={styles.archBoxIcon}>🎯</span>
-                        <span className={styles.archBoxTitle}>MIPROv2</span>
-                        <span className={styles.archBoxDetail}>Instruction opt.</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className={styles.archConnector}>
-                  <div className={styles.archArrowDown}></div>
-                </div>
-
-                {/* Data Layer */}
-                <div className={styles.archLayer}>
-                  <div className={styles.archLayerLabel}>Data Layer</div>
-                  <div className={styles.archLayerContent}>
-                    <div className={styles.archBoxGroup}>
-                      <div className={styles.archBox} data-type="data">
-                        <span className={styles.archBoxIcon}>🗄️</span>
-                        <span className={styles.archBoxTitle}>FAISS</span>
-                        <span className={styles.archBoxDetail}>139 chunks</span>
-                      </div>
-                      <div className={styles.archBox} data-type="data">
-                        <span className={styles.archBoxIcon}>☁️</span>
-                        <span className={styles.archBoxTitle}>Azure SQL</span>
-                        <span className={styles.archBoxDetail}>Eval Cache</span>
-                      </div>
-                      <div className={styles.archBox} data-type="data">
-                        <span className={styles.archBoxIcon}>🤖</span>
-                        <span className={styles.archBoxTitle}>Azure OpenAI</span>
-                        <span className={styles.archBoxDetail}>GPT-4 + Ada</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Data Flow Pipeline */}
-            <h3 className={styles.subsectionTitle}>Query Processing Flow</h3>
-
-            <div className={styles.dataFlowPipeline}>
-              <div className={styles.flowStage}>
-                <div className={styles.flowStageNumber}>1</div>
-                <div className={styles.flowStageContent}>
-                  <h4>Ingestion</h4>
-                  <p>PDF → PyPDF2 → Recursive Chunking</p>
-                  <span className={styles.flowStageDetail}>1200 chars, 300 overlap</span>
-                </div>
-              </div>
-              <div className={styles.flowStageArrow}>→</div>
-
-              <div className={styles.flowStage}>
-                <div className={styles.flowStageNumber}>2</div>
-                <div className={styles.flowStageContent}>
-                  <h4>Embedding</h4>
-                  <p>text-embedding-3-large</p>
-                  <span className={styles.flowStageDetail}>3072 dimensions</span>
-                </div>
-              </div>
-              <div className={styles.flowStageArrow}>→</div>
-
-              <div className={styles.flowStage}>
-                <div className={styles.flowStageNumber}>3</div>
-                <div className={styles.flowStageContent}>
-                  <h4>Retrieval</h4>
-                  <p>FAISS Similarity Search</p>
-                  <span className={styles.flowStageDetail}>Top-K (k=6)</span>
-                </div>
-              </div>
-              <div className={styles.flowStageArrow}>→</div>
-
-              <div className={styles.flowStage}>
-                <div className={styles.flowStageNumber}>4</div>
-                <div className={styles.flowStageContent}>
-                  <h4>Generation</h4>
-                  <p>DSPy ChainOfThought</p>
-                  <span className={styles.flowStageDetail}>GPT-4o</span>
-                </div>
-              </div>
-              <div className={styles.flowStageArrow}>→</div>
-
-              <div className={styles.flowStage}>
-                <div className={styles.flowStageNumber}>5</div>
-                <div className={styles.flowStageContent}>
-                  <h4>Evaluation</h4>
-                  <p>RAGAS Metrics</p>
-                  <span className={styles.flowStageDetail}>3 metrics</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Optimization Pipeline */}
-            <h3 className={styles.subsectionTitle}>DSPy Optimization Pipeline</h3>
-
-            <div className={styles.optimizationFlow}>
-              <div className={styles.optFlowRow}>
-                <div className={styles.optFlowBox}>
-                  <div className={styles.optFlowHeader}>Training Data</div>
-                  <div className={styles.optFlowBody}>
-                    <span>50 Q&A pairs</span>
-                    <span className={styles.optFlowNote}>70/30 split</span>
-                  </div>
-                </div>
-                <div className={styles.optFlowArrow}>→</div>
-                <div className={styles.optFlowBox}>
-                  <div className={styles.optFlowHeader}>DSPy Module</div>
-                  <div className={styles.optFlowBody}>
-                    <span>RAGModule</span>
-                    <span className={styles.optFlowNote}>ChainOfThought</span>
-                  </div>
-                </div>
-                <div className={styles.optFlowArrow}>→</div>
-                <div className={styles.optFlowBox} data-highlight="true">
-                  <div className={styles.optFlowHeader}>Optimizer</div>
-                  <div className={styles.optFlowBody}>
-                    <span>MIPROv2 / Bootstrap</span>
-                    <span className={styles.optFlowNote}>Auto-tune</span>
-                  </div>
-                </div>
-                <div className={styles.optFlowArrow}>→</div>
-                <div className={styles.optFlowBox}>
-                  <div className={styles.optFlowHeader}>Optimized Model</div>
-                  <div className={styles.optFlowBody}>
-                    <span>Production Ready</span>
-                    <span className={styles.optFlowNote}>Cached in DB</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Two Paths Section */}
-          <section id="two-paths" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>5</span>
-              Two Paths, One Goal
-            </h2>
-
-            <p className={styles.paragraph}>
-              We deliberately started with different configurations to understand how DSPy behaves
-              across the spectrum of initial conditions. Same destination, different journeys.
-            </p>
-
-            <div className={styles.pathsComparison}>
-              {/* Chinmoy's Path */}
-              <div className={styles.pathCard}>
-                <div className={styles.pathHeader}>
-                  <div className={styles.pathAvatar}>CM</div>
-                  <div className={styles.pathHeaderText}>
-                    <h3>Chinmoy Mitra</h3>
-                    <span className={styles.pathBadge}>Constrained Approach</span>
-                  </div>
-                </div>
-
-                <div className={styles.pathPhilosophy}>
-                  "Start minimal. Let DSPy explore broadly. See how much it can improve from near-zero."
-                </div>
-
-                <div className={styles.pathDetails}>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>Initial Prompt</span>
-                    <span className={styles.pathDetailValue}>One-liner, naive</span>
-                  </div>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>Test Samples</span>
-                    <span className={styles.pathDetailValue}>50</span>
-                  </div>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>MIPRO Trials</span>
-                    <span className={styles.pathDetailValue}>6</span>
-                  </div>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>Training Time</span>
-                    <span className={styles.pathDetailValue}>~4 min</span>
-                  </div>
-                </div>
-
-                <div className={styles.pathPrompt}>
-                  <div className={styles.pathPromptLabel}>Starting Prompt:</div>
-                  <code>"Answer questions based on provided context from domain-specific documents."</code>
-                </div>
-
-                <div className={styles.pathOutcome}>
-                  <span className={styles.pathOutcomeIcon}>⚡</span>
-                  <div>
-                    <strong>Result: Efficiency Gains</strong>
-                    <p>38% cost reduction, 3.2× faster, similar accuracy</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Nipu's Path */}
-              <div className={styles.pathCard}>
-                <div className={styles.pathHeader}>
-                  <a
-                    href="https://notmeher.github.io/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.pathAvatar}
-                    style={{ textDecoration: 'none' }}
-                  >MN</a>
-                  <div className={styles.pathHeaderText}>
-                    <h3>Mehedi Hasan Nipu</h3>
-                    <span className={styles.pathBadge}>Rich Approach</span>
-                  </div>
-                </div>
-
-                <div className={styles.pathPhilosophy}>
-                  "Start with domain expertise. Guide DSPy toward specific improvements. Maximize accuracy."
-                </div>
-
-                <div className={styles.pathDetails}>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>Initial Prompt</span>
-                    <span className={styles.pathDetailValue}>Detailed, expert-level</span>
-                  </div>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>Test Samples</span>
-                    <span className={styles.pathDetailValue}>50</span>
-                  </div>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>MIPRO Candidates</span>
-                    <span className={styles.pathDetailValue}>10</span>
-                  </div>
-                  <div className={styles.pathDetailItem}>
-                    <span className={styles.pathDetailLabel}>Training Time</span>
-                    <span className={styles.pathDetailValue}>~20 min</span>
-                  </div>
-                </div>
-
-                <div className={styles.pathPrompt}>
-                  <div className={styles.pathPromptLabel}>Starting Prompt:</div>
-                  <code>"You are an expert legal assistant specializing in Access to Information law. Base your answer ONLY on the provided context. Cite specific Articles..."</code>
-                </div>
-
-                <div className={styles.pathOutcome}>
-                  <span className={styles.pathOutcomeIcon}>🎯</span>
-                  <div>
-                    <strong>Result: Accuracy Gains</strong>
-                    <p>+5-7% across all RAGAS metrics, consistent improvement</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Results Section */}
-          <section id="results" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>6</span>
-              Results
-            </h2>
-
-            <h3 className={styles.subsectionTitle}>Chinmoy's Results: Efficiency Through Constraints (50-Sample Benchmark)</h3>
-
-            <div className={styles.resultsTable}>
-              <div className={styles.tableHeader}>
-                <span>System</span>
-                <span>Accuracy</span>
-                <span>Groundedness</span>
-                <span>Tokens</span>
-                <span>Cost</span>
-                <span>Latency</span>
-              </div>
-              <div className={styles.tableRow}>
-                <span className={styles.systemName}>LangChain Baseline</span>
-                <span>64.6%</span>
-                <span>70.8%</span>
-                <span>48,748</span>
-                <span>$0.256</span>
-                <span>13.96s</span>
-              </div>
-              <div className={styles.tableRow}>
-                <span className={styles.systemName}>DSPy Baseline</span>
-                <span>66.7% <span className={styles.gain}>+3.2%</span></span>
-                <span>64.6%</span>
-                <span>30,517</span>
-                <span>$0.158</span>
-                <span>7.38s</span>
-              </div>
-              <div className={`${styles.tableRow} ${styles.tableRowHighlight}`}>
-                <span className={styles.systemName}>DSPy Bootstrap ⭐</span>
-                <span className={styles.bestValue}>70.8% <span className={styles.gain}>+9.6%</span></span>
-                <span>56.3%</span>
-                <span>30,512</span>
-                <span>$0.158</span>
-                <span className={styles.bestValue}>4.33s</span>
-              </div>
-              <div className={styles.tableRow}>
-                <span className={styles.systemName}>DSPy MIPRO</span>
-                <span>64.6%</span>
-                <span>64.6%</span>
-                <span className={styles.bestValue}>30,539</span>
-                <span className={styles.bestValue}>$0.159</span>
-                <span>6.37s</span>
-              </div>
-            </div>
-
-            <div className={styles.insightCallout}>
-              <span className={styles.insightIcon}>💡</span>
-              <div>
-                <strong>Key Observation:</strong> With tight constraints and a naive starting prompt,
-                DSPy primarily optimized for <strong>efficiency</strong> rather than accuracy. The framework
-                found ways to reduce token usage and latency while maintaining comparable accuracy.
-              </div>
-            </div>
-
-            <h3 className={styles.subsectionTitle}>Nipu's Results: Accuracy Through Rich Prompts (50-Sample Benchmark)</h3>
-
-            <div className={styles.resultsTable}>
-              <div className={styles.tableHeader}>
-                <span>System</span>
-                <span>Accuracy</span>
-                <span>Relevance</span>
-                <span>Groundedness</span>
-                <span>Avg Score</span>
-              </div>
-              <div className={styles.tableRow}>
-                <span className={styles.systemName}>LangChain Baseline</span>
-                <span>82-87%</span>
-                <span>80-85%</span>
-                <span>81-86%</span>
-                <span>81-86%</span>
-              </div>
-              <div className={`${styles.tableRow} ${styles.tableRowHighlight}`}>
-                <span className={styles.systemName}>DSPy Optimized ⭐</span>
-                <span className={styles.bestValue}>87-92% <span className={styles.gain}>+5-7%</span></span>
-                <span className={styles.bestValue}>85-90%</span>
-                <span className={styles.bestValue}>86-91%</span>
-                <span className={styles.bestValue}>86-91%</span>
-              </div>
-            </div>
-
-            <h3 className={styles.subsectionTitle}>Prompt Evolution</h3>
-            <p className={styles.paragraph}>
-              One of the most instructive outputs was observing how MIPROv2 transformed the prompts:
-            </p>
-
-            <div className={styles.promptEvolution}>
-              <div className={styles.promptBefore}>
-                <div className={styles.promptLabel}>
-                  <span className={styles.promptLabelIcon}>📝</span>
-                  Before Optimization
-                </div>
-                <div className={styles.promptContent}>
-                  "Answer questions based on provided context from domain-specific documents."
-                </div>
-              </div>
-
-              <div className={styles.promptArrow}>
-                <span>MIPROv2</span>
-                <div className={styles.promptArrowIcon}>→</div>
-              </div>
-
-              <div className={styles.promptAfter}>
-                <div className={styles.promptLabel}>
-                  <span className={styles.promptLabelIcon}>✨</span>
-                  After Optimization
-                </div>
-                <div className={styles.promptContent}>
-                  "Using the information contained strictly within the provided context, answer the
-                  given question in a clear and concise manner. <strong>Ensure your response follows
-                  a step-by-step reasoning process</strong> to explain the logical foundation for your
-                  conclusions. <strong>Do not include information or make assumptions that go beyond
-                  the supplied context.</strong>"
-                </div>
-              </div>
-            </div>
-
-            <p className={styles.paragraph}>
-              The optimized prompt explicitly requests step-by-step reasoning, emphasizes strict
-              adherence to context, and prohibits assumptions—modifications that aligned well
-              with the RAGAS metrics being optimized.
-            </p>
-          </section>
-
-          {/* Takeaways Section */}
-          <section id="takeaways" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>7</span>
-              Key Takeaways
-            </h2>
-
-            <div className={styles.takeawaysGrid}>
-              <div className={styles.takeawayCard}>
-                <div className={styles.takeawayNumber}>01</div>
-                <h4>Starting Point Determines Outcome Type</h4>
-                <p>
-                  A naive prompt led to efficiency gains; a rich prompt led to accuracy gains.
-                  DSPy optimizes toward your metric, but the optimization landscape depends on where you start.
-                </p>
-              </div>
-
-              <div className={styles.takeawayCard}>
-                <div className={styles.takeawayNumber}>02</div>
-                <h4>Trade-offs Are Real</h4>
-                <p>
-                  BootstrapFewShot improved accuracy but reduced groundedness.
-                  MIPRO maintained balance but showed smaller gains. Choose optimizers based on your priority.
-                </p>
-              </div>
-
-              <div className={styles.takeawayCard}>
-                <div className={styles.takeawayNumber}>03</div>
-                <h4>Efficiency Is a Valid Win</h4>
-                <p>
-                  38% cost reduction and 3.2× latency improvement are significant for production systems.
-                  Even without accuracy gains, DSPy can deliver ROI through efficiency.
-                </p>
-              </div>
-
-              <div className={styles.takeawayCard}>
-                <div className={styles.takeawayNumber}>04</div>
-                <h4>Sample Size Matters</h4>
-                <p>
-                  12 samples vs. 50 samples produced different optimization dynamics.
-                  More data generally leads to better generalization, but even small datasets show improvement.
-                </p>
-              </div>
-            </div>
-
-            <div className={styles.recommendationsBox}>
-              <h4>Production Recommendations</h4>
-              <div className={styles.recommendationsList}>
-                <div className={styles.recommendation}>
-                  <span className={styles.recommendationIcon}>🚀</span>
-                  <div>
-                    <strong>Use MIPROv2 for high-traffic systems</strong>
-                    <p>Zero additional token overhead at inference, scales infinitely, one-time training cost</p>
-                  </div>
-                </div>
-                <div className={styles.recommendation}>
-                  <span className={styles.recommendationIcon}>🔬</span>
-                  <div>
-                    <strong>Use BootstrapFewShot for research/low-traffic</strong>
-                    <p>Higher accuracy potential, but adds 1500-2000 tokens per query</p>
-                  </div>
-                </div>
-                <div className={styles.recommendation}>
-                  <span className={styles.recommendationIcon}>📏</span>
-                  <div>
-                    <strong>Define metrics before optimization</strong>
-                    <p>What you measure is what you improve—choose RAGAS metrics carefully</p>
-                  </div>
-                </div>
-                <div className={styles.recommendation}>
-                  <span className={styles.recommendationIcon}>💾</span>
-                  <div>
-                    <strong>Cache aggressively</strong>
-                    <p>Both experiments used Azure SQL caching to avoid redundant LLM calls</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* What's Next Section */}
-          <section id="whats-next" className={styles.section}>
-            <h2 className={styles.sectionTitle}>
-              <span className={styles.sectionNumber}>8</span>
-              What's Next
-            </h2>
-
-            <p className={styles.paragraph}>
-              This experiment validated DSPy for our team's workflow. We're now rolling it out
-              across new RAG projects, with a few areas we're exploring next:
-            </p>
-
-            <div className={styles.nextSteps}>
-              <div className={styles.nextStep}>
-                <div className={styles.nextStepIcon}>🔄</div>
-                <div>
-                  <h4>Cross-Domain Transfer</h4>
-                  <p>Can optimized prompts from legal RAG transfer to medical or financial domains?</p>
-                </div>
-              </div>
-              <div className={styles.nextStep}>
-                <div className={styles.nextStepIcon}>⚖️</div>
-                <div>
-                  <h4>Multi-Objective Optimization</h4>
-                  <p>Simultaneously optimize for accuracy, groundedness, and cost</p>
-                </div>
-              </div>
-              <div className={styles.nextStep}>
-                <div className={styles.nextStepIcon}>🔁</div>
-                <div>
-                  <h4>Continuous Re-Optimization</h4>
-                  <p>Auto-trigger re-optimization when evaluation metrics drift below thresholds</p>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.finalThought}>
-              <p>
-                <strong>The bottom line:</strong> DSPy doesn't eliminate trial-and-error—it transforms it
-                into a programmatic, reproducible process. The manual prompt tweaking cycle?
-                It's been replaced with systematic, metric-driven optimization that clients can actually trust.
-              </p>
-            </div>
-          </section>
-        </main>
+    <main className="max-w-container mx-auto px-8 pt-24 pb-16">
+
+      {/* ===== TOP NAV ===== */}
+      <div className="flex items-center justify-between mb-16">
+        <button
+          type="button"
+          onClick={() => navigate("/research")}
+          className="flex items-center gap-2 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors uppercase tracking-[0.1em]"
+        >
+          <FiArrowLeft className="text-base" />
+          Back to Research
+        </button>
+        <Link
+          to="/research"
+          className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline uppercase tracking-[0.1em]"
+        >
+          All Research
+        </Link>
       </div>
 
-      {/* Lightbox Modal */}
-      {lightbox.open &&
-        createPortal(
-          <div className={styles.lightboxOverlay} onClick={closeLightbox}>
-            <button className={styles.lightboxClose} onClick={closeLightbox}>
-              ×
-            </button>
-            <div className={styles.lightboxContent} onClick={(e) => e.stopPropagation()}>
-              <img src={lightbox.src} alt={lightbox.caption} className={styles.lightboxImage} />
-              {lightbox.caption && <p className={styles.lightboxCaption}>{lightbox.caption}</p>}
+      {/* ===== HERO ===== */}
+      <section className="mb-16">
+        <Reveal>
+          <div className="flex flex-wrap items-center gap-3 mb-5">
+            {["Case Study", "DSPy", "Legal RAG", "ByteMethod AI"].map((tag, i) => (
+              <React.Fragment key={tag}>
+                {i > 0 && <span className="text-on-surface-variant/40 text-xs">·</span>}
+                <span className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+                  {tag}
+                </span>
+              </React.Fragment>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={100}>
+          <h1 className="font-newsreader text-h1 text-ink mb-4">
+            Taming Trial-and-Error in Production RAG
+          </h1>
+        </Reveal>
+
+        <Reveal delay={200}>
+          <div className="h-[1px] w-16 bg-ink mb-6" />
+          <p className="font-newsreader text-[1.5rem] italic text-ink/80 max-w-2xl leading-relaxed">
+            A parallel experiment comparing DSPy's automatic prompt optimization — revealing that
+            initial constraints shape whether you optimize for accuracy or efficiency.
+          </p>
+        </Reveal>
+
+        {/* Authors + org */}
+        <Reveal delay={260}>
+          <div className="flex flex-wrap items-center gap-5 mt-8 mb-6">
+            <a href="https://bytemethod.ai/" target="_blank" rel="noopener noreferrer">
+              <img
+                src={ByteMethodLogo}
+                alt="ByteMethod AI"
+                className="h-7 opacity-75 hover:opacity-100 transition-opacity"
+              />
+            </a>
+            <span className="font-inter text-[0.72rem] text-on-surface-variant/40 uppercase tracking-widest">
+              A Dexian Company
+            </span>
+            <div className="h-4 w-px bg-surface-variant" />
+            <span className="font-inter text-[0.78rem] text-on-surface-variant">
+              Chinmoy Mitra &amp;{" "}
+              <a
+                href="https://notmeher.github.io/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink hover:underline underline-offset-2"
+              >
+                Mehedi Hasan Nipu ↗
+              </a>
+            </span>
+            <div className="h-4 w-px bg-surface-variant" />
+            <span className="font-inter text-[0.78rem] text-on-surface-variant">
+              Supervised by{" "}
+              <a
+                href="https://www.linkedin.com/in/bushra-chowdhury-972604149/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-ink hover:underline underline-offset-2"
+              >
+                Dr. Bushra Chowdhury ↗
+              </a>
+            </span>
+          </div>
+        </Reveal>
+
+        {/* Stats */}
+        <Reveal delay={300}>
+          <div className="flex flex-wrap gap-x-12 gap-y-6 mt-10 pt-8 border-t border-surface-variant mb-10">
+            {[
+              { value: "38%",   label: "Cost Reduction"    },
+              { value: "3.2×",  label: "Faster Response"   },
+              { value: "+9.6%", label: "Accuracy Gain"     },
+              { value: "4",     label: "Systems Compared"  },
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="font-newsreader text-[2.25rem] text-ink leading-none mb-1">{s.value}</p>
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+                  {s.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Stack line */}
+        <Reveal delay={350}>
+          <p className="font-inter text-[0.78rem] text-on-surface-variant/60 mb-10">
+            DSPy 2.5+ · LangChain · RAGAS v0.4 · Azure OpenAI GPT-4o · FAISS · FastAPI · React 18 · Azure SQL
+          </p>
+        </Reveal>
+
+        {/* Inline TOC */}
+        <Reveal delay={400}>
+          <div className="border-t border-b border-surface-variant py-5">
+            <div className="flex flex-wrap gap-x-8 gap-y-3">
+              {toc.map((item, i) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="flex items-baseline gap-2 no-underline group"
+                >
+                  <span className="font-newsreader text-[0.8rem] text-on-surface-variant/30 group-hover:text-on-surface-variant/60 transition-colors select-none">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span className="font-inter text-[0.8rem] text-on-surface-variant group-hover:text-ink transition-colors">
+                    {item.label}
+                  </span>
+                </a>
+              ))}
             </div>
-          </div>,
-          document.body
-        )}
-    </Container>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ===== OVERVIEW ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Overview
+        </span>
+      </div>
+      <section id="overview" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">The Setup</h2>
+        </Reveal>
+        <div className="space-y-4 mb-8">
+          {[
+            "At ByteMethod AI, we build RAG systems for enterprise clients — legal compliance, medical documentation, business intelligence. Every project follows the same frustrating cycle: craft a prompt, test it, observe failures, tweak, repeat.",
+            "DSPy, from Stanford NLP, promises to automate this. We put it to the test with a controlled experiment: same legal document corpus, same evaluation framework (RAGAS), but deliberately different starting conditions.",
+            "This case study, conducted under the supervision of Dr. Bushra Chowdhury, documents two engineers starting from opposite ends of the prompt quality spectrum to understand how DSPy behaves differently across each.",
+            "The finding: DSPy works — but what it improves depends heavily on where you start.",
+          ].map((item, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <p className="font-inter text-body-md text-on-surface-variant leading-relaxed pl-5 border-l border-surface-variant">
+                {item}
+              </p>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* TL;DR */}
+        <Reveal delay={300}>
+          <div className="border border-surface-variant p-6 mt-6">
+            <p className="font-inter text-[0.7rem] uppercase tracking-widest text-on-surface-variant/50 mb-4">
+              TL;DR
+            </p>
+            <ul className="space-y-2.5">
+              {[
+                "DSPy delivers measurable improvements — but the type of improvement depends on your starting point",
+                "A naive, constrained prompt led to efficiency gains (38% cost reduction, 3.2× latency improvement)",
+                "A rich, detailed prompt led to accuracy gains (+5–7% across all RAGAS metrics)",
+                "Both approaches produced production-deployable systems",
+              ].map((item, i) => (
+                <li key={i} className="flex gap-3 font-inter text-[0.85rem] text-on-surface-variant leading-relaxed">
+                  <span className="shrink-0 font-newsreader text-[0.8rem] text-on-surface-variant/30 mt-0.5">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ===== THE PROBLEM ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          The Problem
+        </span>
+      </div>
+      <section id="problem" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">Manual Prompt Engineering Doesn't Scale</h2>
+        </Reveal>
+        <Reveal>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-8">
+            At ByteMethod AI, every RAG project follows the same frustrating pattern: craft a prompt,
+            test it, observe failures, tweak, repeat. The cycle continues until the deadline arrives or
+            the client signs off — whichever comes first.
+          </p>
+        </Reveal>
+
+        {/* Manual cycle — editorial flow */}
+        <Reveal>
+          <div className="border border-surface-variant p-6 mb-8">
+            <p className="font-inter text-[0.65rem] uppercase tracking-widest text-on-surface-variant/40 mb-5">
+              The cycle
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              {["Write Prompt", "Test Queries", "Find Failures", "Tweak Prompt"].map((step, i, arr) => (
+                <React.Fragment key={step}>
+                  <div className="flex flex-col items-center gap-1.5 min-w-[76px]">
+                    <div className="w-7 h-7 border border-surface-variant flex items-center justify-center">
+                      <span className="font-newsreader text-[0.78rem] text-on-surface-variant/40">{i + 1}</span>
+                    </div>
+                    <span className="font-inter text-[0.72rem] text-on-surface-variant text-center">{step}</span>
+                  </div>
+                  {i < arr.length - 1 && (
+                    <span className="font-inter text-[0.85rem] text-on-surface-variant/25 pb-5">→</span>
+                  )}
+                </React.Fragment>
+              ))}
+              <span className="font-inter text-[0.72rem] text-on-surface-variant/40 italic ml-1 pb-5">
+                ↩ repeat for weeks
+              </span>
+            </div>
+          </div>
+        </Reveal>
+
+        {/* 4 pain points */}
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-surface-variant mb-8">
+          {[
+            { label: "Resource Drain",  body: "Weeks of engineering time spent on subjective prompt iterations with no guaranteed improvement." },
+            { label: "No Clear Target", body: "Clients don't know what 'good' looks like until they see the final product. Feedback loops are slow." },
+            { label: "Missing Metrics", body: "Without ground truth, teams iterate blindly with no measurable progress or exit criteria." },
+            { label: "Slow Delivery",   body: "Trial-and-error delays deployments and frustrates stakeholders expecting faster turnaround." },
+          ].map((p, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <div className="border-b border-r border-surface-variant p-6">
+                <p className="font-inter text-[0.7rem] uppercase tracking-widest text-on-surface-variant/50 mb-2">
+                  {p.label}
+                </p>
+                <p className="font-inter text-[0.85rem] text-on-surface-variant leading-relaxed">{p.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <div className="pt-6 border-t border-surface-variant">
+            <p className="font-newsreader text-[1.2rem] italic text-ink/70 leading-relaxed">
+              "Can DSPy's automatic prompt optimization replace this manual cycle? And if so — does it matter how we start?"
+            </p>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ===== OUR APPROACH ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Our Approach
+        </span>
+      </div>
+      <section id="approach" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">A Controlled Experiment</h2>
+        </Reveal>
+        <Reveal>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-8">
+            We designed a controlled experiment: same legal document corpus, same evaluation framework (RAGAS),
+            same infrastructure — but deliberately different starting conditions.
+          </p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Reveal>
+            <div className="border border-surface-variant p-6">
+              <p className="font-inter text-[0.7rem] uppercase tracking-widest text-on-surface-variant/50 mb-5">
+                Shared Foundation
+              </p>
+              <div className="space-y-4">
+                {[
+                  { label: "Document Corpus", detail: "Model Inter-American Law on Access to Public Information — 114 pages, ~139 chunks" },
+                  { label: "LLM Backend",     detail: "Azure OpenAI GPT-4o (generation) + text-embedding-3-large (3072-dim)" },
+                  { label: "Evaluation",      detail: "RAGAS v0.4 — Answer Accuracy, Context Relevance, Response Groundedness" },
+                  { label: "Retrieval",       detail: "FAISS IndexFlatL2 · Top-K = 6 · Chunk: 1200 chars, 300 overlap" },
+                ].map((item) => (
+                  <div key={item.label} className="flex flex-col gap-0.5">
+                    <span className="font-inter text-[0.72rem] font-semibold text-ink uppercase tracking-wide">
+                      {item.label}
+                    </span>
+                    <span className="font-inter text-[0.8rem] text-on-surface-variant leading-relaxed">
+                      {item.detail}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <div className="border border-surface-variant p-6">
+              <p className="font-inter text-[0.7rem] uppercase tracking-widest text-on-surface-variant/50 mb-5">
+                Variables
+              </p>
+              <div className="space-y-4">
+                {[
+                  { label: "Initial Prompt", vals: ["Naive (one-liner)", "Rich (expert-level)"] },
+                  { label: "Constraints",    vals: ["Tight",             "Tolerant"]             },
+                  { label: "Sample Size",    vals: ["12 (test set)",     "50 (full benchmark)"]  },
+                  { label: "Optimization",   vals: ["6 MIPRO trials",    "10 MIPRO candidates"]  },
+                ].map((item) => (
+                  <div key={item.label} className="flex items-start gap-4">
+                    <span className="font-inter text-[0.72rem] font-semibold text-ink uppercase tracking-wide w-28 shrink-0 mt-0.5">
+                      {item.label}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {item.vals.map((v, i) => (
+                        <span
+                          key={i}
+                          className={`font-inter text-[0.72rem] px-2 py-0.5 border ${
+                            i === 0
+                              ? "border-surface-variant text-on-surface-variant/55"
+                              : "border-ink/20 text-on-surface-variant"
+                          }`}
+                        >
+                          {v}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===== ARCHITECTURE ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Architecture
+        </span>
+      </div>
+      <section id="architecture" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">System Architecture</h2>
+        </Reveal>
+        <Reveal>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-8">
+            Both experiments shared a common architecture — React frontend, FastAPI backend, and a DSPy
+            optimization layer sitting on top of shared data infrastructure.
+          </p>
+        </Reveal>
+
+        {/* Layered architecture table */}
+        <Reveal>
+          <div className="border border-surface-variant overflow-hidden mb-10">
+            {[
+              {
+                layer: "Client",
+                items: [{ name: "React Frontend",    detail: "Vite · Tailwind · Recharts" }],
+              },
+              {
+                layer: "API",
+                items: [{ name: "FastAPI",            detail: "Async REST · Swagger docs · Health checks" }],
+              },
+              {
+                layer: "Core Engine",
+                items: [
+                  { name: "LangChain RAG",  detail: "Baseline" },
+                  { name: "DSPy RAG",       detail: "ChainOfThought" },
+                  { name: "RAGAS",          detail: "3 evaluation metrics" },
+                ],
+              },
+              {
+                layer: "Optimizers",
+                items: [
+                  { name: "BootstrapFewShot", detail: "+1500–2000 tokens/query" },
+                  { name: "MIPROv2",          detail: "Zero runtime overhead" },
+                ],
+              },
+              {
+                layer: "Data",
+                items: [
+                  { name: "FAISS",        detail: "139 chunks · 3072-dim vectors" },
+                  { name: "Azure SQL",    detail: "Eval cache · versioning" },
+                  { name: "Azure OpenAI", detail: "GPT-4o + Ada embeddings" },
+                ],
+              },
+            ].map((row, rowIdx, arr) => (
+              <div
+                key={row.layer}
+                className={`flex items-stretch ${rowIdx < arr.length - 1 ? "border-b border-surface-variant" : ""}`}
+              >
+                <div className="w-24 shrink-0 bg-surface-variant/20 border-r border-surface-variant flex items-center px-3 py-4">
+                  <span className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/50 leading-snug">
+                    {row.layer}
+                  </span>
+                </div>
+                <div className="flex flex-wrap flex-1">
+                  {row.items.map((item, i) => (
+                    <div
+                      key={item.name}
+                      className={`px-5 py-4 flex flex-col gap-1 ${
+                        i < row.items.length - 1 ? "border-r border-surface-variant" : ""
+                      }`}
+                    >
+                      <span className="font-inter text-[0.8rem] font-semibold text-ink">{item.name}</span>
+                      <span className="font-inter text-[0.7rem] text-on-surface-variant/55">{item.detail}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+
+        {/* Query Processing Flow */}
+        <Reveal>
+          <h3 className="font-newsreader text-[1.15rem] text-ink mb-4">Query Processing Flow</h3>
+        </Reveal>
+        <Reveal>
+          <div className="border border-surface-variant overflow-hidden mb-10">
+            <div className="flex flex-wrap">
+              {[
+                { n: "1", title: "Ingestion",  body: "PDF → PyPDF2 → Recursive Chunking",  note: "1200 chars, 300 overlap" },
+                { n: "2", title: "Embedding",  body: "text-embedding-3-large",              note: "3072 dimensions"         },
+                { n: "3", title: "Retrieval",  body: "FAISS Similarity Search",             note: "Top-K = 6"               },
+                { n: "4", title: "Generation", body: "DSPy ChainOfThought",                 note: "GPT-4o"                  },
+                { n: "5", title: "Evaluation", body: "RAGAS Metrics",                       note: "3 metrics"               },
+              ].map((step, i, arr) => (
+                <div
+                  key={step.n}
+                  className={`flex-1 min-w-[110px] p-4 flex flex-col gap-1 ${
+                    i < arr.length - 1 ? "border-r border-surface-variant" : ""
+                  }`}
+                >
+                  <span className="font-newsreader text-[1.5rem] text-on-surface-variant/15 leading-none mb-1">
+                    {step.n}
+                  </span>
+                  <span className="font-inter text-[0.78rem] font-semibold text-ink">{step.title}</span>
+                  <span className="font-inter text-[0.72rem] text-on-surface-variant/65 leading-snug">{step.body}</span>
+                  <span className="font-inter text-[0.62rem] text-on-surface-variant/35 uppercase tracking-wide mt-1">
+                    {step.note}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* DSPy Optimization Pipeline */}
+        <Reveal>
+          <h3 className="font-newsreader text-[1.15rem] text-ink mb-4">DSPy Optimization Pipeline</h3>
+        </Reveal>
+        <Reveal>
+          <div className="border border-surface-variant overflow-hidden mb-2">
+            <div className="flex flex-wrap">
+              {[
+                { title: "Training Data",   body: "50 Q&A pairs",         note: "70/30 split",     highlight: false },
+                { title: "DSPy Module",     body: "RAGModule",             note: "ChainOfThought",  highlight: false },
+                { title: "Optimizer",       body: "MIPROv2 / Bootstrap",   note: "Auto-tune",       highlight: true  },
+                { title: "Output",          body: "Production Ready",      note: "Cached in DB",    highlight: false },
+              ].map((step, i, arr) => (
+                <div
+                  key={step.title}
+                  className={`flex-1 min-w-[100px] p-4 flex flex-col gap-1 ${
+                    step.highlight ? "bg-ink" : ""
+                  } ${i < arr.length - 1 ? "border-r border-surface-variant" : ""}`}
+                >
+                  <span className={`font-inter text-[0.62rem] uppercase tracking-widest mb-0.5 ${
+                    step.highlight ? "text-surface/45" : "text-on-surface-variant/40"
+                  }`}>
+                    {step.title}
+                  </span>
+                  <span className={`font-inter text-[0.82rem] font-semibold ${
+                    step.highlight ? "text-surface" : "text-ink"
+                  }`}>
+                    {step.body}
+                  </span>
+                  <span className={`font-inter text-[0.7rem] ${
+                    step.highlight ? "text-surface/55" : "text-on-surface-variant/55"
+                  }`}>
+                    {step.note}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ===== TWO PATHS ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Two Paths
+        </span>
+      </div>
+      <section id="two-paths" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">Two Paths, One Goal</h2>
+        </Reveal>
+        <Reveal>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-8">
+            We deliberately started with different configurations to understand how DSPy behaves across
+            the spectrum of initial conditions. Same destination, different journeys.
+          </p>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Chinmoy's path */}
+          <Reveal>
+            <div className="border border-surface-variant p-6 flex flex-col gap-5 h-full">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="w-9 h-9 bg-ink text-surface flex items-center justify-center font-inter text-[0.7rem] font-semibold tracking-wide shrink-0">
+                    CM
+                  </div>
+                  <div>
+                    <p className="font-inter text-[0.85rem] font-semibold text-ink leading-tight">
+                      Chinmoy Mitra
+                    </p>
+                    <p className="font-inter text-[0.65rem] uppercase tracking-widest text-on-surface-variant/50">
+                      Constrained Approach
+                    </p>
+                  </div>
+                </div>
+                <p className="font-newsreader text-[1rem] italic text-on-surface-variant leading-relaxed">
+                  "Start minimal. Let DSPy explore broadly. See how much it can improve from near-zero."
+                </p>
+              </div>
+
+              <div className="space-y-2 border-t border-surface-variant pt-4">
+                {[
+                  ["Initial Prompt", "One-liner, naive"],
+                  ["Test Samples",   "50"              ],
+                  ["MIPRO Trials",   "6"               ],
+                  ["Training Time",  "~4 min"          ],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex justify-between items-baseline gap-4">
+                    <span className="font-inter text-[0.7rem] text-on-surface-variant/45 uppercase tracking-wide">
+                      {k}
+                    </span>
+                    <span className="font-inter text-[0.8rem] text-ink text-right">{v}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-surface-variant/30 p-4">
+                <p className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 mb-2">
+                  Starting Prompt
+                </p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant italic leading-relaxed">
+                  "Answer questions based on provided context from domain-specific documents."
+                </p>
+              </div>
+
+              <div className="border-t border-surface-variant pt-4 mt-auto">
+                <p className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 mb-1">
+                  Result
+                </p>
+                <p className="font-inter text-[0.85rem] font-semibold text-ink">Efficiency Gains</p>
+                <p className="font-inter text-[0.78rem] text-on-surface-variant mt-1">
+                  38% cost reduction · 3.2× faster · comparable accuracy
+                </p>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Nipu's path */}
+          <Reveal delay={100}>
+            <div className="border border-surface-variant p-6 flex flex-col gap-5 h-full">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <a
+                    href="https://notmeher.github.io/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-9 h-9 bg-surface-variant flex items-center justify-center font-inter text-[0.7rem] font-semibold tracking-wide text-ink border border-surface-variant hover:bg-ink hover:text-surface transition-colors no-underline shrink-0"
+                  >
+                    MN
+                  </a>
+                  <div>
+                    <p className="font-inter text-[0.85rem] font-semibold text-ink leading-tight">
+                      <a
+                        href="https://notmeher.github.io/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-ink hover:underline underline-offset-2 no-underline"
+                      >
+                        Mehedi Hasan Nipu ↗
+                      </a>
+                    </p>
+                    <p className="font-inter text-[0.65rem] uppercase tracking-widest text-on-surface-variant/50">
+                      Rich Approach
+                    </p>
+                  </div>
+                </div>
+                <p className="font-newsreader text-[1rem] italic text-on-surface-variant leading-relaxed">
+                  "Start with domain expertise. Guide DSPy toward specific improvements. Maximize accuracy."
+                </p>
+              </div>
+
+              <div className="space-y-2 border-t border-surface-variant pt-4">
+                {[
+                  ["Initial Prompt",   "Detailed, expert-level"],
+                  ["Test Samples",     "50"                    ],
+                  ["MIPRO Candidates", "10"                    ],
+                  ["Training Time",    "~20 min"               ],
+                ].map(([k, v]) => (
+                  <div key={k} className="flex justify-between items-baseline gap-4">
+                    <span className="font-inter text-[0.7rem] text-on-surface-variant/45 uppercase tracking-wide">
+                      {k}
+                    </span>
+                    <span className="font-inter text-[0.8rem] text-ink text-right">{v}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="bg-surface-variant/30 p-4">
+                <p className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 mb-2">
+                  Starting Prompt
+                </p>
+                <p className="font-inter text-[0.8rem] text-on-surface-variant italic leading-relaxed">
+                  "You are an expert legal assistant specializing in Access to Information law. Base your
+                  answer ONLY on the provided context. Cite specific Articles..."
+                </p>
+              </div>
+
+              <div className="border-t border-surface-variant pt-4 mt-auto">
+                <p className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 mb-1">
+                  Result
+                </p>
+                <p className="font-inter text-[0.85rem] font-semibold text-ink">Accuracy Gains</p>
+                <p className="font-inter text-[0.78rem] text-on-surface-variant mt-1">
+                  +5–7% across all RAGAS metrics · consistent improvement
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ===== RESULTS ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Results
+        </span>
+      </div>
+      <section id="results" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">Results</h2>
+        </Reveal>
+
+        {/* Chinmoy's results */}
+        <Reveal>
+          <h3 className="font-newsreader text-[1.15rem] text-ink mb-2">
+            Chinmoy's Benchmark — Efficiency Through Constraints
+          </h3>
+          <p className="font-inter text-[0.75rem] text-on-surface-variant/50 mb-5">
+            12-sample benchmark · Legal Domain
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="border border-surface-variant overflow-x-auto mb-4">
+            <table className="w-full min-w-[580px] font-inter text-[0.8rem]">
+              <thead>
+                <tr className="border-b border-surface-variant">
+                  {["System", "Accuracy", "Groundedness", "Tokens", "Cost", "Latency"].map((h) => (
+                    <th
+                      key={h}
+                      className="px-4 py-3 text-left text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 font-normal"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    sys: "LangChain Baseline",
+                    acc: "64.6%",        ground: "70.8%", tokens: "48,748",
+                    cost: "$0.256",      lat: "13.96s",   best: false,
+                  },
+                  {
+                    sys: "DSPy Baseline",
+                    acc: "66.7% +3.2%",  ground: "64.6%", tokens: "30,517",
+                    cost: "$0.158",      lat: "7.38s",    best: false,
+                  },
+                  {
+                    sys: "DSPy Bootstrap",
+                    acc: "70.8% +9.6%",  ground: "56.3%", tokens: "30,512",
+                    cost: "$0.158",      lat: "4.33s",    best: true,
+                  },
+                  {
+                    sys: "DSPy MIPRO",
+                    acc: "64.6%",        ground: "64.6%", tokens: "30,539",
+                    cost: "$0.159",      lat: "6.37s",    best: false,
+                  },
+                ].map((row, i) => (
+                  <tr
+                    key={i}
+                    className={`border-b border-surface-variant last:border-0 transition-colors ${
+                      row.best ? "bg-ink/[0.04]" : "hover:bg-surface-variant/15"
+                    }`}
+                  >
+                    <td className="px-4 py-3 text-ink font-medium">
+                      {row.sys}
+                      {row.best && (
+                        <span className="ml-2 font-inter text-[0.6rem] border border-ink/20 px-1.5 py-0.5 text-on-surface-variant/55 uppercase tracking-wide">
+                          best acc.
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.acc}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.ground}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.tokens}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.cost}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.lat}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
+        <Reveal>
+          <div className="border-l-2 border-ink/15 pl-5 mb-12">
+            <p className="font-inter text-[0.85rem] text-on-surface-variant leading-relaxed">
+              <strong className="text-ink">Key observation:</strong> With tight constraints and a naive
+              starting prompt, DSPy primarily optimized for efficiency rather than accuracy — finding ways to
+              reduce token usage and latency while maintaining comparable accuracy.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Nipu's results */}
+        <Reveal>
+          <h3 className="font-newsreader text-[1.15rem] text-ink mb-2">
+            Nipu's Benchmark — Accuracy Through Rich Prompts
+          </h3>
+          <p className="font-inter text-[0.75rem] text-on-surface-variant/50 mb-5">
+            50-sample benchmark · Legal Domain
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="border border-surface-variant overflow-x-auto mb-12">
+            <table className="w-full min-w-[480px] font-inter text-[0.8rem]">
+              <thead>
+                <tr className="border-b border-surface-variant">
+                  {["System", "Accuracy", "Relevance", "Groundedness", "Avg Score"].map((h) => (
+                    <th
+                      key={h}
+                      className="px-4 py-3 text-left text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 font-normal"
+                    >
+                      {h}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    sys: "LangChain Baseline",
+                    acc: "82–87%",           rel: "80–85%",           gnd: "81–86%",           avg: "81–86%",    best: false,
+                  },
+                  {
+                    sys: "DSPy Optimized",
+                    acc: "87–92% (+5–7%)",   rel: "85–90% (+5–7%)",   gnd: "86–91% (+5–7%)",   avg: "86–91%",    best: true,
+                  },
+                ].map((row, i) => (
+                  <tr
+                    key={i}
+                    className={`border-b border-surface-variant last:border-0 ${
+                      row.best ? "bg-ink/[0.04]" : ""
+                    }`}
+                  >
+                    <td className="px-4 py-3 text-ink font-medium">
+                      {row.sys}
+                      {row.best && (
+                        <span className="ml-2 font-inter text-[0.6rem] border border-ink/20 px-1.5 py-0.5 text-on-surface-variant/55 uppercase tracking-wide">
+                          best
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.acc}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.rel}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.gnd}</td>
+                    <td className="px-4 py-3 text-on-surface-variant">{row.avg}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Reveal>
+
+        {/* Prompt Evolution */}
+        <Reveal>
+          <h3 className="font-newsreader text-[1.15rem] text-ink mb-2">Prompt Evolution</h3>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-6">
+            One of the most instructive outputs was observing how MIPROv2 transformed a minimal starting prompt:
+          </p>
+        </Reveal>
+        <Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_72px_1fr] border border-surface-variant overflow-hidden mb-6">
+            <div className="p-6">
+              <p className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 mb-3">
+                Before — Naive
+              </p>
+              <p className="font-inter text-[0.85rem] text-on-surface-variant italic leading-relaxed">
+                "Answer questions based on provided context from domain-specific documents."
+              </p>
+            </div>
+            <div className="flex flex-col items-center justify-center border-l border-r border-surface-variant py-6">
+              <p className="font-inter text-[0.58rem] uppercase tracking-widest text-on-surface-variant/35 mb-1.5 text-center">
+                MIPROv2
+              </p>
+              <span className="font-inter text-[1.1rem] text-on-surface-variant/25">→</span>
+            </div>
+            <div className="p-6 bg-surface-variant/20">
+              <p className="font-inter text-[0.62rem] uppercase tracking-widest text-on-surface-variant/40 mb-3">
+                After — Optimized
+              </p>
+              <p className="font-inter text-[0.85rem] text-on-surface-variant leading-relaxed">
+                "Using the information contained strictly within the provided context, answer the given
+                question in a clear and concise manner.{" "}
+                <strong className="text-ink">
+                  Ensure your response follows a step-by-step reasoning process
+                </strong>{" "}
+                to explain the logical foundation for your conclusions.{" "}
+                <strong className="text-ink">
+                  Do not include information or make assumptions that go beyond the supplied context.
+                </strong>"
+              </p>
+            </div>
+          </div>
+        </Reveal>
+        <Reveal>
+          <p className="font-inter text-[0.85rem] text-on-surface-variant leading-relaxed">
+            MIPRO added explicit step-by-step reasoning, emphasized strict adherence to context, and
+            prohibited assumptions — modifications that directly aligned with the RAGAS metrics being
+            optimized.
+          </p>
+        </Reveal>
+      </section>
+
+      {/* ===== TAKEAWAYS ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Takeaways
+        </span>
+      </div>
+      <section id="takeaways" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">Key Takeaways</h2>
+        </Reveal>
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-surface-variant mb-10">
+          {[
+            {
+              n: "01",
+              title: "Starting Point Determines Outcome Type",
+              body: "A naive prompt led to efficiency gains; a rich prompt led to accuracy gains. DSPy optimizes toward your metric, but the optimization landscape depends on where you start.",
+            },
+            {
+              n: "02",
+              title: "Trade-offs Are Real",
+              body: "BootstrapFewShot improved accuracy but reduced groundedness. MIPRO maintained balance but showed smaller gains. Choose optimizers based on your priority metric.",
+            },
+            {
+              n: "03",
+              title: "Efficiency Is a Valid Win",
+              body: "38% cost reduction and 3.2× latency improvement are significant for production systems. Even without accuracy gains, DSPy can deliver ROI through efficiency alone.",
+            },
+            {
+              n: "04",
+              title: "Sample Size Matters",
+              body: "12 samples vs. 50 samples produced different optimization dynamics. More data leads to better generalization, but even small datasets show measurable improvement.",
+            },
+          ].map((item, i) => (
+            <Reveal key={i} delay={i * 60}>
+              <div className="border-b border-r border-surface-variant p-6">
+                <p className="font-newsreader text-[2rem] text-on-surface-variant/12 leading-none mb-3">
+                  {item.n}
+                </p>
+                <p className="font-inter text-[0.85rem] font-semibold text-ink mb-2">{item.title}</p>
+                <p className="font-inter text-[0.82rem] text-on-surface-variant leading-relaxed">{item.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Production recommendations */}
+        <Reveal>
+          <div className="border border-surface-variant p-6">
+            <p className="font-inter text-[0.7rem] uppercase tracking-widest text-on-surface-variant/50 mb-5">
+              Production Recommendations
+            </p>
+            <div className="space-y-5">
+              {[
+                {
+                  label: "Use MIPROv2 for high-traffic systems",
+                  body:  "Zero additional token overhead at inference, scales infinitely, one-time training cost.",
+                },
+                {
+                  label: "Use BootstrapFewShot for research or low-traffic",
+                  body:  "Higher accuracy potential, but adds 1500–2000 tokens per query at inference.",
+                },
+                {
+                  label: "Define metrics before optimization",
+                  body:  "What you measure is what you improve — choose RAGAS metrics carefully before running optimizers.",
+                },
+                {
+                  label: "Cache aggressively",
+                  body:  "Both experiments used Azure SQL caching to avoid redundant LLM calls during evaluation cycles.",
+                },
+              ].map((rec, i, arr) => (
+                <div
+                  key={i}
+                  className={`flex gap-4 items-start ${i < arr.length - 1 ? "pb-5 border-b border-surface-variant" : ""}`}
+                >
+                  <span className="font-newsreader text-[0.9rem] text-on-surface-variant/22 shrink-0 mt-0.5">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <p className="font-inter text-[0.82rem] font-semibold text-ink mb-1">{rec.label}</p>
+                    <p className="font-inter text-[0.8rem] text-on-surface-variant leading-relaxed">{rec.body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* ===== WHAT'S NEXT ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          What's Next
+        </span>
+      </div>
+      <section id="next" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-6">What's Next</h2>
+        </Reveal>
+        <Reveal>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-8">
+            This experiment validated DSPy for our team's workflow. We're now rolling it out across new RAG
+            projects, with a few areas we're exploring next:
+          </p>
+        </Reveal>
+
+        <div className="border border-surface-variant mb-10">
+          {[
+            {
+              title: "Cross-Domain Transfer",
+              body:  "Can optimized prompts from legal RAG transfer to medical or financial domains with minimal retraining?",
+            },
+            {
+              title: "Multi-Objective Optimization",
+              body:  "Simultaneously optimize for accuracy, groundedness, and cost — current optimizers treat these independently.",
+            },
+            {
+              title: "Continuous Re-Optimization",
+              body:  "Auto-trigger re-optimization when evaluation metrics drift below thresholds — closing the feedback loop in production.",
+            },
+          ].map((step, i, arr) => (
+            <Reveal key={i} delay={i * 60}>
+              <div
+                className={`flex gap-6 p-6 items-start ${
+                  i < arr.length - 1 ? "border-b border-surface-variant" : ""
+                }`}
+              >
+                <span className="font-newsreader text-[1.6rem] text-on-surface-variant/15 leading-none shrink-0 mt-0.5">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <p className="font-inter text-[0.85rem] font-semibold text-ink mb-1">{step.title}</p>
+                  <p className="font-inter text-[0.82rem] text-on-surface-variant leading-relaxed">{step.body}</p>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal>
+          <div className="border-t border-surface-variant pt-8 mb-12">
+            <p className="font-newsreader text-[1.4rem] italic text-ink/75 leading-relaxed max-w-2xl">
+              "DSPy doesn't eliminate trial-and-error — it transforms it into a programmatic, reproducible process."
+            </p>
+            <p className="font-inter text-[0.78rem] text-on-surface-variant/50 mt-3">
+              The manual prompt tweaking cycle has been replaced with systematic, metric-driven
+              optimization that clients can actually trust.
+            </p>
+          </div>
+        </Reveal>
+
+        {/* Collaborator CTA */}
+        <Reveal>
+          <div className="border border-surface-variant p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+            <div className="flex items-center gap-4">
+              <img src={ByteMethodLogo} alt="ByteMethod AI" className="h-7 opacity-65" />
+              <div>
+                <p className="font-inter text-[0.78rem] text-on-surface-variant leading-snug">
+                  Study conducted with{" "}
+                  <strong className="text-ink">Mehedi Hasan Nipu</strong> at ByteMethod AI (A Dexian Company)
+                </p>
+                <p className="font-inter text-[0.72rem] text-on-surface-variant/50 mt-0.5">
+                  Supervised by Dr. Bushra Chowdhury
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://notmeher.github.io/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-[0.8rem] text-ink border border-ink/30 px-5 py-2.5 hover:bg-ink hover:text-surface transition-colors no-underline shrink-0 text-center"
+            >
+              Visit Nipu's Portfolio →
+            </a>
+          </div>
+        </Reveal>
+      </section>
+
+    </main>
   );
-};
+}
 
 export default DSPyOptimization;

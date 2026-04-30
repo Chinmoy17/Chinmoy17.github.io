@@ -333,66 +333,102 @@ function AgentFlowProject() {
 
         {/* Gallery viewer */}
         {gallerySteps.length > 0 && (
-          <Reveal delay={100}>
-            <div className="bg-[#0f0f0f] shadow-[0_12px_48px_rgba(0,0,0,0.18)]">
-
-              {/* Main image */}
-              <div
-                className="p-4 cursor-zoom-in select-none"
-                onTouchStart={handleTouchStart}
-                onTouchEnd={handleTouchEnd}
-                {...zoomClick(
-                  gallerySteps[activeStepIdx].image,
-                  gallerySteps[activeStepIdx].title,
-                  gallerySteps[activeStepIdx].caption
-                )}
-              >
-                <img
-                  key={activeStepIdx}
-                  src={gallerySteps[activeStepIdx].image}
-                  alt={gallerySteps[activeStepIdx].title}
-                  loading="lazy"
-                  className="w-full"
-                />
+          <>
+            {/* Hooker — cream theme, giant attention seeker */}
+            <div className="mt-16 mb-0">
+              <div className="h-[3px] w-full bg-ink" />
+              <div className="flex items-end justify-between pt-5 pb-4">
+                <h2 className="font-newsreader text-[2.2rem] md:text-[2.8rem] italic text-ink leading-none">
+                  Here's what it looks like.
+                </h2>
+                <span className="font-inter text-[0.65rem] text-on-surface-variant/50 uppercase tracking-widest mb-1 shrink-0 ml-6">
+                  {String(gallerySteps.length).padStart(2, "0")} screens
+                </span>
               </div>
+              <p className="font-inter text-[0.78rem] text-on-surface-variant/60 mb-0">
+                Click any step above to jump to that screen · use ‹ › to browse · click the image to zoom
+              </p>
+            </div>
 
-              {/* Thumbnail strip */}
-              <div className="flex gap-1.5 px-4 pb-3 overflow-x-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
-                {gallerySteps.map((step, i) => (
-                  <button
-                    key={i}
-                    type="button"
-                    onClick={() => setActiveStepIdx(i)}
-                    className={`shrink-0 w-20 h-14 overflow-hidden transition-opacity ${i === activeStepIdx ? "opacity-100 ring-1 ring-white/50" : "opacity-35 hover:opacity-65"}`}
+            <Reveal delay={100}>
+              <div className="bg-[#0f0f0f] shadow-[0_12px_48px_rgba(0,0,0,0.18)] mt-5">
+
+                {/* Main image — aspect-video canvas owns the height, buttons absolute inside it */}
+                <div
+                  className="relative w-full aspect-video select-none"
+                  onTouchStart={handleTouchStart}
+                  onTouchEnd={handleTouchEnd}
+                >
+                  {/* Image — fills canvas exactly */}
+                  <div
+                    className="absolute inset-0 cursor-zoom-in"
+                    {...zoomClick(
+                      gallerySteps[activeStepIdx].image,
+                      gallerySteps[activeStepIdx].title,
+                      gallerySteps[activeStepIdx].caption
+                    )}
                   >
-                    <img src={step.image} alt={step.title} className="w-full h-full object-cover object-top" />
-                  </button>
-                ))}
-              </div>
+                    <img
+                      key={activeStepIdx}
+                      src={gallerySteps[activeStepIdx].image}
+                      alt={gallerySteps[activeStepIdx].title}
+                      loading="lazy"
+                      className="w-full h-full object-cover object-top"
+                    />
+                  </div>
 
-              {/* Controls bar */}
-              <div className="border-t border-white/10 px-4 py-3 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-4">
+                  {/* Left arrow — always at left-3 top-1/2, never moves */}
                   <button
                     type="button"
-                    onClick={goPrev}
+                    onClick={(e) => { e.stopPropagation(); goPrev(); }}
                     disabled={activeStepIdx === 0}
-                    className="font-inter text-[0.72rem] text-white/50 hover:text-white disabled:opacity-20 transition-colors uppercase tracking-widest"
+                    aria-label="Previous screenshot"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-black/60 hover:bg-black/90 text-white/60 hover:text-white disabled:opacity-0 transition-all duration-150 text-2xl leading-none"
                   >
-                    ← Prev
+                    ‹
                   </button>
-                  <span className="font-inter text-[0.72rem] text-white/25 tabular-nums">
-                    {String(activeStepIdx + 1).padStart(2, "0")} / {String(gallerySteps.length).padStart(2, "0")}
-                  </span>
+
+                  {/* Right arrow — always at right-3 top-1/2, never moves */}
                   <button
                     type="button"
-                    onClick={goNext}
+                    onClick={(e) => { e.stopPropagation(); goNext(); }}
                     disabled={activeStepIdx === gallerySteps.length - 1}
-                    className="font-inter text-[0.72rem] text-white/50 hover:text-white disabled:opacity-20 transition-colors uppercase tracking-widest"
+                    aria-label="Next screenshot"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 flex items-center justify-center bg-black/60 hover:bg-black/90 text-white/60 hover:text-white disabled:opacity-0 transition-all duration-150 text-2xl leading-none"
                   >
-                    Next →
+                    ›
                   </button>
                 </div>
+
+              {/* Thumbnail strip */}
+              <div className="px-4 pb-4">
+                <p className="font-inter text-[0.6rem] text-white/20 uppercase tracking-widest mb-2.5">All screens</p>
+                <div className="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [scrollbar-width:none]">
+                  {gallerySteps.map((step, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => setActiveStepIdx(i)}
+                      className={`relative shrink-0 w-24 h-16 overflow-hidden transition-all duration-200 ${
+                        i === activeStepIdx
+                          ? "opacity-100 ring-2 ring-white scale-[1.06] shadow-[0_0_14px_rgba(255,255,255,0.2)]"
+                          : "opacity-35 hover:opacity-70 hover:ring-1 hover:ring-white/35 hover:scale-[1.03]"
+                      }`}
+                    >
+                      <img src={step.image} alt={step.title} className="w-full h-full object-cover object-top" />
+                      {i === activeStepIdx && (
+                        <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-white" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Bottom bar — counter + caption */}
+              <div className="border-t border-white/10 px-4 py-3 flex items-center justify-between gap-4">
+                <span className="font-inter text-[0.72rem] text-white/35 tabular-nums">
+                  {String(activeStepIdx + 1).padStart(2, "0")} / {String(gallerySteps.length).padStart(2, "0")}
+                </span>
                 {gallerySteps[activeStepIdx].caption && (
                   <p className="font-inter text-[0.72rem] text-white/35 italic text-right max-w-sm leading-relaxed hidden md:block">
                     {gallerySteps[activeStepIdx].caption}
@@ -402,6 +438,7 @@ function AgentFlowProject() {
 
             </div>
           </Reveal>
+          </>
         )}
       </section>
 
