@@ -6,18 +6,26 @@ import {
   MdOutlinePsychology,
   MdOutlineMedicalServices,
   MdOutlineSecurity,
-  MdOutlineSchool,
 } from "react-icons/md";
+import { FaGraduationCap, FaAward, FaBookOpen } from "react-icons/fa";
 
 function Home() {
-  const experience = resumeData.experience.slice(0, 3);
+  const experience = resumeData.experience;
+  const education = resumeData.education[0]; // BSc only
+  const publication = resumeData.publications[0];
 
   const formatDate = (dateStr) => {
     if (!dateStr) return "Present";
     const d = new Date(dateStr);
-    const year = d.getFullYear();
-    const month = d.toLocaleString("default", { month: "short" });
-    return `${month} ${year}`;
+    return d.toLocaleString("default", { month: "short", year: "numeric" });
+  };
+
+  // One-line impact summaries for each role (progressive disclosure)
+  const impactLines = {
+    "Dexian Bangladesh": "AI automation for 600+ Account Managers",
+    "Walton Hi\u2011Tech Industries": "Enterprise RAG chatbot for multiple business functions",
+    "Outlier": "LLM training data & prompt engineering at scale",
+    "Young Learner's Research Lab": "Fine-tuned LLMs for abstractive summarization",
   };
 
   return (
@@ -25,7 +33,7 @@ function Home() {
       {/* ===== HERO SECTION ===== */}
       <section className="mb-xl flex flex-col md:flex-row items-center gap-16">
         {/* Photo */}
-        <div className="w-full md:w-1/3 shrink-0 max-w-[300px] relative">
+        <div className="w-full md:w-1/3 shrink-0 max-w-[300px]">
           <div className="border border-surface-variant p-2 bg-surface-container-low">
             <img
               src={avatarImg}
@@ -50,27 +58,29 @@ function Home() {
             between cutting-edge academic research and robust, scalable
             production environments.
           </p>
-          <div className="mt-8 flex gap-4">
+          <div className="mt-8 flex flex-wrap gap-4">
             <Link
               to="/project"
               className="bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] hover:bg-surface hover:text-ink border border-ink transition-colors duration-200 no-underline"
             >
               View Projects
             </Link>
-            <Link
-              to="/resume"
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
             >
-              Read CV
-            </Link>
+              Download CV
+            </a>
           </div>
         </div>
       </section>
 
-      {/* ===== ABOUT & FOCUS DIVIDER ===== */}
+      {/* ===== FOCUS AREAS DIVIDER ===== */}
       <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
         <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          About & Focus
+          Focus Areas
         </span>
       </div>
 
@@ -105,8 +115,8 @@ function Home() {
           </p>
         </div>
 
-        {/* Cybersecurity */}
-        <div className="col-span-1 border border-surface-variant bg-surface-container-low p-md">
+        {/* Cybersecurity — spans 2 cols */}
+        <div className="col-span-1 md:col-span-2 border border-surface-variant bg-surface-container-low p-md">
           <div className="flex items-center gap-3 mb-4">
             <MdOutlineSecurity className="text-ink text-2xl" />
             <h3 className="font-newsreader text-h3 text-ink">
@@ -115,30 +125,8 @@ function Home() {
           </div>
           <p className="font-inter text-body-md text-on-surface-variant">
             Integrating machine learning models into robust security pipelines
-            for anomaly detection.
+            for anomaly detection and threat intelligence.
           </p>
-        </div>
-
-        {/* Academic Foundations — spans 2 cols */}
-        <div className="col-span-1 md:col-span-2 border border-surface-variant bg-surface-container-low p-md flex items-center justify-between">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <MdOutlineSchool className="text-ink text-2xl" />
-              <h3 className="font-newsreader text-h3 text-ink">
-                Academic Foundations
-              </h3>
-            </div>
-            <p className="font-inter text-body-md text-on-surface-variant">
-              B.Sc. in Computer Science & Engineering
-              <br />
-              Rajshahi University of Engineering & Technology (RUET)
-            </p>
-          </div>
-          <div className="hidden sm:block text-right">
-            <span className="font-inter text-label-caps border border-surface-variant px-3 py-1 bg-surface inline-block uppercase tracking-[0.1em]">
-              Graduated
-            </span>
-          </div>
         </div>
       </section>
 
@@ -150,46 +138,146 @@ function Home() {
       </div>
 
       {/* ===== EXPERIENCE TIMELINE ===== */}
-      <section className="mb-xl">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+      <section className="mb-lg">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-0 gap-x-8">
           {experience.map((exp, index) => (
             <React.Fragment key={index}>
               {/* Date column */}
               <div className="md:col-span-3 text-left md:text-right">
                 <p className="font-inter text-label-caps text-on-surface-variant pt-2 uppercase tracking-[0.1em]">
-                  {exp.end ? `${formatDate(exp.start).split(" ")[1]} - ${formatDate(exp.end).split(" ")[1]}` : "Present"}
+                  {formatDate(exp.start)} — {formatDate(exp.end)}
                 </p>
               </div>
 
               {/* Content column */}
               <div
                 className={`md:col-span-9 border-l border-surface-variant pl-8 relative ${
-                  index < experience.length - 1 ? "pb-12" : ""
+                  index < experience.length - 1 ? "pb-10" : ""
                 }`}
               >
                 {/* Timeline marker */}
                 <div
                   className={`absolute w-3 h-3 -left-[6px] top-2 ${
-                    !exp.end
-                      ? "bg-ink"
-                      : "border border-ink bg-surface"
+                    !exp.end ? "bg-ink" : "border border-ink bg-surface"
                   }`}
                 ></div>
 
                 <h3 className="font-newsreader text-h3 text-ink mb-1">
                   {exp.role}
                 </h3>
-                <p className="font-inter text-body-lg text-on-surface-variant mb-4">
+                <p className="font-inter text-body-md text-on-surface-variant mb-2">
                   {exp.company}
                 </p>
-                <p className="font-inter text-body-md text-on-surface-variant max-w-2xl">
-                  {exp.summary || exp.highlights?.[0] || ""}
+                <p className="font-inter text-body-md text-on-surface-variant opacity-80">
+                  {impactLines[exp.company] || exp.highlights?.[0] || ""}
                 </p>
               </div>
             </React.Fragment>
           ))}
         </div>
+
+        {/* Link to About */}
+        <div className="mt-8 md:ml-[25%] pl-8">
+          <Link
+            to="/about"
+            className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline"
+          >
+            View full background &rarr;
+          </Link>
+        </div>
       </section>
+
+      {/* ===== EDUCATION & CREDENTIALS DIVIDER ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-xl mt-xl">
+        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+          Education & Credentials
+        </span>
+      </div>
+
+      {/* ===== EDUCATION & CREDENTIALS ===== */}
+      <section className="mb-xl">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+          {/* Main education */}
+          <div className="md:col-span-7">
+            <div className="flex items-start gap-3 mb-3">
+              <FaGraduationCap className="text-ink text-xl mt-1 shrink-0" />
+              <div>
+                <h3 className="font-newsreader text-h3 text-ink mb-1">
+                  B.Sc. in Computer Science & Engineering
+                </h3>
+                <p className="font-inter text-body-md text-on-surface-variant">
+                  Rajshahi University of Engineering & Technology (RUET)
+                </p>
+                <p className="font-inter text-body-md text-on-surface-variant opacity-80">
+                  {education.date} &middot; CGPA: {education.cgpa}
+                </p>
+              </div>
+            </div>
+
+            {/* Thesis */}
+            <div className="flex items-start gap-3 mt-6 mb-3">
+              <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
+              <div>
+                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                  Thesis
+                </p>
+                <p className="font-inter text-body-md text-ink">
+                  {education.thesis.title}
+                </p>
+              </div>
+            </div>
+
+            {/* Publication */}
+            {publication && (
+              <div className="flex items-start gap-3 mt-6">
+                <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
+                <div>
+                  <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                    Publication
+                  </p>
+                  <p className="font-inter text-body-md text-ink">
+                    {publication.title}
+                  </p>
+                  <p className="font-inter text-body-md text-on-surface-variant">
+                    {publication.venue}, {publication.year} &middot; {publication.summary.split(";")[0]}
+                  </p>
+                  {publication.scholarProfile && (
+                    <a
+                      href={publication.scholarProfile}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline inline-block mt-2"
+                    >
+                      Google Scholar &rarr;
+                    </a>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Awards sidebar */}
+          <div className="md:col-span-5">
+            <div className="flex items-center gap-2 mb-4">
+              <FaAward className="text-ink text-lg" />
+              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+                Awards & Scholarships
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {resumeData.awards.slice(0, 3).map((award, i) => (
+                <span
+                  key={i}
+                  className="font-inter text-[0.8rem] text-on-surface-variant border border-surface-variant px-3 py-1.5 bg-surface-container-low inline-block"
+                >
+                  {award.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
   );
 }

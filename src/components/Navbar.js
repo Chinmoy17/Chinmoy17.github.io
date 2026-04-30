@@ -8,9 +8,10 @@ function NavBar() {
 
   const navLinks = [
     { label: "Home", path: "/" },
-    { label: "Research", path: "/research" },
+    { label: "About", path: "/about" },
     { label: "Projects", path: "/project" },
-    { label: "CV", path: "/resume" },
+    { label: "Research", path: "/research" },
+    { label: "Contact", path: "/contact" },
   ];
 
   const isActive = (path) => {
