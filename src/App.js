@@ -14,9 +14,9 @@ import Resume from "./components/Resume/ResumeNew";
 // Travel blog temporarily disabled
 // import TravelBlog from "./components/TravelBlog/TravelBlog";
 import ScrollToTop from "./components/ScrollToTop";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 // import TravelBlogDetail from "./components/TravelBlog/TravelBlogDetail";
 
 
