@@ -116,7 +116,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
   };
 
   return (
-    <article className="relative mb-24 last:mb-0">
+    <article className="relative mb-28 last:mb-15">
       {/* Timeline marker — horizontal dash */}
       <div
         className={`hidden md:block absolute -left-[33px] top-[14px] w-4 h-px ${
@@ -128,12 +128,18 @@ function ExperienceEntry({ exp, defaultExpanded }) {
       <header className="mb-3">
         <div className="flex items-center justify-between gap-4 mb-1">
           <div className="flex items-center gap-3">
-            {logo && (
+            {logo ? (
               <img
                 src={logo}
                 alt={exp.company}
                 className="w-10 h-10 object-contain border border-surface-variant shrink-0"
               />
+            ) : (
+              <div className="w-10 h-10 border border-surface-variant flex items-center justify-center bg-surface-container-low shrink-0">
+                <span className="font-inter text-[0.7rem] font-semibold text-on-surface-variant uppercase">
+                  {exp.company.split(" ").map(w => w[0]).join("").slice(0, 2)}
+                </span>
+              </div>
             )}
             <h3 className="font-newsreader text-h3 text-ink leading-none">{exp.role}</h3>
             {isCurrentRole && (
@@ -167,8 +173,8 @@ function ExperienceEntry({ exp, defaultExpanded }) {
           {exp.summary}
         </p>
 
-        {/* Tech Stack + Toggle in same row */}
-        <div className="flex flex-wrap items-center gap-2 mb-1">
+        {/* Tech Stack */}
+        <div className="flex flex-wrap items-center gap-2">
           {exp.techStack && exp.techStack.map((tech, i) => (
             <span
               key={i}
@@ -177,24 +183,30 @@ function ExperienceEntry({ exp, defaultExpanded }) {
               {tech}
             </span>
           ))}
+        </div>
 
-          {/* Contributions toggle — inline after tech stack */}
-          {exp.highlights && exp.highlights.length > 0 && (
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="font-inter text-[0.75rem] text-ink/60 flex items-center gap-1.5 hover:text-ink transition-colors bg-transparent border-none cursor-pointer p-0 ml-1"
-            >
-              <span className="border-b border-dotted border-ink/40 pb-px">
-                {expanded ? "Hide details" : "See details"}
-              </span>
+        {/* See Impact button — below tech stack with inviting animation */}
+        {exp.highlights && exp.highlights.length > 0 && (
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-4 font-inter text-[0.75rem] uppercase tracking-[0.08em] text-ink flex items-center gap-2 hover:gap-3 transition-all duration-300 bg-transparent border-none cursor-pointer p-0 group"
+          >
+            <span className="border-b border-ink/50 pb-px group-hover:border-ink transition-colors">
+              {expanded ? "Hide Impact" : "See Impact"}
+            </span>
+            <span className={`inline-flex flex-col items-center -gap-1 transition-transform duration-300 ${!expanded ? "animate-bounce-x" : ""}`}>
               {expanded ? (
                 <FaChevronUp className="text-[0.5rem]" />
               ) : (
-                <FaChevronDown className="text-[0.5rem]" />
+                <>
+                  <FaChevronDown className="text-[0.45rem] -mb-[3px]" />
+                  <FaChevronDown className="text-[0.45rem] -mb-[3px] opacity-70" />
+                  <FaChevronDown className="text-[0.45rem] opacity-40" />
+                </>
               )}
-            </button>
-          )}
-        </div>
+            </span>
+          </button>
+        )}
 
         {/* Highlights - collapsible */}
         {expanded && exp.highlights && exp.highlights.length > 0 && (
@@ -225,15 +237,13 @@ function About() {
       {/* Page Title */}
       <section className="mb-xl">
         <Reveal>
-          <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-4 tracking-[0.1em]">
-            Background
-          </p>
+          
           <h1 className="font-newsreader text-h1 text-ink mb-6">
             About Me
           </h1>
           <div className="h-[1px] w-16 bg-ink mb-6"></div>
           <p className="font-inter text-body-lg text-on-surface-variant max-w-3xl">
-            {resumeData.summary}
+            A detailed look at the systems I've built, the research that shaped my thinking, and the tools I reach for. Scroll through experience, education, publications, and technical skills below.
           </p>
         </Reveal>
       </section>
@@ -291,86 +301,101 @@ function About() {
         </div>
 
         {/* Right Column: Education Content */}
-        <div className="md:col-span-9">
+        <div className="md:col-span-9 relative pl-0 md:pl-8">
+          {/* Vertical timeline line */}
+          <div className="hidden md:block absolute left-0 top-2 bottom-0 w-px bg-surface-variant"></div>
+
           {education.map((edu, index) => (
             <Reveal key={index} delay={index * 100}>
-              <div className="border border-surface-variant bg-surface-container-lowest p-md mb-6 last:mb-0">
-                <header className="mb-4 border-b border-surface-variant pb-3">
-                  <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-1">
-                    <h3 className="font-newsreader text-h3 text-ink">
+              <article className="relative mb-20">
+                {/* Timeline marker */}
+                <div className="hidden md:block absolute -left-[33px] top-[14px] w-4 h-px bg-surface-variant"></div>
+
+                {/* Header: Degree + Date on same line */}
+                <header className="mb-3">
+                  <div className="flex items-center justify-between gap-4 mb-1">
+                    <h3 className="font-newsreader text-h3 text-ink leading-none">
                       {edu.degree}
                     </h3>
-                    <span className="font-inter text-[0.8rem] text-on-surface-variant shrink-0">
+                    <span className="font-inter text-[0.8rem] text-on-surface-variant shrink-0 hidden sm:block">
                       {edu.date}
                     </span>
                   </div>
-                  <p className="font-inter text-body-md text-on-surface-variant">
-                    {edu.institution}
-                  </p>
-                  <div className="flex flex-wrap items-center gap-4 mt-2 font-inter text-[0.8rem] text-on-surface-variant/60">
+                  <div className="flex flex-wrap items-center gap-3 font-inter text-body-md text-on-surface-variant">
+                    <span className="text-ink font-medium">{edu.institution}</span>
                     {edu.location && (
-                      <span className="flex items-center gap-1">
-                        <FaMapMarkerAlt className="text-[0.7rem]" />
+                      <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/60">
+                        <FaMapMarkerAlt className="text-[0.6rem]" />
                         {edu.location}
                       </span>
                     )}
                     {(edu.cgpa || edu.gpa) && (
-                      <span>{edu.cgpa || `GPA: ${edu.gpa}`}</span>
+                      <span className="text-[0.8rem] text-on-surface-variant/60">
+                        {edu.cgpa || `GPA: ${edu.gpa}`}
+                      </span>
                     )}
+                    <span className="font-inter text-[0.8rem] text-on-surface-variant sm:hidden">
+                      {edu.date}
+                    </span>
                   </div>
                 </header>
 
-                {edu.thesis && (
-                  <div className="mb-4">
-                    <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">
-                      Thesis
-                    </h4>
-                    <p className="font-inter text-body-md text-ink">
-                      {edu.thesis.title}
-                    </p>
-                    <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">
-                      Supervisor: {edu.thesis.supervisor}
-                    </p>
-                  </div>
-                )}
+                {/* Content area with nested left border — only if there's content */}
+                {(edu.thesis || edu.coursework || edu.awards) && (
+                  <div className="pl-0 md:pl-5 md:border-l md:border-surface-variant pt-2 mt-3">
+                    {edu.thesis && (
+                      <div className="mb-5">
+                        <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1.5">
+                          Thesis
+                        </h4>
+                        <p className="font-inter text-body-md text-ink leading-relaxed">
+                          {edu.thesis.title}
+                        </p>
+                        <p className="font-inter text-[0.8rem] text-on-surface-variant/70 mt-1">
+                          Supervisor: {edu.thesis.supervisor}
+                        </p>
+                      </div>
+                    )}
 
-                {edu.coursework && (
-                  <div className="mb-4">
-                    <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
-                      Key Coursework
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {edu.coursework.map((course, i) => (
-                        <span
-                          key={i}
-                          className="font-inter text-[0.75rem] text-on-surface-variant border border-surface-variant px-2.5 py-1 bg-background"
-                        >
-                          {course}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                    {edu.coursework && (
+                      <div className="mb-5">
+                        <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                          Key Coursework
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {edu.coursework.map((course, i) => (
+                            <span
+                              key={i}
+                              className="font-inter text-[0.7rem] text-on-surface-variant border border-surface-variant px-2.5 py-1 bg-surface-container-low"
+                            >
+                              {course}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
-                {edu.awards && (
-                  <div>
-                    <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
-                      Awards
-                    </h4>
-                    <div className="flex flex-wrap gap-2">
-                      {edu.awards.map((award, i) => (
-                        <span
-                          key={i}
-                          className="font-inter text-[0.75rem] text-ink border border-surface-variant px-2.5 py-1 bg-background"
-                        >
-                          <FaAward className="inline mr-1 text-[0.65rem]" />
-                          {award}
-                        </span>
-                      ))}
-                    </div>
+                    {edu.awards && (
+                      <div>
+                        <h4 className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
+                          Awards
+                        </h4>
+                        <div className="flex flex-wrap gap-2">
+                          {edu.awards.map((award, i) => (
+                            <span
+                              key={i}
+                              className="font-inter text-[0.7rem] text-ink border border-surface-variant px-2.5 py-1 bg-surface-container-low"
+                            >
+                              <FaAward className="inline mr-1 text-[0.6rem]" />
+                              {award}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
-              </div>
+              </article>
             </Reveal>
           ))}
         </div>

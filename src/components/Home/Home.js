@@ -29,7 +29,7 @@ function Home() {
   };
 
   return (
-    <main className="max-w-container mx-auto px-8 pt-24 pb-xl">
+    <main className="max-w-container mx-auto px-8 pt-24 pb-0">
       {/* ===== HERO SECTION ===== */}
       <section className="mb-xl flex flex-col md:flex-row items-center gap-16">
         {/* Photo */}
@@ -84,60 +84,80 @@ function Home() {
         </div>
       </section>
 
-      {/* ===== FOCUS AREAS DIVIDER ===== */}
+      {/* ===== WHAT I BUILD ===== */}
       <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
         <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Focus Areas
+          What I Build
         </span>
       </div>
 
-      {/* ===== BENTO GRID: RESEARCH INTERESTS ===== */}
-      <section className="mb-xl grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Reveal delay={100} className="col-span-1 md:col-span-2">
-          <div className="border border-surface-variant bg-surface-container-low p-md h-full">
-            <div className="flex items-center gap-3 mb-4">
-              <MdOutlinePsychology className="text-ink text-2xl" />
-              <h3 className="font-newsreader text-h3 text-ink">
-                Generative AI & LLMs
-              </h3>
-            </div>
-            <p className="font-inter text-body-md text-on-surface-variant">
-              Exploring novel architectures for Large Language Models to improve
-              reasoning capabilities, reduce hallucination rates, and optimize
-              inference performance for real-time applications.
+      <section className="mb-xl">
+        {/* Two-column: statement + focus items */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+          {/* Left: editorial statement */}
+          <Reveal className="md:col-span-5">
+            <p className="font-newsreader text-[1.75rem] italic text-ink/90 leading-relaxed">
+              I design systems that think, reason, and act — from LLM orchestration to production ML pipelines that serve real users at scale.
             </p>
-          </div>
-        </Reveal>
+          </Reveal>
 
-        <Reveal delay={200} className="col-span-1">
-          <div className="border border-surface-variant bg-surface-container-low p-md h-full">
-            <div className="flex items-center gap-3 mb-4">
-              <MdOutlineMedicalServices className="text-ink text-2xl" />
-              <h3 className="font-newsreader text-h3 text-ink">
-                Medical Deep Learning
-              </h3>
-            </div>
-            <p className="font-inter text-body-md text-on-surface-variant">
-              Applying advanced neural networks to complex diagnostic imaging and
-              patient data analysis.
-            </p>
-          </div>
-        </Reveal>
+          {/* Right: 3 focus areas, open layout */}
+          <div className="md:col-span-7 space-y-10">
+            <Reveal delay={100}>
+              <div className="border-b border-surface-variant pb-8">
+                <div className="flex items-center gap-2 mb-2">
+                  <MdOutlinePsychology className="text-ink text-lg" />
+                  <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
+                    Agentic AI & LLM Systems
+                  </h3>
+                </div>
+                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
+                  Built Note2Action — an automation predicting next actions for 600+ account managers. Designed evaluation pipelines that catch regressions before rollout.
+                </p>
+                <Link
+                  to="/project"
+                  className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                >
+                  View Projects &rarr;
+                </Link>
+              </div>
+            </Reveal>
 
-        <Reveal delay={300} className="col-span-1 md:col-span-2">
-          <div className="border border-surface-variant bg-surface-container-low p-md h-full">
-            <div className="flex items-center gap-3 mb-4">
-              <MdOutlineSecurity className="text-ink text-2xl" />
-              <h3 className="font-newsreader text-h3 text-ink">
-                Cybersecurity
-              </h3>
-            </div>
-            <p className="font-inter text-body-md text-on-surface-variant">
-              Integrating machine learning models into robust security pipelines
-              for anomaly detection and threat intelligence.
-            </p>
+            <Reveal delay={200}>
+              <div className="border-b border-surface-variant pb-8">
+                <div className="flex items-center gap-2 mb-2">
+                  <MdOutlineMedicalServices className="text-ink text-lg" />
+                  <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
+                    Medical Deep Learning
+                  </h3>
+                </div>
+                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
+                  Thesis on transfer learning for brain tumor classification (VGG16, ResNet50, InceptionV3). Published at IEEE QPAN 2025.
+                </p>
+                <Link
+                  to="/research"
+                  className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                >
+                  Read Research &rarr;
+                </Link>
+              </div>
+            </Reveal>
+
+            <Reveal delay={300}>
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <MdOutlineSecurity className="text-ink text-lg" />
+                  <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
+                    Cybersecurity & Infrastructure
+                  </h3>
+                </div>
+                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed">
+                  Integrating ML models into security pipelines for anomaly detection and threat intelligence. Background in network security and secure system architecture.
+                </p>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* ===== PROFESSIONAL TRAJECTORY DIVIDER ===== */}
@@ -298,6 +318,45 @@ function Home() {
             </Reveal>
           </div>
         </div>
+      </section>
+
+      {/* ===== CURRENTLY + NAVIGATION CLOSER ===== */}
+      <Reveal>
+        <div className="w-full h-px bg-surface-variant mb-lg mt-xl"></div>
+      </Reveal>
+
+      <section className="mb-0 pb-12 text-center">
+        <Reveal delay={100}>
+          <p className="font-newsreader text-[1.5rem] italic text-ink/80 max-w-2xl mx-auto leading-relaxed mb-3">
+            Currently building agentic AI systems at Dexian.
+          </p>
+          <p className="font-inter text-body-md text-on-surface-variant/70 max-w-xl mx-auto">
+            Open to research collaborations in NLP, medical imaging, and LLM evaluation.
+          </p>
+        </Reveal>
+
+        <Reveal delay={300}>
+          <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-12">
+            <Link
+              to="/project"
+              className="font-inter text-body-lg text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+            >
+              View Projects &rarr;
+            </Link>
+            <Link
+              to="/research"
+              className="font-inter text-body-lg text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+            >
+              Read Research &rarr;
+            </Link>
+            <Link
+              to="/contact"
+              className="font-inter text-body-lg text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+            >
+              Get in Touch &rarr;
+            </Link>
+          </div>
+        </Reveal>
       </section>
     </main>
   );

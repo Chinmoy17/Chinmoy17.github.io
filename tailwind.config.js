@@ -102,6 +102,15 @@ module.exports = {
       borderRadius: {
         none: "0",
       },
+      keyframes: {
+        "bounce-x": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(3px)" },
+        },
+      },
+      animation: {
+        "bounce-x": "bounce-x 0.8s ease-in-out infinite",
+      },
     },
   },
   plugins: [],
