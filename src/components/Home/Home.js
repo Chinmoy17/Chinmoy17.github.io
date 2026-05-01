@@ -3,36 +3,86 @@ import { Link } from "react-router-dom";
 import resumeData from "../../data/resume.json";
 import avatarImg from "../../Assets/avatar.png";
 import { Reveal } from "../utils/Reveal";
-import {
-  MdOutlinePsychology,
-  MdOutlineSecurity,
-} from "react-icons/md";
-import { FaGraduationCap, FaAward, FaBookOpen } from "react-icons/fa";
+import { MdOutlineHub, MdOutlineApps, MdOutlineTune } from "react-icons/md";
 
 function Home() {
-  const experience = resumeData.experience;
-  const education = resumeData.education[0];
-  const publication = resumeData.publications[0];
+  const milestones = [
+    {
+      date: "2019 – 2024",
+      title: "B.Sc. Computer Science",
+      org: "RUET",
+      note: "CGPA 3.65 · Thesis: Brain Tumor Classification",
+      current: false,
+    },
+    {
+      date: "Mar 2024 – Jul 2025",
+      title: "AI Contributor",
+      org: "Outlier",
+      note: "LLM training data & prompt engineering at scale",
+      current: false,
+    },
+    {
+      date: "2025",
+      title: "Published",
+      org: "IEEE QPAN 2025",
+      note: "Brain tumor classification via transfer learning",
+      current: false,
+    },
+    {
+      date: "Aug – Oct 2025",
+      title: "AI Intern",
+      org: "Walton Hi-Tech Industries",
+      note: "Enterprise RAG chatbot for multiple business units",
+      current: false,
+    },
+    {
+      date: "Oct 2025 – Present",
+      title: "App Dev: AI/ML",
+      org: "Dexian Bangladesh",
+      note: "Note2Action · DemoFactory · Agentic AI systems",
+      current: true,
+    },
+  ];
 
-  const formatDate = (dateStr) => {
-    if (!dateStr) return "Present";
-    const d = new Date(dateStr);
-    return d.toLocaleString("default", { month: "short", year: "numeric" });
-  };
+  const focusAreas = [
+    {
+      icon: MdOutlineHub,
+      title: "Agentic AI & LLM Systems",
+      body: "Built Note2Action — an automation predicting next actions for 600+ account managers. Designed evaluation pipelines that catch regressions before rollout.",
+      linkLabel: "View Projects →",
+      linkTo: "/project",
+      external: false,
+    },
+    {
+      icon: MdOutlineApps,
+      title: "RFP Platform & Demo Automation",
+      body: "Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries. End-to-end proposal automation with agentic orchestration.",
+      linkLabel: "View Projects →",
+      linkTo: "/project",
+      external: false,
+    },
+    {
+      icon: MdOutlineTune,
+      title: "DSPy & Evaluation-Driven LLMs",
+      body: "Implemented evaluation-driven iteration with test sets, rubrics, and regression suites. Ran controlled DSPy optimization experiments showing 38% cost reduction and +9.6% accuracy gains.",
+      linkLabel: "Read Research →",
+      linkTo: "/research/dspy-rag-optimization",
+      external: false,
+    },
+  ];
 
-  const impactLines = {
-    "Dexian Bangladesh": "AI automation for 600+ Account Managers",
-    "Walton Hi\u2011Tech Industries": "Enterprise RAG chatbot for multiple business functions",
-    "Outlier": "LLM training data & prompt engineering at scale",
-    "Young Learner's Research Lab": "Fine-tuned LLMs for abstractive summarization",
-  };
+  const techStack = [
+    "Python", "DSPy 2.5+", "LangChain", "FastAPI",
+    "Azure OpenAI", "React", "FAISS", "PostgreSQL", "Docker",
+  ];
 
   return (
     <main className="max-w-container mx-auto px-8 pt-24 pb-0">
-      {/* ===== HERO SECTION ===== */}
+
+      {/* ===== HERO ===== */}
       <section className="mb-xl flex flex-col md:flex-row items-center gap-16">
         {/* Photo */}
-        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[300px]">
+        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[280px]">
           <div className="border border-surface-variant p-2 bg-surface-container-low">
             <img
               src={avatarImg}
@@ -55,11 +105,14 @@ function Home() {
             </h1>
           </Reveal>
           <Reveal delay={300}>
-            <div className="h-[1px] w-16 bg-ink mb-6"></div>
-            <p className="font-inter text-body-lg text-on-surface-variant max-w-2xl">
-              Full-Stack AI Developer & Collaborative Researcher (2+ Years Exp).
-              Architecting end-to-end pipelines and integrating advanced LLMs, RAG
-              systems, and agentic workflows into scalable enterprise solutions.
+            <div className="h-[1px] w-16 bg-ink mb-6" />
+            <p className="font-inter text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+              I design and build production AI systems — agentic workflows, RAG
+              pipelines, and evaluation frameworks that ship to real enterprise
+              environments. Currently at Dexian Bangladesh, where I shipped
+              Note2Action for 600+ account managers and DemoFactory for
+              AI-driven app generation. Also researching DSPy optimization and
+              medical imaging on the side.
             </p>
           </Reveal>
           <Reveal delay={400}>
@@ -71,12 +124,12 @@ function Home() {
                 View Projects
               </Link>
               <a
-                href="/resume.pdf"
+                href={resumeData.links.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
               >
-                Download CV
+                LinkedIn →
               </a>
             </div>
           </Reveal>
@@ -84,281 +137,194 @@ function Home() {
       </section>
 
       {/* ===== WHAT I BUILD ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-[0.85rem] left-0 bg-surface pr-6 font-newsreader text-[1.3rem] text-ink leading-none">
           What I Build
         </span>
       </div>
 
       <section className="mb-xl">
-        {/* Two-column: statement + focus items */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Left: editorial statement */}
           <Reveal className="md:col-span-5">
             <p className="font-newsreader text-[1.75rem] italic text-ink/90 leading-relaxed">
-              I design systems that think, reason, and act — from LLM orchestration to production ML pipelines that serve real users at scale.
+              I design systems that think, reason, and act — from LLM
+              orchestration to production ML pipelines that serve real users at
+              scale.
             </p>
           </Reveal>
 
-          {/* Right: 3 focus areas, open layout */}
+          {/* Right: 3 focus areas */}
           <div className="md:col-span-7 space-y-10">
-            <Reveal delay={100}>
-              <div className="border-b border-surface-variant pb-8">
-                <div className="flex items-center gap-2 mb-2">
-                  <MdOutlinePsychology className="text-ink text-lg" />
-                  <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
-                    Agentic AI & LLM Systems
-                  </h3>
+            {focusAreas.map((item, i) => (
+              <Reveal key={i} delay={i * 100}>
+                <div className={i < focusAreas.length - 1 ? "border-b border-surface-variant pb-8" : ""}>
+                  <div className="flex items-center gap-2 mb-2">
+                    <item.icon className="text-ink text-[1.1rem] shrink-0 -mt-3" />
+                    <h3 className="font-newsreader text-[1.25rem] text-ink font-medium leading-none">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
+                    {item.body}
+                  </p>
+                  <Link
+                    to={item.linkTo}
+                    className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                  >
+                    {item.linkLabel}
+                  </Link>
                 </div>
-                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
-                  Built Note2Action — an automation predicting next actions for 600+ account managers. Designed evaluation pipelines that catch regressions before rollout.
-                </p>
-                <Link
-                  to="/project"
-                  className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                >
-                  View Projects &rarr;
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal delay={200}>
-              <div className="border-b border-surface-variant pb-8">
-                <div className="flex items-center gap-2 mb-2">
-                  <MdOutlineSecurity className="text-ink text-lg" />
-                  <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
-                    RFP Platform
-                  </h3>
-                </div>
-                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
-                  Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries. End-to-end proposal automation with agentic orchestration.
-                </p>
-                <Link
-                  to="/project"
-                  className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                >
-                  View Projects &rarr;
-                </Link>
-              </div>
-            </Reveal>
-
-            <Reveal delay={300}>
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <MdOutlinePsychology className="text-ink text-lg" />
-                  <h3 className="font-newsreader text-[1.25rem] text-ink font-medium">
-                    DSPy & Evaluation-Driven LLMs
-                  </h3>
-                </div>
-                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
-                  Implemented evaluation-driven iteration for prompts and LLM behaviors — test sets, rubrics, and regression suites to improve quality before rollout. Programmatic prompt optimization over manual engineering.
-                </p>
-                <Link
-                  to="/research/dspy-rag-optimization"
-                  className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                >
-                  Read Research &rarr;
-                </Link>
-              </div>
-            </Reveal>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ===== PROFESSIONAL TRAJECTORY DIVIDER ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Professional Trajectory
+      {/* ===== JOURNEY / TIMELINE ===== */}
+      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
+        <span className="absolute -top-[0.85rem] left-0 bg-surface pr-6 font-newsreader text-[1.3rem] text-ink leading-none">
+          Timeline
         </span>
       </div>
 
-      {/* ===== EXPERIENCE TIMELINE ===== */}
-      <section className="mb-lg">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-y-0 gap-x-8">
-          {experience.map((exp, index) => (
-            <React.Fragment key={index}>
-              {/* Date column */}
-              <Reveal delay={index * 100} className="md:col-span-3 text-left md:text-right">
-                <p className="font-inter text-label-caps text-on-surface-variant pt-2 uppercase tracking-[0.1em]">
-                  {formatDate(exp.start)} — {formatDate(exp.end)}
-                </p>
-              </Reveal>
+      <section className="mb-xl">
+        {/* Desktop: horizontal */}
+        <Reveal>
+          <div className="hidden md:block relative mb-8">
+            {/* connecting line */}
+            <div className="absolute top-[7px] left-0 right-0 h-px bg-surface-variant" />
+            <div className="flex">
+              {milestones.map((m, i) => (
+                <div key={i} className="flex-1 flex flex-col items-start relative pr-4">
+                  {/* node */}
+                  <div className={`w-3.5 h-3.5 border relative z-10 mb-4 ${
+                    m.current
+                      ? "bg-ink border-ink"
+                      : "bg-surface border-on-surface-variant/40"
+                  }`} />
+                  <p className="font-inter text-[0.6rem] uppercase tracking-[0.12em] text-on-surface-variant/40 mb-1 leading-none">
+                    {m.date}
+                  </p>
+                  <p className="font-inter text-[0.82rem] font-semibold text-ink leading-tight mb-0.5">
+                    {m.title}
+                  </p>
+                  <p className="font-inter text-[0.75rem] text-on-surface-variant/70 leading-tight mb-1">
+                    {m.org}
+                  </p>
+                  <p className="font-inter text-[0.68rem] text-on-surface-variant/45 leading-snug">
+                    {m.note}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
 
-              {/* Content column */}
-              <Reveal
-                delay={index * 100 + 50}
-                className={`md:col-span-9 border-l border-surface-variant pl-8 relative ${
-                  index < experience.length - 1 ? "pb-10" : ""
-                }`}
-              >
-                {/* Timeline marker */}
-                <div
-                  className={`absolute w-3 h-3 -left-[6px] top-2 ${
-                    !exp.end ? "bg-ink" : "border border-ink bg-surface"
-                  }`}
-                ></div>
-
-                <h3 className="font-newsreader text-h3 text-ink mb-1">
-                  {exp.role}
-                </h3>
-                <p className="font-inter text-body-md text-on-surface-variant mb-2">
-                  {exp.company}
-                </p>
-                <p className="font-inter text-body-md text-on-surface-variant opacity-80">
-                  {impactLines[exp.company] || exp.highlights?.[0] || ""}
-                </p>
-              </Reveal>
-            </React.Fragment>
+        {/* Mobile: vertical */}
+        <div className="md:hidden relative mb-8">
+          <div className="absolute left-[6px] top-2 bottom-2 w-px bg-surface-variant" />
+          {milestones.map((m, i) => (
+            <Reveal key={i} delay={i * 80}>
+              <div className="flex gap-5 pb-6 last:pb-0">
+                <div className={`shrink-0 w-3.5 h-3.5 border mt-0.5 relative z-10 ${
+                  m.current
+                    ? "bg-ink border-ink"
+                    : "bg-surface border-on-surface-variant/40"
+                }`} />
+                <div>
+                  <p className="font-inter text-[0.62rem] uppercase tracking-[0.12em] text-on-surface-variant/40 mb-0.5">
+                    {m.date}
+                  </p>
+                  <p className="font-inter text-[0.85rem] font-semibold text-ink leading-tight">
+                    {m.title}
+                  </p>
+                  <p className="font-inter text-[0.78rem] text-on-surface-variant/70">
+                    {m.org}
+                  </p>
+                  <p className="font-inter text-[0.72rem] text-on-surface-variant/45 leading-snug mt-0.5">
+                    {m.note}
+                  </p>
+                </div>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        {/* Link to About */}
+        <Reveal delay={400}>
+          <Link
+            to="/about"
+            className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+          >
+            Full background & experience →
+          </Link>
+        </Reveal>
+
+        {/* Tech stack */}
         <Reveal delay={500}>
-          <div className="mt-8 md:ml-[25%] pl-8">
-            <Link
-              to="/about"
-              className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline"
-            >
-              View full background &rarr;
-            </Link>
+          <div className="mt-10 pt-8 border-t border-surface-variant">
+            <p className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/40 mb-4">
+              Technologies
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {techStack.map((t) => (
+                <span
+                  key={t}
+                  className="font-inter text-[0.72rem] text-on-surface-variant border border-surface-variant px-2.5 py-1"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         </Reveal>
       </section>
 
-      {/* ===== EDUCATION & CREDENTIALS DIVIDER ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl mt-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Education & Credentials
-        </span>
-      </div>
-
-      {/* ===== EDUCATION & CREDENTIALS ===== */}
-      <section className="mb-xl">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {/* Main education */}
-          <div className="md:col-span-7">
-            <Reveal delay={100}>
-              <div className="flex items-start gap-3 mb-3">
-                <FaGraduationCap className="text-ink text-xl mt-1 shrink-0" />
-                <div>
-                  <h3 className="font-newsreader text-h3 text-ink mb-1">
-                    B.Sc. in Computer Science & Engineering
-                  </h3>
-                  <p className="font-inter text-body-md text-on-surface-variant">
-                    Rajshahi University of Engineering & Technology (RUET)
-                  </p>
-                  <p className="font-inter text-body-md text-on-surface-variant opacity-80">
-                    {education.date} &middot; CGPA: {education.cgpa}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Thesis */}
-            <Reveal delay={200}>
-              <div className="flex items-start gap-3 mt-6 mb-3">
-                <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
-                <div>
-                  <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
-                    Thesis
-                  </p>
-                  <p className="font-inter text-body-md text-ink">
-                    {education.thesis.title}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-
-            {/* Publication */}
-            {publication && (
-              <Reveal delay={300}>
-                <div className="flex items-start gap-3 mt-6">
-                  <FaBookOpen className="text-ink text-lg mt-1 shrink-0" />
-                  <div>
-                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">
-                      Publication
-                    </p>
-                    <p className="font-inter text-body-md text-ink">
-                      {publication.title}
-                    </p>
-                    <p className="font-inter text-body-md text-on-surface-variant">
-                      {publication.venue}, {publication.year} &middot;{" "}
-                      {publication.summary.split(";")[0]}
-                    </p>
-                    {publication.scholarProfile && (
-                      <a
-                        href={publication.scholarProfile}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-inter text-body-md text-ink border-b border-ink pb-0.5 hover:opacity-70 transition-opacity no-underline inline-block mt-2"
-                      >
-                        Google Scholar &rarr;
-                      </a>
-                    )}
-                  </div>
-                </div>
-              </Reveal>
-            )}
-          </div>
-
-          {/* Awards sidebar */}
-          <div className="md:col-span-5">
-            <Reveal delay={200}>
-              <div className="flex items-center gap-2 mb-4">
-                <FaAward className="text-ink text-lg" />
-                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-                  Awards & Scholarships
-                </p>
-              </div>
-              <div className="space-y-3">
-                {resumeData.awards.slice(0, 3).map((award, i) => (
-                  <p
-                    key={i}
-                    className="font-inter text-body-md text-on-surface-variant pl-4 border-l-2 border-surface-variant"
-                  >
-                    {award.name}
-                  </p>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== CURRENTLY + NAVIGATION CLOSER ===== */}
+      {/* ===== CLOSING ===== */}
       <Reveal>
-        <div className="w-full h-px bg-surface-variant mb-lg mt-xl"></div>
+        <div className="w-full h-px bg-surface-variant mb-xl mt-xl" />
       </Reveal>
 
-      <section className="mb-0 pb-12 text-center">
+      <section className="mb-0 pb-16">
         <Reveal delay={100}>
-          <p className="font-newsreader text-[1.5rem] italic text-ink/80 max-w-2xl mx-auto leading-relaxed mb-3">
+          <p className="font-newsreader text-[1.5rem] italic text-ink/80 max-w-2xl leading-relaxed mb-3">
             Currently building agentic AI systems at Dexian.
           </p>
-          <p className="font-inter text-body-md text-on-surface-variant/70 max-w-xl mx-auto">
-            Open to research collaborations in NLP, medical imaging, and LLM evaluation.
+          <p className="font-inter text-body-md text-on-surface-variant/70 max-w-xl leading-relaxed">
+            Open to research collaborations in NLP, medical imaging, and LLM
+            evaluation.
           </p>
         </Reveal>
 
         <Reveal delay={300}>
-          <div className="mt-12 flex flex-wrap justify-center gap-8 md:gap-12">
-            <Link
-              to="/project"
-              className="font-inter text-body-lg text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+          <div className="mt-10 flex flex-wrap gap-8 md:gap-12 items-center">
+            <a
+              href={`mailto:${resumeData.links.email}`}
+              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
             >
-              View Projects &rarr;
-            </Link>
+              {resumeData.links.email}
+            </a>
+            <a
+              href={resumeData.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+            >
+              GitHub →
+            </a>
+            <a
+              href={resumeData.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+            >
+              LinkedIn →
+            </a>
             <Link
               to="/research"
-              className="font-inter text-body-lg text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
+              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
             >
-              Read Research &rarr;
-            </Link>
-            <Link
-              to="/contact"
-              className="font-inter text-body-lg text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
-            >
-              Get in Touch &rarr;
+              Research →
             </Link>
           </div>
         </Reveal>
