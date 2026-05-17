@@ -48,7 +48,7 @@ function Home() {
       date: "2019 – 2024",
       title: "B.Sc. Computer Science",
       org: "RUET",
-      note: "CGPA 3.65 · Thesis: Brain Tumor Classification",
+      note: "CGPA 3.11/4.00 · Thesis: Brain Tumor Classification",
       current: false,
     },
     {
@@ -111,8 +111,6 @@ function Home() {
     },
   ];
 
-  const techStack = [];
-
   return (
     <main className="max-w-container mx-auto px-8 pt-24 pb-0">
 
@@ -123,7 +121,7 @@ function Home() {
         <div className="w-full md:w-2/3">
           <Reveal delay={100}>
             <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-3 tracking-[0.1em]">
-              AI/ML Application Developer · Published Researcher · Prospective PhD (Fall 2027)
+              AI/ML Application Developer · Prospective PhD (Fall 2027)
             </p>
           </Reveal>
           <Reveal delay={150}>
@@ -148,7 +146,7 @@ function Home() {
             {/* Level 3 — scannable key facts */}
             <div className="flex flex-col gap-3 max-w-lg">
               <div className="flex gap-4 items-baseline">
-                <span className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/50 shrink-0 w-20">
+                <span className="font-inter text-[0.65rem] uppercase tracking-[0.12em] text-on-surface-variant/80 shrink-0 w-20">
                   Published
                 </span>
                 <span className="font-inter text-[0.82rem] text-ink font-medium leading-snug">
@@ -164,7 +162,7 @@ function Home() {
                 </a>
               </div>
               <div className="flex gap-4 items-baseline">
-                <span className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/50 shrink-0 w-20">
+                <span className="font-inter text-[0.65rem] uppercase tracking-[0.12em] text-on-surface-variant/80 shrink-0 w-20">
                   Seeking
                 </span>
                 <span className="font-inter text-[0.82rem] text-on-surface-variant leading-snug">
@@ -258,30 +256,35 @@ function Home() {
 
       {/* ===== WHAT I BUILD ===== */}
       <div className="relative w-full h-[1px] bg-surface-variant mb-10">
-        <span className="absolute -top-[0.85rem] left-0 bg-surface pr-6 font-newsreader text-[1.3rem] text-ink leading-none">
+        <span className="absolute -top-[0.85rem] left-0 pr-6 font-newsreader text-[1.3rem] text-ink leading-none" style={{ background: "#fcf9f4" }}>
           What I Build
         </span>
       </div>
 
       <section className="mb-xl">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          {/* Left: editorial statement */}
-          <Reveal className="md:col-span-5">
-            <p className="font-newsreader text-[1.75rem] italic text-ink leading-relaxed">
-              I design systems that think, reason, and act — from LLM
-              orchestration to production ML pipelines that serve real users at
-              scale.
-            </p>
+          {/* Left: editorial statement — sticky so it anchors as focus areas scroll */}
+          <Reveal className="md:col-span-4">
+            <div className="md:sticky md:top-28">
+              <p className="font-newsreader text-[1.6rem] italic text-ink leading-relaxed mb-6">
+                I design systems that think, reason, and act — from LLM
+                orchestration to production ML pipelines that serve real users at
+                scale.
+              </p>
+              <p className="font-inter text-[0.78rem] uppercase tracking-[0.12em] text-on-surface-variant/70">
+                Focus Areas
+              </p>
+            </div>
           </Reveal>
 
           {/* Right: 3 focus areas */}
-          <div className="md:col-span-7 space-y-10">
+          <div className="md:col-span-8 space-y-10">
             {focusAreas.map((item, i) => (
               <Reveal key={i} delay={i * 100}>
-                <div className={i < focusAreas.length - 1 ? "border-b border-surface-variant pb-8" : ""}>
-                  <div className="flex items-center gap-2 mb-2">
-                    <item.icon className="text-ink text-[1.1rem] shrink-0 -mt-3" />
-                    <h3 className="font-newsreader text-[1.25rem] text-ink font-medium leading-none">
+                <div className={i < focusAreas.length - 1 ? "border-b border-surface-variant pb-10" : ""}>
+                  <div className="flex items-start gap-2 mb-2">
+                    <item.icon className="text-ink text-[1.1rem] shrink-0 mt-[0.2rem]" />
+                    <h3 className="font-newsreader text-[1.25rem] text-ink font-medium leading-snug">
                       {item.title}
                     </h3>
                   </div>
@@ -308,56 +311,40 @@ function Home() {
 
       {/* ===== JOURNEY / TIMELINE ===== */}
       <div className="relative w-full h-[1px] bg-surface-variant mb-10">
-        <span className="absolute -top-[0.85rem] left-0 bg-surface pr-6 font-newsreader text-[1.3rem] text-ink leading-none">
+        <span className="absolute -top-[0.85rem] left-0 pr-6 font-newsreader text-[1.3rem] text-ink leading-none" style={{ background: "#fcf9f4" }}>
           Timeline
         </span>
       </div>
 
       <section className="mb-xl">
-        {/* Timeline cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+        {/* Timeline rows — editorial table, no boxes */}
+        <div className="divide-y divide-surface-variant">
           {milestones.map((m, i) => (
-            <Reveal key={i} delay={i * 80}>
-              <div
-                className={`relative p-6 border transition-colors duration-200 ${
-                  m.current
-                    ? "border-ink bg-ink text-on-ink"
-                    : "border-surface-variant bg-surface hover:border-ink/20"
-                }`}
-              >
-                {m.current && (
-                  <span className="absolute top-3 right-3 font-inter text-[0.6rem] uppercase tracking-[0.12em] opacity-60">
-                    Current
-                  </span>
-                )}
-                <p
-                  className={`font-inter text-[0.7rem] uppercase tracking-[0.12em] mb-3 ${
-                    m.current ? "opacity-60" : "text-on-surface-variant/60"
-                  }`}
-                >
+            <Reveal key={i} delay={i * 60}>
+              <div className={`grid grid-cols-[7rem_1fr] md:grid-cols-[9rem_1fr] gap-x-8 py-5 items-baseline group ${m.current ? "" : ""}`}>
+                {/* Date column */}
+                <p className={`font-inter text-[0.7rem] uppercase tracking-[0.1em] pt-0.5 ${m.current ? "text-ink font-semibold" : "text-on-surface-variant/70"}`}>
                   {m.date}
                 </p>
-                <p
-                  className={`font-newsreader text-[1.1rem] font-semibold leading-tight mb-1 ${
-                    m.current ? "" : "text-ink"
-                  }`}
-                >
-                  {m.title}
-                </p>
-                <p
-                  className={`font-inter text-[0.85rem] leading-tight mb-2 ${
-                    m.current ? "opacity-80" : "text-on-surface-variant"
-                  }`}
-                >
-                  {m.org}
-                </p>
-                <p
-                  className={`font-inter text-[0.8rem] leading-relaxed ${
-                    m.current ? "opacity-70" : "text-on-surface-variant/70"
-                  }`}
-                >
-                  {m.note}
-                </p>
+                {/* Content column */}
+                <div>
+                  <div className="flex items-center gap-3 mb-1">
+                    <span className={`font-newsreader text-[1.05rem] leading-snug ${m.current ? "text-ink" : "text-ink"}`}>
+                      {m.title}
+                    </span>
+                    <span className={`font-inter text-[0.78rem] ${m.current ? "text-on-surface-variant" : "text-on-surface-variant/70"}`}>
+                      · {m.org}
+                    </span>
+                    {m.current && (
+                      <span className="font-inter text-[0.6rem] uppercase tracking-[0.12em] text-ink border border-ink px-1.5 py-0.5 leading-none">
+                        Now
+                      </span>
+                    )}
+                  </div>
+                  <p className="font-inter text-[0.8rem] text-on-surface-variant/70 leading-relaxed">
+                    {m.note}
+                  </p>
+                </div>
               </div>
             </Reveal>
           ))}
@@ -375,7 +362,7 @@ function Home() {
         {/* By the Numbers */}
         <Reveal delay={500}>
           <div className="mt-12 pt-10 border-t border-surface-variant">
-            <p className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/50 mb-8">
+            <p className="font-inter text-[0.65rem] uppercase tracking-[0.14em] text-on-surface-variant/70 mb-8">
               By the Numbers
             </p>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
@@ -393,7 +380,7 @@ function Home() {
                   <p className="font-inter text-[0.78rem] text-ink font-medium leading-tight mb-0.5">
                     {s.label}
                   </p>
-                  <p className="font-inter text-[0.7rem] text-on-surface-variant/60 leading-snug">
+                  <p className="font-inter text-[0.7rem] text-on-surface-variant/70 leading-snug">
                     {s.sub}
                   </p>
                 </div>
@@ -413,7 +400,7 @@ function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             {/* Left: heading + copy + social */}
             <div>
-              <p className="font-inter text-[0.7rem] uppercase tracking-[0.14em] text-on-surface-variant/50 mb-8">
+              <p className="font-inter text-[0.7rem] uppercase tracking-[0.14em] text-on-surface-variant/70 mb-8">
                 Let&apos;s Work Together
               </p>
               <h2 className="font-newsreader text-[2rem] md:text-[2.4rem] text-ink leading-tight mb-5">
@@ -464,7 +451,7 @@ function Home() {
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                   <div className="flex flex-col gap-1">
-                    <label className="font-inter text-[0.62rem] uppercase tracking-[0.14em] text-on-surface-variant/50">
+                    <label className="font-inter text-[0.65rem] uppercase tracking-[0.14em] text-on-surface-variant/70">
                       Name
                     </label>
                     <input
@@ -478,7 +465,7 @@ function Home() {
                     />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="font-inter text-[0.62rem] uppercase tracking-[0.14em] text-on-surface-variant/50">
+                    <label className="font-inter text-[0.65rem] uppercase tracking-[0.14em] text-on-surface-variant/70">
                       Email
                     </label>
                     <input
@@ -492,7 +479,7 @@ function Home() {
                     />
                   </div>
                   <div className="flex flex-col gap-1">
-                    <label className="font-inter text-[0.62rem] uppercase tracking-[0.14em] text-on-surface-variant/50">
+                    <label className="font-inter text-[0.65rem] uppercase tracking-[0.14em] text-on-surface-variant/70">
                       Message
                     </label>
                     <textarea

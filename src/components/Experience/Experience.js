@@ -101,7 +101,7 @@ const experiences = [
 ];
 
 function ExperienceCard({ exp, index }) {
-  const [expanded, setExpanded] = useState(index === 0); // First one expanded by default
+  const [expanded, setExpanded] = useState(false); // Collapsed by default
   const isCurrentRole = exp.end === null;
   const logo = companyLogos[exp.company];
   const techStack = techStacks[exp.company] || [];

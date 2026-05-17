@@ -8,7 +8,6 @@ import Research from "./components/Research/Research";
 import ResearchDetail from "./components/Research/ResearchDetail";
 import Projects from "./components/Projects/Projects";
 import ProjectDetail from "./components/Projects/ProjectDetail";
-import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
@@ -53,7 +52,7 @@ function App() {
           <Route path="/skills" element={<Navigate to="/about" />} />
           <Route path="*" element={<Navigate to="/"/>} />
         </Routes>
-        <Footer />
+
       </div>
     </Router>
   );
