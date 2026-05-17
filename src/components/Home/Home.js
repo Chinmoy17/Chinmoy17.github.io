@@ -5,7 +5,8 @@ import resumeData from "../../data/resume.json";
 import avatarImg from "../../Assets/avatar.png";
 import { Reveal } from "../utils/Reveal";
 import { MdOutlineHub, MdOutlineApps, MdOutlineTune } from "react-icons/md";
-import { FaGithub, FaLinkedinIn, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { SiGmail } from "react-icons/si";
 
 function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
@@ -192,29 +193,47 @@ function Home() {
         </div>
 
         {/* Photo + social — RIGHT column, secondary in F-scan */}
-        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[280px] md:ml-auto">
+        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[300px] md:ml-auto md:-mt-12">
           <div className="relative">
-            {/* Oval ground shadow — "standing on the page" */}
+            {/* Oval ground shadow */}
             <div
-              className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[72%] h-7 rounded-full blur-2xl pointer-events-none"
-              style={{ background: "rgba(28,28,25,0.15)" }}
+              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[60%] h-5 rounded-full blur-xl pointer-events-none"
+              style={{ background: "rgba(28,28,25,0.12)" }}
             />
-            <img
-              src={avatarImg}
-              alt="Chinmoy Mitra"
-              className="w-full h-auto object-contain block relative z-10"
-              style={{ filter: "contrast(1.03) brightness(1.01)" }}
-            />
+            <div className="relative" style={{ animation: "riseUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both",
+              WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 28%)",
+              maskImage: "linear-gradient(to top, transparent 0%, black 28%)" }}>
+              <img
+                src={avatarImg}
+                alt="Chinmoy Mitra"
+                className="w-full h-auto object-contain block"
+                style={{ filter: "contrast(1.03) brightness(1.01)" }}
+              />
+            </div>
           </div>
-          {/* Social links below photo */}
-          <div className="mt-5 flex flex-col gap-3">
+          <style>{`
+            @keyframes riseUp {
+              0% {
+                clip-path: inset(100% 0 0 0);
+                transform: translateY(40px);
+                opacity: 0;
+              }
+              100% {
+                clip-path: inset(0% 0 0 0);
+                transform: translateY(0);
+                opacity: 1;
+              }
+            }
+          `}</style>
+          {/* Social links below photo — aligned with image */}
+          <div className="mt-5 flex flex-col gap-3 pl-4">
             <a
               href={resumeData.links.linkedin}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
             >
-              <FaLinkedinIn className="text-[1rem] shrink-0 group-hover:text-ink transition-colors" />
+              <FaLinkedinIn className="text-[1.05rem] shrink-0 transition-colors" style={{ color: "#0A66C2" }} />
               <span>LinkedIn</span>
             </a>
             <a
@@ -223,14 +242,14 @@ function Home() {
               rel="noopener noreferrer"
               className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
             >
-              <FaGithub className="text-[1rem] shrink-0 group-hover:text-ink transition-colors" />
+              <FaGithub className="text-[1.05rem] shrink-0 transition-colors" style={{ color: "#1c1c19" }} />
               <span>chinmoy17</span>
             </a>
             <a
               href={`mailto:${resumeData.links.email}`}
               className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
             >
-              <FaEnvelope className="text-[1rem] shrink-0 group-hover:text-ink transition-colors" />
+              <SiGmail className="text-[1.05rem] shrink-0 transition-colors" style={{ color: "#EA4335" }} />
               <span>{resumeData.links.email}</span>
             </a>
           </div>
