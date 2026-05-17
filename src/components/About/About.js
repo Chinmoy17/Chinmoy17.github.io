@@ -16,7 +16,7 @@ import outlierLogo from "../../Assets/CompanyLogos/outlier.jpeg";
 const companyLogos = {
   "Dexian Bangladesh": dexianLogo,
   "Walton Hi\u2011Tech Industries": waltonLogo,
-  Outlier: outlierLogo,
+  "Outlier (Scale AI)": outlierLogo,
 };
 
 const experiences = [
@@ -42,9 +42,9 @@ const experiences = [
   },
   {
     company: "Walton Hi\u2011Tech Industries",
-    role: "AI Intern",
+    role: "AI Engineer (on probation)",
     type: "Onsite",
-    location: "Gazipur, Bangladesh",
+    location: "Bashundhara R/A, Dhaka",
     start: "2025-08-01",
     end: "2025-10-09",
     summary:
@@ -56,7 +56,7 @@ const experiences = [
     ],
   },
   {
-    company: "Outlier",
+    company: "Outlier (Scale AI)",
     role: "AI Contributor",
     type: "Remote",
     location: "San Francisco, CA (Remote)",
@@ -75,7 +75,7 @@ const experiences = [
     company: "Young Learner's Research Lab",
     role: "Research Assistant",
     type: "Non-paid",
-    location: "Remote",
+    location: "Remote · RUET, Rajshahi",
     start: "2024-11-01",
     end: "2025-02-28",
     summary:
@@ -149,7 +149,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
           </span>
         </div>
         <div className="flex flex-wrap items-center gap-3 font-inter text-body-md text-on-surface-variant ml-[52px]">
-          <span>{exp.company}</span>
+          <span className="text-ink font-medium">{exp.company}</span>
           {exp.location && (
             <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/80">
               <FaMapMarkerAlt className="text-[0.6rem]" />
@@ -163,7 +163,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
       </header>
 
       <div className="pl-0 md:pl-5 md:border-l md:border-surface-variant pt-2">
-        <p className="font-inter text-body-md text-on-surface-variant max-w-3xl leading-relaxed mb-4">
+        <p className="font-inter text-body-md text-ink/80 max-w-3xl leading-relaxed mb-4">
           {exp.summary}
         </p>
 
@@ -184,7 +184,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
             className="mt-4 font-inter text-[0.75rem] uppercase tracking-[0.08em] text-ink flex items-center gap-2 hover:gap-3 transition-all duration-300 bg-transparent border-none cursor-pointer p-0 group"
           >
             <span className="border-b border-ink/50 pb-px group-hover:border-ink transition-colors">
-              {expanded ? "Hide Impact" : "See Impact"}
+              {expanded ? "Hide" : "Contributions"}
             </span>
             <span className={`inline-flex flex-col items-center -gap-1 transition-transform duration-300 ${!expanded ? "animate-bounce-x" : ""}`}>
               {expanded ? (
@@ -205,7 +205,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
             {exp.highlights.map((h, i) => (
               <li
                 key={i}
-                className="font-inter text-body-md text-on-surface-variant pl-5 border-l-2 border-surface-variant leading-relaxed"
+                className="font-inter text-body-md text-ink/80 pl-5 border-l-2 border-surface-variant leading-relaxed"
               >
                 {parseHighlight(h)}
               </li>
@@ -248,19 +248,51 @@ function About() {
   }, []);
 
   return (
-    <main className="max-w-container mx-auto px-8 pt-24 pb-xl">
+    <main className="max-w-container mx-auto px-8 pt-24 pb-16">
 
       {/* Page Title */}
-      <section className="mb-xl">
-        <Reveal>
-          <h1 className="font-newsreader text-h1 text-ink mb-6">
-            About Me
-          </h1>
-          <div className="h-[1px] w-16 bg-ink mb-6"></div>
-          <p className="font-inter text-body-lg text-on-surface-variant max-w-3xl">
-            Work history, research, and the tools I build with.
-          </p>
-        </Reveal>
+      <section className="mb-xl grid grid-cols-1 md:grid-cols-12 gap-x-16 gap-y-8">
+        {/* LEFT — title + pull-quote */}
+        <div className="md:col-span-6">
+          <Reveal>
+            <h1 className="font-newsreader text-h1 text-ink mb-3">About</h1>
+            <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-5 tracking-[0.1em]">
+              Application Developer: AI/ML &middot; B.Sc. CSE, RUET &rsquo;24 &middot; Dhaka, Bangladesh
+            </p>
+            <div className="h-[1px] w-16 bg-ink mb-6"></div>
+            <p className="font-newsreader text-[1.35rem] italic text-ink leading-[1.6]">
+              I started writing code to solve concrete problems. Now I build systems
+              that reason, retrieve, and act &mdash; and I measure whether they actually work.
+            </p>
+          </Reveal>
+        </div>
+
+        {/* RIGHT — bio + key facts */}
+        <div className="md:col-span-6 md:pt-[6.5rem]">
+          <Reveal delay={120}>
+            <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-8">
+              Graduated from RUET with a thesis on brain tumor classification. Published
+              at IEEE QPAN 2025. Currently at Dexian Bangladesh shipping agentic LLM
+              systems for enterprise &mdash; Note2Action, DemoFactory, multi-agent pipelines.
+              Targeting a PhD in NLP or AI systems from Fall 2027, with a focus on
+              evaluation-driven methods and controllable LLM behavior.
+            </p>
+            <div className="grid grid-cols-3 gap-6 border-t border-surface-variant pt-6">
+              <div>
+                <p className="font-newsreader text-[1.8rem] text-ink leading-none mb-1">2+</p>
+                <p className="font-inter text-[0.72rem] text-on-surface-variant leading-snug">Years in production AI</p>
+              </div>
+              <div>
+                <p className="font-newsreader text-[1.8rem] text-ink leading-none mb-1">1</p>
+                <p className="font-inter text-[0.72rem] text-on-surface-variant leading-snug">IEEE publication</p>
+              </div>
+              <div>
+                <p className="font-newsreader text-[1.8rem] text-ink leading-none mb-1">600+</p>
+                <p className="font-inter text-[0.72rem] text-on-surface-variant leading-snug">Users automated</p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* Sidebar + Content Layout */}
@@ -307,9 +339,9 @@ function About() {
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
-              <div className="md:col-span-3">
+              <div className="md:col-span-3 sticky top-28 self-start">
                 <Reveal>
-                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
                     Experience
                   </h2>
                 </Reveal>
@@ -319,7 +351,7 @@ function About() {
                 <div className="hidden md:block absolute left-0 top-2 bottom-0 w-px bg-surface-variant"></div>
                 {experiences.map((exp, index) => (
                   <Reveal key={index} delay={index * 100}>
-                    <ExperienceEntry exp={exp} defaultExpanded={index === 0} />
+                    <ExperienceEntry exp={exp} defaultExpanded={false} />
                   </Reveal>
                 ))}
               </div>
@@ -336,9 +368,9 @@ function About() {
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
-              <div className="md:col-span-3">
+              <div className="md:col-span-3 sticky top-28 self-start">
                 <Reveal>
-                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
                     Academic Foundations
                   </h2>
                 </Reveal>
@@ -451,9 +483,9 @@ function About() {
               </Reveal>
 
               <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
-                <div className="md:col-span-3">
+                <div className="md:col-span-3 sticky top-28 self-start">
                   <Reveal>
-                    <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+                    <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
                       Research
                     </h2>
                   </Reveal>
@@ -468,7 +500,7 @@ function About() {
                         {publication.venue}, {publication.year} &middot;{" "}
                         {publication.notes}
                       </p>
-                      <p className="font-inter text-body-md text-on-surface-variant mt-3 leading-relaxed">
+                      <p className="font-inter text-body-md text-ink/80 mt-3 leading-relaxed">
                         {publication.summary}
                       </p>
                       {publication.scholarProfile && (
@@ -492,7 +524,7 @@ function About() {
                       <p className="font-inter text-body-md text-on-surface-variant">
                         Industry Writing, 2024 &middot; Applied AI / Prompt Optimization
                       </p>
-                      <p className="font-inter text-body-md text-on-surface-variant mt-3 leading-relaxed">
+                      <p className="font-inter text-body-md text-ink/80 mt-3 leading-relaxed">
                         A collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal — demonstrating how initial constraints affect whether you gain accuracy or efficiency. Programmatic prompt optimization over manual engineering.
                       </p>
                       <a
@@ -518,16 +550,16 @@ function About() {
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
-              <div className="md:col-span-3">
+              <div className="md:col-span-3 sticky top-28 self-start">
                 <Reveal>
-                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
                     Technical Stack
                   </h2>
                 </Reveal>
               </div>
               <div className="md:col-span-9">
                 <Reveal delay={50}>
-                  <p className="font-inter text-body-md text-on-surface-variant mb-12 max-w-2xl">
+                  <p className="font-inter text-body-md text-ink/75 mb-12 max-w-2xl">
                     The tools I reach for, and what I use each one for.
                   </p>
                 </Reveal>
@@ -649,9 +681,9 @@ function About() {
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
-              <div className="md:col-span-3">
+              <div className="md:col-span-3 sticky top-28 self-start">
                 <Reveal>
-                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink sticky top-28">
+                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
                     Awards
                   </h2>
                 </Reveal>
@@ -706,7 +738,7 @@ function About() {
 
           {/* ===== CTA ===== */}
           <Reveal>
-            <div className="text-center py-lg border-t border-surface-variant">
+            <div className="text-center py-10 border-t border-surface-variant">
               <p className="font-inter text-body-md text-on-surface-variant mb-4">
                 Open to opportunities and collaboration.
               </p>

@@ -21,3 +21,26 @@ body {
   background-color: #fcf9f4;
   color: #1c1c19;
 }
+
+@keyframes riseUp {
+  0% {
+    clip-path: inset(100% 0 0 0);
+    transform: translateY(40px);
+    opacity: 0;
+  }
+  100% {
+    clip-path: inset(0% 0 0 0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

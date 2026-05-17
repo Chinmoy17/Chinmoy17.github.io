@@ -94,10 +94,10 @@ module.exports = {
         lg: "4rem",
         xl: "8rem",
         gutter: "1.5rem",
-        "container-max": "1120px",
+        "container-max": "clamp(320px, 90%, 1440px)",
       },
       maxWidth: {
-        container: "1120px",
+        container: "clamp(320px, 90%, 1440px)",
       },
       borderRadius: {
         none: "0",
