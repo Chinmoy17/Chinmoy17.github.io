@@ -6,10 +6,10 @@ function Type() {
     <Typewriter
       options={{
         strings: [
-          "Research → Production, Fast",
-          "LLMs + Evaluation-Driven Development",
+          "Full Stack + AI/ML Integrations",
+          "GenAI Apps That Save Time & Resources",
           "RAG Pipelines & Agentic Workflows",
-          "Seeking PhD Opportunities",
+          "Research → Production, Fast",
         ],
         autoStart: true,
         loop: true,

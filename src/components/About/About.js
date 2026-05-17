@@ -151,7 +151,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
         <div className="flex flex-wrap items-center gap-3 font-inter text-body-md text-on-surface-variant ml-[52px]">
           <span>{exp.company}</span>
           {exp.location && (
-            <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/60">
+            <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/80">
               <FaMapMarkerAlt className="text-[0.6rem]" />
               {exp.location}
             </span>
@@ -163,7 +163,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
       </header>
 
       <div className="pl-0 md:pl-5 md:border-l md:border-surface-variant pt-2">
-        <p className="font-inter text-body-md text-on-surface-variant/80 max-w-3xl leading-relaxed mb-4">
+        <p className="font-inter text-body-md text-on-surface-variant max-w-3xl leading-relaxed mb-4">
           {exp.summary}
         </p>
 
@@ -205,7 +205,7 @@ function ExperienceEntry({ exp, defaultExpanded }) {
             {exp.highlights.map((h, i) => (
               <li
                 key={i}
-                className="font-inter text-body-md text-on-surface-variant/80 pl-5 border-l-2 border-surface-variant leading-relaxed"
+                className="font-inter text-body-md text-on-surface-variant pl-5 border-l-2 border-surface-variant leading-relaxed"
               >
                 {parseHighlight(h)}
               </li>
@@ -258,18 +258,18 @@ function About() {
           </h1>
           <div className="h-[1px] w-16 bg-ink mb-6"></div>
           <p className="font-inter text-body-lg text-on-surface-variant max-w-3xl">
-            A detailed look at the systems I've built, the research that shaped my thinking, and the tools I reach for. Scroll through experience, education, publications, and technical skills below.
+            Work history, research, and the tools I build with.
           </p>
         </Reveal>
       </section>
 
       {/* Sidebar + Content Layout */}
-      <div className="md:flex md:gap-16">
+      <div className="md:flex md:gap-8">
 
         {/* Sticky sidebar TOC */}
-        <aside className="hidden md:block w-40 shrink-0">
+        <aside className="hidden md:block w-40 shrink-0 -ml-4">
           <div className="sticky top-24">
-            <p className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/40 mb-4">
+            <p className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/60 mb-4">
               Contents
             </p>
             <nav className="border-l border-surface-variant">
@@ -284,7 +284,7 @@ function About() {
                   className={`block pl-4 py-1.5 font-inter text-[0.78rem] no-underline transition-colors duration-150 border-l -ml-px ${
                     activeSection === item.id
                       ? "border-ink text-ink"
-                      : "border-transparent text-on-surface-variant/50 hover:text-ink"
+                      : "border-transparent text-on-surface-variant/70 hover:text-ink"
                   }`}
                 >
                   {item.label}
@@ -301,7 +301,7 @@ function About() {
           <div id="experience">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
                 Professional Tenure
               </p>
             </Reveal>
@@ -330,8 +330,8 @@ function About() {
           <div id="education">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
-                Scholarly Background
+              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
+                Academic Record
               </p>
             </Reveal>
 
@@ -363,13 +363,13 @@ function About() {
                         <div className="flex flex-wrap items-center gap-3 font-inter text-body-md text-on-surface-variant">
                           <span className="text-ink font-medium">{edu.institution}</span>
                           {edu.location && (
-                            <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/60">
+                          <span className="flex items-center gap-1 text-[0.8rem] text-on-surface-variant/80">
                               <FaMapMarkerAlt className="text-[0.6rem]" />
                               {edu.location}
                             </span>
                           )}
                           {(edu.cgpa || edu.gpa) && (
-                            <span className="text-[0.8rem] text-on-surface-variant/60">
+                            <span className="text-[0.8rem] text-on-surface-variant/80">
                               {edu.cgpa || `GPA: ${edu.gpa}`}
                             </span>
                           )}
@@ -389,7 +389,7 @@ function About() {
                               <p className="font-inter text-body-md text-ink leading-relaxed">
                                 {edu.thesis.title}
                               </p>
-                              <p className="font-inter text-[0.8rem] text-on-surface-variant/70 mt-1">
+                              <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">
                                 Supervisor: {edu.thesis.supervisor}
                               </p>
                             </div>
@@ -445,7 +445,7 @@ function About() {
             <div id="research">
               <Reveal>
                 <div className="w-full h-px bg-surface-variant mb-md"></div>
-                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+                <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
                   Research Output
                 </p>
               </Reveal>
@@ -468,7 +468,7 @@ function About() {
                         {publication.venue}, {publication.year} &middot;{" "}
                         {publication.notes}
                       </p>
-                      <p className="font-inter text-body-md text-on-surface-variant/80 mt-3 leading-relaxed">
+                      <p className="font-inter text-body-md text-on-surface-variant mt-3 leading-relaxed">
                         {publication.summary}
                       </p>
                       {publication.scholarProfile && (
@@ -490,9 +490,9 @@ function About() {
                         DSPy RAG Optimization: Taming Trial-and-Error in Production Systems
                       </h3>
                       <p className="font-inter text-body-md text-on-surface-variant">
-                        Collaborative Research, 2024 &middot; Applied AI / Prompt Optimization
+                        Industry Writing, 2024 &middot; Applied AI / Prompt Optimization
                       </p>
-                      <p className="font-inter text-body-md text-on-surface-variant/80 mt-3 leading-relaxed">
+                      <p className="font-inter text-body-md text-on-surface-variant mt-3 leading-relaxed">
                         A collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal — demonstrating how initial constraints affect whether you gain accuracy or efficiency. Programmatic prompt optimization over manual engineering.
                       </p>
                       <a
@@ -512,7 +512,7 @@ function About() {
           <div id="skills">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
                 Technical Proficiency
               </p>
             </Reveal>
@@ -528,7 +528,7 @@ function About() {
               <div className="md:col-span-9">
                 <Reveal delay={50}>
                   <p className="font-inter text-body-md text-on-surface-variant mb-12 max-w-2xl">
-                    An architectural overview of core competencies, focusing on foundational systems, modern frameworks, and applied artificial intelligence.
+                    The tools I reach for, and what I use each one for.
                   </p>
                 </Reveal>
 
@@ -536,7 +536,7 @@ function About() {
                   <Reveal delay={100}>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       <div className="md:col-span-4">
-                        <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                        <h3 className="font-newsreader text-[1.4rem] font-medium text-ink leading-tight">
                           Intelligence &<br className="hidden md:block" /> Frameworks
                         </h3>
                       </div>
@@ -566,7 +566,7 @@ function About() {
                   <Reveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       <div className="md:col-span-4">
-                        <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                        <h3 className="font-newsreader text-[1.4rem] font-medium text-ink leading-tight">
                           Systems &<br className="hidden md:block" /> Architecture
                         </h3>
                       </div>
@@ -593,7 +593,7 @@ function About() {
                   <Reveal delay={300}>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       <div className="md:col-span-4">
-                        <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                        <h3 className="font-newsreader text-[1.4rem] font-medium text-ink leading-tight">
                           Data &<br className="hidden md:block" /> Storage
                         </h3>
                       </div>
@@ -614,7 +614,7 @@ function About() {
                   <Reveal delay={400}>
                     <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                       <div className="md:col-span-4">
-                        <h3 className="font-newsreader text-[1.4rem] text-ink leading-tight">
+                        <h3 className="font-newsreader text-[1.4rem] font-medium text-ink leading-tight">
                           Core<br className="hidden md:block" /> Foundations
                         </h3>
                       </div>
@@ -643,7 +643,7 @@ function About() {
           <div id="awards">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-lg">
+              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
                 Recognition
               </p>
             </Reveal>
@@ -660,7 +660,7 @@ function About() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
 
                   <Reveal delay={80}>
-                    <div className="border-t border-ink pt-4">
+                    <div className="border-t border-surface-variant pt-4">
                       <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Scholarship</p>
                       <p className="font-newsreader text-[1.25rem] text-ink leading-snug">Dutch Bangla Bank Scholarship for Undergraduates</p>
                       <p className="font-inter text-[0.8rem] text-on-surface-variant mt-1">2019 – 2023 &middot; 4 years consecutive</p>
@@ -708,7 +708,7 @@ function About() {
           <Reveal>
             <div className="text-center py-lg border-t border-surface-variant">
               <p className="font-inter text-body-md text-on-surface-variant mb-4">
-                Want to connect or see more?
+                Open to opportunities and collaboration.
               </p>
               <a
                 href={resumeData.links.linkedin}

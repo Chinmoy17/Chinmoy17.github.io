@@ -31,3 +31,11 @@ Server/config.js
 # Claude temporary files
 tmpclaude-*
 **/tmpclaude-*
+
+#env
+.env
+.env.local
+.env/
+
+.vscode/ 
+.vscode

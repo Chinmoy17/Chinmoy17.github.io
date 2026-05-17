@@ -1,19 +1,24 @@
 {
-  "servers": {
-    "stitch": {
-      "type": "http",
-      "url": "https://stitch.googleapis.com/mcp",
-      "headers": {
-        "X-Goog-Api-Key": "${input:stitch-api-key}"
-      }
-    }
-  },
-  "inputs": [
-    {
-      "id": "stitch-api-key",
-      "type": "promptString",
-      "description": "Google Stitch API Key",
-      "password": true
-    }
-  ]
+	"servers": {
+		"stitch": {
+			"type": "http",
+			"url": "https://stitch.googleapis.com/mcp",
+			"headers": {
+				"X-Goog-Api-Key": "${input:stitch-api-key}"
+			}
+		},
+		"ui-craft": {
+			"type": "stdio",
+			"command": "npx",
+			"args": ["-y", "@chinmoy_mitra/ui-craft@latest"]
+		}
+	},
+	"inputs": [
+		{
+			"id": "stitch-api-key",
+			"type": "promptString",
+			"description": "Google Stitch API Key",
+			"password": true
+		}
+	]
 }

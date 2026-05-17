@@ -1,11 +1,47 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 import resumeData from "../../data/resume.json";
 import avatarImg from "../../Assets/avatar.png";
 import { Reveal } from "../utils/Reveal";
 import { MdOutlineHub, MdOutlineApps, MdOutlineTune } from "react-icons/md";
+import { FaGithub, FaLinkedinIn, FaEnvelope } from "react-icons/fa";
 
 function Home() {
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSending(true);
+    setError("");
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        {
+          title: "Portfolio Contact",
+          name: formState.name,
+          email_address: formState.email,
+          message: formState.message,
+          time: new Date().toLocaleString(),
+        },
+        { publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY }
+      )
+      .then(() => {
+        setSending(false);
+        setSent(true);
+        setFormState({ name: "", email: "", message: "" });
+      })
+      .catch((err) => {
+        console.error("EmailJS error:", err);
+        setSending(false);
+        const msg = err?.text || err?.message || JSON.stringify(err);
+        setError(`Error: ${msg}`);
+      });
+  };
   const milestones = [
     {
       date: "2019 – 2024",
@@ -48,72 +84,94 @@ function Home() {
     {
       icon: MdOutlineHub,
       title: "Agentic AI & LLM Systems",
-      body: "Built Note2Action — an automation predicting next actions for 600+ account managers. Designed evaluation pipelines that catch regressions before rollout.",
+      body: "Shipped Note2Action — predicting next actions for 600+ account managers. Designed evaluation pipelines with regression guards before every production rollout.",
       linkLabel: "View Projects →",
       linkTo: "/project",
       external: false,
+      highlight: null,
     },
     {
       icon: MdOutlineApps,
-      title: "RFP Platform & Demo Automation",
-      body: "Built DemoFactory — an AI-driven platform that generates and deploys customizable applications from user queries. End-to-end proposal automation with agentic orchestration.",
+      title: "Multi-Agent Systems & BM Product Accelerator",
+      body: "Built the skill-extractor agent for BM Product Accelerator — a multi-agent platform (planner, skill-extractor, coding agent). Given legacy production code as input, the skill-extractor parses reusable skills into a GitLab repo and builds a tree-based index with quality weights.",
+      highlight: "Tree-based index reduces skill search complexity from O(n²) to O(log n), letting the planner and coding agents retrieve relevant skills instantly at scale.",
       linkLabel: "View Projects →",
       linkTo: "/project",
       external: false,
     },
     {
       icon: MdOutlineTune,
-      title: "DSPy & Evaluation-Driven LLMs",
-      body: "Implemented evaluation-driven iteration with test sets, rubrics, and regression suites. Ran controlled DSPy optimization experiments showing 38% cost reduction and +9.6% accuracy gains.",
+      title: "Research: DSPy & Evaluation-Driven LLMs",
+      body: "Ongoing controlled experiments optimizing LLM pipelines with DSPy 2.5+. Measured results show 38% cost reduction and +9.6% accuracy gains over baseline prompting. Targeting an arXiv preprint — results are real, the paper is in progress.",
       linkLabel: "Read Research →",
-      linkTo: "/research/dspy-rag-optimization",
+      linkTo: "/research",
       external: false,
+      highlight: null,
     },
   ];
 
-  const techStack = [
-    "Python", "DSPy 2.5+", "LangChain", "FastAPI",
-    "Azure OpenAI", "React", "FAISS", "PostgreSQL", "Docker",
-  ];
+  const techStack = [];
 
   return (
     <main className="max-w-container mx-auto px-8 pt-24 pb-0">
 
       {/* ===== HERO ===== */}
-      <section className="mb-xl flex flex-col md:flex-row items-center gap-16">
-        {/* Photo */}
-        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[280px]">
-          <div className="border border-surface-variant p-2 bg-surface-container-low">
-            <img
-              src={avatarImg}
-              alt="Chinmoy Mitra"
-              className="w-full h-auto object-cover aspect-[3/4]"
-            />
-          </div>
-        </Reveal>
+      <section className="mb-xl flex flex-col md:flex-row items-start gap-16">
 
-        {/* Content */}
+        {/* F-pattern: TEXT LEFT — first horizontal scan hits name + headline */}
         <div className="w-full md:w-2/3">
           <Reveal delay={100}>
-            <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-4 tracking-[0.1em]">
-              AI/ML Application Developer & Researcher
+            <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-3 tracking-[0.1em]">
+              AI/ML Application Developer · Published Researcher · Prospective PhD (Fall 2027)
             </p>
           </Reveal>
-          <Reveal delay={200}>
-            <h1 className="font-newsreader text-h1 text-ink mb-6">
+          <Reveal delay={150}>
+            <h1 className="font-newsreader text-h1 text-ink mb-4">
               Chinmoy Mitra
             </h1>
           </Reveal>
-          <Reveal delay={300}>
+          <Reveal delay={250}>
             <div className="h-[1px] w-16 bg-ink mb-6" />
-            <p className="font-inter text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
-              I design and build production AI systems — agentic workflows, RAG
-              pipelines, and evaluation frameworks that ship to real enterprise
-              environments. Currently at Dexian Bangladesh, where I shipped
-              Note2Action for 600+ account managers and DemoFactory for
-              AI-driven app generation. Also researching DSPy optimization and
-              medical imaging on the side.
+            {/* Level 1 — editorial lead */}
+            <p className="font-newsreader text-[1.35rem] italic text-ink leading-[1.55] mb-5 max-w-lg">
+              Full-stack developer building AI/ML-integrated systems — from
+              production web apps to agentic GenAI pipelines that save real time
+              and resources.
             </p>
+            {/* Level 2 — current role + focus */}
+            <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-6 max-w-md">
+              Currently at Dexian Bangladesh shipping multi-agent architectures,
+              RAG systems, and LLM evaluation frameworks that go from research to
+              production fast.
+            </p>
+            {/* Level 3 — scannable key facts */}
+            <div className="flex flex-col gap-3 max-w-lg">
+              <div className="flex gap-4 items-baseline">
+                <span className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/50 shrink-0 w-20">
+                  Published
+                </span>
+                <span className="font-inter text-[0.82rem] text-ink font-medium leading-snug">
+                  IEEE QPAN 2025 — brain tumor classification via transfer learning
+                </span>
+                <a
+                  href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-inter text-[0.72rem] text-on-surface-variant/60 border-b border-on-surface-variant/30 pb-px hover:text-ink hover:border-ink transition-colors no-underline shrink-0"
+                >
+                  View →
+                </a>
+              </div>
+              <div className="flex gap-4 items-baseline">
+                <span className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/50 shrink-0 w-20">
+                  Seeking
+                </span>
+                <span className="font-inter text-[0.82rem] text-on-surface-variant leading-snug">
+                  Fall 2027 PhD · NLP · LLM Evaluation · Computational Systems ·
+                  Healthcare AI
+                </span>
+              </div>
+            </div>
           </Reveal>
           <Reveal delay={400}>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -121,19 +179,62 @@ function Home() {
                 to="/project"
                 className="bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] hover:bg-surface hover:text-ink border border-ink transition-colors duration-200 no-underline"
               >
-                View Projects
+                Explore Projects
               </Link>
-              <a
-                href={resumeData.links.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
+              <Link
+                to="/research"
                 className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
               >
-                LinkedIn →
-              </a>
+                Research →
+              </Link>
             </div>
           </Reveal>
         </div>
+
+        {/* Photo + social — RIGHT column, secondary in F-scan */}
+        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[280px] md:ml-auto">
+          <div className="relative">
+            {/* Oval ground shadow — "standing on the page" */}
+            <div
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-[72%] h-7 rounded-full blur-2xl pointer-events-none"
+              style={{ background: "rgba(28,28,25,0.15)" }}
+            />
+            <img
+              src={avatarImg}
+              alt="Chinmoy Mitra"
+              className="w-full h-auto object-contain block relative z-10"
+              style={{ filter: "contrast(1.03) brightness(1.01)" }}
+            />
+          </div>
+          {/* Social links below photo */}
+          <div className="mt-5 flex flex-col gap-3">
+            <a
+              href={resumeData.links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
+            >
+              <FaLinkedinIn className="text-[1rem] shrink-0 group-hover:text-ink transition-colors" />
+              <span>LinkedIn</span>
+            </a>
+            <a
+              href={resumeData.links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
+            >
+              <FaGithub className="text-[1rem] shrink-0 group-hover:text-ink transition-colors" />
+              <span>chinmoy17</span>
+            </a>
+            <a
+              href={`mailto:${resumeData.links.email}`}
+              className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
+            >
+              <FaEnvelope className="text-[1rem] shrink-0 group-hover:text-ink transition-colors" />
+              <span>{resumeData.links.email}</span>
+            </a>
+          </div>
+        </Reveal>
       </section>
 
       {/* ===== WHAT I BUILD ===== */}
@@ -147,7 +248,7 @@ function Home() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Left: editorial statement */}
           <Reveal className="md:col-span-5">
-            <p className="font-newsreader text-[1.75rem] italic text-ink/90 leading-relaxed">
+            <p className="font-newsreader text-[1.75rem] italic text-ink leading-relaxed">
               I design systems that think, reason, and act — from LLM
               orchestration to production ML pipelines that serve real users at
               scale.
@@ -168,6 +269,11 @@ function Home() {
                   <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
                     {item.body}
                   </p>
+                  {item.highlight && (
+                    <p className="font-inter text-[0.82rem] text-ink border-l-2 border-ink pl-3 leading-relaxed mb-3">
+                      {item.highlight}
+                    </p>
+                  )}
                   <Link
                     to={item.linkTo}
                     className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
@@ -189,63 +295,50 @@ function Home() {
       </div>
 
       <section className="mb-xl">
-        {/* Desktop: horizontal */}
-        <Reveal>
-          <div className="hidden md:block relative mb-8">
-            {/* connecting line */}
-            <div className="absolute top-[7px] left-0 right-0 h-px bg-surface-variant" />
-            <div className="flex">
-              {milestones.map((m, i) => (
-                <div key={i} className="flex-1 flex flex-col items-start relative pr-4">
-                  {/* node */}
-                  <div className={`w-3.5 h-3.5 border relative z-10 mb-4 ${
-                    m.current
-                      ? "bg-ink border-ink"
-                      : "bg-surface border-on-surface-variant/40"
-                  }`} />
-                  <p className="font-inter text-[0.6rem] uppercase tracking-[0.12em] text-on-surface-variant/40 mb-1 leading-none">
-                    {m.date}
-                  </p>
-                  <p className="font-inter text-[0.82rem] font-semibold text-ink leading-tight mb-0.5">
-                    {m.title}
-                  </p>
-                  <p className="font-inter text-[0.75rem] text-on-surface-variant/70 leading-tight mb-1">
-                    {m.org}
-                  </p>
-                  <p className="font-inter text-[0.68rem] text-on-surface-variant/45 leading-snug">
-                    {m.note}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Mobile: vertical */}
-        <div className="md:hidden relative mb-8">
-          <div className="absolute left-[6px] top-2 bottom-2 w-px bg-surface-variant" />
+        {/* Timeline cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
           {milestones.map((m, i) => (
             <Reveal key={i} delay={i * 80}>
-              <div className="flex gap-5 pb-6 last:pb-0">
-                <div className={`shrink-0 w-3.5 h-3.5 border mt-0.5 relative z-10 ${
+              <div
+                className={`relative p-6 border transition-colors duration-200 ${
                   m.current
-                    ? "bg-ink border-ink"
-                    : "bg-surface border-on-surface-variant/40"
-                }`} />
-                <div>
-                  <p className="font-inter text-[0.62rem] uppercase tracking-[0.12em] text-on-surface-variant/40 mb-0.5">
-                    {m.date}
-                  </p>
-                  <p className="font-inter text-[0.85rem] font-semibold text-ink leading-tight">
-                    {m.title}
-                  </p>
-                  <p className="font-inter text-[0.78rem] text-on-surface-variant/70">
-                    {m.org}
-                  </p>
-                  <p className="font-inter text-[0.72rem] text-on-surface-variant/45 leading-snug mt-0.5">
-                    {m.note}
-                  </p>
-                </div>
+                    ? "border-ink bg-ink text-on-ink"
+                    : "border-surface-variant bg-surface hover:border-ink/20"
+                }`}
+              >
+                {m.current && (
+                  <span className="absolute top-3 right-3 font-inter text-[0.6rem] uppercase tracking-[0.12em] opacity-60">
+                    Current
+                  </span>
+                )}
+                <p
+                  className={`font-inter text-[0.7rem] uppercase tracking-[0.12em] mb-3 ${
+                    m.current ? "opacity-60" : "text-on-surface-variant/60"
+                  }`}
+                >
+                  {m.date}
+                </p>
+                <p
+                  className={`font-newsreader text-[1.1rem] font-semibold leading-tight mb-1 ${
+                    m.current ? "" : "text-ink"
+                  }`}
+                >
+                  {m.title}
+                </p>
+                <p
+                  className={`font-inter text-[0.85rem] leading-tight mb-2 ${
+                    m.current ? "opacity-80" : "text-on-surface-variant"
+                  }`}
+                >
+                  {m.org}
+                </p>
+                <p
+                  className={`font-inter text-[0.8rem] leading-relaxed ${
+                    m.current ? "opacity-70" : "text-on-surface-variant/70"
+                  }`}
+                >
+                  {m.note}
+                </p>
               </div>
             </Reveal>
           ))}
@@ -260,75 +353,155 @@ function Home() {
           </Link>
         </Reveal>
 
-        {/* Tech stack */}
+        {/* By the Numbers */}
         <Reveal delay={500}>
-          <div className="mt-10 pt-8 border-t border-surface-variant">
-            <p className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/40 mb-4">
-              Technologies
+          <div className="mt-12 pt-10 border-t border-surface-variant">
+            <p className="font-inter text-[0.6rem] uppercase tracking-[0.14em] text-on-surface-variant/50 mb-8">
+              By the Numbers
             </p>
-            <div className="flex flex-wrap gap-2">
-              {techStack.map((t) => (
-                <span
-                  key={t}
-                  className="font-inter text-[0.72rem] text-on-surface-variant border border-surface-variant px-2.5 py-1"
-                >
-                  {t}
-                </span>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+              {[
+                { value: "600+", label: "Account Managers", sub: "Note2Action automation" },
+                { value: "38%", label: "Cost Reduction", sub: "DSPy LLM optimization" },
+                { value: "3.2×", label: "Latency Improvement", sub: "Production RAG system" },
+                { value: "99.5%", label: "Model Accuracy", sub: "IEEE QPAN 2025 paper" },
+                { value: "35K+", label: "Papers Analyzed", sub: "Retraction NLP study" },
+              ].map((s, i) => (
+                <div key={i}>
+                  <p className="font-newsreader text-[2rem] text-ink leading-none mb-1">
+                    {s.value}
+                  </p>
+                  <p className="font-inter text-[0.78rem] text-ink font-medium leading-tight mb-0.5">
+                    {s.label}
+                  </p>
+                  <p className="font-inter text-[0.7rem] text-on-surface-variant/60 leading-snug">
+                    {s.sub}
+                  </p>
+                </div>
               ))}
             </div>
           </div>
         </Reveal>
       </section>
 
-      {/* ===== CLOSING ===== */}
+      {/* ===== CLOSING — flat, no box ===== */}
       <Reveal>
-        <div className="w-full h-px bg-surface-variant mb-xl mt-xl" />
+        <div className="relative w-full h-[1px] bg-surface-variant mb-16 mt-xl" />
       </Reveal>
 
-      <section className="mb-0 pb-16">
-        <Reveal delay={100}>
-          <p className="font-newsreader text-[1.5rem] italic text-ink/80 max-w-2xl leading-relaxed mb-3">
-            Currently building agentic AI systems at Dexian.
-          </p>
-          <p className="font-inter text-body-md text-on-surface-variant/70 max-w-xl leading-relaxed">
-            Open to research collaborations in NLP, medical imaging, and LLM
-            evaluation.
-          </p>
-        </Reveal>
+      <Reveal>
+        <section className="mb-0 pb-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+            {/* Left: heading + copy + social */}
+            <div>
+              <p className="font-inter text-[0.7rem] uppercase tracking-[0.14em] text-on-surface-variant/50 mb-8">
+                Let&apos;s Work Together
+              </p>
+              <h2 className="font-newsreader text-[2rem] md:text-[2.4rem] text-ink leading-tight mb-5">
+                Got a project, research idea, or just want to talk AI?
+              </h2>
+              <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-10">
+                I&apos;m always open to interesting conversations &mdash; whether
+                it&apos;s a collaboration, a PhD opportunity, or a challenging
+                engineering problem.
+              </p>
+              <div className="flex flex-col gap-4">
+                <a
+                  href={resumeData.links.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 font-inter text-[0.85rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
+                >
+                  <FaLinkedinIn className="text-[1.1rem] shrink-0 text-ink" />
+                  <span className="border-b border-ink/30 pb-px group-hover:border-ink transition-colors">
+                    LinkedIn &rarr;
+                  </span>
+                </a>
+                <a
+                  href={resumeData.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 font-inter text-[0.85rem] text-on-surface-variant hover:text-ink transition-colors no-underline group"
+                >
+                  <FaGithub className="text-[1.1rem] shrink-0 text-ink" />
+                  <span className="border-b border-ink/30 pb-px group-hover:border-ink transition-colors">
+                    GitHub &rarr;
+                  </span>
+                </a>
+              </div>
+            </div>
 
-        <Reveal delay={300}>
-          <div className="mt-10 flex flex-wrap gap-8 md:gap-12 items-center">
-            <a
-              href={`mailto:${resumeData.links.email}`}
-              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
-            >
-              {resumeData.links.email}
-            </a>
-            <a
-              href={resumeData.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
-            >
-              GitHub →
-            </a>
-            <a
-              href={resumeData.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
-            >
-              LinkedIn →
-            </a>
-            <Link
-              to="/research"
-              className="font-inter text-body-md text-ink border-b border-ink/40 pb-1 hover:border-ink transition-colors no-underline"
-            >
-              Research →
-            </Link>
+            {/* Right: inline EmailJS form */}
+            <div>
+              {sent ? (
+                <div className="py-12">
+                  <p className="font-newsreader text-[1.4rem] italic text-ink mb-2">
+                    Message sent.
+                  </p>
+                  <p className="font-inter text-[0.88rem] text-on-surface-variant">
+                    I&apos;ll get back to you as soon as I can.
+                  </p>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                  <div className="flex flex-col gap-1">
+                    <label className="font-inter text-[0.62rem] uppercase tracking-[0.14em] text-on-surface-variant/50">
+                      Name
+                    </label>
+                    <input
+                      type="text"
+                      name="from_name"
+                      required
+                      value={formState.name}
+                      onChange={(e) => setFormState((p) => ({ ...p, name: e.target.value }))}
+                      className="w-full bg-transparent border-b border-surface-variant focus:border-ink outline-none font-inter text-[0.92rem] text-ink py-2 transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label className="font-inter text-[0.62rem] uppercase tracking-[0.14em] text-on-surface-variant/50">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="reply_to"
+                      required
+                      value={formState.email}
+                      onChange={(e) => setFormState((p) => ({ ...p, email: e.target.value }))}
+                      className="w-full bg-transparent border-b border-surface-variant focus:border-ink outline-none font-inter text-[0.92rem] text-ink py-2 transition-colors"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label className="font-inter text-[0.62rem] uppercase tracking-[0.14em] text-on-surface-variant/50">
+                      Message
+                    </label>
+                    <textarea
+                      name="message"
+                      required
+                      rows={4}
+                      value={formState.message}
+                      onChange={(e) => setFormState((p) => ({ ...p, message: e.target.value }))}
+                      className="w-full bg-transparent border-b border-surface-variant focus:border-ink outline-none font-inter text-[0.92rem] text-ink py-2 resize-none transition-colors"
+                      placeholder="What's on your mind?"
+                    />
+                  </div>
+                  {error && (
+                    <p className="font-inter text-[0.8rem] text-red-600">{error}</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={sending}
+                    className="self-start bg-ink text-on-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-surface hover:text-ink transition-colors duration-200 disabled:opacity-50"
+                  >
+                    {sending ? "Sending…" : "Send Message"}
+                  </button>
+                </form>
+              )}
+            </div>
           </div>
-        </Reveal>
-      </section>
+        </section>
+      </Reveal>
     </main>
   );
 }
