@@ -83,7 +83,7 @@ function Home() {
         <div className="w-full md:w-2/3">
           <Reveal delay={100}>
             <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-3 tracking-[0.1em]">
-              AI/ML Application Developer &middot; Prospective PhD (Fall 2027)
+              AI/ML Application Developer @ Dexian &middot; 
             </p>
           </Reveal>
           <Reveal delay={150}>
