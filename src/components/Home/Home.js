@@ -95,7 +95,7 @@ function Home() {
             <div className="h-[1px] w-16 bg-ink mb-6" />
             <p className="font-newsreader text-[1.35rem] italic text-ink leading-[1.55] mb-2">
               Full-stack developer building AI/ML-integrated systems &mdash; from
-              production web apps to agentic GenAI pipelines that save real time
+              production web apps to agentic pipelines that save real time
               and resources.
             </p>
             <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-6">
