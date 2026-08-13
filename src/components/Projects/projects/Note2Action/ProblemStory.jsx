@@ -43,7 +43,7 @@ function ProblemStory({ steps }) {
 
   return (
     <div className={styles.problemGrid}>
-      <aside className={styles.problemMetric} aria-live="polite">
+      <aside className={styles.problemMetric} data-active={active} aria-live="polite">
         <div>
           <p className={styles.metricIndex}>
             Signal {String(active + 1).padStart(2, "0")} / {String(steps.length).padStart(2, "0")}

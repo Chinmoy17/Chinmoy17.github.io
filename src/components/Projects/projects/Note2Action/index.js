@@ -9,9 +9,9 @@ import SystemStage from "./SystemCube/SystemStage";
 import data from "./data";
 import styles from "./Note2Action.module.css";
 
-function ChapterHeader({ number, label, title, lead, dark = false, id }) {
+function ChapterHeader({ number, label, title, lead, id }) {
   return (
-    <div className={styles.chapterHeader}>
+    <div className={`${styles.chapterHeader} ${styles.chapterHeaderStacked}`}>
       <p className={styles.chapterKicker}>{number} · {label}</p>
       <div>
         <h2 id={id} className={styles.chapterHeading}>{title}</h2>
@@ -83,7 +83,7 @@ function Note2ActionProject() {
           <Reveal>
             <ChapterHeader
               number="01"
-              label="The operational gap"
+              label="The Ops Gap"
               id="problem-heading"
               title="The company had the context. Account managers still had to find the action."
               lead="Client history was captured faithfully, but the decision layer was missing: what should happen next, and when?"
@@ -102,12 +102,9 @@ function Note2ActionProject() {
               id="solution-heading"
               title="One narrow AI contract, carried through four deliberate stages."
               lead="The system does not try to automate account management. It cleans the note, proposes one reviewable action, and places it inside the existing workflow."
-              dark
             />
           </Reveal>
-          <Reveal delay={100}>
-            <SolutionFlow steps={data.solutionSteps} surfaces={data.solutionSurfaces} />
-          </Reveal>
+          <SolutionFlow steps={data.solutionSteps} surfaces={data.solutionSurfaces} />
         </div>
       </section>
 

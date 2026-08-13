@@ -1,10 +1,208 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  FiArrowRight,
+  FiBarChart2,
+  FiCalendar,
+  FiCheck,
+  FiCpu,
+  FiDatabase,
+  FiFileText,
+  FiMail,
+  FiServer,
+} from "react-icons/fi";
+import { SiMicrosoftteams } from "react-icons/si";
 import styles from "./Note2Action.module.css";
+
+function DashboardPreview() {
+  return (
+    <div className={styles.dashboardPreview} aria-hidden="true">
+      <div className={styles.previewTopbar}>
+        <span className={styles.previewBrand}>Note2Action</span>
+        <span className={styles.previewIdentity}>KL</span>
+      </div>
+      <div className={styles.dashboardBody}>
+        <div className={styles.dashboardSummary}>
+          <span><strong>18</strong> recent notes</span>
+          <span><strong>7</strong> clients</span>
+        </div>
+        <div className={styles.dashboardChart}>
+          {[44, 72, 58, 86, 64, 92, 76].map((height, index) => (
+            <i key={index} style={{ height: `${height}%` }} />
+          ))}
+        </div>
+        <div className={styles.dashboardAction}>
+          <FiCheck />
+          <span>Confirm revised SOW</span>
+          <time>18 Aug</time>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TeamsPreview() {
+  return (
+    <div className={styles.teamsPreview} aria-hidden="true">
+      <div className={styles.teamsBar}>
+        <SiMicrosoftteams />
+        <span>Microsoft Teams</span>
+        <span className={styles.teamsPresence} />
+      </div>
+      <div className={styles.teamsBody}>
+        <div className={styles.teamsAvatar}>GC</div>
+        <div className={styles.teamsConversation}>
+          <p className={styles.teamsSender}>GoldenCompass <span>10:42</span></p>
+          <div className={styles.adaptiveCard}>
+            <p className={styles.adaptiveEyebrow}>NEXT ACTION · ACME CORP</p>
+            <strong>Confirm the revised SOW and Q3 start date.</strong>
+            <div className={styles.adaptiveMeta}>
+              <span><FiCalendar /> Due 18 Aug</span>
+              <span><FiMail /> Email client</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SurfacePreview({ surface }) {
+  const isTeams = surface.title === "Teams bot";
+  return (
+    <article className={`${styles.surfaceCard} ${isTeams ? styles.surfaceCardTeams : ""}`}>
+      <div className={styles.surfaceVisual}>
+        {isTeams ? <TeamsPreview /> : <DashboardPreview />}
+      </div>
+      <div className={styles.surfaceCaption}>
+        <span className={styles.surfaceIcon}>{isTeams ? <SiMicrosoftteams /> : <FiBarChart2 />}</span>
+        <div>
+          <h3>{surface.title}</h3>
+          <p>{surface.copy}</p>
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function IngestPreview() {
+  return (
+    <div className={`${styles.stageVisual} ${styles.ingestPreview}`} aria-hidden="true">
+      <div className={styles.pipelineNode}>
+        <FiDatabase />
+        <strong>CRM view</strong>
+        <span>7-day client notes</span>
+      </div>
+      <div className={styles.pipelineArrow}>
+        <span>filtered by AM</span>
+        <FiArrowRight />
+      </div>
+      <div className={`${styles.pipelineNode} ${styles.pipelineNodeAccent}`}>
+        <FiServer />
+        <strong>Data service</strong>
+        <span>notes + metadata</span>
+      </div>
+      <div className={styles.fallbackNode}>
+        <FiFileText />
+        <span><strong>CSV fallback</strong> if the database is unavailable</span>
+      </div>
+    </div>
+  );
+}
+
+function CleanPreview() {
+  return (
+    <div className={`${styles.stageVisual} ${styles.cleanPreview}`} aria-hidden="true">
+      <div className={styles.cleanPane}>
+        <span className={styles.stageEyebrow}>RAW CRM COMMENT</span>
+        <code>&lt;p&gt;Met Sarah at Acme.&lt;br/&gt;SOW is approved...&lt;/p&gt;</code>
+        <span className={styles.noiseTag}>HTML · nulls · split names</span>
+      </div>
+      <FiArrowRight className={styles.cleanArrow} />
+      <div className={`${styles.cleanPane} ${styles.cleanPaneStructured}`}>
+        <span className={styles.stageEyebrow}>NORMALIZED CONTEXT</span>
+        <dl>
+          <div><dt>Client</dt><dd>Sarah Chen · Acme</dd></div>
+          <div><dt>Note</dt><dd>SOW approved; confirm start date</dd></div>
+          <div><dt>Date</dt><dd>13 Aug 2026</dd></div>
+        </dl>
+      </div>
+    </div>
+  );
+}
+
+function ReasonPreview() {
+  return (
+    <div className={`${styles.stageVisual} ${styles.reasonPreview}`} aria-hidden="true">
+      <div className={styles.reasonInput}>
+        <FiFileText />
+        <span>Clean note</span>
+      </div>
+      <FiArrowRight className={styles.reasonArrow} />
+      <div className={styles.reasonModel}>
+        <FiCpu />
+        <strong>Azure OpenAI</strong>
+        <span>temperature 0.3</span>
+      </div>
+      <FiArrowRight className={styles.reasonArrow} />
+      <div className={styles.reasonOutput}>
+        <span><small>Suggested Action</small><strong>Confirm SOW start date</strong></span>
+        <span><small>Due Date</small><strong>18 Aug</strong></span>
+      </div>
+    </div>
+  );
+}
+
+function StagePreview({ stage, surfaces }) {
+  if (stage === "Ingest") return <IngestPreview />;
+  if (stage === "Clean") return <CleanPreview />;
+  if (stage === "Reason") return <ReasonPreview />;
+  return (
+    <div className={styles.surfaceSplit}>
+      {surfaces.map((surface) => (
+        <SurfacePreview key={surface.title} surface={surface} />
+      ))}
+    </div>
+  );
+}
 
 function SolutionFlow({ steps, surfaces }) {
   const [active, setActive] = useState(0);
+  const flowRef = useRef(null);
+  const triggerRef = useRef(null);
+  const detailRef = useRef(null);
   const tabRefs = useRef([]);
   const current = steps[active];
+
+  useEffect(() => {
+    const flow = flowRef.current;
+    if (!flow) return undefined;
+    const section = flow.closest("section");
+    if (!section) return undefined;
+
+    const updateFromScroll = () => {
+      const detail = detailRef.current;
+      const trigger = triggerRef.current;
+      if (!detail || !trigger) return;
+
+      const sectionRect = section.getBoundingClientRect();
+      const triggerRect = trigger.getBoundingClientRect();
+      const readingLine = window.innerHeight * 0.65;
+      const detailOffset = triggerRect.top - sectionRect.top;
+      const runway = Math.max(
+        section.offsetHeight - window.innerHeight * 0.25 - detailOffset + readingLine,
+        1
+      );
+      const progress = Math.min(Math.max((readingLine - triggerRect.top) / runway, 0), 1);
+      const next = Math.min(steps.length - 1, Math.floor(progress * steps.length));
+      setActive((previous) => (previous === next ? previous : next));
+    };
+
+    updateFromScroll();
+    const timer = window.setInterval(updateFromScroll, 80);
+    return () => {
+      window.clearInterval(timer);
+    };
+  }, [steps.length]);
 
   const moveTo = (index) => {
     const next = Math.max(0, Math.min(steps.length - 1, index));
@@ -29,7 +227,7 @@ function SolutionFlow({ steps, surfaces }) {
   };
 
   return (
-    <div>
+    <div ref={flowRef} className={styles.solutionScrollFlow}>
       <div className={styles.solutionTrack} role="tablist" aria-label="Note2Action processing stages" onKeyDown={onKeyDown}>
         {steps.map((step, index) => (
           <button
@@ -52,8 +250,10 @@ function SolutionFlow({ steps, surfaces }) {
         ))}
       </div>
 
+      <div ref={triggerRef} className={styles.solutionTrigger} aria-hidden="true" />
       <div
         key={current.title}
+        ref={detailRef}
         id="solution-detail"
         className={styles.solutionDetail}
         role="tabpanel"
@@ -64,14 +264,7 @@ function SolutionFlow({ steps, surfaces }) {
           <p className="font-inter text-[0.65rem] text-white/40 uppercase tracking-[0.1em]">{current.signal}</p>
           <p className={styles.solutionDetailText}>{current.detail}</p>
         </div>
-        <div className={styles.surfaceSplit}>
-          {surfaces.map((surface) => (
-            <div key={surface.title} className={styles.surfaceChip}>
-              <span className="block text-white font-medium mb-1">{surface.title}</span>
-              <span>{surface.copy}</span>
-            </div>
-          ))}
-        </div>
+        <StagePreview stage={current.title} surfaces={surfaces} />
       </div>
     </div>
   );

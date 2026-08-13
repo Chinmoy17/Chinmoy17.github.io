@@ -35,18 +35,6 @@ function HeroInfographic() {
         <span className={styles.engineLabel}>Reason</span>
       </div>
 
-      <div className={styles.actionCard}>
-        <div className="flex items-center justify-between gap-4">
-          <span className={styles.actionLabel}>Suggested action</span>
-          <img className={styles.noteIcon} src="/assets/note2action/notes.png" alt="" />
-        </div>
-        <p className={styles.actionTitle}>Confirm the revised SOW and agree the Q3 start date.</p>
-        <div className={styles.actionDue}>
-          <span>Due date</span>
-          <strong>18 Aug</strong>
-        </div>
-      </div>
-
       <div className={styles.tapCue}>
         <img src="/assets/note2action/double-tap.png" alt="" />
       </div>
