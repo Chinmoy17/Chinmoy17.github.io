@@ -206,6 +206,64 @@
   background: #5b5fc7;
 }
 
+.domainControls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding-top: 0.65rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.14);
+}
+
+.domainButton {
+  min-height: 38px;
+  padding: 0.45rem 0.7rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  color: rgba(26, 26, 26, 0.66);
+  background: rgba(252, 249, 244, 0.38);
+  border: 1px solid rgba(26, 26, 26, 0.14);
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.domainButton:hover,
+.domainButton:focus-visible {
+  color: #1a1a1a;
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(26, 26, 26, 0.34);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.domainButtonActive {
+  color: #fff;
+  background: #5b5fc7;
+  border-color: #5b5fc7;
+}
+
+.domainButtonActive:hover,
+.domainButtonActive:focus-visible {
+  color: #fff;
+  background: #504daf;
+  border-color: #504daf;
+}
+
+.domainNumber {
+  color: inherit;
+  font-family: "Newsreader", serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.domainLabel {
+  color: inherit;
+  font-family: "Inter", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
 @keyframes contentUnfold {
   0% {
     opacity: 0;

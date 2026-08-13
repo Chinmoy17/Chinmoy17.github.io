@@ -384,7 +384,7 @@
 }
 
 .architectureChapter {
-  padding-bottom: 2.5rem;
+  padding-bottom: 1.25rem;
 }
 
 .problemGrid {
@@ -602,8 +602,168 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.solutionDetailContent {
-  animation: stageChange 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+.solutionDeck {
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+.solutionDeckToolbar {
+  min-height: 38px;
+  margin-bottom: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.solutionDeckToolbar > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 0.58rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.solutionDeckToolbar > span svg {
+  width: 15px;
+  height: 15px;
+}
+
+.solutionDeckNav {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.solutionDeckNav > button {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  transition: color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.solutionDeckNav > button:hover:not(:disabled) {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.58);
+}
+
+.solutionDeckNav > button:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.solutionDeckDots {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.solutionDeckDots button {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  background: rgba(255, 255, 255, 0.28);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+
+.solutionDeckDots button[aria-current="step"] {
+  width: 22px;
+  background: #7773c4;
+}
+
+.solutionDeckStage {
+  position: relative;
+  width: calc(100% - 64px);
+  height: 404px;
+  margin: 0 32px;
+  perspective: 1200px;
+  overflow: visible;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.solutionDeckCard {
+  position: absolute;
+  inset: 0;
+  padding: 0.9rem 1rem 1rem;
+  overflow: hidden;
+  color: #fff;
+  background-color: #17191d;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+  background-size: 28px 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 2px solid rgba(119, 115, 196, 0.74);
+  box-shadow: 0 22px 46px rgba(0, 0, 0, 0.28);
+  transform-origin: center bottom;
+  transition:
+    transform 0.52s cubic-bezier(0.2, 0.86, 0.22, 1),
+    opacity 0.42s ease,
+    box-shadow 0.42s ease;
+}
+
+.solutionDeckCardActive {
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.36);
+}
+
+.solutionDeckCardHeader {
+  min-height: 26px;
+  padding-bottom: 0.55rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.solutionDeckCardHeader span:last-child {
+  text-align: right;
+}
+
+.solutionDeckCard .solutionDetailText {
+  margin: 0.7rem 0 0;
+  max-width: 720px;
+  font-size: 0.78rem;
+  line-height: 1.55;
+}
+
+.solutionDeckCard .stageVisual,
+.solutionDeckCard .surfaceSplit {
+  width: 100%;
+  margin-top: 0.8rem;
+}
+
+.solutionDeckCard .stageVisual {
+  min-height: 195px;
+}
+
+.solutionDeckCard .surfaceVisual {
+  min-height: 142px;
+  padding: 0.62rem;
+}
+
+.solutionDeckCard .dashboardPreview,
+.solutionDeckCard .teamsPreview {
+  height: 120px;
+}
+
+.solutionDeckCard .surfaceCaption {
+  min-height: 56px;
+  padding: 0.65rem 0.75rem;
 }
 
 .solutionScrollFlow {
@@ -1379,19 +1539,6 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes stageChange {
-  from {
-    opacity: 0;
-    transform: translateY(14px) scale(0.992);
-    filter: blur(2px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
 @media (max-width: 900px) {
   .heroScene {
     right: -18%;
@@ -1431,6 +1578,102 @@
 
   .solutionTrack::before {
     display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-height: 820px) {
+  .solutionStep {
+    min-height: 128px;
+  }
+
+  .solutionDot {
+    width: 42px;
+    height: 42px;
+    border-width: 3px;
+  }
+
+  .solutionStepTitle {
+    margin-top: 0.6rem;
+    font-size: 1.25rem;
+  }
+
+  .solutionStepCopy {
+    margin-top: 0.35rem;
+    max-width: 205px;
+    font-size: 0.72rem;
+    line-height: 1.38;
+  }
+
+  .solutionTrack::before {
+    top: 21px;
+  }
+
+  .solutionDetail {
+    margin-top: 0.5rem;
+    padding-top: 0.55rem;
+  }
+
+  .solutionDeckToolbar {
+    min-height: 32px;
+    margin-bottom: 0.3rem;
+  }
+
+  .solutionDeckNav > button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .solutionDeckStage {
+    height: 315px;
+  }
+
+  .solutionDeckCard {
+    padding: 0.65rem 0.75rem 0.7rem;
+  }
+
+  .solutionDeckCardHeader {
+    min-height: 21px;
+    padding-bottom: 0.35rem;
+  }
+
+  .solutionDeckCard .solutionDetailText {
+    margin-top: 0.42rem;
+    font-size: 0.69rem;
+    line-height: 1.42;
+  }
+
+  .solutionDeckCard .stageVisual,
+  .solutionDeckCard .surfaceSplit {
+    margin-top: 0.52rem;
+  }
+
+  .solutionDeckCard .stageVisual {
+    min-height: 158px;
+    padding: 0.75rem;
+  }
+
+  .solutionDeckCard .surfaceVisual {
+    min-height: 104px;
+    padding: 0.42rem;
+  }
+
+  .solutionDeckCard .dashboardPreview,
+  .solutionDeckCard .teamsPreview {
+    height: 88px;
+  }
+
+  .solutionDeckCard .surfaceCaption {
+    min-height: 44px;
+    padding: 0.42rem 0.55rem;
+  }
+
+  .solutionDeckCard .surfaceCaption h3 {
+    font-size: 0.72rem;
+  }
+
+  .solutionDeckCard .surfaceCaption p {
+    margin-top: 0.15rem;
+    font-size: 0.6rem;
   }
 }
 
@@ -1514,6 +1757,39 @@
     min-height: 132px;
   }
 
+  .solutionDeck {
+    width: 100%;
+  }
+
+  .solutionDeckToolbar {
+    align-items: flex-start;
+  }
+
+  .solutionDeckToolbar > span {
+    max-width: 120px;
+    line-height: 1.4;
+  }
+
+  .solutionDeckStage {
+    width: calc(100% - 24px);
+    height: 690px;
+    margin: 0 12px;
+  }
+
+  .solutionDeckCard {
+    padding: 0.75rem;
+  }
+
+  .solutionDeckCardHeader {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .solutionDeckCardHeader span:last-child {
+    text-align: left;
+  }
+
   .stageVisual {
     min-height: auto;
     padding: 0.8rem;
@@ -1576,9 +1852,6 @@
     animation: none !important;
   }
 
-  .solutionDetailContent {
-    animation: none !important;
-  }
 
   .flowRail::after {
     display: none;

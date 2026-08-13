@@ -3,10 +3,13 @@ import {
   FiArrowRight,
   FiBarChart2,
   FiCalendar,
+  FiChevronLeft,
+  FiChevronRight,
   FiCheck,
   FiCpu,
   FiDatabase,
   FiFileText,
+  FiGrid,
   FiMail,
   FiServer,
 } from "react-icons/fi";
@@ -165,6 +168,93 @@ function StagePreview({ stage, surfaces }) {
   );
 }
 
+function SolutionDeck({ steps, surfaces, active, onSelect }) {
+  const pointerStart = useRef(null);
+
+  const startDrag = (event) => {
+    pointerStart.current = event.clientX;
+    if (event.currentTarget.setPointerCapture) {
+      try {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      } catch (error) {
+      }
+    }
+  };
+
+  const endDrag = (event) => {
+    if (pointerStart.current === null) return;
+    const distance = event.clientX - pointerStart.current;
+    pointerStart.current = null;
+    if (Math.abs(distance) < 45) return;
+    onSelect(active + (distance < 0 ? 1 : -1));
+  };
+
+  return (
+    <div className={styles.solutionDeck}>
+      <div className={styles.solutionDeckToolbar}>
+        <span><FiGrid /> Scroll, drag, or use arrow keys</span>
+        <div className={styles.solutionDeckNav}>
+          <button type="button" onClick={() => onSelect(active - 1)} disabled={active === 0} aria-label="Previous response stage">
+            <FiChevronLeft />
+          </button>
+          <div className={styles.solutionDeckDots} aria-label="Response stage position">
+            {steps.map((step, index) => (
+              <button
+                key={step.title}
+                type="button"
+                aria-label={`Open ${step.title}`}
+                aria-current={index === active ? "step" : undefined}
+                onClick={() => onSelect(index)}
+              />
+            ))}
+          </div>
+          <button type="button" onClick={() => onSelect(active + 1)} disabled={active === steps.length - 1} aria-label="Next response stage">
+            <FiChevronRight />
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={styles.solutionDeckStage}
+        onPointerDown={startDrag}
+        onPointerUp={endDrag}
+        onPointerCancel={() => { pointerStart.current = null; }}
+      >
+        {steps.map((step, index) => {
+          const delta = index - active;
+          const distance = Math.min(Math.abs(delta), 3);
+          const side = delta < 0 ? -1 : 1;
+          const isActive = delta === 0;
+          const transform = isActive
+            ? "translate3d(0, 0, 0) rotate(0deg) scale(1)"
+            : `translate3d(${side * distance * 26}px, ${distance * 14}px, 0) rotate(${side * distance * 0.7}deg) scale(${1 - distance * 0.035})`;
+
+          return (
+            <article
+              key={step.title}
+              className={`${styles.solutionDeckCard} ${isActive ? styles.solutionDeckCardActive : ""}`}
+              aria-hidden={!isActive}
+              style={{
+                zIndex: 10 - distance,
+                opacity: isActive ? 1 : Math.max(0, 0.82 - distance * 0.2),
+                transform,
+                pointerEvents: isActive ? "auto" : "none",
+              }}
+            >
+              <header className={styles.solutionDeckCardHeader}>
+                <span>{String(index + 1).padStart(2, "0")} · {step.title}</span>
+                <span>{step.signal}</span>
+              </header>
+              <p className={styles.solutionDetailText}>{step.detail}</p>
+              <StagePreview stage={step.title} surfaces={surfaces} />
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 function SolutionFlow({ steps, surfaces }) {
   const [active, setActive] = useState(0);
   const flowRef = useRef(null);
@@ -172,7 +262,6 @@ function SolutionFlow({ steps, surfaces }) {
   const activeRef = useRef(0);
   const wheelLockRef = useRef(false);
   const wheelTimerRef = useRef(null);
-  const current = steps[active];
 
   useEffect(() => {
     activeRef.current = active;
@@ -242,8 +331,27 @@ function SolutionFlow({ steps, surfaces }) {
 
   const moveTo = (index) => {
     const next = Math.max(0, Math.min(steps.length - 1, index));
+    if (next === activeRef.current) return;
+    activeRef.current = next;
     setActive(next);
     tabRefs.current[next]?.focus();
+
+    const flow = flowRef.current;
+    if (flow && window.innerWidth >= 768) {
+      wheelLockRef.current = true;
+      const rect = flow.getBoundingClientRect();
+      const stickyTop = 72;
+      const runway = Math.max(flow.offsetHeight - window.innerHeight + stickyTop, 1);
+      const progress = next === 0 ? 0 : (next + 0.08) / steps.length;
+      window.scrollTo({
+        top: rect.top + window.scrollY - stickyTop + runway * progress,
+        behavior: "smooth",
+      });
+      window.clearTimeout(wheelTimerRef.current);
+      wheelTimerRef.current = window.setTimeout(() => {
+        wheelLockRef.current = false;
+      }, 460);
+    }
   };
 
   const onKeyDown = (event) => {
@@ -294,13 +402,7 @@ function SolutionFlow({ steps, surfaces }) {
           aria-labelledby={`solution-tab-${active}`}
           aria-live="polite"
         >
-          <div key={current.title} className={styles.solutionDetailContent}>
-            <div>
-              <p className={styles.solutionSignal}>{current.signal}</p>
-              <p className={styles.solutionDetailText}>{current.detail}</p>
-            </div>
-            <StagePreview stage={current.title} surfaces={surfaces} />
-          </div>
+          <SolutionDeck steps={steps} surfaces={surfaces} active={active} onSelect={moveTo} />
         </div>
       </div>
     </div>

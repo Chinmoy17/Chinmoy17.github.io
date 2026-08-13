@@ -4,8 +4,6 @@ import styles from "./SystemStage.module.css";
 
 const SystemCube = lazy(() => import("./SystemCube"));
 
-const ACCENT = "#5b5fc7";
-
 const DOMAIN_DETAILS = {
   frontend: {
     focus: "Turns shared API responses into reviewable notes, actions and insights.",
@@ -159,25 +157,18 @@ function ControlStrip({ faces, active, onSelect }) {
   };
   return (
     <div role="tablist" aria-label="System domains" onKeyDown={onKeyDown}
-      className="flex flex-wrap gap-x-6 gap-y-3 border-t border-surface-variant pt-4">
+      className={styles.domainControls}>
       {faces.map((f, i) => {
         const on = i === active;
         return (
           <button key={f.id} type="button" role="tab" aria-selected={on}
             tabIndex={on ? 0 : -1}
             onClick={() => onSelect(i)}
-            className="group flex items-baseline gap-2 no-underline">
-            <span className="font-newsreader text-[0.8rem] text-on-surface-variant/30 select-none">
+            className={`${styles.domainButton} ${on ? styles.domainButtonActive : ""}`}>
+            <span className={styles.domainNumber}>
               {String(i + 1).padStart(2, "0")}
             </span>
-            <span
-              className={`font-inter text-[0.85rem] transition-colors pb-px ${
-                on ? "text-ink border-b-2" : "text-on-surface-variant border-b-2 border-transparent group-hover:text-ink"
-              }`}
-              style={on ? { borderColor: ACCENT } : undefined}
-            >
-              {f.label}
-            </span>
+            <span className={styles.domainLabel}>{f.label}</span>
           </button>
         );
       })}
