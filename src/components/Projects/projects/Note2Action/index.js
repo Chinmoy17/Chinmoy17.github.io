@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 import { Reveal } from "../../../utils/Reveal";
+import SystemStage from "./SystemCube/SystemStage";
 import data from "./data";
 
 const toc = [
@@ -9,6 +10,7 @@ const toc = [
   { id: "problem", label: "The Overload" },
   { id: "pipeline", label: "The Pipeline" },
   { id: "surfaces", label: "Two Surfaces" },
+  { id: "system", label: "The System" },
   { id: "workflow", label: "Note to Nudge" },
   { id: "architecture", label: "Under the Hood" },
   { id: "results", label: "What It Changed" },
@@ -246,6 +248,18 @@ function Note2ActionProject() {
         </Reveal>
       </section>
 
+      {/* ===== THE SYSTEM (interactive 3D cube) ===== */}
+      <Divider label="The System" />
+      <section id="system" className="mb-xl">
+        <Reveal>
+          <h2 className="font-newsreader text-h3 text-ink mb-4">The whole system, in one object</h2>
+          <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-10 max-w-3xl">
+            Six domains, one build. Turn the cube over &mdash; each face is a slice of the stack, from the SSO-gated frontend to the two-stage Docker ship. Scroll to rotate it, or grab it and explore.
+          </p>
+        </Reveal>
+        <SystemStage faces={data.systemFaces} />
+      </section>
+
       {/* ===== NOTE TO NUDGE ===== */}
       <Divider label="Note to Nudge" />
       <section id="workflow" className="mb-xl">
@@ -325,7 +339,7 @@ function Note2ActionProject() {
                   ))}
                 </div>
                 <div className="mt-4 pt-3 border-t border-white/10">
-                  <p className="font-mono text-[0.66rem] text-white/30 leading-relaxed">// returns "N/A" when nothing useful can be inferred</p>
+                  <p className="font-mono text-[0.66rem] text-white/30 leading-relaxed">{'// returns "N/A" when nothing useful can be inferred'}</p>
                 </div>
               </div>
             </div>

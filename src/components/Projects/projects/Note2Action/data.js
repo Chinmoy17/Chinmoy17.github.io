@@ -213,6 +213,143 @@ const note2actionData = {
     "Auth hardening — enforce the SSO bearer token on the bot's backend calls before wider rollout.",
   ],
 
+  // ===== SYSTEM CUBE — the 6 domains of the stack, one per cube face =====
+  // Narrative order; the component maps each to a physical cube side.
+  systemFaces: [
+    {
+      id: "frontend",
+      label: "Frontend",
+      tag: "Client",
+      oneLiner: "SSO-gated dashboard for focused review",
+      tech: ["Next.js 16", "React 19", "Tailwind", "recharts"],
+      responsibility:
+        "A statically-exported Next.js app: SSO login, a notes table with per-row action generation in a modal, and an insights page charting action distribution and a daily timeline.",
+      diagram: {
+        nodes: [
+          { id: "browser", label: "Browser", sub: "SSO session", x: 64, y: 105, type: "external" },
+          { id: "shell", label: "App shell", sub: "Next.js export", x: 180, y: 105 },
+          { id: "actions", label: "Notes + actions", sub: "/extract_actions", x: 298, y: 56, type: "accent" },
+          { id: "insights", label: "Insights", sub: "recharts", x: 298, y: 154 },
+        ],
+        edges: [
+          { from: "browser", to: "shell", label: "SSO" },
+          { from: "shell", to: "actions" },
+          { from: "shell", to: "insights" },
+        ],
+      },
+    },
+    {
+      id: "backend",
+      label: "Backend",
+      tag: "Core",
+      oneLiner: "One stateless FastAPI service",
+      tech: ["FastAPI", "Uvicorn", "pandas", "SQLAlchemy"],
+      responsibility:
+        "A stateless FastAPI service exposing /api/notes, /api/extract_actions and /api/am_stats. Every request carries full note context, so the web and Teams clients share one endpoint with zero server-side session state.",
+      diagram: {
+        nodes: [
+          { id: "api", label: "FastAPI", sub: "stateless", x: 78, y: 105, type: "accent" },
+          { id: "notes", label: "/notes", sub: "list + meta", x: 252, y: 46 },
+          { id: "extract", label: "/extract", sub: "note \u2192 LLM", x: 252, y: 105 },
+          { id: "stats", label: "/am_stats", sub: "summary", x: 252, y: 164 },
+        ],
+        edges: [
+          { from: "api", to: "notes", label: "GET" },
+          { from: "api", to: "extract", label: "POST" },
+          { from: "api", to: "stats", label: "GET" },
+        ],
+      },
+    },
+    {
+      id: "ai",
+      label: "AI",
+      tag: "Reasoning",
+      oneLiner: "A deterministic two-field prompt",
+      tech: ["Azure OpenAI", "prompt contract", "temp 0.3"],
+      responsibility:
+        "Each cleaned note goes to Azure OpenAI under a deliberately tiny prompt that returns exactly two fields — Suggested Action and Due Date — or \u201cN/A\u201d. Low temperature keeps the same note stable across reruns.",
+      diagram: {
+        nodes: [
+          { id: "note", label: "Note", sub: "cleaned", x: 62, y: 105 },
+          { id: "aoai", label: "Azure OpenAI", sub: "prompt \u00b7 temp 0.3", x: 184, y: 105, type: "accent" },
+          { id: "sug", label: "Suggested", sub: "next step", x: 300, y: 56 },
+          { id: "due", label: "Due date", sub: "or N/A", x: 300, y: 154 },
+        ],
+        edges: [
+          { from: "note", to: "aoai", label: "constrained" },
+          { from: "aoai", to: "sug" },
+          { from: "aoai", to: "due" },
+        ],
+      },
+    },
+    {
+      id: "data",
+      label: "Data",
+      tag: "Source",
+      oneLiner: "A CRM view with a CSV fallback",
+      tech: ["SQL Server", "CSV fallback", "BeautifulSoup"],
+      responsibility:
+        "Pulls each AM's recent client-visit notes from a CRM view, strips HTML and normalizes fields. If the database is unreachable it silently falls back to a bundled CSV and tags the response with its data_source.",
+      diagram: {
+        nodes: [
+          { id: "crm", label: "CRM view", sub: "Bullhorn", x: 66, y: 56, type: "store" },
+          { id: "csv", label: "CSV", sub: "bundled", x: 66, y: 156, type: "store" },
+          { id: "svc", label: "Data service", sub: "clean \u00b7 normalize", x: 190, y: 105, type: "accent" },
+          { id: "out", label: "Response", sub: "+ data_source", x: 300, y: 105 },
+        ],
+        edges: [
+          { from: "crm", to: "svc", label: "primary" },
+          { from: "csv", to: "svc", label: "fallback", dashed: true },
+          { from: "svc", to: "out" },
+        ],
+      },
+    },
+    {
+      id: "bot",
+      label: "Bot",
+      tag: "Surface",
+      oneLiner: "Adaptive Cards inside Teams",
+      tech: ["Bot Framework v4", "Adaptive Cards", "aiohttp"],
+      responsibility:
+        "A separate Bot Framework service renders the same suggestions as paginated Adaptive Cards in Microsoft Teams under the internal GoldenCompass brand — expandable rows and a one-tap handoff to email the client.",
+      diagram: {
+        nodes: [
+          { id: "teams", label: "Teams", sub: "@mention", x: 60, y: 105, type: "external" },
+          { id: "bot", label: "Bot service", sub: "Bot Framework", x: 176, y: 105, type: "accent" },
+          { id: "api", label: "Backend", sub: "same API", x: 300, y: 56 },
+          { id: "card", label: "Adaptive Card", sub: "mailto handoff", x: 300, y: 154 },
+        ],
+        edges: [
+          { from: "teams", to: "bot", label: "activity" },
+          { from: "bot", to: "api", label: "HTTP", dashed: true },
+          { from: "bot", to: "card", label: "render" },
+        ],
+      },
+    },
+    {
+      id: "deploy",
+      label: "Deploy",
+      tag: "Ship",
+      oneLiner: "One container, built in two stages",
+      tech: ["Docker", "multi-stage", "ACR", "Azure Bot Service"],
+      responsibility:
+        "A multi-stage Docker build compiles the Next.js frontend, then a Python runtime serves it alongside the API — one image, one port. The bot ships as its own service, registered independently against Azure Bot Service.",
+      diagram: {
+        nodes: [
+          { id: "build", label: "Node build", sub: "next build", x: 66, y: 58 },
+          { id: "run", label: "Py runtime", sub: "serves /static", x: 190, y: 58, type: "accent" },
+          { id: "cont", label: "Container", sub: "one image", x: 300, y: 58 },
+          { id: "botsvc", label: "Bot service", sub: "separate", x: 190, y: 158, type: "external" },
+        ],
+        edges: [
+          { from: "build", to: "run", label: "export" },
+          { from: "run", to: "cont", label: "packaged" },
+          { from: "cont", to: "botsvc", label: "independent", dashed: true },
+        ],
+      },
+    },
+  ],
+
   closingQuote:
     "The interesting part isn't that an LLM can summarize a note. It's the plumbing that makes one suggestion show up, reliably, in the two places an account manager actually looks.",
 };

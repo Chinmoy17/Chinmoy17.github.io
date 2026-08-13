@@ -107,9 +107,23 @@ module.exports = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(3px)" },
         },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(6px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        drawLine: {
+          to: { strokeDashoffset: "0" },
+        },
+        popIn: {
+          "0%": { opacity: "0", transform: "scale(0.85)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "bounce-x": "bounce-x 0.8s ease-in-out infinite",
+        "fade-in": "fadeIn 0.4s ease-out",
+        "draw-line": "drawLine 0.5s ease forwards",
+        "pop-in": "popIn 0.35s ease-out both",
       },
     },
   },
