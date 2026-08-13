@@ -1,0 +1,871 @@
+.page {
+  --n2a-ink: #151719;
+  --n2a-paper: #fcf9f4;
+  --n2a-paper-deep: #efe8dd;
+  --n2a-line: rgba(28, 28, 25, 0.16);
+  --n2a-violet: #6966b8;
+  --n2a-cyan: #62c9c2;
+  background: var(--n2a-paper);
+  color: var(--n2a-ink);
+  overflow: clip;
+}
+
+.hero {
+  min-height: calc(100vh - 4.5rem);
+  position: relative;
+  display: flex;
+  color: #fff;
+  background: #15171b;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(13, 15, 18, 0.98) 0%, rgba(13, 15, 18, 0.86) 46%, rgba(13, 15, 18, 0.3) 76%, rgba(13, 15, 18, 0.54) 100%);
+}
+
+.heroInner {
+  min-height: calc(100vh - 4.5rem);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.heroCopy {
+  max-width: 720px;
+  padding-top: clamp(5rem, 12vh, 8rem);
+  animation: heroCopyIn 0.7s ease-out both;
+}
+
+.heroTitle {
+  font-size: clamp(4rem, 9vw, 8rem);
+  line-height: 0.9;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+
+.heroStatement {
+  max-width: 650px;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  line-height: 1.28;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.heroStats {
+  margin-top: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.heroStat {
+  min-height: 106px;
+  padding: 1.25rem 1.5rem 1.1rem 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.heroStat:last-child {
+  border-right: 0;
+  padding-left: 1.5rem;
+}
+
+.heroStat:not(:first-child) {
+  padding-left: 1.5rem;
+}
+
+.heroStatValue {
+  display: block;
+  font-family: "Newsreader", serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1;
+}
+
+.heroStatLabel {
+  display: block;
+  margin-top: 0.5rem;
+  max-width: 150px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.68rem;
+  line-height: 1.35;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.heroScene {
+  position: absolute;
+  z-index: 0;
+  top: 7%;
+  right: -1.5vw;
+  width: min(56vw, 820px);
+  height: 80%;
+  pointer-events: none;
+  opacity: 0.94;
+  animation: sceneIn 0.9s 0.15s ease-out both;
+}
+
+.sceneHalo {
+  position: absolute;
+  top: 16%;
+  left: 22%;
+  width: 58%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(98, 201, 194, 0.28);
+  border-radius: 50%;
+  box-shadow: inset 0 0 70px rgba(98, 201, 194, 0.06);
+}
+
+.sceneHalo::before,
+.sceneHalo::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sceneHalo::before {
+  inset: 12%;
+}
+
+.sceneHalo::after {
+  inset: 27%;
+}
+
+.noteStack {
+  position: absolute;
+  top: 14%;
+  left: 2%;
+  width: 48%;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.noteCard {
+  min-height: 76px;
+  padding: 0.9rem 1rem;
+  background: rgba(252, 249, 244, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  transform: translateX(var(--offset, 0));
+  animation: noteDrift 5.5s ease-in-out infinite;
+  animation-delay: var(--delay, 0s);
+}
+
+.noteCard:nth-child(2) {
+  --offset: 2rem;
+}
+
+.noteCard:nth-child(3) {
+  --offset: 0.75rem;
+}
+
+.noteMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.noteLines {
+  margin-top: 0.7rem;
+  display: grid;
+  gap: 0.42rem;
+}
+
+.noteLine {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.noteLine:last-child {
+  width: 62%;
+}
+
+.noteIcon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: invert(1);
+  opacity: 0.56;
+}
+
+.flowRail {
+  position: absolute;
+  top: 49%;
+  left: 39%;
+  width: 28%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(-5deg);
+}
+
+.flowRail::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--n2a-cyan);
+  box-shadow: 0 0 16px rgba(98, 201, 194, 0.7);
+  animation: flowDot 2.2s ease-in-out infinite;
+}
+
+.engine {
+  position: absolute;
+  top: 36%;
+  left: 47%;
+  width: 112px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(21, 23, 27, 0.94);
+  border: 1px solid rgba(98, 201, 194, 0.65);
+  box-shadow: 0 0 0 12px rgba(98, 201, 194, 0.05), 0 18px 50px rgba(0, 0, 0, 0.4);
+}
+
+.engine img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  filter: invert(1);
+  opacity: 0.88;
+}
+
+.engineLabel {
+  position: absolute;
+  bottom: 19px;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.actionCard {
+  position: absolute;
+  top: 26%;
+  right: 4%;
+  width: 41%;
+  padding: 1.35rem;
+  color: var(--n2a-ink);
+  background: rgba(252, 249, 244, 0.96);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.34);
+  animation: actionFloat 5s ease-in-out infinite;
+}
+
+.actionLabel {
+  color: rgba(21, 23, 25, 0.5);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.actionTitle {
+  margin-top: 0.85rem;
+  font-family: "Newsreader", serif;
+  font-size: 1.45rem;
+  line-height: 1.2;
+}
+
+.actionDue {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid rgba(21, 23, 25, 0.14);
+  font-size: 0.68rem;
+  color: rgba(21, 23, 25, 0.58);
+}
+
+.tapCue {
+  position: absolute;
+  right: 7%;
+  bottom: 19%;
+  width: 68px;
+  height: 68px;
+  padding: 17px;
+  border-radius: 50%;
+  background: var(--n2a-violet);
+  box-shadow: 0 0 0 0 rgba(105, 102, 184, 0.4);
+  animation: tapPulse 2.6s ease-out infinite;
+}
+
+.tapCue img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(1);
+}
+
+.chapterNav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--n2a-line);
+}
+
+.chapterLink {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: rgba(28, 28, 25, 0.62);
+  text-decoration: none;
+  font-size: 0.78rem;
+}
+
+.chapterLink:hover {
+  color: var(--n2a-ink);
+}
+
+.chapterNumber {
+  font-family: "Newsreader", serif;
+  color: rgba(28, 28, 25, 0.28);
+}
+
+.chapter {
+  padding: clamp(5rem, 10vw, 9rem) 0;
+}
+
+.chapterTint {
+  background: #f2ede5;
+}
+
+.chapterDark {
+  color: #fff;
+  background: var(--n2a-ink);
+}
+
+.chapterHeader {
+  display: grid;
+  grid-template-columns: minmax(90px, 1fr) minmax(0, 5fr);
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.chapterKicker {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(28, 28, 25, 0.52);
+}
+
+.chapterDark .chapterKicker {
+  color: rgba(255, 255, 255, 0.48);
+}
+
+.chapterHeading {
+  max-width: 850px;
+  font-family: "Newsreader", serif;
+  font-size: clamp(2.2rem, 5vw, 4.6rem);
+  line-height: 1.02;
+  letter-spacing: 0;
+}
+
+.chapterLead {
+  max-width: 690px;
+  margin-top: 1.25rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(28, 28, 25, 0.68);
+}
+
+.chapterDark .chapterLead {
+  color: rgba(255, 255, 255, 0.64);
+}
+
+.problemGrid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: start;
+}
+
+.problemMetric {
+  position: sticky;
+  top: 7.5rem;
+  min-height: 410px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+  background: var(--n2a-ink);
+  overflow: hidden;
+}
+
+.problemMetric::after {
+  content: "";
+  position: absolute;
+  right: -2.5rem;
+  bottom: -2.5rem;
+  width: 190px;
+  height: 190px;
+  border: 1px solid rgba(98, 201, 194, 0.28);
+  border-radius: 50%;
+}
+
+.metricValue {
+  font-family: "Newsreader", serif;
+  font-size: clamp(4.4rem, 9vw, 7.8rem);
+  line-height: 0.9;
+  animation: metricIn 0.45s ease-out both;
+}
+
+.metricLabel {
+  max-width: 240px;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.metricIndex {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.problemStep {
+  min-height: 52vh;
+  padding: 2rem 0 3rem;
+  border-top: 1px solid var(--n2a-line);
+  opacity: 0.38;
+  transform: translateY(18px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.problemStepActive {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.problemStepTitle {
+  margin: 0.6rem 0 1rem;
+  font-family: "Newsreader", serif;
+  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+  line-height: 1.12;
+}
+
+.problemStepBody {
+  max-width: 590px;
+  color: rgba(28, 28, 25, 0.68);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+.problemConsequence {
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--n2a-violet);
+  color: rgba(28, 28, 25, 0.82);
+  font-size: 0.88rem;
+}
+
+.solutionTrack {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.solutionTrack::before {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: 7%;
+  right: 7%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.solutionStep {
+  position: relative;
+  z-index: 1;
+  min-height: 210px;
+  padding: 0;
+  color: rgba(255, 255, 255, 0.58);
+  text-align: left;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.solutionStep:hover,
+.solutionStepActive {
+  color: #fff;
+}
+
+.solutionDot {
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  color: var(--n2a-ink);
+  background: #f6f0e7;
+  border: 4px solid var(--n2a-ink);
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+  font-family: "Newsreader", serif;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.solutionStepActive .solutionDot {
+  color: #fff;
+  background: var(--n2a-violet);
+  transform: translateY(-4px);
+}
+
+.solutionStepTitle {
+  display: block;
+  margin-top: 1.15rem;
+  font-family: "Newsreader", serif;
+  font-size: 1.45rem;
+  color: #fff;
+}
+
+.solutionStepCopy {
+  display: block;
+  margin-top: 0.65rem;
+  max-width: 220px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.solutionDetail {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+  gap: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  animation: detailIn 0.35s ease-out both;
+}
+
+.solutionDetailText {
+  max-width: 700px;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.7;
+}
+
+.surfaceSplit {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.surfaceChip {
+  padding: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  line-height: 1.4;
+}
+
+.impactRows {
+  border-top: 1px solid var(--n2a-line);
+}
+
+.impactRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1.3fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: center;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--n2a-line);
+}
+
+.impactBefore {
+  color: rgba(28, 28, 25, 0.45);
+  font-size: 0.9rem;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.impactArrow {
+  color: var(--n2a-violet);
+  font-family: "Newsreader", serif;
+  font-size: 1.7rem;
+}
+
+.impactAfterTitle {
+  font-family: "Newsreader", serif;
+  font-size: 1.5rem;
+}
+
+.impactAfterCopy {
+  margin-top: 0.35rem;
+  color: rgba(28, 28, 25, 0.64);
+  font-size: 0.85rem;
+  line-height: 1.55;
+}
+
+.cta {
+  position: relative;
+  padding: clamp(5rem, 10vw, 9rem) 0;
+  color: #fff;
+  background: #15171b;
+  overflow: hidden;
+}
+
+.ctaIcon {
+  position: absolute;
+  right: 6%;
+  bottom: -18%;
+  width: min(38vw, 440px);
+  opacity: 0.055;
+  filter: invert(1);
+  transform: rotate(-8deg);
+}
+
+.ctaHeading {
+  max-width: 800px;
+  font-family: "Newsreader", serif;
+  font-size: clamp(2.7rem, 6vw, 5.6rem);
+  line-height: 1;
+  letter-spacing: 0;
+  pointer-events: none;
+}
+
+.ctaCopy {
+  max-width: 600px;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 1rem;
+  line-height: 1.7;
+  pointer-events: none;
+}
+
+.ctaActions {
+  position: relative;
+  z-index: 2;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.ctaPrimary,
+.ctaSecondary {
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0 1.15rem;
+  text-decoration: none;
+  font-size: 0.8rem;
+}
+
+.ctaPrimary {
+  color: var(--n2a-ink);
+  background: var(--n2a-paper);
+}
+
+.ctaSecondary {
+  color: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.26);
+}
+
+@keyframes heroCopyIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sceneIn {
+  from { opacity: 0; transform: translateX(36px); }
+  to { opacity: 0.94; transform: translateX(0); }
+}
+
+@keyframes noteDrift {
+  0%, 100% { transform: translateX(var(--offset, 0)) translateY(0); }
+  50% { transform: translateX(calc(var(--offset, 0px) + 8px)) translateY(-5px); }
+}
+
+@keyframes flowDot {
+  0% { left: 0; opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { left: calc(100% - 7px); opacity: 0; }
+}
+
+@keyframes actionFloat {
+  0%, 100% { transform: translateY(0) rotate(0.4deg); }
+  50% { transform: translateY(-10px) rotate(-0.3deg); }
+}
+
+@keyframes tapPulse {
+  0% { box-shadow: 0 0 0 0 rgba(105, 102, 184, 0.45); }
+  70% { box-shadow: 0 0 0 18px rgba(105, 102, 184, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(105, 102, 184, 0); }
+}
+
+@keyframes metricIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes detailIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .heroScene {
+    right: -18%;
+    width: 76vw;
+    opacity: 0.55;
+  }
+
+  .hero::after {
+    background: rgba(13, 15, 18, 0.76);
+  }
+
+  .problemGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .problemMetric {
+    position: relative;
+    top: auto;
+    min-height: 300px;
+  }
+
+  .problemStep {
+    min-height: auto;
+    opacity: 1;
+    transform: none;
+  }
+
+  .solutionTrack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .solutionTrack::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: calc(100svh - 4.5rem);
+  }
+
+  .heroInner {
+    min-height: calc(100svh - 4.5rem);
+  }
+
+  .heroCopy {
+    padding-top: 4.5rem;
+  }
+
+  .heroTitle {
+    font-size: 3.25rem;
+  }
+
+  .heroScene {
+    top: 24%;
+    right: -58%;
+    width: 142vw;
+    height: 58%;
+    opacity: 0.36;
+  }
+
+  .noteStack {
+    display: none;
+  }
+
+  .heroStats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .heroStat,
+  .heroStat:last-child,
+  .heroStat:not(:first-child) {
+    min-height: 84px;
+    padding: 0.9rem 0.75rem;
+  }
+
+  .heroStatLabel {
+    font-size: 0.72rem;
+  }
+
+  .heroStat:nth-child(2) {
+    border-right: 0;
+  }
+
+  .heroStat:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  }
+
+  .chapterHeader {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .chapter {
+    padding: 4.5rem 0;
+  }
+
+  .solutionTrack,
+  .solutionDetail,
+  .surfaceSplit {
+    grid-template-columns: 1fr;
+  }
+
+  .solutionStep {
+    min-height: 132px;
+  }
+
+  .impactRow {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .impactArrow {
+    transform: rotate(90deg);
+    transform-origin: left center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroCopy,
+  .heroScene,
+  .noteCard,
+  .actionCard,
+  .tapCue,
+  .metricValue,
+  .solutionDetail {
+    animation: none !important;
+  }
+
+  .flowRail::after {
+    display: none;
+  }
+
+  .problemStep {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

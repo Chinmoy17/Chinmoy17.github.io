@@ -41,6 +41,101 @@ const note2actionData = {
     { value: "7-day", label: "Rolling note window" },
   ],
 
+  chapters: [
+    { id: "problem", label: "Problem" },
+    { id: "solution", label: "Solution" },
+    { id: "architecture", label: "Architecture" },
+    { id: "impact", label: "Impact" },
+  ],
+
+  problemStory: [
+    {
+      value: "600+",
+      metricLabel: "Account managers depend on client notes to decide what happens next.",
+      label: "Scale",
+      title: "The signal exists, but it is buried in prose.",
+      body: "Every visit, call and email leaves a free-form CRM note. The organization has the context it needs; the problem is making that context usable before the next client interaction.",
+      consequence: "Important follow-ups compete with hundreds of other memories and manual to-do lists.",
+    },
+    {
+      value: "100–200",
+      metricLabel: "Notes per account manager, every week.",
+      label: "Load",
+      title: "Reading everything is not a workflow.",
+      body: "A note faithfully records what happened, but it does not convert itself into a clear next step. Re-reading the week is slow, inconsistent and easy to postpone.",
+      consequence: "The cost is not missing data. It is missing the moment to act on it.",
+    },
+    {
+      value: "2 places",
+      metricLabel: "The CRM holds the history; Microsoft Teams holds the working day.",
+      label: "Reach",
+      title: "An insight in the wrong tool is still invisible.",
+      body: "Even a good recommendation fails if the account manager has to leave their daily workflow to find it. The action needs to appear both in a focused dashboard and inside Teams.",
+      consequence: "Adoption starts with delivery: put the action where the work already happens.",
+    },
+  ],
+
+  solutionSteps: [
+    {
+      title: "Ingest",
+      short: "Fetch the AM's recent client-visit notes.",
+      signal: "SQL Server · 7-day default · CSV fallback",
+      detail: "The data service queries a filtered CRM view for one account manager and returns aggregate metadata with the notes. If the database is unavailable, a labeled CSV fallback keeps the read path alive.",
+    },
+    {
+      title: "Clean",
+      short: "Turn CRM HTML into reliable model context.",
+      signal: "BeautifulSoup · pandas · normalized fields",
+      detail: "HTML is stripped, nulls are normalized and client names are stitched into a stable payload. The model receives deliberate context instead of raw CRM formatting noise.",
+    },
+    {
+      title: "Reason",
+      short: "Constrain the model to one decision contract.",
+      signal: "Azure OpenAI · temperature 0.3 · two fields",
+      detail: "A deliberately small prompt returns only Suggested Action and Due Date, or N/A when the note cannot support a useful recommendation. Low temperature keeps reruns reviewable and stable.",
+    },
+    {
+      title: "Deliver",
+      short: "Render one answer in the two places AMs work.",
+      signal: "FastAPI · Next.js · Adaptive Cards",
+      detail: "The same stateless endpoint feeds the web dashboard and the Teams bot. Each client owns presentation; neither duplicates the reasoning pipeline.",
+    },
+  ],
+
+  solutionSurfaces: [
+    {
+      title: "Web dashboard",
+      copy: "Focused review, per-note generation and an insights view.",
+    },
+    {
+      title: "Teams bot",
+      copy: "Paginated Adaptive Cards with an email handoff.",
+    },
+  ],
+
+  impactStory: [
+    {
+      before: "A note that only records the past",
+      title: "A clear action and a due date",
+      copy: "Every useful result follows the same compact contract, so the AM can review the recommendation instead of interpreting another summary.",
+    },
+    {
+      before: "A dashboard people must remember to open",
+      title: "The same decision in web and Teams",
+      copy: "Two delivery surfaces share one backend and meet the account manager in both focused review and daily communication.",
+    },
+    {
+      before: "An unavailable database ending the workflow",
+      title: "Read continuity with a labeled fallback",
+      copy: "The CSV path keeps demos and read-only operation available while the response tells the interface which source supplied the data.",
+    },
+    {
+      before: "Separate clients duplicating AI logic",
+      title: "One stateless reasoning service",
+      copy: "The full note context travels with each request, keeping the web app and bot independent without fragmenting the core behavior.",
+    },
+  ],
+
   // ===== OVERVIEW =====
   overview: [
     "Note2Action is a production internal tool with one job: read every account manager's recent client notes and tell them, in a single line, what to do next and by when.",
