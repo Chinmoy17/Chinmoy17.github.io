@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FiArrowLeft, FiArrowRight, FiMessageCircle } from "react-icons/fi";
+import { FiArrowDown, FiArrowLeft, FiArrowRight, FiLock, FiMessageCircle } from "react-icons/fi";
 import { Reveal } from "../../../utils/Reveal";
+import AnimatedStatValue from "./AnimatedStatValue";
 import HeroInfographic from "./HeroInfographic";
 import ProblemStory from "./ProblemStory";
 import SolutionFlow from "./SolutionFlow";
@@ -24,6 +25,12 @@ function ChapterHeader({ number, label, title, lead, id }) {
 function Note2ActionProject() {
   const navigate = useNavigate();
 
+  const scrollToProblem = (event) => {
+    event.preventDefault();
+    const reduceMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+    document.getElementById("problem")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+  };
+
   return (
     <main className={styles.page}>
       <section className={styles.hero} aria-labelledby="n2a-title">
@@ -38,15 +45,13 @@ function Note2ActionProject() {
               <FiArrowLeft aria-hidden="true" />
               Projects
             </button>
-            <span className="font-inter text-[0.65rem] text-white/40 uppercase tracking-[0.1em]">
-              Production system · Private / SSO
+            <span className={styles.heroStatus}>
+              <FiLock aria-hidden="true" />
+              SSO protected
             </span>
           </div>
 
           <div className={styles.heroCopy}>
-            <p className="font-inter text-[0.7rem] text-[#83d8d2] uppercase tracking-[0.12em] mb-5">
-              AI-assisted account management
-            </p>
             <h1 id="n2a-title" className={`font-newsreader ${styles.heroTitle}`}>Note2Action</h1>
             <p className={`font-newsreader mt-6 ${styles.heroStatement}`}>
               Every client note should end with a next step.
@@ -59,11 +64,16 @@ function Note2ActionProject() {
           <div className={styles.heroStats} aria-label="Project scale">
             {data.stats.map((stat) => (
               <div key={stat.label} className={styles.heroStat}>
-                <span className={styles.heroStatValue}>{stat.value}</span>
+                <AnimatedStatValue value={stat.value} className={styles.heroStatValue} />
                 <span className={styles.heroStatLabel}>{stat.label}</span>
               </div>
             ))}
           </div>
+
+          <a href="#problem" className={styles.scrollCue} aria-label="Scroll to the problem section" onClick={scrollToProblem}>
+            <span>Scroll down</span>
+            <span className={styles.scrollCueIcon}><FiArrowDown aria-hidden="true" /></span>
+          </a>
         </div>
       </section>
 
@@ -185,12 +195,12 @@ function Note2ActionProject() {
             <div className={styles.ctaActions}>
               <Link to="/contact" className={styles.ctaPrimary}>
                 <FiMessageCircle aria-hidden="true" />
-                Start a conversation
+                Discuss your workflow
                 <FiArrowRight aria-hidden="true" />
               </Link>
               <Link to="/project" className={styles.ctaSecondary}>
                 <FiArrowLeft aria-hidden="true" />
-                All projects
+                Explore all projects
               </Link>
             </div>
           </Reveal>

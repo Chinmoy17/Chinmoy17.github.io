@@ -35,9 +35,6 @@ function HeroInfographic() {
         <span className={styles.engineLabel}>Reason</span>
       </div>
 
-      <div className={styles.tapCue}>
-        <img src="/assets/note2action/double-tap.png" alt="" />
-      </div>
     </div>
   );
 }

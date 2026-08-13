@@ -5,6 +5,8 @@
   --n2a-line: rgba(28, 28, 25, 0.16);
   --n2a-violet: #6966b8;
   --n2a-cyan: #62c9c2;
+  --n2a-response-accent: #4f8f89;
+  --n2a-response-accent-dark: #356b67;
   background: var(--n2a-paper);
   color: var(--n2a-ink);
   overflow-x: clip;
@@ -56,6 +58,24 @@
   animation: heroCopyIn 0.7s ease-out both;
 }
 
+.heroStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: rgba(255, 255, 255, 0.78);
+  font-family: "Inter", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.heroStatus svg {
+  width: 13px;
+  height: 13px;
+  color: #83d8d2;
+}
+
 .heroTitle {
   font-size: clamp(4rem, 9vw, 8rem);
   line-height: 0.9;
@@ -98,6 +118,7 @@
   font-family: "Newsreader", serif;
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .heroStatLabel {
@@ -267,24 +288,50 @@
   font-weight: 600;
 }
 
-.tapCue {
+.scrollCue {
   position: absolute;
-  right: 7%;
-  bottom: 19%;
-  width: 68px;
-  height: 68px;
-  padding: 17px;
-  border-radius: 50%;
-  background: var(--n2a-violet);
-  box-shadow: 0 0 0 0 rgba(105, 102, 184, 0.4);
-  animation: tapPulse 2.6s ease-out infinite;
+  right: 1.5rem;
+  bottom: 8.5rem;
+  z-index: 3;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: "Inter", sans-serif;
+  font-size: 0.55rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  text-decoration: none;
 }
 
-.tapCue img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: invert(1);
+.scrollCue:hover {
+  color: #fff;
+}
+
+.scrollCueIcon {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  border-radius: 50%;
+  background: rgba(13, 15, 18, 0.42);
+  backdrop-filter: blur(8px);
+  animation: scrollNudge 1.8s ease-in-out infinite;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.scrollCue:hover .scrollCueIcon,
+.scrollCue:focus-visible .scrollCueIcon {
+  border-color: #83d8d2;
+  background: rgba(79, 143, 137, 0.28);
+}
+
+.scrollCue:focus-visible {
+  outline: 2px solid #83d8d2;
+  outline-offset: 4px;
 }
 
 .chapterNav {
@@ -535,13 +582,7 @@
 }
 
 .solutionTrack::before {
-  content: "";
-  position: absolute;
-  top: 25px;
-  left: 7%;
-  right: 7%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.24);
+  display: none;
 }
 
 .solutionStep {
@@ -571,12 +612,14 @@
   border: 4px solid var(--n2a-ink);
   outline: 1px solid rgba(255, 255, 255, 0.3);
   font-family: "Newsreader", serif;
-  transition: transform 0.25s ease, background 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .solutionStepActive .solutionDot {
   color: #fff;
-  background: var(--n2a-violet);
+  background: var(--n2a-response-accent);
+  border-color: var(--n2a-response-accent-dark);
+  box-shadow: 0 0 0 4px rgba(79, 143, 137, 0.14);
   transform: translateY(-4px);
 }
 
@@ -676,7 +719,7 @@
 
 .solutionDeckDots button[aria-current="step"] {
   width: 22px;
-  background: #7773c4;
+  background: var(--n2a-response-accent);
 }
 
 .solutionDeckStage {
@@ -702,7 +745,7 @@
     linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
   background-size: 28px 28px;
   border: 1px solid rgba(255, 255, 255, 0.16);
-  border-top: 2px solid rgba(119, 115, 196, 0.74);
+  border-top: 2px solid var(--n2a-response-accent);
   box-shadow: 0 22px 46px rgba(0, 0, 0, 0.28);
   transform-origin: center bottom;
   transition:
@@ -845,12 +888,12 @@
 }
 
 .pipelineNodeAccent {
-  border-top: 3px solid var(--n2a-violet);
-  box-shadow: 0 10px 25px rgba(49, 46, 79, 0.1);
+  border-top: 3px solid var(--n2a-response-accent);
+  box-shadow: 0 10px 25px rgba(38, 83, 79, 0.1);
 }
 
 .pipelineNodeAccent svg {
-  color: var(--n2a-violet);
+  color: var(--n2a-response-accent);
 }
 
 .pipelineArrow {
@@ -864,7 +907,7 @@
 .pipelineArrow svg {
   width: 28px;
   height: 28px;
-  color: var(--n2a-violet);
+  color: var(--n2a-response-accent);
 }
 
 .pipelineArrow span {
@@ -886,7 +929,7 @@
 }
 
 .fallbackNode svg {
-  color: var(--n2a-violet);
+  color: var(--n2a-response-accent);
 }
 
 .cleanPreview {
@@ -933,7 +976,7 @@
 .cleanPaneStructured {
   color: #1f2023;
   background: #fff;
-  border-top: 3px solid var(--n2a-violet);
+  border-top: 3px solid var(--n2a-response-accent);
 }
 
 .cleanPaneStructured .stageEyebrow {
@@ -967,7 +1010,7 @@
   width: 24px;
   height: 24px;
   justify-self: center;
-  color: var(--n2a-violet);
+  color: var(--n2a-response-accent);
 }
 
 .reasonPreview {
@@ -994,7 +1037,7 @@
   width: 19px;
   height: 19px;
   margin-bottom: 0.65rem;
-  color: var(--n2a-violet);
+  color: var(--n2a-response-accent);
 }
 
 .reasonInput span,
@@ -1003,7 +1046,7 @@
 }
 
 .reasonModel {
-  border-top: 3px solid var(--n2a-violet);
+  border-top: 3px solid var(--n2a-response-accent);
 }
 
 .reasonModel span {
@@ -1031,7 +1074,7 @@
   flex-direction: column;
   justify-content: center;
   background: #fff;
-  border-left: 3px solid var(--n2a-violet);
+  border-left: 3px solid var(--n2a-response-accent);
 }
 
 .reasonOutput small {
@@ -1102,7 +1145,7 @@
   display: grid;
   place-items: center;
   color: #fff;
-  background: rgba(105, 102, 184, 0.9);
+  background: var(--n2a-response-accent);
 }
 
 .dashboardPreview,
@@ -1138,7 +1181,7 @@
   place-items: center;
   border-radius: 50%;
   color: #fff;
-  background: var(--n2a-violet);
+  background: var(--n2a-response-accent);
   font-size: 0.48rem;
   font-weight: 600;
 }
@@ -1183,7 +1226,7 @@
 .dashboardChart i {
   flex: 1;
   min-width: 3px;
-  background: linear-gradient(180deg, #7773c4, #565394);
+  background: linear-gradient(180deg, #75aaa6, #3f7974);
 }
 
 .dashboardAction {
@@ -1195,13 +1238,13 @@
   gap: 0.4rem;
   align-items: center;
   background: #fff;
-  border-left: 3px solid var(--n2a-violet);
+  border-left: 3px solid var(--n2a-response-accent);
   box-shadow: 0 4px 12px rgba(19, 21, 24, 0.08);
   font-size: 0.58rem;
 }
 
 .dashboardAction svg {
-  color: var(--n2a-violet);
+  color: var(--n2a-response-accent);
 }
 
 .dashboardAction time {
@@ -1489,16 +1532,54 @@
   padding: 0 1.15rem;
   text-decoration: none;
   font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .ctaPrimary {
   color: var(--n2a-ink);
-  background: var(--n2a-paper);
+  background: #83d8d2;
+  border: 1px solid #83d8d2;
+  box-shadow: 0 10px 26px rgba(49, 112, 107, 0.16);
 }
 
 .ctaSecondary {
-  color: rgba(255, 255, 255, 0.76);
-  border: 1px solid rgba(255, 255, 255, 0.26);
+  color: rgba(255, 255, 255, 0.86);
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+}
+
+.ctaPrimary:hover,
+.ctaPrimary:focus-visible {
+  color: var(--n2a-ink);
+  background: #a2e3de;
+  border-color: #a2e3de;
+  box-shadow: 0 14px 34px rgba(49, 112, 107, 0.26);
+  transform: translateY(-2px);
+}
+
+.ctaPrimary svg:last-child {
+  transition: transform 0.2s ease;
+}
+
+.ctaPrimary:hover svg:last-child,
+.ctaPrimary:focus-visible svg:last-child {
+  transform: translateX(4px);
+}
+
+.ctaSecondary:hover,
+.ctaSecondary:focus-visible {
+  color: var(--n2a-ink);
+  background: var(--n2a-paper);
+  border-color: var(--n2a-paper);
+  transform: translateY(-2px);
+}
+
+.ctaPrimary:focus-visible,
+.ctaSecondary:focus-visible {
+  outline: 2px solid #83d8d2;
+  outline-offset: 3px;
 }
 
 @keyframes heroCopyIn {
@@ -1523,10 +1604,9 @@
   100% { left: calc(100% - 7px); opacity: 0; }
 }
 
-@keyframes tapPulse {
-  0% { box-shadow: 0 0 0 0 rgba(105, 102, 184, 0.45); }
-  70% { box-shadow: 0 0 0 18px rgba(105, 102, 184, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(105, 102, 184, 0); }
+@keyframes scrollNudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
 }
 
 @keyframes metricIn {
@@ -1702,6 +1782,15 @@
     opacity: 0.36;
   }
 
+  .scrollCue {
+    right: 0.75rem;
+    bottom: 11rem;
+  }
+
+  .scrollCue > span:first-child {
+    display: none;
+  }
+
   .noteStack {
     display: none;
   }
@@ -1846,7 +1935,7 @@
   .heroCopy,
   .heroScene,
   .noteCard,
-  .tapCue,
+  .scrollCueIcon,
   .metricValue,
   .solutionDetail {
     animation: none !important;
