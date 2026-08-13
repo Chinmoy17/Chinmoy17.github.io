@@ -45,7 +45,7 @@ const note2actionData = {
     { id: "problem", label: "Problem" },
     { id: "solution", label: "Solution" },
     { id: "architecture", label: "Architecture" },
-    { id: "impact", label: "Impact" },
+    { id: "impact", label: "Impact + Rationale" },
   ],
 
   problemStory: [
@@ -113,26 +113,40 @@ const note2actionData = {
     },
   ],
 
-  impactStory: [
+  impactMetrics: [
     {
-      before: "A note that only records the past",
-      title: "A clear action and a due date",
-      copy: "Every useful result follows the same compact contract, so the AM can review the recommendation instead of interpreting another summary.",
+      value: "2",
+      label: "decision fields",
+      copy: "Suggested Action + Due Date",
     },
     {
-      before: "A dashboard people must remember to open",
-      title: "The same decision in web and Teams",
-      copy: "Two delivery surfaces share one backend and meet the account manager in both focused review and daily communication.",
+      value: "2",
+      label: "delivery surfaces",
+      copy: "Web dashboard + Microsoft Teams",
     },
     {
-      before: "An unavailable database ending the workflow",
-      title: "Read continuity with a labeled fallback",
-      copy: "The CSV path keeps demos and read-only operation available while the response tells the interface which source supplied the data.",
+      value: "1",
+      label: "reasoning contract",
+      copy: "One stateless backend shared by both clients",
+    },
+  ],
+
+  rationale: [
+    {
+      question: "Why suggest an action instead of taking it automatically?",
+      answer: "Account managers retain decision authority. The system proposes a next step, but it does not send email or write a task back to the CRM without human review.",
     },
     {
-      before: "Separate clients duplicating AI logic",
-      title: "One stateless reasoning service",
-      copy: "The full note context travels with each request, keeping the web app and bot independent without fragmenting the core behavior.",
+      question: "Why constrain the model to only two fields?",
+      answer: "A fixed Suggested Action + Due Date contract keeps reruns reviewable and lets the web app and Teams bot render the same answer without separate interpretation logic. When evidence is weak, the model returns N/A.",
+    },
+    {
+      question: "How were access and client data bounded?",
+      answer: "The web surface is protected by internal SSO, retrieval is filtered to one account manager and a recent note window, and Teams activities are authenticated through Azure Bot Service. This public case study uses illustrative data only; backend bearer enforcement for bot calls remains an explicit hardening step before broader exposure.",
+    },
+    {
+      question: "Why a stateless backend and a labeled fallback?",
+      answer: "Every request carries its full note context, so web and Teams cannot drift into separate reasoning systems. If the CRM is unavailable, the read path falls back to CSV and reports the active data source instead of silently pretending it is live data.",
     },
   ],
 

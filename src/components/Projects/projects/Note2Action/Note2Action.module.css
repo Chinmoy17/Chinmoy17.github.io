@@ -375,6 +375,14 @@
   color: rgba(255, 255, 255, 0.64);
 }
 
+.solutionChapter {
+  padding-bottom: 2.5rem;
+}
+
+.architectureChapter {
+  padding-bottom: 2.5rem;
+}
+
 .problemGrid {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
@@ -574,21 +582,27 @@
 }
 
 .solutionDetail {
-  position: sticky;
-  top: 5.5rem;
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
-  animation: detailIn 0.35s ease-out both;
 }
 
-.solutionTrigger {
-  height: 1px;
-  pointer-events: none;
+.solutionDetailContent {
+  animation: stageChange 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .solutionScrollFlow {
-  padding-bottom: 110vh;
+  position: relative;
+  height: 260vh;
+}
+
+.solutionSticky {
+  position: sticky;
+  top: 4.5rem;
+  min-height: calc(100vh - 4.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .solutionDetailText {
@@ -1117,42 +1131,120 @@
   gap: 0.25rem;
 }
 
-.impactRows {
-  border-top: 1px solid var(--n2a-line);
+.impactChapter {
+  padding-top: clamp(4.5rem, 8vw, 7rem);
+  padding-bottom: clamp(4.5rem, 8vw, 7rem);
 }
 
-.impactRow {
+.impactChapter .chapterHeader {
+  margin-bottom: 2.75rem;
+}
+
+.impactRationaleGrid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1.3fr);
-  gap: clamp(1rem, 3vw, 2.5rem);
+  grid-template-columns: minmax(280px, 0.82fr) minmax(0, 1.18fr);
+  gap: clamp(3rem, 7vw, 7rem);
+  align-items: start;
+}
+
+.impactColumnLabel {
+  margin: 0;
+  padding-bottom: 0.75rem;
+  color: rgba(28, 28, 25, 0.48);
+  border-bottom: 1px solid var(--n2a-line);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.impactMetric {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 1rem;
   align-items: center;
-  padding: 2rem 0;
+  padding: 1.25rem 0;
   border-bottom: 1px solid var(--n2a-line);
 }
 
-.impactBefore {
-  color: rgba(28, 28, 25, 0.45);
-  font-size: 0.9rem;
-  text-decoration: line-through;
-  text-decoration-thickness: 1px;
+.impactMetricValue {
+  color: var(--n2a-ink);
+  font-family: "Newsreader", serif;
+  font-size: 3.8rem;
+  line-height: 0.9;
 }
 
-.impactArrow {
+.impactMetric h3 {
+  margin: 0;
+  font-family: "Newsreader", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.impactMetric p {
+  margin: 0.35rem 0 0;
+  color: rgba(28, 28, 25, 0.62);
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.rationaleItem {
+  border-bottom: 1px solid var(--n2a-line);
+}
+
+.rationaleItem summary {
+  min-height: 74px;
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 20px;
+  gap: 0.75rem;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+}
+
+.rationaleItem summary::-webkit-details-marker {
+  display: none;
+}
+
+.rationaleItem summary::after {
+  content: "+";
+  color: rgba(28, 28, 25, 0.48);
+  font-family: "Newsreader", serif;
+  font-size: 1.35rem;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.rationaleItem[open] summary::after {
   color: var(--n2a-violet);
-  font-family: "Newsreader", serif;
-  font-size: 1.7rem;
+  transform: rotate(45deg);
 }
 
-.impactAfterTitle {
+.rationaleItem summary span {
+  color: rgba(28, 28, 25, 0.35);
   font-family: "Newsreader", serif;
-  font-size: 1.5rem;
+  font-size: 0.8rem;
 }
 
-.impactAfterCopy {
-  margin-top: 0.35rem;
-  color: rgba(28, 28, 25, 0.64);
-  font-size: 0.85rem;
-  line-height: 1.55;
+.rationaleItem summary strong {
+  color: var(--n2a-ink);
+  font-family: "Newsreader", serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.rationaleItem > p {
+  max-width: 660px;
+  margin: -0.15rem 2.5rem 1.25rem 2.75rem;
+  color: rgba(28, 28, 25, 0.68);
+  font-size: 0.82rem;
+  line-height: 1.65;
+  animation: rationaleAnswer 0.25s ease-out both;
+}
+
+@keyframes rationaleAnswer {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .cta {
@@ -1257,6 +1349,19 @@
 @keyframes detailIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes stageChange {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.992);
+    filter: blur(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
 }
 
 @media (max-width: 900px) {
@@ -1369,11 +1474,12 @@
   }
 
   .solutionScrollFlow {
-    padding-bottom: 0;
+    height: auto;
   }
 
-  .solutionDetail {
+  .solutionSticky {
     position: static;
+    min-height: auto;
   }
 
   .solutionStep {
@@ -1418,14 +1524,17 @@
     padding: 0.55rem;
   }
 
-  .impactRow {
+  .impactRationaleGrid {
     grid-template-columns: 1fr;
-    gap: 0.65rem;
+    gap: 2.5rem;
   }
 
-  .impactArrow {
-    transform: rotate(90deg);
-    transform-origin: left center;
+  .impactMetric {
+    grid-template-columns: 76px minmax(0, 1fr);
+  }
+
+  .impactMetricValue {
+    font-size: 3.2rem;
   }
 }
 
@@ -1436,6 +1545,10 @@
   .tapCue,
   .metricValue,
   .solutionDetail {
+    animation: none !important;
+  }
+
+  .solutionDetailContent {
     animation: none !important;
   }
 

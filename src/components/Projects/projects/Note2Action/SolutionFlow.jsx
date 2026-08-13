@@ -168,39 +168,75 @@ function StagePreview({ stage, surfaces }) {
 function SolutionFlow({ steps, surfaces }) {
   const [active, setActive] = useState(0);
   const flowRef = useRef(null);
-  const triggerRef = useRef(null);
-  const detailRef = useRef(null);
   const tabRefs = useRef([]);
+  const activeRef = useRef(0);
+  const wheelLockRef = useRef(false);
+  const wheelTimerRef = useRef(null);
   const current = steps[active];
+
+  useEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   useEffect(() => {
     const flow = flowRef.current;
     if (!flow) return undefined;
-    const section = flow.closest("section");
-    if (!section) return undefined;
 
     const updateFromScroll = () => {
-      const detail = detailRef.current;
-      const trigger = triggerRef.current;
-      if (!detail || !trigger) return;
-
-      const sectionRect = section.getBoundingClientRect();
-      const triggerRect = trigger.getBoundingClientRect();
-      const readingLine = window.innerHeight * 0.65;
-      const detailOffset = triggerRect.top - sectionRect.top;
-      const runway = Math.max(
-        section.offsetHeight - window.innerHeight * 0.25 - detailOffset + readingLine,
-        1
-      );
-      const progress = Math.min(Math.max((readingLine - triggerRect.top) / runway, 0), 1);
+      if (wheelLockRef.current) return;
+      const rect = flow.getBoundingClientRect();
+      const stickyTop = 72;
+      const runway = Math.max(flow.offsetHeight - window.innerHeight + stickyTop, 1);
+      const progress = Math.min(Math.max((stickyTop - rect.top) / runway, 0), 1);
       const next = Math.min(steps.length - 1, Math.floor(progress * steps.length));
       setActive((previous) => (previous === next ? previous : next));
     };
 
+    const onWheel = (event) => {
+      const rect = flow.getBoundingClientRect();
+      const stickyTop = 72;
+      const pinned = rect.top <= stickyTop + 2 && rect.bottom >= window.innerHeight - 2;
+      const mouseNotch = event.deltaMode !== 0 || Math.abs(event.deltaY) >= 40;
+      if (!pinned || !mouseNotch) return;
+
+      const direction = event.deltaY > 0 ? 1 : -1;
+      const currentIndex = activeRef.current;
+      const next = Math.max(0, Math.min(steps.length - 1, currentIndex + direction));
+
+      // At either end, release normal page scrolling into the adjacent section.
+      if (next === currentIndex) return;
+
+      event.preventDefault();
+      if (wheelLockRef.current) return;
+
+      wheelLockRef.current = true;
+      activeRef.current = next;
+      setActive(next);
+
+      const flowTop = rect.top + window.scrollY;
+      const runway = Math.max(flow.offsetHeight - window.innerHeight + stickyTop, 1);
+      const targetProgress = next === 0 ? 0 : (next + 0.08) / steps.length;
+      window.scrollTo({
+        top: flowTop - stickyTop + runway * targetProgress,
+        behavior: "smooth",
+      });
+
+      window.clearTimeout(wheelTimerRef.current);
+      wheelTimerRef.current = window.setTimeout(() => {
+        wheelLockRef.current = false;
+        updateFromScroll();
+      }, 460);
+    };
+
     updateFromScroll();
-    const timer = window.setInterval(updateFromScroll, 80);
+    window.addEventListener("scroll", updateFromScroll, { passive: true });
+    window.addEventListener("resize", updateFromScroll);
+    window.addEventListener("wheel", onWheel, { passive: false });
     return () => {
-      window.clearInterval(timer);
+      window.removeEventListener("scroll", updateFromScroll);
+      window.removeEventListener("resize", updateFromScroll);
+      window.removeEventListener("wheel", onWheel);
+      window.clearTimeout(wheelTimerRef.current);
     };
   }, [steps.length]);
 
@@ -228,43 +264,44 @@ function SolutionFlow({ steps, surfaces }) {
 
   return (
     <div ref={flowRef} className={styles.solutionScrollFlow}>
-      <div className={styles.solutionTrack} role="tablist" aria-label="Note2Action processing stages" onKeyDown={onKeyDown}>
-        {steps.map((step, index) => (
-          <button
-            key={step.title}
-            ref={(node) => { tabRefs.current[index] = node; }}
-            id={`solution-tab-${index}`}
-            type="button"
-            role="tab"
-            aria-selected={index === active}
-            aria-controls="solution-detail"
-            tabIndex={index === active ? 0 : -1}
-            className={`${styles.solutionStep} ${index === active ? styles.solutionStepActive : ""}`}
-            onClick={() => setActive(index)}
-            onFocus={() => setActive(index)}
-          >
-            <span className={styles.solutionDot}>{String(index + 1).padStart(2, "0")}</span>
-            <span className={styles.solutionStepTitle}>{step.title}</span>
-            <span className={styles.solutionStepCopy}>{step.short}</span>
-          </button>
-        ))}
-      </div>
-
-      <div ref={triggerRef} className={styles.solutionTrigger} aria-hidden="true" />
-      <div
-        key={current.title}
-        ref={detailRef}
-        id="solution-detail"
-        className={styles.solutionDetail}
-        role="tabpanel"
-        aria-labelledby={`solution-tab-${active}`}
-        aria-live="polite"
-      >
-        <div>
-          <p className="font-inter text-[0.65rem] text-white/40 uppercase tracking-[0.1em]">{current.signal}</p>
-          <p className={styles.solutionDetailText}>{current.detail}</p>
+      <div className={styles.solutionSticky}>
+        <div className={styles.solutionTrack} role="tablist" aria-label="Note2Action processing stages" onKeyDown={onKeyDown}>
+          {steps.map((step, index) => (
+            <button
+              key={step.title}
+              ref={(node) => { tabRefs.current[index] = node; }}
+              id={`solution-tab-${index}`}
+              type="button"
+              role="tab"
+              aria-selected={index === active}
+              aria-controls="solution-detail"
+              tabIndex={index === active ? 0 : -1}
+              className={`${styles.solutionStep} ${index === active ? styles.solutionStepActive : ""}`}
+              onClick={() => setActive(index)}
+              onFocus={() => setActive(index)}
+            >
+              <span className={styles.solutionDot}>{String(index + 1).padStart(2, "0")}</span>
+              <span className={styles.solutionStepTitle}>{step.title}</span>
+              <span className={styles.solutionStepCopy}>{step.short}</span>
+            </button>
+          ))}
         </div>
-        <StagePreview stage={current.title} surfaces={surfaces} />
+
+        <div
+          id="solution-detail"
+          className={styles.solutionDetail}
+          role="tabpanel"
+          aria-labelledby={`solution-tab-${active}`}
+          aria-live="polite"
+        >
+          <div key={current.title} className={styles.solutionDetailContent}>
+            <div>
+              <p className="font-inter text-[0.65rem] text-white/40 uppercase tracking-[0.1em]">{current.signal}</p>
+              <p className={styles.solutionDetailText}>{current.detail}</p>
+            </div>
+            <StagePreview stage={current.title} surfaces={surfaces} />
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -93,7 +93,7 @@ function Note2ActionProject() {
         </div>
       </section>
 
-      <section id="solution" className={`${styles.chapter} ${styles.chapterDark}`} aria-labelledby="solution-heading">
+      <section id="solution" className={`${styles.chapter} ${styles.chapterDark} ${styles.solutionChapter}`} aria-labelledby="solution-heading">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <Reveal>
             <ChapterHeader
@@ -108,7 +108,7 @@ function Note2ActionProject() {
         </div>
       </section>
 
-      <section id="architecture" className={styles.chapter} aria-labelledby="architecture-heading">
+      <section id="architecture" className={`${styles.chapter} ${styles.architectureChapter}`} aria-labelledby="architecture-heading">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <Reveal>
             <ChapterHeader
@@ -123,31 +123,48 @@ function Note2ActionProject() {
         </div>
       </section>
 
-      <section id="impact" className={`${styles.chapter} ${styles.chapterTint}`} aria-labelledby="impact-heading">
+      <section id="impact" className={`${styles.chapter} ${styles.chapterTint} ${styles.impactChapter}`} aria-labelledby="impact-heading">
         <div className="max-w-container mx-auto px-6 md:px-8">
           <Reveal>
             <ChapterHeader
               number="04"
-              label="Impact"
+              label="Impact + Rationale"
               id="impact-heading"
-              title="The outcome is operational clarity, not another AI summary."
-              lead="No unverified ROI or adoption figures: these are the concrete changes the shipped design makes to the workflow."
+              title="The shipped impact—and the reasoning behind the choices."
+              lead="No invented ROI or adoption claims: the numbers describe the system that shipped, while the rationale makes its authority, privacy and failure boundaries explicit."
             />
           </Reveal>
 
-          <div className={styles.impactRows}>
-            {data.impactStory.map((item, index) => (
-              <Reveal key={item.title} delay={index * 70}>
-                <div className={styles.impactRow}>
-                  <p className={styles.impactBefore}>{item.before}</p>
-                  <span className={styles.impactArrow} aria-hidden="true">→</span>
-                  <div>
-                    <h3 className={styles.impactAfterTitle}>{item.title}</h3>
-                    <p className={styles.impactAfterCopy}>{item.copy}</p>
+          <div className={styles.impactRationaleGrid}>
+            <Reveal>
+              <aside className={styles.impactNumbers} aria-label="Note2Action impact signals">
+                <p className={styles.impactColumnLabel}>The shipped shape</p>
+                {data.impactMetrics.map((metric) => (
+                  <div key={metric.label} className={styles.impactMetric}>
+                    <span className={styles.impactMetricValue}>{metric.value}</span>
+                    <div>
+                      <h3>{metric.label}</h3>
+                      <p>{metric.copy}</p>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                ))}
+              </aside>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className={styles.rationaleList}>
+                <p className={styles.impactColumnLabel}>Design decisions</p>
+                {data.rationale.map((item, index) => (
+                  <details key={item.question} className={styles.rationaleItem} open={index === 0}>
+                    <summary>
+                      <span>{String(index + 1).padStart(2, "0")}</span>
+                      <strong>{item.question}</strong>
+                    </summary>
+                    <p>{item.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>

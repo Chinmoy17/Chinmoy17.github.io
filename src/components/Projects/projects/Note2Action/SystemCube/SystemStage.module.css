@@ -1,0 +1,241 @@
+.carpetPanel {
+  width: 100%;
+  padding: 0;
+  color: #1a1a1a;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  animation: contentUnfold 0.52s cubic-bezier(0.2, 0.86, 0.22, 1) both;
+}
+
+.carpetPanel::before {
+  display: none;
+}
+
+.carpetHeader {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(26, 26, 26, 0.12);
+}
+
+.carpetKicker {
+  margin: 0 0 0.25rem;
+  color: rgba(26, 26, 26, 0.5);
+  font-family: "Inter", sans-serif;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.carpetHeader h3 {
+  margin: 0;
+  font-family: "Newsreader", serif;
+  font-size: 1.75rem;
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.carpetRole {
+  padding-top: 0.18rem;
+  color: rgba(26, 26, 26, 0.42);
+  font-family: "Inter", sans-serif;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.backboneWrap {
+  margin: 0.35rem 0 0.5rem;
+}
+
+.backbone {
+  display: block;
+  width: 100%;
+  height: 172px;
+  overflow: visible;
+  color: rgba(26, 26, 26, 0.48);
+}
+
+.runtimeBoundary {
+  fill: rgba(252, 249, 244, 0.35);
+  stroke: rgba(26, 26, 26, 0.18);
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+  transition: stroke 0.3s ease, fill 0.3s ease;
+}
+
+.activeBoundary {
+  fill: rgba(91, 95, 199, 0.055);
+  stroke: #5b5fc7;
+  stroke-width: 1.6;
+}
+
+.boundaryLabel {
+  fill: rgba(26, 26, 26, 0.42);
+  font-family: "Inter", sans-serif;
+  font-size: 7px;
+  letter-spacing: 0.08em;
+}
+
+.flowLine,
+.aiLine,
+.returnLine {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.4;
+}
+
+.fallbackLine {
+  stroke-dasharray: 4 4;
+}
+
+.aiLine {
+  color: rgba(91, 95, 199, 0.72);
+}
+
+.returnLine {
+  color: rgba(91, 95, 199, 0.45);
+  stroke-dasharray: 3 3;
+}
+
+.systemNode rect {
+  fill: #fcf9f4;
+  stroke: rgba(26, 26, 26, 0.28);
+  stroke-width: 1;
+  transition: fill 0.28s ease, stroke 0.28s ease, stroke-width 0.28s ease;
+}
+
+.systemNode text {
+  fill: #1a1a1a;
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.systemNode .nodeSub {
+  fill: rgba(26, 26, 26, 0.48);
+  font-size: 7px;
+  font-weight: 400;
+}
+
+.secondaryNode rect {
+  stroke-dasharray: 3 3;
+}
+
+.aiNode rect {
+  fill: rgba(244, 242, 251, 0.86);
+}
+
+.activeNode rect {
+  fill: rgba(91, 95, 199, 0.1);
+  stroke: #5b5fc7;
+  stroke-width: 2;
+}
+
+.activeNode text {
+  fill: #343178;
+}
+
+.edgeLabel {
+  fill: rgba(26, 26, 26, 0.46);
+  font-family: "Inter", sans-serif;
+  font-size: 7px;
+  text-anchor: middle;
+}
+
+.domainLedger {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(180px, 0.85fr);
+  gap: 1rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(26, 26, 26, 0.12);
+}
+
+.domainLedger > div > span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: rgba(26, 26, 26, 0.45);
+  font-family: "Inter", sans-serif;
+  font-size: 0.54rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.domainLedger p,
+.domainLedger li {
+  color: rgba(26, 26, 26, 0.72);
+  font-family: "Inter", sans-serif;
+  font-size: 0.68rem;
+  line-height: 1.45;
+}
+
+.domainLedger p {
+  margin: 0;
+}
+
+.domainLedger ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.domainLedger li {
+  position: relative;
+  padding-left: 0.72rem;
+}
+
+.domainLedger li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.48rem;
+  width: 4px;
+  height: 4px;
+  background: #5b5fc7;
+}
+
+@keyframes contentUnfold {
+  0% {
+    opacity: 0;
+    transform: translateX(-28px);
+    clip-path: inset(0 100% 0 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .carpetPanel {
+    padding: 1rem;
+    animation: none;
+  }
+
+  .backboneWrap {
+    overflow-x: auto;
+  }
+
+  .backbone {
+    min-width: 560px;
+  }
+
+  .domainLedger {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carpetPanel,
+  .carpetPanel::before {
+    animation: none;
+  }
+}

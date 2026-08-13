@@ -1,9 +1,37 @@
 import React, { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
 import { useScrollProgress, useMediaQuery, detectWebGL } from "./useScrollProgress";
+import styles from "./SystemStage.module.css";
 
 const SystemCube = lazy(() => import("./SystemCube"));
 
 const ACCENT = "#5b5fc7";
+
+const DOMAIN_DETAILS = {
+  frontend: {
+    focus: "Turns shared API responses into reviewable notes, actions and insights.",
+    contracts: ["SSO session", "GET /api/notes", "POST /api/extract_actions"],
+  },
+  backend: {
+    focus: "Owns retrieval, prompt orchestration and the contract shared by both clients.",
+    contracts: ["GET /api/notes", "POST /api/extract_actions", "GET /api/am_stats"],
+  },
+  ai: {
+    focus: "Receives cleaned note context and returns only a suggested action plus due date.",
+    contracts: ["temperature 0.3", "max_tokens 500", "N/A when evidence is weak"],
+  },
+  data: {
+    focus: "Filters recent CRM notes, cleans HTML and preserves read continuity with a CSV fallback.",
+    contracts: ["CRM filtered view", "BeautifulSoup + pandas", "data_source response flag"],
+  },
+  bot: {
+    focus: "Bridges authenticated Teams activities to the same API and renders Adaptive Cards.",
+    contracts: ["Bot Framework activity", "Adaptive Card payload", "mailto handoff"],
+  },
+  deploy: {
+    focus: "Packages the web UI with FastAPI while keeping the Teams bot independently deployable.",
+    contracts: ["Next.js static export", "one web image + port", "separate bot service"],
+  },
+};
 
 function TechChips({ items }) {
   return (
@@ -17,135 +45,104 @@ function TechChips({ items }) {
   );
 }
 
-const NODE_W = 104;
-const NODE_H = 42;
-const PAPER = "#f8f4ec";
-const PAGE = "#fcf9f4";
-
-// Point on the border of node `from` in the direction of node `to`.
-function nodeEdgePoint(from, to) {
-  const dx = to.x - from.x;
-  const dy = to.y - from.y;
-  if (dx === 0 && dy === 0) return { x: from.x, y: from.y };
-  const sx = dx !== 0 ? NODE_W / 2 / Math.abs(dx) : Infinity;
-  const sy = dy !== 0 ? NODE_H / 2 / Math.abs(dy) : Infinity;
-  const s = Math.min(sx, sy);
-  return { x: from.x + dx * s, y: from.y + dy * s };
-}
-
-function DiagramNode({ n, i }) {
-  const accent = n.type === "accent";
-  const external = n.type === "external";
-  const store = n.type === "store";
-  const stroke = accent ? ACCENT : "#1a1a1a";
-  const strokeOpacity = accent ? 1 : external ? 0.4 : 0.45;
-  const strokeWidth = accent ? 1.5 : 1;
-  const fill = accent ? "#f4f2fb" : PAPER;
-  const left = n.x - NODE_W / 2;
-  const top = n.y - NODE_H / 2;
-  const ry = 6;
+function SystemBackbone({ activeId }) {
+  const active = (id) => activeId === id || (activeId === "deploy" && id === "runtime");
   return (
-    <g className="motion-safe:animate-pop-in"
-      style={{ transformBox: "fill-box", transformOrigin: "center", animationDelay: `${0.06 + i * 0.08}s` }}>
-      {store ? (
-        <g>
-          <path
-            d={`M ${left} ${top + ry} L ${left} ${top + NODE_H - ry} A ${NODE_W / 2} ${ry} 0 0 0 ${n.x + NODE_W / 2} ${top + NODE_H - ry} L ${n.x + NODE_W / 2} ${top + ry}`}
-            fill={fill} stroke={stroke} strokeOpacity={strokeOpacity} strokeWidth={strokeWidth} />
-          <ellipse cx={n.x} cy={top + ry} rx={NODE_W / 2} ry={ry} fill={fill} stroke={stroke} strokeOpacity={strokeOpacity} strokeWidth={strokeWidth} />
+    <div className={styles.backboneWrap}>
+      <p className="sr-only">
+        Recent CRM notes and the CSV fallback feed the data service, which connects to the stateless FastAPI backend. The backend calls Azure OpenAI and returns actions to the Next.js web dashboard and Microsoft Teams bot.
+      </p>
+      <svg viewBox="0 0 620 250" className={styles.backbone} aria-hidden="true">
+        <defs>
+          <marker id="backbone-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0 0 L10 5 L0 10 Z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <rect x="8" y="18" width="604" height="214" rx="8" className={`${styles.runtimeBoundary} ${active("runtime") ? styles.activeBoundary : ""}`} />
+        <text x="24" y="40" className={styles.boundaryLabel}>DEPLOYMENT BOUNDARY · WEB IMAGE + SEPARATE BOT</text>
+
+        <path d="M94 86 H145" className={styles.flowLine} markerEnd="url(#backbone-arrow)" />
+        <path d="M94 166 H145" className={`${styles.flowLine} ${styles.fallbackLine}`} markerEnd="url(#backbone-arrow)" />
+        <path d="M246 126 H298" className={styles.flowLine} markerEnd="url(#backbone-arrow)" />
+        <path d="M398 119 C430 94 444 88 472 88" className={styles.flowLine} markerEnd="url(#backbone-arrow)" />
+        <path d="M398 145 C430 172 447 178 472 178" className={styles.flowLine} markerEnd="url(#backbone-arrow)" />
+        <path d="M348 92 V62 H392" className={styles.aiLine} markerEnd="url(#backbone-arrow)" />
+        <path d="M468 62 H490 V112 H398" className={styles.returnLine} markerEnd="url(#backbone-arrow)" />
+
+        <g className={`${styles.systemNode} ${active("data") ? styles.activeNode : ""}`}>
+          <rect x="18" y="59" width="76" height="54" rx="5" />
+          <text x="56" y="80">CRM</text>
+          <text x="56" y="96" className={styles.nodeSub}>recent notes</text>
         </g>
-      ) : (
-        <rect x={left} y={top} width={NODE_W} height={NODE_H} rx="5"
-          fill={fill} stroke={stroke} strokeOpacity={strokeOpacity} strokeWidth={strokeWidth}
-          strokeDasharray={external ? "3 3" : undefined} />
-      )}
-      <text x={n.x} y={store ? n.y : n.y - 4} textAnchor="middle" dominantBaseline="central"
-        fontFamily="Inter, sans-serif" fontSize="11" fill="#1a1a1a"
-        style={{ fontWeight: accent ? 600 : 500 }}>
-        {n.label}
-      </text>
-      {n.sub && (
-        <text x={n.x} y={store ? n.y + 12 : n.y + 9} textAnchor="middle" dominantBaseline="central"
-          fontFamily="Inter, sans-serif" fontSize="8.5" fill="#1a1a1a" fillOpacity="0.5">
-          {n.sub}
-        </text>
-      )}
-    </g>
-  );
-}
-
-function DiagramEdge({ a, b, edge, i }) {
-  const p1 = nodeEdgePoint(a, b);
-  const p2 = nodeEdgePoint(b, a);
-  const mx = (p1.x + p2.x) / 2;
-  const my = (p1.y + p2.y) / 2;
-  const dashed = edge.dashed;
-  const lw = edge.label ? edge.label.length * 4.5 + 10 : 0;
-  return (
-    <g>
-      <line x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y}
-        stroke="#1a1a1a" strokeOpacity={dashed ? 0.36 : 0.5} strokeWidth={dashed ? 1.2 : 1.4}
-        markerEnd="url(#n2a-arrow)"
-        pathLength={dashed ? undefined : 1}
-        strokeDasharray={dashed ? "4 4" : 1}
-        className={dashed ? undefined : "motion-safe:animate-draw-line"}
-        style={dashed ? undefined : { strokeDashoffset: 1, animationDelay: `${0.2 + i * 0.1}s` }} />
-      {edge.label && (
-        <g className="motion-safe:animate-pop-in"
-          style={{ transformBox: "fill-box", transformOrigin: "center", animationDelay: `${0.45 + i * 0.1}s` }}>
-          <rect x={mx - lw / 2} y={my - 16} width={lw} height="13" rx="2" fill={PAGE} />
-          <text x={mx} y={my - 9} textAnchor="middle" dominantBaseline="central"
-            fontFamily="Inter, sans-serif" fontSize="8" fill="#1a1a1a" fillOpacity="0.55"
-            style={{ letterSpacing: "0.02em" }}>
-            {edge.label}
-          </text>
+        <g className={`${styles.systemNode} ${styles.secondaryNode} ${active("data") ? styles.activeNode : ""}`}>
+          <rect x="18" y="139" width="76" height="54" rx="5" />
+          <text x="56" y="160">CSV</text>
+          <text x="56" y="176" className={styles.nodeSub}>fallback</text>
         </g>
-      )}
-    </g>
-  );
-}
+        <g className={`${styles.systemNode} ${active("data") ? styles.activeNode : ""}`}>
+          <rect x="145" y="94" width="101" height="64" rx="5" />
+          <text x="195" y="118">Data service</text>
+          <text x="195" y="136" className={styles.nodeSub}>clean · normalize</text>
+        </g>
+        <g className={`${styles.systemNode} ${active("backend") ? styles.activeNode : ""}`}>
+          <rect x="298" y="92" width="100" height="68" rx="5" />
+          <text x="348" y="117">FastAPI</text>
+          <text x="348" y="136" className={styles.nodeSub}>stateless core</text>
+        </g>
+        <g className={`${styles.systemNode} ${styles.aiNode} ${active("ai") ? styles.activeNode : ""}`}>
+          <rect x="392" y="42" width="76" height="40" rx="5" />
+          <text x="430" y="59">Azure OpenAI</text>
+          <text x="430" y="72" className={styles.nodeSub}>2-field output</text>
+        </g>
+        <g className={`${styles.systemNode} ${active("frontend") ? styles.activeNode : ""}`}>
+          <rect x="500" y="76" width="102" height="49" rx="5" />
+          <text x="551" y="95">Web dashboard</text>
+          <text x="551" y="111" className={styles.nodeSub}>Next.js · SSO</text>
+        </g>
+        <g className={`${styles.systemNode} ${active("bot") ? styles.activeNode : ""}`}>
+          <rect x="500" y="153" width="102" height="49" rx="5" />
+          <text x="551" y="172">Teams bot</text>
+          <text x="551" y="188" className={styles.nodeSub}>Adaptive Cards</text>
+        </g>
 
-// Animated architecture diagram — draws itself in on each face change.
-function DomainDiagram({ diagram }) {
-  if (!diagram) return null;
-  const byId = {};
-  diagram.nodes.forEach((n) => {
-    byId[n.id] = n;
-  });
-  return (
-    <svg viewBox="0 0 360 210" className="w-full h-auto" role="img" aria-hidden="true">
-      <defs>
-        <marker id="n2a-arrow" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
-          <path d="M0,0 L10,5 L0,10 z" fill="#1a1a1a" fillOpacity="0.5" />
-        </marker>
-      </defs>
-      {diagram.edges.map((e, i) => {
-        const a = byId[e.from];
-        const b = byId[e.to];
-        if (!a || !b) return null;
-        return <DiagramEdge key={i} a={a} b={b} edge={e} i={i} />;
-      })}
-      {diagram.nodes.map((n, i) => (
-        <DiagramNode key={n.id} n={n} i={i} />
-      ))}
-    </svg>
+        <text x="112" y="81" className={styles.edgeLabel}>primary</text>
+        <text x="106" y="161" className={styles.edgeLabel}>fallback</text>
+        <text x="260" y="116" className={styles.edgeLabel}>notes</text>
+        <text x="431" y="102" className={styles.edgeLabel}>JSON</text>
+        <text x="408" y="164" className={styles.edgeLabel}>JSON</text>
+        <text x="356" y="54" className={styles.edgeLabel}>prompt</text>
+      </svg>
+    </div>
   );
 }
 
 function DetailPanel({ face, index, total }) {
+  const detail = DOMAIN_DETAILS[face.id];
   return (
-    <div key={index} className="motion-safe:animate-fade-in" role="tabpanel" aria-live="polite">
-      <p className="font-inter text-label-caps text-on-surface-variant/60 uppercase tracking-[0.1em] mb-3">
-        {face.tag} · {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
-      </p>
-      <h3 className="font-newsreader text-[1.9rem] text-ink mb-4 leading-tight">{face.label}</h3>
-      <div className="mb-5 max-w-[380px]">
-        <DomainDiagram key={index} diagram={face.diagram} />
+    <div className={styles.carpetPanel} role="tabpanel" aria-live="polite">
+      <div className={styles.carpetHeader}>
+        <div>
+          <p className={styles.carpetKicker}>{face.tag} · {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}</p>
+          <h3>{face.label}</h3>
+        </div>
+        <span className={styles.carpetRole}>Ownership view</span>
       </div>
-      <div className="mb-4">
-        <TechChips items={face.tech} />
+
+      <SystemBackbone activeId={face.id} />
+
+      <div className={styles.domainLedger}>
+        <div>
+          <span>Responsibility</span>
+          <p>{detail.focus}</p>
+        </div>
+        <div>
+          <span>Contracts &amp; guardrails</span>
+          <ul>
+            {detail.contracts.map((item) => <li key={item}>{item}</li>)}
+          </ul>
+        </div>
       </div>
-      <p className="font-inter text-[0.9rem] text-on-surface-variant/80 leading-relaxed max-w-md">{face.responsibility}</p>
     </div>
   );
 }
@@ -325,20 +322,17 @@ function SystemStage({ faces }) {
   return (
     <div ref={stageRef}>
       {srList}
-      <div ref={trackRef} className="relative" style={{ height: `${100 + total * 26}vh` }}>
-        <div className="sticky top-[4.5rem] h-[calc(100vh-4.5rem)] flex flex-col justify-center gap-6 pb-8">
-          <div className="grid md:grid-cols-2 gap-10 items-center">
-            <div className="h-[58vh] min-h-[400px] w-full">{cube}</div>
-            <div className="min-h-[240px] flex items-center">
+      <div ref={trackRef} className="relative" style={{ height: `${100 + (total - 1) * 19}vh` }}>
+        <div className="sticky top-[4.5rem] h-[calc(100vh-4.5rem)] flex flex-col justify-start gap-4 pt-3 pb-2">
+          <div className="grid md:grid-cols-[0.92fr_1.08fr] gap-5 items-center">
+            <div className="h-[60vh] min-h-[410px] w-full">{cube}</div>
+            <div className="min-h-[350px] flex items-center">
               <DetailPanel face={faces[active]} index={active} total={total} />
             </div>
           </div>
           <ControlStrip faces={faces} active={active} onSelect={select} />
         </div>
       </div>
-      <p className="font-inter text-[0.72rem] text-on-surface-variant/50 mt-2">
-        Scroll to turn the cube · drag to rotate freely · click a face to open it
-      </p>
     </div>
   );
 }
