@@ -85,8 +85,8 @@ function Note2ActionProject() {
               number="01"
               label="The Ops Gap"
               id="problem-heading"
-              title="The company had the context. Account managers still had to find the action."
-              lead="Client history was captured faithfully, but the decision layer was missing: what should happen next, and when?"
+              title="After a weekend or vacation, 100–200 client notes become a memory test."
+              lead="An account manager returns to a CRM full of visits, calls and commitments—but no clear queue of what needs attention next. Rebuilding the week means rereading the history, and an important follow-up or promise can disappear inside it."
             />
           </Reveal>
           <ProblemStory steps={data.problemStory} />

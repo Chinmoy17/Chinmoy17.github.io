@@ -209,6 +209,31 @@ function SystemCube({ faces, activeIndex = 0, onFaceClick, onActiveChange, reduc
     dir.position.set(2.5, 3.5, 4);
     scene.add(dir);
 
+    const shadowCanvas = document.createElement("canvas");
+    shadowCanvas.width = 256;
+    shadowCanvas.height = 256;
+    const shadowContext = shadowCanvas.getContext("2d");
+    const shadowGradient = shadowContext.createRadialGradient(128, 128, 0, 128, 128, 118);
+    shadowGradient.addColorStop(0, "rgba(24, 24, 22, 0.28)");
+    shadowGradient.addColorStop(0.38, "rgba(24, 24, 22, 0.15)");
+    shadowGradient.addColorStop(0.72, "rgba(24, 24, 22, 0.055)");
+    shadowGradient.addColorStop(1, "rgba(24, 24, 22, 0)");
+    shadowContext.fillStyle = shadowGradient;
+    shadowContext.fillRect(0, 0, 256, 256);
+
+    const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+    const shadowMaterial = new THREE.SpriteMaterial({
+      map: shadowTexture,
+      transparent: true,
+      opacity: 0.72,
+      depthWrite: false,
+      depthTest: true,
+    });
+    const shadow = new THREE.Sprite(shadowMaterial);
+    shadow.position.set(0, -1.18, -0.55);
+    shadow.scale.set(2.75, 0.62, 1);
+    scene.add(shadow);
+
     const floatGroup = new THREE.Group();
     const cubeGroup = new THREE.Group();
     scene.add(floatGroup);
@@ -449,6 +474,8 @@ function SystemCube({ faces, activeIndex = 0, onFaceClick, onActiveChange, reduc
       geometry.dispose();
       edgesGeo.dispose();
       edges.material.dispose();
+      shadowTexture.dispose();
+      shadowMaterial.dispose();
       materials.forEach((m) => {
         if (m.map) m.map.dispose();
         m.dispose();

@@ -26,9 +26,10 @@
 
 .carpetKicker {
   margin: 0 0 0.25rem;
-  color: rgba(26, 26, 26, 0.5);
+  color: rgba(26, 26, 26, 0.72);
   font-family: "Inter", sans-serif;
   font-size: 0.58rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -43,9 +44,10 @@
 
 .carpetRole {
   padding-top: 0.18rem;
-  color: rgba(26, 26, 26, 0.42);
+  color: rgba(26, 26, 26, 0.66);
   font-family: "Inter", sans-serif;
   font-size: 0.58rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -77,9 +79,10 @@
 }
 
 .boundaryLabel {
-  fill: rgba(26, 26, 26, 0.42);
+  fill: rgba(26, 26, 26, 0.65);
   font-family: "Inter", sans-serif;
   font-size: 7px;
+  font-weight: 600;
   letter-spacing: 0.08em;
 }
 
@@ -144,9 +147,10 @@
 }
 
 .edgeLabel {
-  fill: rgba(26, 26, 26, 0.46);
+  fill: rgba(26, 26, 26, 0.62);
   font-family: "Inter", sans-serif;
   font-size: 7px;
+  font-weight: 600;
   text-anchor: middle;
 }
 
@@ -161,9 +165,10 @@
 .domainLedger > div > span {
   display: block;
   margin-bottom: 0.35rem;
-  color: rgba(26, 26, 26, 0.45);
+  color: rgba(26, 26, 26, 0.7);
   font-family: "Inter", sans-serif;
   font-size: 0.54rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }

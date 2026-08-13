@@ -61,7 +61,7 @@ function ProblemStory({ steps }) {
             data-index={index}
             className={`${styles.problemStep} ${index === active ? styles.problemStepActive : ""}`}
           >
-            <p className="font-inter text-[0.68rem] text-on-surface-variant/50 uppercase tracking-[0.1em]">
+            <p className={styles.problemStepKicker}>
               {String(index + 1).padStart(2, "0")} · {step.label}
             </p>
             <h3 className={styles.problemStepTitle}>{step.title}</h3>

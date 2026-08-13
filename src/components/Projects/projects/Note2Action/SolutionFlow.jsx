@@ -296,7 +296,7 @@ function SolutionFlow({ steps, surfaces }) {
         >
           <div key={current.title} className={styles.solutionDetailContent}>
             <div>
-              <p className="font-inter text-[0.65rem] text-white/40 uppercase tracking-[0.1em]">{current.signal}</p>
+              <p className={styles.solutionSignal}>{current.signal}</p>
               <p className={styles.solutionDetailText}>{current.detail}</p>
             </div>
             <StagePreview stage={current.title} surfaces={surfaces} />
