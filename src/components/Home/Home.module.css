@@ -282,13 +282,16 @@
 }
 
 .agendaItem {
-  min-height: 180px;
-  padding: 1.6rem 0;
+  padding: 1.75rem 0;
   display: grid;
-  grid-template-columns: 62px minmax(260px, 0.95fr) minmax(280px, 1.05fr);
-  gap: 2rem;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
   border-bottom: 1px solid var(--line);
+}
+
+.agendaIndex {
+  grid-column: 1;
+  margin-bottom: 0.55rem;
 }
 
 .agendaIndex,
@@ -301,6 +304,8 @@
 }
 
 .agendaQuestion {
+  grid-column: 1;
+  max-width: 760px;
   margin: 0;
   font-family: "Newsreader", serif;
   font-size: 1.55rem;
@@ -312,6 +317,12 @@
 
 .agendaBody p {
   margin: 0;
+}
+
+.agendaBody {
+  grid-column: 1;
+  max-width: 760px;
+  margin-top: 0.85rem;
 }
 
 .agendaBody > p:first-child {
@@ -658,8 +669,8 @@
   }
 
   .agendaItem {
-    grid-template-columns: 48px minmax(220px, 0.9fr) minmax(240px, 1.1fr);
-    gap: 1.4rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
   }
 
   .practiceGrid {
@@ -779,13 +790,12 @@
   }
 
   .agendaItem {
-    grid-template-columns: 38px minmax(0, 1fr);
-    gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .agendaQuestion,
   .agendaBody {
-    grid-column: 2;
+    grid-column: 1;
   }
 
   .publication {

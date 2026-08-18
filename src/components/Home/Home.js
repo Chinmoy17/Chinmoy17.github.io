@@ -180,9 +180,6 @@ function Home() {
             <p className={styles.sectionNumber}>01 · Active questions</p>
             <div>
               <h2 id="questions-heading" className={styles.sectionHeading}>The questions connecting the work.</h2>
-              <p className={styles.sectionLead}>
-                The application domains differ, but the research concern is consistent: dependable models require evaluation that reflects the conditions in which they will actually operate.
-              </p>
             </div>
           </header>
 
