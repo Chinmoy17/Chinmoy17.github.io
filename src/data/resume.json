@@ -703,12 +703,54 @@
   ],
   "publications": [
     {
+      "title": "Robust and Personalized Federated Learning for Aircraft-Engine Prognostics under Benign and Adversarial Client Heterogeneity",
+      "authors": [
+        "Chinmoy Mitra",
+        "Md. Mehedi Hasan Nipu",
+        "Mohammad Sakib Mahmood",
+        "Md. Rakibul Islam",
+        "M. F. Mridha"
+      ],
+      "venue": "Engineering Applications of Artificial Intelligence (Elsevier)",
+      "year": 2026,
+      "status": "Submitted",
+      "notes": "arXiv preprint · Manuscript submitted to EAAI",
+      "summary": "A controlled safety-oriented study of personalized and robust federated learning for aircraft-engine remaining-useful-life prediction under non-IID operating conditions and poisoned client updates.",
+      "metrics": [
+        "70% of the local-to-centralized RMSE gap closed",
+        "94.9% backdoor attack success against standard averaging",
+        "2.8% attack success with personalization plus robust aggregation"
+      ],
+      "link": "https://arxiv.org/abs/2608.04045",
+      "pdfLink": "https://arxiv.org/pdf/2608.04045"
+    },
+    {
+      "title": "PulmoLiteNet: A Memory-Efficient Lightweight Convolutional Network for Accurate Lung Cancer Histopathology Classification on Edge Device",
+      "venue": "IEEE BECITHCON",
+      "year": 2026,
+      "status": "Accepted",
+      "notes": "Accepted at IEEE BECITHCON 2026",
+      "summary": "A lightweight convolutional network derived from a redesigned AlexNet backbone for three-class lung histopathology classification on commodity edge hardware.",
+      "metrics": [
+        "99.8% test accuracy on LC25000",
+        "Approximately 0.49 MB memory footprint",
+        "Approximately 665x fewer parameters than compared Vision Transformers"
+      ],
+      "link": null
+    },
+    {
       "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
       "venue": "IEEE QPAN",
       "year": 2025,
-      "notes": "Undergraduate Thesis",
+      "status": "Published",
+      "notes": "IEEE QPAN 2025 · Undergraduate thesis",
       "summary": "ResNet50 transfer learning model for multiclass MRI brain tumor classification; ~99.50% accuracy and reduced training time.",
-      "link": null,
+      "metrics": [
+        "Approximately 99.50% test accuracy",
+        "Four-class MRI classification",
+        "Transfer learning and ensemble methods"
+      ],
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C",
       "scholarProfile": "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ"
     }
   ],

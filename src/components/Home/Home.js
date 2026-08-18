@@ -1,378 +1,358 @@
-﻿import React from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import resumeData from "../../data/resume.json";
+import { FiArrowRight, FiExternalLink, FiMail } from "react-icons/fi";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import avatarImg from "../../Assets/avatar.png";
-import { Reveal } from "../utils/Reveal";
-import { MdOutlineHub, MdOutlineApps, MdOutlineTune } from "react-icons/md";
-import { FaGithub, FaLinkedinIn, FaExternalLinkAlt } from "react-icons/fa";
-import { SiGmail } from "react-icons/si";
+import resumeData from "../../data/resume.json";
+import styles from "./Home.module.css";
 
-function Home() {
-  const milestones = [
-    {
-      date: "2019 - 2024",
-      title: "B.Sc. Computer Science & Engineering",
-      org: "RUET",
-      note: "CGPA 3.11/4.00. Thesis on brain tumor classification via transfer learning. Dutch Bangla Bank Scholar, RUET Technical Scholar.",
-      current: false,
-    },
-    {
-      date: "Mar 2024 - Jul 2025",
-      title: "AI Contributor",
-      org: "Outlier",
-      note: "Designed high-quality prompts and evaluated outputs to improve LLM performance in code generation, refactoring, and summarization across Python and Swift contexts.",
-      current: false,
-    },
-    {
-      date: "2025",
-      title: "Published - IEEE QPAN 2025",
-      org: "IEEE",
-      note: "Transfer learning based multiclass brain tumor classification using MRI data. Achieved ~99.50% accuracy with ensemble methods.",
-      current: false,
-    },
-    {
-      date: "Aug - Oct 2025",
-      title: "AI Intern",
-      org: "Walton Hi-Tech Industries",
-      note: "Contributed to an enterprise RAG chatbot serving customer support, order processing, HRMS, and warranty claims across Bangladesh's largest electronics manufacturer.",
-      current: false,
-    },
-    {
-      date: "Oct 2025 - Present",
-      title: "Application Developer: AI/ML",
-      org: "Dexian Bangladesh",
-      note: "Shipping Note2Action (automation for 600+ AMs), DemoFactory (AI app generator), and agentic workflows with evaluation-driven iteration for production LLM systems.",
-      current: true,
-    },
-  ];
+const scholarUrl = "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ";
 
-  const focusAreas = [
-    {
-      icon: MdOutlineHub,
-      title: "Agentic AI & LLM Systems",
-      body: "Shipped Note2Action \u2014 predicting next actions for 600+ account managers. Designed evaluation pipelines with regression guards before every production rollout.",
-      linkLabel: "View Projects \u2192",
-      linkTo: "/project",
-      highlight: null,
-    },
-    {
-      icon: MdOutlineApps,
-      title: "Multi-Agent Systems & BM Product Accelerator",
-      body: "Built the skill-extractor agent for BM Product Accelerator \u2014 a multi-agent platform (planner, skill-extractor, coding agent). Given legacy production code as input, the skill-extractor parses reusable skills into a GitLab repo and builds a tree-based index with quality weights.",
-      highlight: "Tree-based index reduces skill search complexity from O(n\u00b2) to O(log n), letting the planner and coding agents retrieve relevant skills instantly at scale.",
-      linkLabel: "View Projects \u2192",
-      linkTo: "/project",
-    },
-    {
-      icon: MdOutlineTune,
-      title: "Research: DSPy & Evaluation-Driven LLMs",
-      body: "Ongoing controlled experiments optimizing LLM pipelines with DSPy 2.5+. Measured results show 38% cost reduction and +9.6% accuracy gains over baseline prompting. Targeting an arXiv preprint \u2014 results are real, the paper is in progress.",
-      linkLabel: "Read Research \u2192",
-      linkTo: "/research",
-      highlight: null,
-    },
-  ];
+const researchQuestions = [
+  {
+    question: "How can collaborative models remain useful when clients are heterogeneous or adversarial?",
+    body: "I study personalization, robust aggregation, and failure-specific evaluation in federated learning rather than treating clean test accuracy as a sufficient safety claim.",
+    evidence: "Aircraft-engine prognostics · C-MAPSS · Robust federated learning",
+  },
+  {
+    question: "How much diagnostic performance can be retained under edge-scale memory and compute limits?",
+    body: "My healthcare AI work examines the relationship between architecture size, diagnostic accuracy, and practical deployment on constrained hardware.",
+    evidence: "PulmoLiteNet · MRI classification · Efficient deep learning",
+  },
+  {
+    question: "How should generative systems be evaluated when several kinds of quality matter at once?",
+    body: "I compare accuracy, latency, cost, robustness, and human oversight in LLM and RAG systems, then carry those measurements into production workflows.",
+    evidence: "DSPy optimization · RAG evaluation · Human-reviewed AI",
+  },
+];
+
+const researchTrajectory = [
+  {
+    period: "2019-2025",
+    domain: "Medical imaging",
+    title: "Accuracy was the starting point.",
+    question: "Can transfer learning distinguish multiple brain-tumor classes from MRI data with limited training resources?",
+    body: "My undergraduate thesis used ResNet50-based transfer learning and ensemble methods for multiclass MRI classification. The work reached approximately 99.50% accuracy and was published at IEEE QPAN 2025.",
+    lesson: "The result established my foundation in experimental design, medical imaging, and reporting model performance with a defined data boundary.",
+    link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C",
+    linkLabel: "View publication",
+    external: true,
+  },
+  {
+    period: "2025",
+    domain: "Scientific NLP",
+    title: "Noisy evidence changed the question.",
+    question: "What can structured and textual evidence reveal about why scientific papers are retracted?",
+    body: "I analyzed 35,215 retraction records, engineered 22 reason features, and combined exploratory analysis, clustering, and classification to identify recurring patterns across a difficult multi-label domain.",
+    lesson: "A 64.5% best classification accuracy made the limitation visible: ambiguous labels and incomplete records are part of the research problem, not preprocessing details to hide.",
+    link: "/research/paper-retraction-analysis",
+    linkLabel: "Read the study",
+  },
+  {
+    period: "2026",
+    domain: "Efficient healthcare AI",
+    title: "Efficiency became part of correctness.",
+    question: "Can a clinically useful vision model fit within the memory budget of commodity edge hardware?",
+    body: "PulmoLiteNet redesigns an AlexNet-derived backbone for three-class lung histopathology classification. It attained 99.8% test accuracy on LC25000 with an approximately 0.49 MB memory footprint.",
+    lesson: "The accepted IEEE BECITHCON 2026 paper treats model size and deployability as first-class evaluation criteria alongside predictive performance.",
+  },
+  {
+    period: "2025-2026",
+    domain: "LLM evaluation",
+    title: "Generative systems required a wider scorecard.",
+    question: "How do automatic prompt optimizers change accuracy, latency, and cost under different starting constraints?",
+    body: "A controlled DSPy study compared optimization strategies in production RAG settings. The experiments measured a 38% cost reduction, a 3.2x latency improvement, and a 9.6% accuracy gain in different configurations.",
+    lesson: "Optimization is conditional: the best method depends on the initial bottleneck and the metric the system is required to improve.",
+    link: "/research/dspy-rag-optimization",
+    linkLabel: "Examine the experiments",
+  },
+  {
+    period: "2026",
+    domain: "Robust federated learning",
+    title: "Reliability now includes hostile conditions.",
+    question: "Can federated prognostics remain personalized and robust when operators differ and some clients submit poisoned updates?",
+    body: "On C-MAPSS aircraft-engine telemetry, shared-representation personalization closed approximately 70% of the local-to-centralized RMSE gap. A backdoor reached 94.9% attack success against standard averaging, while personalization with robust aggregation reduced it to 2.8%.",
+    lesson: "Clean accuracy alone cannot certify safety. Robustness requires explicit attack evaluation and a measured trade-off between update selection and collaborative representation learning.",
+    link: "https://arxiv.org/abs/2608.04045",
+    linkLabel: "Read the arXiv preprint",
+    external: true,
+  },
+];
+
+const practiceWork = [
+  {
+    title: "Evaluation before optimization",
+    copy: "DSPy experiments use controlled baselines and multi-metric comparisons to determine whether an intervention improves the actual bottleneck rather than a convenient proxy.",
+    evidence: "Accuracy · latency · cost · starting conditions",
+    link: "/research/dspy-rag-optimization",
+    linkLabel: "DSPy study",
+  },
+  {
+    title: "Human review before automation",
+    copy: "Note2Action turns unstructured CRM notes into one suggested action and due date for more than 600 account managers while retaining human review, SSO, and per-user data boundaries.",
+    evidence: "600+ users · human-reviewed output · operational privacy",
+    link: "/project/note2action",
+    linkLabel: "Note2Action case study",
+  },
+  {
+    title: "Architecture as an experimental constraint",
+    copy: "AgentFlow and enterprise RAG systems expose the practical variables that laboratory prototypes often omit: retrieval quality, tool failures, deployment isolation, observability, and cost.",
+    evidence: "RAG · agent tools · Azure deployment · failure handling",
+    link: "/project/agentflow",
+    linkLabel: "AgentFlow case study",
+  },
+];
+
+function EvidenceLink({ item }) {
+  if (!item.link) return null;
+
+  if (item.external) {
+    return (
+      <a className={styles.inlineLink} href={item.link} target="_blank" rel="noreferrer">
+        {item.linkLabel} <FiExternalLink aria-hidden="true" />
+      </a>
+    );
+  }
 
   return (
-    <main className="max-w-container mx-auto px-8 pt-24 pb-0">
+    <Link className={styles.inlineLink} to={item.link}>
+      {item.linkLabel} <FiArrowRight aria-hidden="true" />
+    </Link>
+  );
+}
 
-      {/* ===== HERO ===== */}
-      <section className="mb-20 flex flex-col md:flex-row items-start gap-16">
+function Home() {
+  const publications = resumeData.publications || [];
 
-        {/* F-pattern: TEXT LEFT */}
-        <div className="w-full md:w-2/3">
-          <Reveal delay={100}>
-            <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-3 tracking-[0.1em]">
-              AI/ML Application Developer @ Dexian &middot; PhD Aspirant
-            </p>
-          </Reveal>
-          <Reveal delay={150}>
-            <h1 className="font-newsreader text-h1 text-ink mb-4">
-              Chinmoy Mitra
-            </h1>
-          </Reveal>
-          <Reveal delay={250}>
-            <div className="h-[1px] w-16 bg-ink mb-6" />
-            <p className="font-newsreader text-[1.35rem] italic text-ink leading-[1.55] mb-2">
-              Full-stack developer building AI/ML-integrated systems &mdash; from
-              production web apps to agentic pipelines that save real time
-              and resources.
-            </p>
-            <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-6">
-              Currently at Dexian Bangladesh shipping multi-agent architectures,
-              RAG systems, and LLM evaluation frameworks that go from research to
-              production fast.
-            </p>
-            {/* Scannable key facts */}
-            <div className="flex flex-col gap-3">
-              <div className="flex gap-4 items-baseline">
-                <span className="font-inter text-[0.65rem] uppercase tracking-[0.12em] text-on-surface-variant/80 shrink-0 w-20">
-                  Published
-                </span>
-                <span className="font-inter text-[0.82rem] text-ink font-medium leading-snug">
-                  IEEE QPAN 2025 &mdash; brain tumor classification via transfer learning
-                </span>
-                <a
-                  href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 font-inter text-[0.72rem] text-[#2563eb] hover:text-[#1d4ed8] transition-colors no-underline shrink-0"
-                >
-                  <FaExternalLinkAlt className="text-[0.55rem]" />
-                  <span>Link</span>
+  return (
+    <main className={styles.page}>
+      <section className={styles.hero} aria-labelledby="home-title">
+        <div className={styles.inner}>
+          <div className={styles.heroLayout}>
+            <div className={styles.heroContent}>
+              <p className={styles.eyebrow}>Research portfolio · Machine learning and AI systems</p>
+              <h1 id="home-title" className={styles.heroTitle}>Chinmoy Mitra</h1>
+              <p className={styles.heroStatement}>
+                I study how learning systems can remain reliable when data, users, and operating conditions change.
+              </p>
+              <p className={styles.heroCopy}>
+                My work spans robust federated learning, efficient healthcare AI, LLM evaluation, and production AI systems. Across each setting, I focus on what accuracy alone leaves unanswered: robustness, efficiency, failure behavior, and evidence.
+              </p>
+              <p className={styles.heroStatus}>Preparing for Fall 2027 PhD applications</p>
+
+              <div className={styles.heroActions}>
+                <a className={styles.primaryAction} href="#publications">
+                  View publications <FiArrowRight aria-hidden="true" />
+                </a>
+                <Link className={styles.secondaryAction} to="/research">
+                  Research archive <FiArrowRight aria-hidden="true" />
+                </Link>
+              </div>
+            </div>
+
+            <aside className={styles.heroProfile} aria-label="Academic profile summary">
+              <figure className={styles.portrait}>
+                <img
+                  className={styles.portraitImage}
+                  src={avatarImg}
+                  alt="Chinmoy Mitra"
+                  width="1632"
+                  height="2220"
+                />
+                <figcaption className={styles.portraitCaption}>Dhaka, Bangladesh</figcaption>
+              </figure>
+
+              <dl className={styles.profileFacts}>
+                <div className={styles.profileFact}>
+                  <dt className={styles.profileLabel}>Current</dt>
+                  <dd className={styles.profileValue}>AI/ML Application Developer, Dexian</dd>
+                </div>
+                <div className={styles.profileFact}>
+                  <dt className={styles.profileLabel}>Education</dt>
+                  <dd className={styles.profileValue}>B.Sc. CSE, RUET, 2024</dd>
+                </div>
+                <div className={styles.profileFact}>
+                  <dt className={styles.profileLabel}>Research record</dt>
+                  <dd className={styles.profileValue}>Published · accepted · submitted</dd>
+                </div>
+              </dl>
+
+              <nav className={styles.profileLinks} aria-label="External academic and professional links">
+                <a href={scholarUrl} target="_blank" rel="noreferrer">Scholar</a>
+                <a href={resumeData.links.github} target="_blank" rel="noreferrer"><FaGithub aria-hidden="true" /> GitHub</a>
+                <a href={resumeData.links.linkedin} target="_blank" rel="noreferrer"><FaLinkedinIn aria-hidden="true" /> LinkedIn</a>
+              </nav>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.sectionQuestions}`} aria-labelledby="questions-heading">
+        <div className={styles.inner}>
+          <header className={styles.sectionIntro}>
+            <p className={styles.sectionNumber}>01 · Active questions</p>
+            <div>
+              <h2 id="questions-heading" className={styles.sectionHeading}>The questions connecting the work.</h2>
+              <p className={styles.sectionLead}>
+                The application domains differ, but the research concern is consistent: dependable models require evaluation that reflects the conditions in which they will actually operate.
+              </p>
+            </div>
+          </header>
+
+          <div className={styles.agendaList}>
+            {researchQuestions.map((item, index) => (
+              <article className={styles.agendaItem} key={item.question}>
+                <span className={styles.agendaIndex}>{String(index + 1).padStart(2, "0")}</span>
+                <h3 className={styles.agendaQuestion}>{item.question}</h3>
+                <div className={styles.agendaBody}>
+                  <p>{item.body}</p>
+                  <p className={styles.agendaEvidence}>{item.evidence}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="publications" className={`${styles.section} ${styles.sectionPublications}`} aria-labelledby="publications-heading">
+        <div className={styles.inner}>
+          <header className={styles.sectionIntro}>
+            <p className={styles.sectionNumber}>02 · Publication record</p>
+            <div>
+              <h2 id="publications-heading" className={styles.sectionHeading}>Published, accepted, and under review.</h2>
+              <p className={styles.sectionLead}>
+                Status labels are explicit so a reviewer can distinguish completed publication, conference acceptance, and submitted manuscript work at a glance.
+              </p>
+            </div>
+          </header>
+
+          <div className={styles.publicationList}>
+            {publications.map((publication) => (
+              <article className={styles.publication} key={publication.title}>
+                <div className={styles.publicationMeta}>
+                  <span className={styles.publicationStatus} data-status={publication.status.toLowerCase()}>{publication.status}</span>
+                  <span className={styles.publicationYear}>{publication.year}</span>
+                </div>
+
+                <div className={styles.publicationContent}>
+                  <h3 className={styles.publicationTitle}>{publication.title}</h3>
+                  <p className={styles.publicationVenue}>{publication.venue}</p>
+                  {publication.authors && (
+                    <p className={styles.publicationAuthors}>{publication.authors.join(", ")}</p>
+                  )}
+                  <p className={styles.publicationSummary}>{publication.summary}</p>
+
+                  {publication.metrics && (
+                    <ul className={styles.metricList}>
+                      {publication.metrics.map((metric) => <li key={metric}>{metric}</li>)}
+                    </ul>
+                  )}
+
+                  <div className={styles.publicationLinks}>
+                    {publication.link ? (
+                      <a className={styles.paperLink} href={publication.link} target="_blank" rel="noreferrer">
+                        {publication.status === "Submitted" ? "Read arXiv preprint" : "View publication"} <FiExternalLink aria-hidden="true" />
+                      </a>
+                    ) : (
+                      <span className={styles.pendingLink}>Public paper link forthcoming</span>
+                    )}
+                    {publication.pdfLink && (
+                      <a className={styles.paperLink} href={publication.pdfLink} target="_blank" rel="noreferrer">
+                        PDF <FiExternalLink aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.sectionTrajectory}`} aria-labelledby="trajectory-heading">
+        <div className={styles.inner}>
+          <header className={styles.sectionIntro}>
+            <p className={styles.sectionNumber}>03 · Research throughline</p>
+            <div>
+              <h2 id="trajectory-heading" className={styles.sectionHeading}>The question kept getting harder.</h2>
+              <p className={styles.sectionLead}>
+                I began by asking whether a model could be accurate. Each project added a condition that a useful system also has to satisfy: noisy evidence, limited memory, multiple objectives, heterogeneous clients, and adversarial behavior.
+              </p>
+            </div>
+          </header>
+
+          <div className={styles.trajectoryList}>
+            {researchTrajectory.map((item, index) => (
+              <article className={styles.trajectoryItem} key={item.title}>
+                <span className={styles.trajectoryIndex}>{String(index + 1).padStart(2, "0")}</span>
+                <div className={styles.trajectoryMeta}>
+                  <p className={styles.trajectoryPeriod}>{item.period}</p>
+                  <p className={styles.trajectoryDomain}>{item.domain}</p>
+                </div>
+                <div className={styles.trajectoryContent}>
+                  <h3 className={styles.trajectoryTitle}>{item.title}</h3>
+                  <p className={styles.trajectoryQuestion}>{item.question}</p>
+                  <p className={styles.trajectoryBody}>{item.body}</p>
+                  <p className={styles.trajectoryLesson}>{item.lesson}</p>
+                  <EvidenceLink item={item} />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.sectionPractice}`} aria-labelledby="practice-heading">
+        <div className={styles.inner}>
+          <header className={styles.sectionIntro}>
+            <p className={styles.sectionNumber}>04 · Research in practice</p>
+            <div>
+              <h2 id="practice-heading" className={styles.sectionHeading}>Production work as a pressure test.</h2>
+              <p className={styles.sectionLead}>
+                Industry systems are not presented as substitutes for research. They show where evaluation assumptions meet users, privacy boundaries, infrastructure failures, and operational cost.
+              </p>
+            </div>
+          </header>
+
+          <div className={styles.practiceGrid}>
+            {practiceWork.map((item, index) => (
+              <article className={styles.practiceItem} key={item.title}>
+                <span className={styles.practiceIndex}>{String(index + 1).padStart(2, "0")}</span>
+                <h3 className={styles.practiceTitle}>{item.title}</h3>
+                <p className={styles.practiceCopy}>{item.copy}</p>
+                <p className={styles.practiceEvidence}>{item.evidence}</p>
+                <Link className={styles.inlineLink} to={item.link}>
+                  {item.linkLabel} <FiArrowRight aria-hidden="true" />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.closing} aria-labelledby="closing-heading">
+        <div className={styles.inner}>
+          <div className={styles.closingGrid}>
+            <p className={styles.closingEyebrow}>05 · Current direction</p>
+            <div>
+              <h2 id="closing-heading" className={styles.closingHeading}>
+                Seeking a PhD environment where reliability is part of the research question.
+              </h2>
+              <p className={styles.closingCopy}>
+                For Fall 2027, I am interested in groups working on trustworthy machine learning, robust and personalized federated learning, efficient healthcare AI, and rigorous evaluation of LLM systems. I am also open to research collaboration before the application cycle.
+              </p>
+              <div className={styles.closingActions}>
+                <a className={styles.primaryAction} href={`mailto:${resumeData.links.email}`}>
+                  Discuss research <FiMail aria-hidden="true" />
+                </a>
+                <a className={styles.secondaryAction} href={scholarUrl} target="_blank" rel="noreferrer">
+                  Google Scholar <FiExternalLink aria-hidden="true" />
                 </a>
               </div>
-              <div className="flex gap-4 items-baseline">
-                <span className="font-inter text-[0.65rem] uppercase tracking-[0.12em] text-on-surface-variant/80 shrink-0 w-20">
-                  Seeking
-                </span>
-                <span className="font-inter text-[0.82rem] text-on-surface-variant leading-snug">
-                  Fall 2027 PhD &middot; NLP &middot; LLM Evaluation &middot; Computational Systems &middot;
-                  Healthcare AI
-                </span>
-              </div>
             </div>
-          </Reveal>
-          <Reveal delay={400}>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Link
-                to="/project"
-                className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
-              >
-                Explore Projects
-              </Link>
-              <Link
-                to="/research"
-                className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
-              >
-                Research &rarr;
-              </Link>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* Photo + social */}
-        <Reveal className="w-full md:w-1/3 shrink-0 max-w-[300px] md:ml-auto md:-mt-12">
-          <div className="relative">
-            <div
-              className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[60%] h-5 rounded-full blur-xl pointer-events-none"
-              style={{ background: "rgba(28,28,25,0.12)" }}
-            />
-            <div className="relative" style={{ animation: "riseUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both",
-              WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 28%)",
-              maskImage: "linear-gradient(to top, transparent 0%, black 28%)" }}>
-              <img
-                src={avatarImg}
-                alt="Chinmoy Mitra"
-                className="w-full h-auto object-contain block"
-                style={{ filter: "contrast(1.03) brightness(1.01)" }}
-              />
-            </div>
-          </div>
-          <div className="mt-5 flex flex-col gap-3 pl-4">
-            <a href={resumeData.links.linkedin} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group">
-              <FaLinkedinIn className="text-[1.05rem] shrink-0" style={{ color: "#0A66C2" }} />
-              <span>LinkedIn</span>
-            </a>
-            <a href={resumeData.links.github} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group">
-              <FaGithub className="text-[1.05rem] shrink-0" style={{ color: "#1c1c19" }} />
-              <span>chinmoy17</span>
-            </a>
-            <a href={"mailto:" + resumeData.links.email}
-              className="flex items-center gap-2.5 font-inter text-[0.8rem] text-on-surface-variant hover:text-ink transition-colors no-underline group">
-              <SiGmail className="text-[1.05rem] shrink-0" style={{ color: "#EA4335" }} />
-              <span>{resumeData.links.email}</span>
-            </a>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ===== WHAT I BUILD ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
-        <span className="absolute -top-[0.85rem] left-0 pr-6 font-newsreader text-[1.3rem] text-ink leading-none" style={{ background: "#fcf9f4" }}>
-          What I Build
-        </span>
-      </div>
-
-      <section className="mb-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-          <Reveal className="md:col-span-4">
-            <div className="md:sticky md:top-28">
-              <p className="font-newsreader text-[1.6rem] italic text-ink leading-relaxed mb-6">
-                I design systems that think, reason, and act &mdash; from LLM
-                orchestration to production ML pipelines that serve real users at
-                scale.
-              </p>
-              <p className="font-inter text-[0.78rem] uppercase tracking-[0.12em] text-on-surface-variant/70">
-                Focus Areas
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="md:col-span-8 space-y-10">
-            {focusAreas.map((item, i) => (
-              <Reveal key={i} delay={i * 100}>
-                <div className={i < focusAreas.length - 1 ? "border-b border-surface-variant pb-10" : ""}>
-                  <div className="flex items-start gap-2 mb-2">
-                    <item.icon className="text-ink text-[1.1rem] shrink-0 mt-[0.2rem]" />
-                    <h3 className="font-newsreader text-[1.25rem] text-ink font-medium leading-snug">
-                      {item.title}
-                    </h3>
-                  </div>
-                  <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-3">
-                    {item.body}
-                  </p>
-                  {item.highlight && (
-                    <p className="font-inter text-[0.82rem] text-ink border-l-2 border-ink pl-3 leading-relaxed mb-3">
-                      {item.highlight}
-                    </p>
-                  )}
-                  <Link
-                    to={item.linkTo}
-                    className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                  >
-                    {item.linkLabel}
-                  </Link>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>
-
-      {/* ===== JOURNEY / TIMELINE ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
-        <span className="absolute -top-[0.85rem] left-0 pr-6 font-newsreader text-[1.3rem] text-ink leading-none" style={{ background: "#fcf9f4" }}>
-          Timeline
-        </span>
-      </div>
-
-      <section className="mb-20">
-        <div className="divide-y divide-surface-variant max-w-4xl">
-          {milestones.map((m, i) => (
-            <Reveal key={i} delay={i * 60}>
-              <div className="grid grid-cols-[7.5rem_1fr] md:grid-cols-[10rem_1fr] gap-x-8 py-6 items-start">
-                <div className="pt-0.5">
-                  <p className={"font-inter text-[0.7rem] uppercase tracking-[0.1em] " + (m.current ? "text-ink font-semibold" : "text-on-surface-variant/70")}>
-                    {m.date}
-                  </p>
-                  {m.current && (
-                    <span className="inline-block mt-1.5 font-inter text-[0.55rem] uppercase tracking-[0.12em] text-ink border border-ink px-1.5 py-0.5 leading-none">
-                      Now
-                    </span>
-                  )}
-                </div>
-                <div>
-                  <div className="flex items-baseline gap-2 mb-1.5">
-                    <span className="font-newsreader text-[1.1rem] text-ink leading-snug">
-                      {m.title}
-                    </span>
-                    <span className="font-inter text-[0.78rem] text-on-surface-variant/80">
-                      &middot; {m.org}
-                    </span>
-                  </div>
-                  <p className="font-inter text-[0.82rem] text-on-surface-variant leading-relaxed">
-                    {m.note}
-                  </p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal delay={400}>
-          <div className="mt-6">
-            <Link
-              to="/about"
-              className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-            >
-              Full background & experience &rarr;
-            </Link>
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ===== BY THE NUMBERS ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-10">
-        <span className="absolute -top-[0.85rem] left-0 pr-6 font-newsreader text-[1.3rem] text-ink leading-none" style={{ background: "#fcf9f4" }}>
-          By the Numbers
-        </span>
-      </div>
-
-      <section className="mb-20">
-        <Reveal>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-10 gap-x-8">
-            {[
-              { value: "600+", label: "Account Managers", sub: "Note2Action automation" },
-              { value: "38%", label: "Cost Reduction", sub: "DSPy LLM optimization" },
-              { value: "3.2x", label: "Latency Improvement", sub: "Production RAG system" },
-              { value: "99.5%", label: "Model Accuracy", sub: "IEEE QPAN 2025 paper" },
-              { value: "35K+", label: "Papers Analyzed", sub: "Retraction NLP study" },
-            ].map((s, i) => (
-              <div key={i}>
-                <p className="font-newsreader text-[2rem] text-ink leading-none mb-1">
-                  {s.value}
-                </p>
-                <p className="font-inter text-[0.78rem] text-ink font-medium leading-tight mb-0.5">
-                  {s.label}
-                </p>
-                <p className="font-inter text-[0.7rem] text-on-surface-variant/70 leading-snug">
-                  {s.sub}
-                </p>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </section>
-
-      {/* ===== CLOSING - CTA to Contact ===== */}
-      <Reveal>
-        <div className="relative w-full h-[1px] bg-surface-variant mb-16" />
-      </Reveal>
-
-      <Reveal>
-        <section className="mb-0 pb-20 max-w-2xl">
-          <p className="font-inter text-[0.7rem] uppercase tracking-[0.14em] text-on-surface-variant/70 mb-8">
-            Let&apos;s Work Together
-          </p>
-          <h2 className="font-newsreader text-[2rem] md:text-[2.4rem] text-ink leading-tight mb-5">
-            Got a project, research idea, or just want to talk AI?
-          </h2>
-          <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-10">
-            I&apos;m always open to interesting conversations &mdash; whether
-            it&apos;s a collaboration, a PhD opportunity, or a challenging
-            engineering problem.
-          </p>
-          <div className="flex flex-wrap items-center gap-6">
-            <Link
-              to="/contact"
-              className="bg-transparent text-ink px-8 py-3 font-inter text-label-caps uppercase tracking-[0.1em] border border-ink hover:bg-ink hover:text-on-ink transition-colors duration-200 no-underline"
-            >
-              Get in Touch &rarr;
-            </Link>
-            <a
-              href={resumeData.links.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 font-inter text-[0.85rem] text-on-surface-variant hover:text-ink transition-colors no-underline"
-            >
-              <FaLinkedinIn className="text-[1rem]" style={{ color: "#0A66C2" }} />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href={resumeData.links.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 font-inter text-[0.85rem] text-on-surface-variant hover:text-ink transition-colors no-underline"
-            >
-              <FaGithub className="text-[1rem]" style={{ color: "#1c1c19" }} />
-              <span>GitHub</span>
-            </a>
-          </div>
-        </section>
-      </Reveal>
     </main>
   );
 }
