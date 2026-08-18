@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiExternalLink, FiMail } from "react-icons/fi";
-import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import avatarImg from "../../Assets/avatar.png";
 import resumeData from "../../data/resume.json";
 import styles from "./Home.module.css";
@@ -130,7 +129,6 @@ function Home() {
         <div className={styles.inner}>
           <div className={styles.heroLayout}>
             <div className={styles.heroContent}>
-              <p className={styles.eyebrow}>Research portfolio · Machine learning and AI systems</p>
               <h1 id="home-title" className={styles.heroTitle}>Chinmoy Mitra</h1>
               <p className={styles.heroStatement}>
                 I study how learning systems can remain reliable when data, users, and operating conditions change.
@@ -159,7 +157,6 @@ function Home() {
                   width="1632"
                   height="2220"
                 />
-                <figcaption className={styles.portraitCaption}>Dhaka, Bangladesh</figcaption>
               </figure>
 
               <dl className={styles.profileFacts}>
@@ -171,17 +168,7 @@ function Home() {
                   <dt className={styles.profileLabel}>Education</dt>
                   <dd className={styles.profileValue}>B.Sc. CSE, RUET, 2024</dd>
                 </div>
-                <div className={styles.profileFact}>
-                  <dt className={styles.profileLabel}>Research record</dt>
-                  <dd className={styles.profileValue}>Published · accepted · submitted</dd>
-                </div>
               </dl>
-
-              <nav className={styles.profileLinks} aria-label="External academic and professional links">
-                <a href={scholarUrl} target="_blank" rel="noreferrer">Scholar</a>
-                <a href={resumeData.links.github} target="_blank" rel="noreferrer"><FaGithub aria-hidden="true" /> GitHub</a>
-                <a href={resumeData.links.linkedin} target="_blank" rel="noreferrer"><FaLinkedinIn aria-hidden="true" /> LinkedIn</a>
-              </nav>
             </aside>
           </div>
         </div>
