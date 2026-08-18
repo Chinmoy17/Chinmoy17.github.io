@@ -7,74 +7,59 @@ import styles from "./Home.module.css";
 
 const scholarUrl = "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ";
 
-const researchQuestions = [
+const researchSummary = [
   {
-    question: "How can collaborative models remain useful when clients are heterogeneous or adversarial?",
-    body: "I study personalization, robust aggregation, and failure-specific evaluation in federated learning rather than treating clean test accuracy as a sufficient safety claim.",
-    evidence: "Aircraft-engine prognostics · C-MAPSS · Robust federated learning",
+    status: "Submitted",
+    venue: "EAAI · Elsevier · arXiv 2026",
+    question: "Can collaborative models remain useful when some clients are malicious?",
+    title: "Robust and Personalized Federated Learning for Aircraft-Engine Prognostics",
+    signal: "Combining personalization with robust aggregation reduced backdoor attack success from 94.9% to 2.8%.",
+    link: "https://arxiv.org/abs/2608.04045",
+    linkLabel: "Read the preprint",
   },
   {
-    question: "How much diagnostic performance can be retained under edge-scale memory and compute limits?",
-    body: "My healthcare AI work examines the relationship between architecture size, diagnostic accuracy, and practical deployment on constrained hardware.",
-    evidence: "PulmoLiteNet · MRI classification · Efficient deep learning",
+    status: "Accepted",
+    venue: "IEEE BECITHCON 2026",
+    question: "How small can a diagnostic model become without giving up accuracy?",
+    title: "PulmoLiteNet: Lightweight Lung Cancer Histopathology Classification",
+    signal: "PulmoLiteNet reached 99.8% test accuracy on LC25000 with an approximately 0.49 MB memory footprint.",
   },
   {
-    question: "How should generative systems be evaluated when several kinds of quality matter at once?",
-    body: "I compare accuracy, latency, cost, robustness, and human oversight in LLM and RAG systems, then carry those measurements into production workflows.",
-    evidence: "DSPy optimization · RAG evaluation · Human-reviewed AI",
+    status: "Published",
+    venue: "IEEE QPAN 2025",
+    question: "Where did the focus on dependable healthcare AI begin?",
+    title: "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
+    signal: "The undergraduate thesis reached approximately 99.50% accuracy and established the first step in this research trajectory.",
+    link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C",
+    linkLabel: "View the publication",
   },
 ];
 
-const researchTrajectory = [
+const researchArc = [
   {
     period: "2019-2025",
-    domain: "Medical imaging",
-    title: "Accuracy was the starting point.",
-    question: "Can transfer learning distinguish multiple brain-tumor classes from MRI data with limited training resources?",
-    body: "My undergraduate thesis used ResNet50-based transfer learning and ensemble methods for multiclass MRI classification. The work reached approximately 99.50% accuracy and was published at IEEE QPAN 2025.",
-    lesson: "The result established my foundation in experimental design, medical imaging, and reporting model performance with a defined data boundary.",
-    link: "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C",
-    linkLabel: "View publication",
-    external: true,
-  },
-  {
-    period: "2025",
-    domain: "Scientific NLP",
-    title: "Noisy evidence changed the question.",
-    question: "What can structured and textual evidence reveal about why scientific papers are retracted?",
-    body: "I analyzed 35,215 retraction records, engineered 22 reason features, and combined exploratory analysis, clustering, and classification to identify recurring patterns across a difficult multi-label domain.",
-    lesson: "A 64.5% best classification accuracy made the limitation visible: ambiguous labels and incomplete records are part of the research problem, not preprocessing details to hide.",
-    link: "/research/paper-retraction-analysis",
-    linkLabel: "Read the study",
-  },
-  {
-    period: "2026",
-    domain: "Efficient healthcare AI",
-    title: "Efficiency became part of correctness.",
-    question: "Can a clinically useful vision model fit within the memory budget of commodity edge hardware?",
-    body: "PulmoLiteNet redesigns an AlexNet-derived backbone for three-class lung histopathology classification. It attained 99.8% test accuracy on LC25000 with an approximately 0.49 MB memory footprint.",
-    lesson: "The accepted IEEE BECITHCON 2026 paper treats model size and deployability as first-class evaluation criteria alongside predictive performance.",
+    domain: "Medical imaging · Scientific NLP",
+    title: "I started by measuring accuracy.",
+    body: "My early work asked whether machine-learning models could extract useful signals from complex datasets, from multiclass brain-tumor MRI classification to large-scale analysis of scientific retractions.",
+    transition: "High benchmark performance was only part of the answer. Noisy labels, incomplete evidence, and deployment constraints began to matter.",
   },
   {
     period: "2025-2026",
-    domain: "LLM evaluation",
-    title: "Generative systems required a wider scorecard.",
-    question: "How do automatic prompt optimizers change accuracy, latency, and cost under different starting constraints?",
-    body: "A controlled DSPy study compared optimization strategies in production RAG settings. The experiments measured a 38% cost reduction, a 3.2x latency improvement, and a 9.6% accuracy gain in different configurations.",
-    lesson: "Optimization is conditional: the best method depends on the initial bottleneck and the metric the system is required to improve.",
-    link: "/research/dspy-rag-optimization",
-    linkLabel: "Examine the experiments",
+    domain: "Efficient · Robust learning",
+    title: "I began chasing reliability under constraints.",
+    body: "PulmoLiteNet made efficiency part of the research objective. Federated aircraft-engine prognostics added non-IID clients, personalization, adversarial updates, and safety-specific evaluation.",
+    transition: "A model could be accurate and still be too large, insufficiently personalized, or vulnerable under realistic operating conditions.",
   },
   {
-    period: "2026",
-    domain: "Robust federated learning",
-    title: "Reliability now includes hostile conditions.",
-    question: "Can federated prognostics remain personalized and robust when operators differ and some clients submit poisoned updates?",
-    body: "On C-MAPSS aircraft-engine telemetry, shared-representation personalization closed approximately 70% of the local-to-centralized RMSE gap. A backdoor reached 94.9% attack success against standard averaging, while personalization with robust aggregation reduced it to 2.8%.",
-    lesson: "Clean accuracy alone cannot certify safety. Robustness requires explicit attack evaluation and a measured trade-off between update selection and collaborative representation learning.",
-    link: "https://arxiv.org/abs/2608.04045",
-    linkLabel: "Read the arXiv preprint",
-    external: true,
+    period: "Current",
+    domain: "LLM evaluation · RAG · Agentic systems",
+    title: "Now I am chasing dependable generative AI.",
+    body: "My current direction asks how generative systems should be evaluated and controlled when quality has several dimensions: correctness, retrieval grounding, robustness, latency, cost, and human oversight.",
+    questions: [
+      "How can evaluation expose failures that aggregate benchmark scores hide?",
+      "How should RAG and agentic systems balance quality, efficiency, and controllability?",
+      "Where should human review remain part of the system rather than an afterthought?",
+    ],
   },
 ];
 
@@ -102,27 +87,7 @@ const practiceWork = [
   },
 ];
 
-function EvidenceLink({ item }) {
-  if (!item.link) return null;
-
-  if (item.external) {
-    return (
-      <a className={styles.inlineLink} href={item.link} target="_blank" rel="noreferrer">
-        {item.linkLabel} <FiExternalLink aria-hidden="true" />
-      </a>
-    );
-  }
-
-  return (
-    <Link className={styles.inlineLink} to={item.link}>
-      {item.linkLabel} <FiArrowRight aria-hidden="true" />
-    </Link>
-  );
-}
-
 function Home() {
-  const publications = resumeData.publications || [];
-
   return (
     <main className={styles.page}>
       <section className={styles.hero} aria-labelledby="home-title">
@@ -174,122 +139,84 @@ function Home() {
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.sectionQuestions}`} aria-labelledby="questions-heading">
-        <div className={styles.inner}>
-          <header className={styles.sectionIntro}>
-            <p className={styles.sectionNumber}>01 · Active questions</p>
-            <div>
-              <h2 id="questions-heading" className={styles.sectionHeading}>The questions connecting the work.</h2>
-            </div>
-          </header>
-
-          <div className={styles.agendaList}>
-            {researchQuestions.map((item, index) => (
-              <article className={styles.agendaItem} key={item.question}>
-                <span className={styles.agendaIndex}>{String(index + 1).padStart(2, "0")}</span>
-                <h3 className={styles.agendaQuestion}>{item.question}</h3>
-                <div className={styles.agendaBody}>
-                  <p>{item.body}</p>
-                  <p className={styles.agendaEvidence}>{item.evidence}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="publications" className={`${styles.section} ${styles.sectionPublications}`} aria-labelledby="publications-heading">
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
-            <p className={styles.sectionNumber}>02 · Publication record</p>
             <div>
-              <h2 id="publications-heading" className={styles.sectionHeading}>Published, accepted, and under review.</h2>
-              <p className={styles.sectionLead}>
-                Status labels are explicit so a reviewer can distinguish completed publication, conference acceptance, and submitted manuscript work at a glance.
-              </p>
+              <h2 id="publications-heading" className={styles.sectionHeading}>Research Summary</h2>
             </div>
           </header>
 
-          <div className={styles.publicationList}>
-            {publications.map((publication) => (
-              <article className={styles.publication} key={publication.title}>
-                <div className={styles.publicationMeta}>
-                  <span className={styles.publicationStatus} data-status={publication.status.toLowerCase()}>{publication.status}</span>
-                  <span className={styles.publicationYear}>{publication.year}</span>
+          <div className={styles.researchSummaryGrid}>
+            {researchSummary.map((item) => (
+              <article className={styles.researchTeaser} key={item.title}>
+                <div className={styles.researchTeaserMeta}>
+                  <span className={styles.researchTeaserStatus}>{item.status}</span>
+                  <span>{item.venue}</span>
                 </div>
-
-                <div className={styles.publicationContent}>
-                  <h3 className={styles.publicationTitle}>{publication.title}</h3>
-                  <p className={styles.publicationVenue}>{publication.venue}</p>
-                  {publication.authors && (
-                    <p className={styles.publicationAuthors}>{publication.authors.join(", ")}</p>
+                <div className={styles.researchTeaserContent}>
+                  <h3 className={styles.researchTeaserTitle}>{item.title}</h3>
+                  <ul className={styles.researchTeaserPoints}>
+                    <li><span>Question:</span> {item.question}</li>
+                    <li><span>Result:</span> {item.signal}</li>
+                  </ul>
+                  {item.link && (
+                    <a className={styles.paperLink} href={item.link} target="_blank" rel="noreferrer">
+                      {item.linkLabel} <FiExternalLink aria-hidden="true" />
+                    </a>
                   )}
-                  <p className={styles.publicationSummary}>{publication.summary}</p>
-
-                  {publication.metrics && (
-                    <ul className={styles.metricList}>
-                      {publication.metrics.map((metric) => <li key={metric}>{metric}</li>)}
-                    </ul>
-                  )}
-
-                  <div className={styles.publicationLinks}>
-                    {publication.link ? (
-                      <a className={styles.paperLink} href={publication.link} target="_blank" rel="noreferrer">
-                        {publication.status === "Submitted" ? "Read arXiv preprint" : "View publication"} <FiExternalLink aria-hidden="true" />
-                      </a>
-                    ) : (
-                      <span className={styles.pendingLink}>Public paper link forthcoming</span>
-                    )}
-                    {publication.pdfLink && (
-                      <a className={styles.paperLink} href={publication.pdfLink} target="_blank" rel="noreferrer">
-                        PDF <FiExternalLink aria-hidden="true" />
-                      </a>
-                    )}
-                  </div>
                 </div>
               </article>
             ))}
           </div>
+
+          <Link className={styles.researchArchiveLink} to="/research">
+            Explore the full research archive <FiArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
       <section className={`${styles.section} ${styles.sectionTrajectory}`} aria-labelledby="trajectory-heading">
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
-            <p className={styles.sectionNumber}>03 · Research throughline</p>
             <div>
-              <h2 id="trajectory-heading" className={styles.sectionHeading}>The question kept getting harder.</h2>
-              <p className={styles.sectionLead}>
-                I began by asking whether a model could be accurate. Each project added a condition that a useful system also has to satisfy: noisy evidence, limited memory, multiple objectives, heterogeneous clients, and adversarial behavior.
-              </p>
+              <h2 id="trajectory-heading" className={styles.sectionHeading}>From accurate models to dependable GenAI.</h2>
             </div>
           </header>
 
-          <div className={styles.trajectoryList}>
-            {researchTrajectory.map((item, index) => (
-              <article className={styles.trajectoryItem} key={item.title}>
-                <span className={styles.trajectoryIndex}>{String(index + 1).padStart(2, "0")}</span>
-                <div className={styles.trajectoryMeta}>
-                  <p className={styles.trajectoryPeriod}>{item.period}</p>
-                  <p className={styles.trajectoryDomain}>{item.domain}</p>
+          <div className={styles.researchArcList}>
+            {researchArc.map((item, index) => (
+              <article className={styles.researchArcItem} key={item.title}>
+                <div className={styles.researchArcMeta}>
+                  <span className={styles.researchArcIndex}>{String(index + 1).padStart(2, "0")}</span>
+                  <p>{item.period}</p>
+                  <p>{item.domain}</p>
                 </div>
-                <div className={styles.trajectoryContent}>
-                  <h3 className={styles.trajectoryTitle}>{item.title}</h3>
-                  <p className={styles.trajectoryQuestion}>{item.question}</p>
-                  <p className={styles.trajectoryBody}>{item.body}</p>
-                  <p className={styles.trajectoryLesson}>{item.lesson}</p>
-                  <EvidenceLink item={item} />
+                <div className={styles.researchArcContent}>
+                  <h3 className={styles.researchArcTitle}>{item.title}</h3>
+                  <p className={styles.researchArcBody}>{item.body}</p>
+                  {item.transition && (
+                    <p className={styles.researchArcTransition}><strong>What changed:</strong> {item.transition}</p>
+                  )}
+                  {item.questions && (
+                    <ul className={styles.researchArcQuestions}>
+                      {item.questions.map((question) => <li key={question}>{question}</li>)}
+                    </ul>
+                  )}
                 </div>
               </article>
             ))}
           </div>
+
+          <Link className={styles.researchArchiveLink} to="/research">
+            Explore the experiments and studies <FiArrowRight aria-hidden="true" />
+          </Link>
         </div>
       </section>
 
       <section className={`${styles.section} ${styles.sectionPractice}`} aria-labelledby="practice-heading">
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
-            <p className={styles.sectionNumber}>04 · Research in practice</p>
             <div>
               <h2 id="practice-heading" className={styles.sectionHeading}>Production work as a pressure test.</h2>
               <p className={styles.sectionLead}>
@@ -317,7 +244,6 @@ function Home() {
       <section className={styles.closing} aria-labelledby="closing-heading">
         <div className={styles.inner}>
           <div className={styles.closingGrid}>
-            <p className={styles.closingEyebrow}>05 · Current direction</p>
             <div>
               <h2 id="closing-heading" className={styles.closingHeading}>
                 Seeking a PhD environment where reliability is part of the research question.
