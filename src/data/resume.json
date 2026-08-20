@@ -725,6 +725,20 @@
       "pdfLink": "https://arxiv.org/pdf/2608.04045"
     },
     {
+      "title": "Trust-Gated Capability Control: Breaking the Trust-Vulnerability Paradox in Multi-Agent LLM Systems",
+      "venue": "iCONNECT",
+      "year": 2026,
+      "status": "Under review",
+      "notes": "Under review at iCONNECT 2026",
+      "summary": "A security framework for multi-agent LLM collectives: an operational five-layer trust stack and a cross-layer synergy operator that maps composite trust into short-lived, revocable capability grants, so stealthy compromised agents cannot escalate privileges.",
+      "metrics": [
+        "Operational five-layer trust stack",
+        "Short-lived, revocable capability grants",
+        "Automatic revocation on compromise"
+      ],
+      "link": null
+    },
+    {
       "title": "PulmoLiteNet: A Memory-Efficient Lightweight Convolutional Network for Accurate Lung Cancer Histopathology Classification on Edge Device",
       "venue": "IEEE BECITHCON",
       "year": 2026,
@@ -740,10 +754,10 @@
     },
     {
       "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
-      "venue": "IEEE QPAN",
+      "venue": "IEEE QPAIN",
       "year": 2025,
       "status": "Published",
-      "notes": "IEEE QPAN 2025 · Undergraduate thesis",
+      "notes": "IEEE QPAIN 2025 · Undergraduate thesis",
       "summary": "ResNet50 transfer learning model for multiclass MRI brain tumor classification; ~99.50% accuracy and reduced training time.",
       "metrics": [
         "Approximately 99.50% test accuracy",

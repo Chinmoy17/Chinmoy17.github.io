@@ -13,7 +13,7 @@ function Research() {
   );
 
   return (
-    <main className="max-w-container mx-auto px-8 pt-24 pb-16">
+    <main className="max-w-container mx-auto px-8 pt-10 pb-16">
 
       {/* ===== HEADER ===== */}
       <section className="mb-xl">
@@ -32,7 +32,7 @@ function Research() {
             <Reveal delay={200}>
               <div className="h-[1px] w-16 bg-ink mb-6"></div>
               <p className="font-inter text-body-lg text-on-surface-variant max-w-xl">
-                Exploring the intersection of LLM evaluation, RAG systems, and applied ML — where academic rigour meets production constraints.
+                Where academic rigour meets production constraints &mdash; I study how learning systems fail when accuracy alone looks fine, and how to evaluate, harden, and control them.
               </p>
             </Reveal>
           </div>
@@ -42,27 +42,99 @@ function Research() {
             <div className="space-y-4 border-l border-surface-variant pl-8">
               <div>
                 <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">Primary Focus</p>
-                <p className="font-newsreader text-[1.2rem] text-ink">LLM Evaluation & Prompt Optimization</p>
+                <p className="font-newsreader text-[1.2rem] text-ink">Failure-aware LLM evaluation & prompt optimization</p>
               </div>
               <div>
                 <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">Secondary Focus</p>
-                <p className="font-newsreader text-[1.2rem] text-ink">Medical Deep Learning & Imaging</p>
+                <p className="font-newsreader text-[1.2rem] text-ink">Robust & efficient learning (federated, healthcare)</p>
               </div>
               <div>
                 <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-1">Active Interest</p>
-                <p className="font-newsreader text-[1.2rem] text-ink">NLP, Abstractive Summarization, RAG</p>
+                <p className="font-newsreader text-[1.2rem] text-ink">Controllable multi-agent LLM systems</p>
               </div>
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ===== RESEARCH STUDIES ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Research Studies
-        </span>
-      </div>
+      {/* ===== PUBLICATIONS & SUBMITTED WORK ===== */}
+      <h2 className="font-newsreader text-[2.1rem] md:text-[2.7rem] font-medium text-ink leading-tight mb-4">
+        Publications & Submitted Work
+      </h2>
+      <div className="w-full h-px bg-surface-variant mb-8"></div>
+
+      <section className="mb-xl">
+        {pubs.map((pub, i) => (
+          <Reveal key={i} delay={i * 80}>
+            <article className="border-b border-surface-variant py-9">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+
+                {/* Content — fills the row */}
+                <div className="md:col-span-9">
+                  {pub.status && (
+                    <span className="inline-block font-inter text-[0.62rem] uppercase tracking-[0.12em] text-ink border border-ink/40 px-2 py-0.5 mb-4">
+                      {pub.status}
+                    </span>
+                  )}
+                  <h2 className="font-newsreader text-h3 text-ink mb-3 leading-snug">
+                    {pub.title}
+                  </h2>
+                  <p className="font-inter text-body-md text-on-surface-variant leading-relaxed mb-5 max-w-3xl">
+                    {pub.summary}
+                  </p>
+
+                  {/* Venue — highlighted metadata under title & explanation */}
+                  <div className="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 border-l-2 border-ink pl-3 py-0.5">
+                    <span className="font-inter text-[0.8rem] font-semibold text-ink">{pub.venue}</span>
+                    <span className="text-on-surface-variant/40">·</span>
+                    <span className="font-inter text-[0.8rem] text-on-surface-variant">{pub.year}</span>
+                    {pub.notes && (
+                      <>
+                        <span className="text-on-surface-variant/40">·</span>
+                        <span className="font-inter text-[0.78rem] text-on-surface-variant/70">{pub.notes}</span>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Links */}
+                <div className="md:col-span-3 flex flex-col justify-start items-start md:items-end gap-3">
+                  {pub.scholarProfile && (
+                    <a
+                      href={pub.scholarProfile}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                    >
+                      Google Scholar &rarr;
+                    </a>
+                  )}
+                  {pub.link && (
+                    <a
+                      href={pub.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
+                    >
+                      Paper &rarr;
+                    </a>
+                  )}
+                </div>
+
+              </div>
+            </article>
+          </Reveal>
+        ))}
+      </section>
+
+      {/* ===== PERSONAL RESEARCH ===== */}
+      <h2 className="font-newsreader text-[2.1rem] md:text-[2.7rem] font-medium text-ink leading-tight mb-4">
+        Personal Research
+      </h2>
+      <div className="w-full h-px bg-surface-variant mb-6"></div>
+      <p className="font-inter text-body-md text-on-surface-variant max-w-xl mb-xl">
+        Self-initiated studies and applied experiments &mdash; not yet formally published. These are where I test ideas, tooling, and methods on my own terms.
+      </p>
 
       <section className="mb-xl">
         {researchProjects.map((p, i) => (
@@ -148,74 +220,13 @@ function Research() {
         ))}
       </section>
 
-      {/* ===== PUBLICATIONS ===== */}
-      <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-        <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-          Publications
-        </span>
-      </div>
-
-      <section className="mb-xl">
-        {pubs.map((pub, i) => (
-          <Reveal key={i} delay={i * 80}>
-            <article className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-10">
-
-              {/* Year / Venue */}
-              <div className="md:col-span-3">
-                <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] leading-relaxed">
-                  {pub.year}<br />
-                  {pub.venue}<br />
-                  <span className="opacity-60">{pub.notes}</span>
-                </p>
-              </div>
-
-              {/* Content */}
-              <div className="md:col-span-6">
-                <h2 className="font-newsreader text-h3 text-ink mb-4 leading-snug">
-                  {pub.title}
-                </h2>
-                <p className="font-inter text-body-md text-on-surface-variant leading-relaxed">
-                  {pub.summary}
-                </p>
-              </div>
-
-              {/* Links */}
-              <div className="md:col-span-3 flex flex-col justify-start items-start md:items-end gap-3">
-                {pub.scholarProfile && (
-                  <a
-                    href={pub.scholarProfile}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                  >
-                    Google Scholar &rarr;
-                  </a>
-                )}
-                {pub.link && (
-                  <a
-                    href={pub.link}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
-                  >
-                    Paper &rarr;
-                  </a>
-                )}
-              </div>
-
-            </article>
-          </Reveal>
-        ))}
-      </section>
-
       {/* ===== RESEARCH EXPERIENCE ===== */}
       {researchExp && (
         <>
-          <div className="relative w-full h-[1px] bg-surface-variant mb-xl">
-            <span className="absolute -top-3 left-0 bg-surface pr-4 font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
-              Research Experience
-            </span>
-          </div>
+          <h2 className="font-newsreader text-[2.1rem] md:text-[2.7rem] font-medium text-ink leading-tight mb-4">
+            Research Experience
+          </h2>
+          <div className="w-full h-px bg-surface-variant mb-xl"></div>
 
           <section className="mb-xl">
             <Reveal>
