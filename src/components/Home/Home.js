@@ -35,62 +35,13 @@ const researchSummary = [
   },
 ];
 
-const researchArc = [
-  {
-    period: "2023–2026",
-    focus: "Performance",
-    title: "Can the model learn the signal?",
-    body: "My undergraduate thesis established the starting point: 99.50% accuracy in multiclass brain-tumor MRI classification. PulmoLiteNet then expanded the objective to efficiency, pairing 99.8% accuracy with an approximately 0.49 MB footprint.",
-    signals: [
-      { value: "99.50%", label: "MRI classification accuracy" },
-      { value: "0.49 MB", label: "PulmoLiteNet memory footprint" },
-    ],
-  },
-  {
-    period: "2025–2026",
-    focus: "Hidden failure",
-    title: "What does clean performance conceal?",
-    body: "In federated aircraft-engine prognostics, a failure-masking sensor-value backdoor left clean performance unchanged while compromising the behavior that mattered. Measuring the attack directly exposed what F1 and RMSE did not.",
-    metric: {
-      before: "94.9%",
-      after: "2.8%",
-      label: "attack success rate",
-      note: "Reduced by a stacked personalized and Byzantine-robust defense, validated over five seeds and harder settings.",
-    },
-    link: "https://arxiv.org/abs/2608.04045",
-    linkLabel: "Read the federated-learning preprint",
-    external: true,
-  },
-  {
-    period: "Current",
-    focus: "Evaluation + control",
-    title: "Do improvements survive optimization and transfer?",
-    body: "I now study feedback-driven prompt optimization across MMLU, LegalBench, and GSM8K using controlled comparisons of domains, model families, and optimization methods.",
-    coreQuestion: "When average accuracy rises, which previously correct behaviors break—and do the gains transfer across domains and models?",
-    workstreams: [
-      {
-        label: "Evaluation",
-        status: "In progress",
-        body: "Strict held-out tests, item-level positive and negative flips, and three independent prompt-rewriter seeds.",
-      },
-      {
-        label: "Control",
-        status: "Under review",
-        body: "Trust-Gated Capability Control studies short-lived, revocable capability grants for multi-agent LLM systems.",
-      },
-    ],
-    link: "/research/dspy-rag-optimization",
-    linkLabel: "View the preliminary DSPy study",
-  },
-];
-
 const practiceWork = [
   {
-    title: "Evaluation before optimization",
-    copy: "DSPy experiments use controlled baselines and multi-metric comparisons to determine whether an intervention improves the actual bottleneck rather than a convenient proxy.",
-    evidence: "Accuracy · latency · cost · starting conditions",
-    link: "/research/dspy-rag-optimization",
-    linkLabel: "DSPy study",
+    title: "RFP Intelligence Platform",
+    copy: "An end-to-end platform that turns 100–500 page government tenders into compliant, 14-section proposals — SAM.gov discovery, non-vector page indexing, and agentic drafting kept under human review at each step.",
+    evidence: "Government RFPs · PageIndex retrieval · weeks → minutes",
+    link: "/project/rfp-platform",
+    linkLabel: "RFP Platform case study",
   },
   {
     title: "Human review before automation",
@@ -117,19 +68,16 @@ function Home() {
             <div className={styles.heroContent}>
               <h1 id="home-title" className={styles.heroTitle}>Chinmoy Mitra</h1>
               <p className={styles.heroStatement}>
-                I study how learning systems can remain reliable when data, users, and operating conditions change.
-              </p>
-              <p className={styles.heroCopy}>
-                My work spans robust federated learning, efficient healthcare AI, LLM evaluation, and production AI systems. Across each setting, I focus on what accuracy alone leaves unanswered: robustness, efficiency, failure behavior, and evidence.
+                I&rsquo;m an AI Engineer at ByteMethod AI, a Dexian company, building evaluation-driven LLM and agentic systems. Alongside that, I research how learning systems stay reliable when data, users, and conditions keep shifting.
               </p>
               <p className={styles.heroStatus}>Preparing for Fall 2027 PhD applications</p>
 
               <div className={styles.heroActions}>
-                <a className={styles.primaryAction} href="#publications">
-                  View publications <FiArrowRight aria-hidden="true" />
-                </a>
-                <Link className={styles.secondaryAction} to="/research">
-                  Research archive <FiArrowRight aria-hidden="true" />
+                <Link className={styles.primaryAction} to="/research">
+                  Research Page <FiArrowRight aria-hidden="true" />
+                </Link>
+                <Link className={styles.secondaryAction} to="/project">
+                  View Projects <FiArrowRight aria-hidden="true" />
                 </Link>
               </div>
             </div>
@@ -148,7 +96,7 @@ function Home() {
               <dl className={styles.profileFacts}>
                 <div className={styles.profileFact}>
                   <dt className={styles.profileLabel}>Current</dt>
-                  <dd className={styles.profileValue}>AI/ML Application Developer, Dexian</dd>
+                  <dd className={styles.profileValue}>AI Engineer · ByteMethod AI (Dexian)</dd>
                 </div>
                 <div className={styles.profileFact}>
                   <dt className={styles.profileLabel}>Education</dt>
@@ -203,82 +151,87 @@ function Home() {
             <div>
               <h2 id="trajectory-heading" className={styles.sectionHeading}>Research Direction</h2>
               <p className={styles.sectionLead}>
-                My research has moved from optimizing predictive performance to exposing hidden failures and designing evaluation and control mechanisms around them.
+                A short, honest account of the questions that have shaped my work &mdash; and the ones I want to spend the next years on.
               </p>
             </div>
           </header>
 
-          <div className={styles.researchArcGrid}>
-            {researchArc.map((item, index) => (
-              <article className={styles.researchArcItem} key={item.title}>
-                <header className={styles.researchArcMeta}>
-                  <span className={styles.researchArcIndex}>{String(index + 1).padStart(2, "0")}</span>
-                  <div>
-                    <p className={styles.researchArcPeriod}>{item.period}</p>
-                    <p className={styles.researchArcFocus}>{item.focus}</p>
-                  </div>
-                </header>
+          <div className={styles.article}>
+            <article className={styles.chapter}>
+              <div className={styles.chapterMeta}>
+                <span className={styles.chapterIndex}>01</span>
+                <p className={styles.chapterLabel}>Where it began</p>
+                <p className={styles.chapterEra}>Undergraduate thesis · IEEE QPAIN 2025</p>
+              </div>
+              <div className={styles.chapterBody}>
+                <p>
+                  My research began with my undergraduate thesis at RUET, supervised by Assistant Professor Farjana Parvin. It was my first serious piece of work, and it was demanding in the best way. I learned how to run a proper literature review, how to turn a vague interest into a precise question, and how to keep interrogating the <strong>what</strong>, the <strong>why</strong>, and the <strong>how</strong> behind a contribution.
+                </p>
+                <p>
+                  The thesis was published at IEEE QPAIN 2025 &mdash; but not on the first attempt. My first submission was rejected. It stung, yet I came away more enlightened than discouraged; that rejection taught me more than an easy acceptance ever could have.
+                </p>
+              </div>
+            </article>
 
-                <h3 className={styles.researchArcTitle}>{item.title}</h3>
-                <p className={styles.researchArcBody}>{item.body}</p>
+            <article className={styles.chapter}>
+              <div className={styles.chapterMeta}>
+                <span className={styles.chapterIndex}>02</span>
+                <p className={styles.chapterLabel}>Harder questions</p>
+                <p className={styles.chapterEra}>Efficiency · Federated robustness</p>
+              </div>
+              <div className={styles.chapterBody}>
+                <p>
+                  Several projects followed. In <strong>PulmoLiteNet</strong>, I chased a stubborn, narrow question: how small can a diagnostic model become before accuracy gives way? The result was a lightweight lung-histopathology classifier that held <strong>99.8%</strong> accuracy within roughly a <strong>0.49&nbsp;MB</strong> footprint &mdash; small enough for edge and microcontroller deployment.
+                </p>
+                <p>
+                  But the questions that genuinely reshaped my thinking came from federated learning for aircraft-engine prognostics. The research questions were sharp: how should a federated model cope with heterogeneous, non-IID data, and how can it stay trustworthy in the presence of attackers and malicious clients? That project changed how I judge my own results.
+                </p>
+              </div>
+            </article>
 
-                {item.signals && (
-                  <dl className={styles.researchArcSignals}>
-                    {item.signals.map((signal) => (
-                      <div key={signal.label}>
-                        <dt>{signal.label}</dt>
-                        <dd>{signal.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                )}
+            <blockquote className={styles.articlePull}>
+              <p>The best part of being an engineer, to me, is getting to <span className={styles.pullAccent}>formalize the problems I run into</span> &mdash; and then build my way out of them.</p>
+            </blockquote>
 
-                {item.metric && (
-                  <div className={styles.researchArcMetric} aria-label={`${item.metric.label} reduced from ${item.metric.before} to ${item.metric.after}`}>
-                    <div className={styles.researchArcMetricFlow}>
-                      <span>{item.metric.before}</span>
-                      <FiArrowRight aria-hidden="true" />
-                      <span>{item.metric.after}</span>
-                    </div>
-                    <p className={styles.researchArcMetricLabel}>{item.metric.label}</p>
-                    <p className={styles.researchArcMetricNote}>{item.metric.note}</p>
-                  </div>
-                )}
+            <article className={styles.chapter}>
+              <div className={styles.chapterMeta}>
+                <span className={styles.chapterIndex}>03</span>
+                <p className={styles.chapterLabel}>Building the tools</p>
+                <p className={styles.chapterEra}>UI Craft · MCP server</p>
+              </div>
+              <div className={styles.chapterBody}>
+                <p>
+                  One of those problems was building good interfaces for the backends I work on. By <em>good</em> I don&rsquo;t mean decorative &mdash; I mean interfaces that use the psychological anchors which make people actually read what is in front of them, and which set one product apart from another.
+                </p>
+                <p>
+                  That frustration became <strong>UI Craft</strong>: an MCP server that guides the language models I code with and learns my design choices project by project. It has proven useful enough that I am building this very portfolio with it.
+                </p>
+              </div>
+            </article>
 
-                {item.coreQuestion && (
-                  <div className={styles.researchArcQuestion}>
-                    <p>Core question</p>
-                    <strong>{item.coreQuestion}</strong>
-                  </div>
-                )}
-
-                {item.workstreams && (
-                  <div className={styles.researchArcWorkstreams}>
-                    {item.workstreams.map((workstream) => (
-                      <div className={styles.researchArcWorkstream} key={workstream.label}>
-                        <div>
-                          <h4>{workstream.label}</h4>
-                          <span>{workstream.status}</span>
-                        </div>
-                        <p>{workstream.body}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {item.link && (
-                  item.external ? (
-                    <a className={`${styles.paperLink} ${styles.researchArcLink}`} href={item.link} target="_blank" rel="noreferrer">
-                      {item.linkLabel} <FiExternalLink aria-hidden="true" />
-                    </a>
-                  ) : (
-                    <Link className={`${styles.inlineLink} ${styles.researchArcLink}`} to={item.link}>
-                      {item.linkLabel} <FiArrowRight aria-hidden="true" />
-                    </Link>
-                  )
-                )}
-              </article>
-            ))}
+            <article className={styles.chapter}>
+              <div className={styles.chapterMeta}>
+                <span className={styles.chapterIndex}>04</span>
+                <p className={styles.chapterLabel}>Where I&rsquo;m heading</p>
+                <p className={styles.chapterEra}>LLM evaluation · Prompt optimization</p>
+              </div>
+              <div className={styles.chapterBody}>
+                <p>
+                  Most recently I have been building MCP servers and enterprise systems on top of LLMs and generative AI. The difficulties that keep returning are the ones I now care about most: <strong>evaluation</strong>, <strong>reliability</strong>, and above all <strong>consistency</strong>.
+                </p>
+                <p>
+                  That pull led me to prompt optimization, which is the part of my work I enjoy most right now. Over the next chapter of my life, I want to build my research squarely around these questions &mdash; how to make generative systems dependable, and how to prove that they are.
+                </p>
+                <div className={styles.chapterLinks}>
+                  <a className={styles.paperLink} href="https://arxiv.org/abs/2608.04045" target="_blank" rel="noreferrer">
+                    Read the federated-learning preprint <FiExternalLink aria-hidden="true" />
+                  </a>
+                  <Link className={styles.inlineLink} to="/research/dspy-rag-optimization">
+                    View the preliminary DSPy study <FiArrowRight aria-hidden="true" />
+                  </Link>
+                </div>
+              </div>
+            </article>
           </div>
 
           <Link className={styles.researchArchiveLink} to="/research">

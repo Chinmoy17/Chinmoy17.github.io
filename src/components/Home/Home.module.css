@@ -71,20 +71,11 @@
   max-width: 760px;
   margin: 1.6rem 0 0;
   font-family: "Newsreader", serif;
-  font-size: 2.1rem;
+  font-size: 1.6rem;
   font-style: normal;
-  font-weight: 400;
-  line-height: 1.18;
+  font-weight: 300;
+  line-height: 1.5;
   letter-spacing: 0;
-}
-
-.heroCopy {
-  max-width: 700px;
-  margin: 1.2rem 0 0;
-  color: rgba(23, 25, 24, 0.7);
-  font-family: "Inter", sans-serif;
-  font-size: 0.98rem;
-  line-height: 1.75;
 }
 
 .heroStatus {
@@ -399,225 +390,106 @@
   border-bottom-color: var(--accent);
 }
 
-.researchArcGrid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+.article {
   border-top: 1px solid var(--ink);
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  padding: 3rem 0;
   border-bottom: 1px solid var(--line);
 }
 
-.researchArcItem {
-  min-width: 0;
-  padding: 2.2rem;
-  display: flex;
-  flex-direction: column;
+.chapterMeta {
+  position: sticky;
+  top: 5.5rem;
+  align-self: start;
+  height: fit-content;
 }
 
-.researchArcItem:first-child {
-  padding-left: 0;
+.chapterIndex {
+  display: block;
+  color: rgba(23, 25, 24, 0.3);
+  font-family: "Newsreader", serif;
+  font-size: 2rem;
+  line-height: 1;
 }
 
-.researchArcItem + .researchArcItem {
-  border-left: 1px solid var(--line);
-}
-
-.researchArcItem:nth-child(2) {
-  background: var(--paper-muted);
-}
-
-.researchArcMeta {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.researchArcPeriod,
-.researchArcFocus {
-  margin: 0;
-  color: rgba(23, 25, 24, 0.58);
+.chapterLabel {
+  margin: 1rem 0 0;
+  color: var(--ink);
   font-family: "Inter", sans-serif;
-  font-size: 0.67rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.35;
+}
+
+.chapterEra {
+  margin: 0.4rem 0 0;
+  color: var(--accent);
+  font-family: "Inter", sans-serif;
+  font-size: 0.66rem;
   font-weight: 600;
   line-height: 1.5;
   text-transform: uppercase;
 }
 
-.researchArcFocus {
-  margin-top: 0.28rem;
-  color: var(--ink);
+.chapterBody {
+  max-width: 720px;
 }
 
-.researchArcIndex {
-  color: rgba(23, 25, 24, 0.32);
-  font-family: "Newsreader", serif;
-  font-size: 1.55rem;
-  line-height: 1;
-}
-
-.researchArcItem:last-child .researchArcPeriod {
-  color: var(--accent);
-}
-
-.researchArcTitle {
-  margin: 2rem 0 0;
-  font-family: "Newsreader", serif;
-  font-size: 1.8rem;
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: 0;
-  color: var(--ink);
-}
-
-.researchArcBody {
-  margin: 0.85rem 0 0;
-  color: rgba(23, 25, 24, 0.7);
-  font-family: "Inter", sans-serif;
-  font-size: 0.83rem;
-  line-height: 1.72;
-}
-
-.researchArcSignals {
-  margin: 1.6rem 0 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--line);
-}
-
-.researchArcSignals div {
-  min-width: 0;
-  padding: 1rem 0 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.researchArcSignals div + div {
-  padding-left: 1rem;
-  border-left: 1px solid var(--line);
-}
-
-.researchArcSignals dd {
+.chapterBody p {
   margin: 0;
-  order: -1;
-  color: var(--ink);
-  font-family: "Newsreader", serif;
-  font-size: 1.7rem;
-  line-height: 1;
-}
-
-.researchArcSignals dt,
-.researchArcMetricLabel,
-.researchArcQuestion > p,
-.researchArcWorkstream span {
-  margin: 0.45rem 0 0;
-  color: rgba(23, 25, 24, 0.58);
+  color: rgba(23, 25, 24, 0.82);
   font-family: "Inter", sans-serif;
-  font-size: 0.62rem;
-  font-weight: 650;
-  line-height: 1.45;
-  text-transform: uppercase;
+  font-size: 1.03rem;
+  line-height: 1.8;
 }
 
-.researchArcMetric {
-  margin: 1.6rem -2.2rem 0;
-  padding: 1.25rem 2.2rem 0;
-  border-top: 1px solid var(--line-strong);
+.chapterBody p + p {
+  margin-top: 1.25rem;
 }
 
-.researchArcMetricFlow {
+.chapterBody strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.chapterBody em {
+  font-style: italic;
+}
+
+.chapterLinks {
+  margin-top: 1.8rem;
   display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  color: var(--accent);
-  font-family: "Newsreader", serif;
-  font-size: 2.35rem;
-  line-height: 1;
+  flex-wrap: wrap;
+  gap: 1rem 2.2rem;
 }
 
-.researchArcMetricFlow svg {
-  width: 1rem;
-  flex: 0 0 auto;
-  color: rgba(23, 25, 24, 0.42);
-  stroke-width: 1.5;
-}
-
-.researchArcMetricLabel {
-  color: var(--accent);
-}
-
-.researchArcMetricNote {
-  margin: 0.8rem 0 0;
-  color: var(--ink);
-  font-family: "Inter", sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.62;
-}
-
-.researchArcQuestion {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line-strong);
-}
-
-.researchArcQuestion > p {
-  margin-top: 0;
-  color: var(--accent);
-}
-
-.researchArcQuestion strong {
-  margin-top: 0.45rem;
-  display: block;
-  color: var(--ink);
-  font-family: "Newsreader", serif;
-  font-size: 1.12rem;
-  font-weight: 500;
-  line-height: 1.35;
-}
-
-.researchArcWorkstreams {
-  margin-top: 1.35rem;
-  border-top: 1px solid var(--line);
-}
-
-.researchArcWorkstream {
-  padding: 0.9rem 0;
+.articlePull {
+  display: grid;
+  grid-template-columns: minmax(190px, 230px) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  margin: 0;
+  padding: 3rem 0;
   border-bottom: 1px solid var(--line);
 }
 
-.researchArcWorkstream > div {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.4rem 0.8rem;
-}
-
-.researchArcWorkstream h4 {
+.articlePull p {
+  grid-column: 2;
+  max-width: 840px;
   margin: 0;
   color: var(--ink);
-  font-family: "Inter", sans-serif;
-  font-size: 0.75rem;
-  font-weight: 650;
-  line-height: 1.4;
+  font-family: "Newsreader", serif;
+  font-size: clamp(1.5rem, 2.6vw, 2.05rem);
+  font-weight: 400;
+  line-height: 1.3;
 }
 
-.researchArcWorkstream span {
-  margin: 0;
+.pullAccent {
   color: var(--accent);
-}
-
-.researchArcWorkstream p {
-  margin: 0.45rem 0 0;
-  color: rgba(23, 25, 24, 0.68);
-  font-family: "Inter", sans-serif;
-  font-size: 0.72rem;
-  line-height: 1.6;
-}
-
-.researchArcLink {
-  width: fit-content;
-  margin-top: auto;
-  padding-top: 1.5rem;
 }
 
 .practiceGrid {
@@ -873,7 +745,7 @@
   }
 
   .heroStatement {
-    font-size: 1.65rem;
+    font-size: 1.6rem;
   }
 
   .heroProfile {
@@ -939,28 +811,41 @@
     gap: 0.35rem 0.7rem;
   }
 
-  .researchArcGrid {
+  .chapter,
+  .articlePull {
     grid-template-columns: 1fr;
+    gap: 1.1rem;
+    padding: 2.4rem 0;
   }
 
-  .researchArcItem,
-  .researchArcItem:first-child {
-    padding: 2rem 0;
+  .chapterMeta {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 0.9rem;
   }
 
-  .researchArcItem + .researchArcItem {
-    border-top: 1px solid var(--line);
-    border-left: 0;
+  .chapterIndex {
+    font-size: 1.4rem;
   }
 
-  .researchArcItem:nth-child(2) {
-    margin-inline: -1.25rem;
-    padding-inline: 1.25rem;
+  .chapterLabel,
+  .chapterEra {
+    margin: 0;
   }
 
-  .researchArcMetric {
-    margin-inline: -1.25rem;
-    padding-inline: 1.25rem;
+  .chapterBody {
+    max-width: none;
+  }
+
+  .chapterBody p {
+    font-size: 0.98rem;
+  }
+
+  .articlePull p {
+    grid-column: 1;
+    font-size: 1.3rem;
   }
 
   .practiceItem {
@@ -1045,9 +930,12 @@
     font-size: 2.25rem;
   }
 
-  .researchTeaserTitle,
-  .researchArcTitle {
+  .researchTeaserTitle {
     font-size: 1.5rem;
+  }
+
+  .articlePull p {
+    font-size: 1.2rem;
   }
 }
 
