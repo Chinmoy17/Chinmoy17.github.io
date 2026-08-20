@@ -219,12 +219,11 @@ function ExperienceEntry({ exp, defaultExpanded }) {
 
 function About() {
   const education = resumeData.education;
-  const publication = resumeData.publications[0];
 
   const toc = [
     { id: "experience", label: "Experience"      },
     { id: "education",  label: "Education"       },
-    { id: "research",   label: "Research"        },
+    { id: "beyond",    label: "Beyond Work"     },
     { id: "skills",     label: "Technical Stack" },
     { id: "awards",     label: "Awards"          },
   ];
@@ -248,52 +247,7 @@ function About() {
   }, []);
 
   return (
-    <main className="max-w-container mx-auto px-8 pt-24 pb-16">
-
-      {/* Page Title */}
-      <section className="mb-xl grid grid-cols-1 md:grid-cols-12 gap-x-16 gap-y-8">
-        {/* LEFT — title + pull-quote */}
-        <div className="md:col-span-6">
-          <Reveal>
-            <h1 className="font-newsreader text-h1 text-ink mb-3">About</h1>
-            <p className="font-inter text-label-caps text-on-surface-variant uppercase mb-5 tracking-[0.1em]">
-              Application Developer: AI/ML &middot; B.Sc. CSE, RUET &rsquo;24 &middot; Dhaka, Bangladesh
-            </p>
-            <div className="h-[1px] w-16 bg-ink mb-6"></div>
-            <p className="font-newsreader text-[1.35rem] italic text-ink leading-[1.6]">
-              I started writing code to solve concrete problems. Now I build systems
-              that reason, retrieve, and act &mdash; and I measure whether they actually work.
-            </p>
-          </Reveal>
-        </div>
-
-        {/* RIGHT — bio + key facts */}
-        <div className="md:col-span-6 md:pt-[6.5rem]">
-          <Reveal delay={120}>
-            <p className="font-inter text-[0.95rem] text-on-surface-variant leading-relaxed mb-8">
-              Graduated from RUET with a thesis on brain tumor classification. Published
-              at IEEE QPAN 2025. Currently at Dexian Bangladesh shipping agentic LLM
-              systems for enterprise &mdash; Note2Action, DemoFactory, multi-agent pipelines.
-              Targeting a PhD in NLP or AI systems from Fall 2027, with a focus on
-              evaluation-driven methods and controllable LLM behavior.
-            </p>
-            <div className="grid grid-cols-3 gap-6 border-t border-surface-variant pt-6">
-              <div>
-                <p className="font-newsreader text-[1.8rem] text-ink leading-none mb-1">2+</p>
-                <p className="font-inter text-[0.72rem] text-on-surface-variant leading-snug">Years in production AI</p>
-              </div>
-              <div>
-                <p className="font-newsreader text-[1.8rem] text-ink leading-none mb-1">1</p>
-                <p className="font-inter text-[0.72rem] text-on-surface-variant leading-snug">IEEE publication</p>
-              </div>
-              <div>
-                <p className="font-newsreader text-[1.8rem] text-ink leading-none mb-1">600+</p>
-                <p className="font-inter text-[0.72rem] text-on-surface-variant leading-snug">Users automated</p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+    <main className="max-w-container mx-auto px-8 pt-10 pb-16">
 
       {/* Sidebar + Content Layout */}
       <div className="md:flex md:gap-8">
@@ -333,9 +287,6 @@ function About() {
           <div id="experience">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
-                Professional Tenure
-              </p>
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
@@ -362,9 +313,6 @@ function About() {
           <div id="education">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
-                Academic Record
-              </p>
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
@@ -472,81 +420,62 @@ function About() {
             </section>
           </div>
 
-          {/* ===== RESEARCH ===== */}
-          {publication && (
-            <div id="research">
-              <Reveal>
-                <div className="w-full h-px bg-surface-variant mb-md"></div>
-                <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
-                  Research Output
-                </p>
-              </Reveal>
+          {/* ===== BEYOND THE WORK ===== */}
+          <div id="beyond">
+            <Reveal>
+              <div className="w-full h-px bg-surface-variant mb-md"></div>
+            </Reveal>
 
-              <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
-                <div className="md:col-span-3 sticky top-28 self-start">
-                  <Reveal>
-                    <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
-                      Research
-                    </h2>
-                  </Reveal>
-                </div>
-                <div className="md:col-span-9 space-y-12">
-                  <Reveal delay={100}>
-                    <article>
-                      <h3 className="font-newsreader text-h3 text-ink mb-2">
-                        {publication.title}
-                      </h3>
-                      <p className="font-inter text-body-md text-on-surface-variant">
-                        {publication.venue}, {publication.year} &middot;{" "}
-                        {publication.notes}
-                      </p>
-                      <p className="font-inter text-body-md text-ink/80 mt-3 leading-relaxed">
-                        {publication.summary}
-                      </p>
-                      {publication.scholarProfile && (
-                        <a
-                          href={publication.scholarProfile}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-inter text-body-md text-ink border-b border-ink/40 pb-0.5 hover:border-ink transition-colors no-underline inline-block mt-4"
-                        >
-                          Google Scholar Profile &rarr;
-                        </a>
-                      )}
-                    </article>
-                  </Reveal>
+            <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
+              <div className="md:col-span-3 sticky top-28 self-start">
+                <Reveal>
+                  <h2 className="font-newsreader text-[2.5rem] leading-[1.2] text-ink">
+                    Beyond the Work
+                  </h2>
+                  <p className="font-inter text-[0.9rem] text-on-surface-variant mt-3 leading-relaxed">
+                    The parts of me that don&rsquo;t fit on a r&eacute;sum&eacute; but shape how I work.
+                  </p>
+                </Reveal>
+              </div>
 
-                  <Reveal delay={200}>
-                    <article>
-                      <h3 className="font-newsreader text-h3 text-ink mb-2">
-                        DSPy RAG Optimization: Taming Trial-and-Error in Production Systems
-                      </h3>
-                      <p className="font-inter text-body-md text-on-surface-variant">
-                        Industry Writing, 2024 &middot; Applied AI / Prompt Optimization
-                      </p>
-                      <p className="font-inter text-body-md text-ink/80 mt-3 leading-relaxed">
-                        A collaborative study comparing DSPy's automatic prompt optimization strategies in production RAG systems. Two engineers, different starting conditions, same goal — demonstrating how initial constraints affect whether you gain accuracy or efficiency. Programmatic prompt optimization over manual engineering.
-                      </p>
-                      <a
-                        href="/research/dspy-rag-optimization"
-                        className="font-inter text-body-md text-ink border-b border-ink/40 pb-0.5 hover:border-ink transition-colors no-underline inline-block mt-4"
-                      >
-                        Read Full Research &rarr;
-                      </a>
-                    </article>
-                  </Reveal>
-                </div>
-              </section>
-            </div>
-          )}
+              <div className="md:col-span-9 space-y-10">
+                <Reveal delay={100}>
+                  <article className="border-t border-surface-variant pt-5">
+                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Competitive Programming</p>
+                    <h3 className="font-newsreader text-[1.5rem] text-ink leading-snug mb-2">Fundamentals, kept sharp</h3>
+                    <p className="font-inter text-body-md text-ink/80 leading-relaxed">
+                      Algorithms are how I keep my problem-solving sharp. I&rsquo;ve worked through <span className="text-ink font-medium">350+ problems</span> across LeetCode and Codeforces, and I care most about the theory underneath them &mdash; data structures, algorithms, and clean reasoning, driven by C++.
+                    </p>
+                  </article>
+                </Reveal>
+
+                <Reveal delay={180}>
+                  <article className="border-t border-surface-variant pt-5">
+                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Community &amp; Events</p>
+                    <h3 className="font-newsreader text-[1.5rem] text-ink leading-snug mb-2">Building the room, not just the code</h3>
+                    <p className="font-inter text-body-md text-ink/80 leading-relaxed">
+                      As Joint Secretary of the Rajshahi City Association at RUET (2023&ndash;2024), I helped organize community events &mdash; Pitha festivals, inauguration ceremonies, and farewell programs.
+                    </p>
+                  </article>
+                </Reveal>
+
+                <Reveal delay={260}>
+                  <article className="border-t border-surface-variant pt-5">
+                    <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2">Trekking</p>
+                    <h3 className="font-newsreader text-[1.5rem] text-ink leading-snug mb-2">A mountain guy at heart</h3>
+                    <p className="font-inter text-body-md text-ink/80 leading-relaxed">
+                      When I step away from the screen, I head for the mountains. I&rsquo;ve completed the Annapurna Base Camp trek and explored the trails of Bandarban, Darjeeling, and Sikkim. The climb always resets how I think.
+                    </p>
+                  </article>
+                </Reveal>
+              </div>
+            </section>
+          </div>
 
           {/* ===== TECHNICAL STACK ===== */}
           <div id="skills">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
-                Technical Proficiency
-              </p>
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
@@ -675,9 +604,6 @@ function About() {
           <div id="awards">
             <Reveal>
               <div className="w-full h-px bg-surface-variant mb-md"></div>
-              <p className="font-inter text-label-caps text-on-surface uppercase tracking-[0.1em] mb-lg">
-                Recognition
-              </p>
             </Reveal>
 
             <section className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-xl">
