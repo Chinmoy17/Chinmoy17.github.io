@@ -37,29 +37,50 @@ const researchSummary = [
 
 const researchArc = [
   {
-    period: "2019-2025",
-    domain: "Medical imaging · Scientific NLP",
-    title: "I started by measuring accuracy.",
-    body: "My early work asked whether machine-learning models could extract useful signals from complex datasets, from multiclass brain-tumor MRI classification to large-scale analysis of scientific retractions.",
-    transition: "High benchmark performance was only part of the answer. Noisy labels, incomplete evidence, and deployment constraints began to matter.",
+    period: "2023–2026",
+    focus: "Performance",
+    title: "Can the model learn the signal?",
+    body: "My undergraduate thesis established the starting point: 99.50% accuracy in multiclass brain-tumor MRI classification. PulmoLiteNet then expanded the objective to efficiency, pairing 99.8% accuracy with an approximately 0.49 MB footprint.",
+    signals: [
+      { value: "99.50%", label: "MRI classification accuracy" },
+      { value: "0.49 MB", label: "PulmoLiteNet memory footprint" },
+    ],
   },
   {
-    period: "2025-2026",
-    domain: "Efficient · Robust learning",
-    title: "I began chasing reliability under constraints.",
-    body: "PulmoLiteNet made efficiency part of the research objective. Federated aircraft-engine prognostics added non-IID clients, personalization, adversarial updates, and safety-specific evaluation.",
-    transition: "A model could be accurate and still be too large, insufficiently personalized, or vulnerable under realistic operating conditions.",
+    period: "2025–2026",
+    focus: "Hidden failure",
+    title: "What does clean performance conceal?",
+    body: "In federated aircraft-engine prognostics, a failure-masking sensor-value backdoor left clean performance unchanged while compromising the behavior that mattered. Measuring the attack directly exposed what F1 and RMSE did not.",
+    metric: {
+      before: "94.9%",
+      after: "2.8%",
+      label: "attack success rate",
+      note: "Reduced by a stacked personalized and Byzantine-robust defense, validated over five seeds and harder settings.",
+    },
+    link: "https://arxiv.org/abs/2608.04045",
+    linkLabel: "Read the federated-learning preprint",
+    external: true,
   },
   {
     period: "Current",
-    domain: "LLM evaluation · RAG · Agentic systems",
-    title: "Now I am chasing dependable generative AI.",
-    body: "My current direction asks how generative systems should be evaluated and controlled when quality has several dimensions: correctness, retrieval grounding, robustness, latency, cost, and human oversight.",
-    questions: [
-      "How can evaluation expose failures that aggregate benchmark scores hide?",
-      "How should RAG and agentic systems balance quality, efficiency, and controllability?",
-      "Where should human review remain part of the system rather than an afterthought?",
+    focus: "Evaluation + control",
+    title: "Do improvements survive optimization and transfer?",
+    body: "I now study feedback-driven prompt optimization across MMLU, LegalBench, and GSM8K using controlled comparisons of domains, model families, and optimization methods.",
+    coreQuestion: "When average accuracy rises, which previously correct behaviors break—and do the gains transfer across domains and models?",
+    workstreams: [
+      {
+        label: "Evaluation",
+        status: "In progress",
+        body: "Strict held-out tests, item-level positive and negative flips, and three independent prompt-rewriter seeds.",
+      },
+      {
+        label: "Control",
+        status: "Under review",
+        body: "Trust-Gated Capability Control studies short-lived, revocable capability grants for multi-agent LLM systems.",
+      },
     ],
+    link: "/research/dspy-rag-optimization",
+    linkLabel: "View the preliminary DSPy study",
   },
 ];
 
@@ -143,7 +164,7 @@ function Home() {
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
             <div>
-              <h2 id="publications-heading" className={styles.sectionHeading}>Research Summary</h2>
+              <h2 id="publications-heading" className={styles.sectionHeading}>Publications</h2>
             </div>
           </header>
 
@@ -180,30 +201,82 @@ function Home() {
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
             <div>
-              <h2 id="trajectory-heading" className={styles.sectionHeading}>From accurate models to dependable GenAI.</h2>
+              <h2 id="trajectory-heading" className={styles.sectionHeading}>Research Direction</h2>
+              <p className={styles.sectionLead}>
+                My research has moved from optimizing predictive performance to exposing hidden failures and designing evaluation and control mechanisms around them.
+              </p>
             </div>
           </header>
 
-          <div className={styles.researchArcList}>
+          <div className={styles.researchArcGrid}>
             {researchArc.map((item, index) => (
               <article className={styles.researchArcItem} key={item.title}>
-                <div className={styles.researchArcMeta}>
+                <header className={styles.researchArcMeta}>
                   <span className={styles.researchArcIndex}>{String(index + 1).padStart(2, "0")}</span>
-                  <p>{item.period}</p>
-                  <p>{item.domain}</p>
-                </div>
-                <div className={styles.researchArcContent}>
-                  <h3 className={styles.researchArcTitle}>{item.title}</h3>
-                  <p className={styles.researchArcBody}>{item.body}</p>
-                  {item.transition && (
-                    <p className={styles.researchArcTransition}><strong>What changed:</strong> {item.transition}</p>
-                  )}
-                  {item.questions && (
-                    <ul className={styles.researchArcQuestions}>
-                      {item.questions.map((question) => <li key={question}>{question}</li>)}
-                    </ul>
-                  )}
-                </div>
+                  <div>
+                    <p className={styles.researchArcPeriod}>{item.period}</p>
+                    <p className={styles.researchArcFocus}>{item.focus}</p>
+                  </div>
+                </header>
+
+                <h3 className={styles.researchArcTitle}>{item.title}</h3>
+                <p className={styles.researchArcBody}>{item.body}</p>
+
+                {item.signals && (
+                  <dl className={styles.researchArcSignals}>
+                    {item.signals.map((signal) => (
+                      <div key={signal.label}>
+                        <dt>{signal.label}</dt>
+                        <dd>{signal.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+
+                {item.metric && (
+                  <div className={styles.researchArcMetric} aria-label={`${item.metric.label} reduced from ${item.metric.before} to ${item.metric.after}`}>
+                    <div className={styles.researchArcMetricFlow}>
+                      <span>{item.metric.before}</span>
+                      <FiArrowRight aria-hidden="true" />
+                      <span>{item.metric.after}</span>
+                    </div>
+                    <p className={styles.researchArcMetricLabel}>{item.metric.label}</p>
+                    <p className={styles.researchArcMetricNote}>{item.metric.note}</p>
+                  </div>
+                )}
+
+                {item.coreQuestion && (
+                  <div className={styles.researchArcQuestion}>
+                    <p>Core question</p>
+                    <strong>{item.coreQuestion}</strong>
+                  </div>
+                )}
+
+                {item.workstreams && (
+                  <div className={styles.researchArcWorkstreams}>
+                    {item.workstreams.map((workstream) => (
+                      <div className={styles.researchArcWorkstream} key={workstream.label}>
+                        <div>
+                          <h4>{workstream.label}</h4>
+                          <span>{workstream.status}</span>
+                        </div>
+                        <p>{workstream.body}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {item.link && (
+                  item.external ? (
+                    <a className={`${styles.paperLink} ${styles.researchArcLink}`} href={item.link} target="_blank" rel="noreferrer">
+                      {item.linkLabel} <FiExternalLink aria-hidden="true" />
+                    </a>
+                  ) : (
+                    <Link className={`${styles.inlineLink} ${styles.researchArcLink}`} to={item.link}>
+                      {item.linkLabel} <FiArrowRight aria-hidden="true" />
+                    </Link>
+                  )
+                )}
               </article>
             ))}
           </div>
@@ -218,7 +291,7 @@ function Home() {
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
             <div>
-              <h2 id="practice-heading" className={styles.sectionHeading}>Production work as a pressure test.</h2>
+              <h2 id="practice-heading" className={styles.sectionHeading}>Production Work</h2>
               <p className={styles.sectionLead}>
                 Industry systems are not presented as substitutes for research. They show where evaluation assumptions meet users, privacy boundaries, infrastructure failures, and operational cost.
               </p>
@@ -244,10 +317,13 @@ function Home() {
       <section className={styles.closing} aria-labelledby="closing-heading">
         <div className={styles.inner}>
           <div className={styles.closingGrid}>
-            <div>
+            <div className={styles.closingStatement}>
+              <p className={styles.closingEyebrow}>Research direction · Fall 2027</p>
               <h2 id="closing-heading" className={styles.closingHeading}>
                 Seeking a PhD environment where reliability is part of the research question.
               </h2>
+            </div>
+            <div className={styles.closingDetails}>
               <p className={styles.closingCopy}>
                 For Fall 2027, I am interested in groups working on trustworthy machine learning, robust and personalized federated learning, efficient healthcare AI, and rigorous evaluation of LLM systems. I am also open to research collaboration before the application cycle.
               </p>
@@ -260,6 +336,18 @@ function Home() {
                 </a>
               </div>
             </div>
+          </div>
+
+          <div className={styles.closingEndcap}>
+            <p className={styles.closingIdentity}>
+              <strong>Chinmoy Mitra</strong>
+              <span>AI/ML Application Developer · Dhaka, Bangladesh</span>
+            </p>
+            <nav className={styles.closingLinks} aria-label="Portfolio links">
+              <a href={resumeData.links.github} target="_blank" rel="noreferrer">GitHub</a>
+              <a href={resumeData.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href={`mailto:${resumeData.links.email}`}>Email</a>
+            </nav>
           </div>
         </div>
       </section>
