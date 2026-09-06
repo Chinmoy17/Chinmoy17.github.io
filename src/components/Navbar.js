@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { MdDarkMode } from "react-icons/md";
+import { FiGithub, FiLinkedin } from "react-icons/fi";
+import { SiGooglescholar } from "react-icons/si";
+import resumeData from "../data/resume.json";
+
+const scholarUrl = "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ";
 
 function NavBar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -12,6 +16,12 @@ function NavBar() {
     { label: "Research", path: "/research" },
     { label: "Projects", path: "/project" },
     { label: "Contact", path: "/contact" },
+  ];
+
+  const socials = [
+    { label: "Google Scholar", url: scholarUrl, Icon: SiGooglescholar, hoverClass: "hover:text-[#4285F4]" },
+    { label: "GitHub", url: resumeData.links.github, Icon: FiGithub, hoverClass: "hover:text-[#181717]" },
+    { label: "LinkedIn", url: resumeData.links.linkedin, Icon: FiLinkedin, hoverClass: "hover:text-[#0A66C2]" },
   ];
 
   const isActive = (path) => {
@@ -47,14 +57,25 @@ function NavBar() {
           ))}
         </div>
 
-        {/* Right: Dark mode toggle */}
+        {/* Right: socials + dark mode toggle */}
         <div className="flex items-center gap-4">
-          <button
-            className="text-on-surface hover:text-on-surface-variant transition-colors duration-200"
-            aria-label="Toggle dark mode"
-          >
-            <MdDarkMode size={22} />
-          </button>
+          <div className="hidden md:flex items-center gap-4">
+            {socials.map(({ label, url, Icon, hoverClass }) => (
+              <a
+                key={label}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={`group relative text-on-surface-variant ${hoverClass} transition-colors duration-200`}
+              >
+                <Icon size={18} />
+                <span className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-2 whitespace-nowrap rounded-sm bg-ink text-on-ink font-inter text-[0.62rem] uppercase tracking-[0.08em] px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-150 z-50">
+                  {label}
+                </span>
+              </a>
+            ))}
+          </div>
 
           {/* Mobile hamburger */}
           <button
@@ -98,6 +119,20 @@ function NavBar() {
               >
                 {link.label}
               </Link>
+            ))}
+          </div>
+          <div className="flex items-center gap-5 mt-6 pt-6 border-t border-surface-variant">
+            {socials.map(({ label, url, Icon, hoverClass }) => (
+              <a
+                key={label}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className={`text-on-surface-variant ${hoverClass} transition-colors duration-200`}
+              >
+                <Icon size={20} />
+              </a>
             ))}
           </div>
         </div>

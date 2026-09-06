@@ -1,9 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import resumeData from "../../data/resume.json";
 import { Reveal } from "../utils/Reveal";
 
 function Projects() {
+  const navigate = useNavigate();
   const allProjects = Array.isArray(resumeData.projects)
     ? resumeData.projects.filter((p) => (p.category || "project") === "project")
     : [];
@@ -45,10 +46,15 @@ function Projects() {
         {featured.map((p, i) => {
           const isPrivate = p.visibility && p.visibility !== "public";
           const caseStudyLink = p.slug ? `/project/${p.slug}` : "/project";
+          const externalUrl = p.noCaseStudy && p.links?.demo ? p.links.demo : null;
+          const openCard = () =>
+            externalUrl
+              ? window.open(externalUrl, "_blank", "noopener,noreferrer")
+              : navigate(caseStudyLink);
 
           return (
             <Reveal key={p.id} delay={i * 80}>
-              <article className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-10 group">
+              <article onClick={openCard} className="relative grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-10 group cursor-pointer transition-all duration-300 ease-out hover:scale-[1.01] hover:bg-surface-container-low/50">
 
                 {/* Index */}
                 <div className="md:col-span-1">
@@ -58,7 +64,7 @@ function Projects() {
                 </div>
 
                 {/* Content */}
-                <div className="md:col-span-8">
+                <div className="md:col-span-11">
                   {/* Meta row */}
                   <div className="flex flex-wrap items-center gap-3 mb-3">
                     {p.tier && (
@@ -72,9 +78,27 @@ function Projects() {
                     </span>
                   </div>
 
-                  {/* Title */}
-                  <h2 className="font-newsreader text-h3 text-ink mb-3 group-hover:opacity-80 transition-opacity">
-                    {p.title}
+                  {/* Title — stretched link makes the whole card clickable */}
+                  <h2 className="font-newsreader text-h3 text-ink mb-3 leading-snug">
+                    {externalUrl ? (
+                      <a
+                        href={externalUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-ink no-underline transition-opacity group-hover:opacity-80 after:absolute after:inset-0 after:content-['']"
+                      >
+                        {p.title}
+                        <span className="text-on-surface-variant/50 transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={caseStudyLink}
+                        className="inline-flex items-center gap-2 text-ink no-underline transition-opacity group-hover:opacity-80 after:absolute after:inset-0 after:content-['']"
+                      >
+                        {p.title}
+                        <span className="text-on-surface-variant/50 transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                      </Link>
+                    )}
                   </h2>
 
                   {/* Stack */}
@@ -86,25 +110,31 @@ function Projects() {
                   <p className="font-inter text-body-md text-on-surface-variant leading-relaxed">
                     {p.summary}
                   </p>
-                </div>
 
-                {/* Links */}
-                <div className="md:col-span-3 flex flex-col justify-start items-start md:items-end gap-3 pt-1">
-                  <Link
-                    to={caseStudyLink}
-                    className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                  >
-                    Read Case Study &rarr;
-                  </Link>
-                  {!isPrivate && p.links?.repo && (
-                    <a
-                      href={p.links.repo}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
-                    >
-                      GitHub &rarr;
-                    </a>
+                  {/* External actions — left aligned, above the stretched overlay */}
+                  {((p.links?.demo && !externalUrl) || (!isPrivate && p.links?.repo)) && (
+                    <div onClick={(e) => e.stopPropagation()} className="relative z-10 mt-5 flex flex-wrap items-center gap-5">
+                      {p.links?.demo && !externalUrl && (
+                        <a
+                          href={p.links.demo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-inter text-[0.8rem] font-medium text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
+                        >
+                          View Live App &rarr;
+                        </a>
+                      )}
+                      {!isPrivate && p.links?.repo && (
+                        <a
+                          href={p.links.repo}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
+                        >
+                          GitHub &rarr;
+                        </a>
+                      )}
+                    </div>
                   )}
                 </div>
 
@@ -130,7 +160,7 @@ function Projects() {
 
               return (
                 <Reveal key={p.id} delay={i * 80}>
-                  <article className="grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-8 group">
+                  <article onClick={() => navigate(caseStudyLink)} className="relative grid grid-cols-1 md:grid-cols-12 gap-6 border-b border-surface-variant py-8 group cursor-pointer transition-all duration-300 ease-out hover:scale-[1.01] hover:bg-surface-container-low/50">
 
                     {/* Index */}
                     <div className="md:col-span-1">
@@ -140,7 +170,7 @@ function Projects() {
                     </div>
 
                     {/* Content */}
-                    <div className="md:col-span-8">
+                    <div className="md:col-span-11">
                       <div className="flex flex-wrap items-center gap-3 mb-3">
                         {p.tier && (
                           <span className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em]">
@@ -153,8 +183,14 @@ function Projects() {
                         </span>
                       </div>
 
-                      <h2 className="font-newsreader text-[1.5rem] leading-snug text-ink mb-3 group-hover:opacity-80 transition-opacity">
-                        {p.title}
+                      <h2 className="font-newsreader text-[1.5rem] leading-snug text-ink mb-3">
+                        <Link
+                          to={caseStudyLink}
+                          className="inline-flex items-center gap-2 text-ink no-underline transition-opacity group-hover:opacity-80 after:absolute after:inset-0 after:content-['']"
+                        >
+                          {p.title}
+                          <span className="text-on-surface-variant/50 transition-transform group-hover:translate-x-1" aria-hidden="true">&rarr;</span>
+                        </Link>
                       </h2>
 
                       <p className="font-inter text-[0.8rem] text-on-surface-variant/70 mb-3 leading-relaxed">
@@ -164,25 +200,18 @@ function Projects() {
                       <p className="font-inter text-body-md text-on-surface-variant leading-relaxed">
                         {p.summary}
                       </p>
-                    </div>
 
-                    {/* Links */}
-                    <div className="md:col-span-3 flex flex-col justify-start items-start md:items-end gap-3 pt-1">
-                      <Link
-                        to={caseStudyLink}
-                        className="font-inter text-[0.8rem] text-ink border-b border-ink/40 pb-px hover:border-ink transition-colors no-underline"
-                      >
-                        Read Case Study &rarr;
-                      </Link>
                       {!isPrivate && p.links?.repo && (
-                        <a
-                          href={p.links.repo}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
-                        >
-                          GitHub &rarr;
-                        </a>
+                        <div onClick={(e) => e.stopPropagation()} className="relative z-10 mt-4 flex flex-wrap items-center gap-5">
+                          <a
+                            href={p.links.repo}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-inter text-[0.8rem] text-on-surface-variant border-b border-surface-variant pb-px hover:text-ink hover:border-ink transition-colors no-underline"
+                          >
+                            GitHub &rarr;
+                          </a>
+                        </div>
                       )}
                     </div>
 

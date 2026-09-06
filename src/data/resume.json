@@ -196,6 +196,37 @@
   ],
   "projects": [
     {
+      "id": "note2action",
+      "slug": "note2action",
+      "visibility": "private",
+      "category": "project",
+      "featured": true,
+      "title": "Note2Action — AI-Powered Task Prediction System",
+      "stack": [
+        "Python",
+        "Machine Learning",
+        "NLP",
+        "FastAPI"
+      ],
+      "summary": "Analyzes weekly notes from 600+ Account Managers to predict next actions, reducing manual workload and minimizing missed tasks.",
+      "links": {},
+      "caseStudy": {
+        "problem": "Account Managers log weekly notes, but next actions are often missed or manually tracked across tools.",
+        "methods": [
+          "Defined a task taxonomy and labeling workflow for historical notes.",
+          "Built an ML/NLP pipeline to infer likely next actions from free-form text.",
+          "Integrated predictions into an internal workflow to support day-to-day execution."
+        ],
+        "results": [
+          "Improved action follow-through by making next steps visible and structured.",
+          "Reduced manual effort for action planning and triage."
+        ],
+        "constraints": [
+          "Internal system (SSO). Code and product access are private."
+        ]
+      }
+    },
+    {
       "id": "rfp-platform",
       "slug": "rfp-platform",
       "visibility": "private",
@@ -467,65 +498,52 @@
       "tier": "Learning Project"
     },
     {
-      "id": "note2action",
-      "slug": "note2action",
-      "visibility": "private",
+      "id": "cashcompass",
+      "slug": "cashcompass",
+      "visibility": "public",
       "category": "project",
       "featured": true,
-      "title": "Note2Action — AI-Powered Task Prediction System",
+      "noCaseStudy": true,
+      "title": "CashCompass — Agent Liquidity Forecasting for Mobile Money",
+      "tier": "Fintech · ML",
       "stack": [
         "Python",
-        "Machine Learning",
-        "NLP",
-        "FastAPI"
+        "LightGBM",
+        "Federated Learning (Flower)",
+        "FastAPI",
+        "React 18 + Vite",
+        "Azure Container Apps"
       ],
-      "summary": "Analyzes weekly notes from 600+ Account Managers to predict next actions, reducing manual workload and minimizing missed tasks.",
-      "links": {},
+      "summary": "Agent-liquidity forecasting for mobile-money networks: gradient-boosted quantile demand forecasts and stockout-risk scoring that tell each agent how much cash and e-float to hold against calendar peaks. Live agent app; federated learning prototyped as the privacy path.",
+      "links": {
+        "demo": "https://cashcompass-ebacgwdcb5cba9b8.canadacentral-01.azurewebsites.net/agent"
+      },
       "caseStudy": {
-        "problem": "Account Managers log weekly notes, but next actions are often missed or manually tracked across tools.",
+        "tldr": [
+          "Two LightGBM models on tabular agent-day data: a quantile demand forecaster (P10–P90) and a class-weighted stockout-risk classifier.",
+          "Turns forecasts into a net cash / e-float top-up per agent, sized against the P90 of a peak day.",
+          "Data is synthetic-but-calibrated to Bangladesh Bank MFS figures today; federated learning is prototyped as the privacy path, not production."
+        ],
+        "atAGlance": {
+          "scope": "A trained, measured, gradient-boosted liquidity system for mobile-money agents — demand forecasts, stockout-risk scores, and a net top-up recommendation, served to a live agent app."
+        },
+        "problem": "Mobile-money agents run dry of cash or e-float on roughly 1 in 8 days in simulation, losing transactions and customer trust. They have no forward view of how much liquidity to hold against calendar peaks such as Eid, salary windows, and harvest seasons.",
         "methods": [
-          "Defined a task taxonomy and labeling workflow for historical notes.",
-          "Built an ML/NLP pipeline to infer likely next actions from free-form text.",
-          "Integrated predictions into an internal workflow to support day-to-day execution."
+          "Engineered 32 features across calendar, agent/location, recent lags, and inventory-balance signals over ~289k agent-days.",
+          "Trained per-quantile LightGBM demand forecasters (P10/P25/P50/P75/P90) on log cash-out, plus a class-weighted stockout-risk classifier.",
+          "Validated with a strict temporal 70/15/15 split and per-agent lags to prevent leakage across the cutoff.",
+          "Prototyped a FedRep federated model (8 district clients, robust aggregation) and benchmarked it against FedAvg and centralized LightGBM."
         ],
         "results": [
-          "Improved action follow-through by making next steps visible and structured.",
-          "Reduced manual effort for action planning and triage."
+          "Demand MAE ≈ ৳14,138 — about 10% of a high-volume agent's daily cash-out.",
+          "Well-calibrated intervals: P10–P90 coverage 79.5% against an 80% target.",
+          "Stockout-risk ROC-AUC 0.746 and PR-AUC 0.370 vs a 13.2% base rate (~2.8× lift), tuned recall-leaning to catch shortfalls.",
+          "Centralized LightGBM beat the federated prototypes on accuracy, so it anchors the MVP while FL remains the privacy roadmap."
         ],
         "constraints": [
-          "Internal system (SSO). Code and product access are private."
-        ]
-      }
-    },
-    {
-      "id": "demofactory",
-      "slug": "demofactory-dspy",
-      "visibility": "private",
-      "category": "project",
-      "featured": true,
-      "title": "DemoFactory — AI-driven App Generator",
-      "stack": [
-        "RAG",
-        "LangChain",
-        "Python",
-        "Prompt Engineering",
-        "Deployment"
-      ],
-      "summary": "Generates customizable applications (e.g., RAG systems, summarizers) directly from user queries; dynamic module generation and automated deployment for instant demos.",
-      "links": {},
-      "caseStudy": {
-        "problem": "Internal teams needed a fast way to generate, customize, and deploy demo-grade apps from natural language requests.",
-        "methods": [
-          "Designed a prompt-to-app workflow that maps user intent to app templates/modules.",
-          "Implemented evaluation-driven iteration for prompt strategies and LLM behaviors.",
-          "Automated packaging and deployment steps to shorten time-to-demo."
-        ],
-        "results": [
-          "Reduced friction to prototype and share demo experiences across teams.",
-          "Enabled consistent quality via evaluation and regression checks."
-        ],
-        "constraints": [
-          "Internal system (SSO). Code and deployments are private."
+          "Data is synthetic, calibrated to published Bangladesh Bank MFS aggregates — the pipeline retrains unchanged on real aggregate data.",
+          "Federated learning is prototyped and centralized in the MVP; DSO route optimization is designed, not built.",
+          "Metrics are measured on the synthetic test window and would be recalibrated on real data before being quoted as production results."
         ]
       }
     },
@@ -713,8 +731,8 @@
       ],
       "venue": "Engineering Applications of Artificial Intelligence (Elsevier)",
       "year": 2026,
-      "status": "Submitted",
-      "notes": "arXiv preprint · Manuscript submitted to EAAI",
+      "status": "Under review",
+      "notes": "arXiv preprint · Under review at EAAI (Elsevier)",
       "summary": "A controlled safety-oriented study of personalized and robust federated learning for aircraft-engine remaining-useful-life prediction under non-IID operating conditions and poisoned client updates.",
       "metrics": [
         "70% of the local-to-centralized RMSE gap closed",
@@ -726,10 +744,10 @@
     },
     {
       "title": "Trust-Gated Capability Control: Breaking the Trust-Vulnerability Paradox in Multi-Agent LLM Systems",
-      "venue": "iCONNECT",
+      "venue": "IEEE iCONNECT",
       "year": 2026,
-      "status": "Under review",
-      "notes": "Under review at iCONNECT 2026",
+      "status": "Accepted",
+      "notes": "Accepted at IEEE iCONNECT 2026",
       "summary": "A security framework for multi-agent LLM collectives: an operational five-layer trust stack and a cross-layer synergy operator that maps composite trust into short-lived, revocable capability grants, so stealthy compromised agents cannot escalate privileges.",
       "metrics": [
         "Operational five-layer trust stack",
@@ -737,6 +755,35 @@
         "Automatic revocation on compromise"
       ],
       "link": null
+    },
+    {
+      "title": "Ben-Misandry: Closing the Bidirectional Gap in Bengali Gender Hate Detection through Transformer Late Fusion",
+      "venue": "IEEE COMPAS",
+      "year": 2026,
+      "status": "Accepted",
+      "notes": "Accepted at IEEE COMPAS 2026",
+      "summary": "Introduces the first 5,000-comment Bengali dataset for anti-male hate speech with a novel 6-class taxonomy, and a late-fusion framework averaging BanglaBERT and XLM-RoBERTa predictions.",
+      "metrics": [
+        "96.6% classification accuracy",
+        "First 5,000-comment Bengali anti-male hate speech dataset",
+        "Outperforms standard early-fusion baselines"
+      ],
+      "link": null
+    },
+    {
+      "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
+      "venue": "IEEE QPAN",
+      "year": 2025,
+      "status": "Published",
+      "notes": "IEEE QPAN 2025 · Undergraduate thesis",
+      "summary": "ResNet50 transfer learning model for multiclass MRI brain tumor classification; ~99.50% accuracy and reduced training time.",
+      "metrics": [
+        "Approximately 99.50% test accuracy",
+        "Four-class MRI classification",
+        "Transfer learning and ensemble methods"
+      ],
+      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C",
+      "scholarProfile": "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ"
     },
     {
       "title": "PulmoLiteNet: A Memory-Efficient Lightweight Convolutional Network for Accurate Lung Cancer Histopathology Classification on Edge Device",
@@ -753,19 +800,18 @@
       "link": null
     },
     {
-      "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
-      "venue": "IEEE QPAIN",
-      "year": 2025,
-      "status": "Published",
-      "notes": "IEEE QPAIN 2025 · Undergraduate thesis",
-      "summary": "ResNet50 transfer learning model for multiclass MRI brain tumor classification; ~99.50% accuracy and reduced training time.",
+      "title": "SpinoFuseNet: A Parameter-Efficient Feature-Fusion Ensemble with Dual Attention Gating for Lumbar Spine Degenerative Severity Classification",
+      "venue": "IEEE COMPAS",
+      "year": 2026,
+      "status": "Accepted",
+      "notes": "Accepted at IEEE COMPAS 2026",
+      "summary": "A dual-attention early-fusion ensemble combining EfficientNetV2-S and VGG16 for lumbar spine degenerative severity classification, balancing accuracy against parameter cost.",
       "metrics": [
-        "Approximately 99.50% test accuracy",
-        "Four-class MRI classification",
-        "Transfer learning and ensemble methods"
+        "82.62% validation accuracy on LumbarDISC",
+        "5.8x fewer trainable parameters than compared baselines",
+        "Dual attention gating for early feature fusion"
       ],
-      "link": "https://scholar.google.com/citations?view_op=view_citation&hl=en&user=kUignlYAAAAJ&citation_for_view=kUignlYAAAAJ:u5HHmVD_uO8C",
-      "scholarProfile": "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ"
+      "link": null
     }
   ],
   "references": [

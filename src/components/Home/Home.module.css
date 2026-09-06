@@ -1,13 +1,13 @@
 .page {
   --ink: #171918;
-  --paper: #fcf9f4;
+  --paper: #fdfbf8;
   --paper-muted: #f2ede5;
   --white: #ffffff;
   --accent: #315b70;
   --line: rgba(23, 25, 24, 0.16);
   --line-strong: rgba(23, 25, 24, 0.42);
   color: var(--ink);
-  background: var(--paper);
+  background: var(--white);
   overflow-x: clip;
 }
 
@@ -18,8 +18,7 @@
 
 .hero {
   padding: 3rem 0 4rem;
-  background: var(--paper);
-  border-bottom: 1px solid var(--line);
+  background: var(--white);
 }
 
 .heroLayout {
@@ -203,27 +202,20 @@
 
 .section {
   padding: 5.8rem 0;
-  background: var(--paper);
+  background: var(--white);
   scroll-margin-top: 5rem;
 }
 
 .sectionPublications {
-  background: var(--paper-muted);
-}
-
-.sectionTrajectory {
   background: var(--paper);
 }
 
-.sectionPractice {
-  background: var(--paper-muted);
+.sectionTrajectory {
+  background: var(--white);
 }
 
-.sectionPublications,
-.sectionTrajectory,
 .sectionPractice {
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  background: var(--paper);
 }
 
 .sectionIntro {
@@ -544,7 +536,7 @@
 .closing {
   padding: 6rem 0 0;
   color: var(--ink);
-  background: var(--paper);
+  background: var(--white);
 }
 
 .closingGrid {

@@ -138,6 +138,14 @@ function GenericProjectDetail({ slug }) {
 
           <p className="project-hero-summary">{project.summary}</p>
 
+          {!isPrivate && project.links?.demo ? (
+            <p className="project-hero-actions">
+              <a className="home-cta home-cta-primary" href={project.links.demo} target="_blank" rel="noreferrer">
+                Open the live app →
+              </a>
+            </p>
+          ) : null}
+
           {heroSrc ? (
             <figure className="project-hero-figure">
               <img className="project-hero-img" src={heroSrc} alt={heroAlt} loading="lazy" />
