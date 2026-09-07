@@ -62,9 +62,9 @@ function Research() {
       <section className="mb-10">
         {pubs.map((pub, i) => (
           <Reveal key={i} delay={i * 40}>
-            <article className="flex flex-col gap-2.5 py-3.5 border-b border-surface-variant">
+            <article className="flex items-start justify-between gap-4 py-3.5 border-b border-surface-variant">
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 min-w-0 flex-1">
                 {/* Index */}
                 <span className="font-inter text-[0.8rem] text-on-surface-variant/40 tabular-nums w-6 shrink-0 pt-0.5">
                   {String(i + 1).padStart(2, "0")}
@@ -95,9 +95,9 @@ function Research() {
                 </div>
               </div>
 
-              {/* Actions — lower-left, under the index column */}
-              <div className="flex items-center gap-2 pl-9">
-                {pub.link && (
+              {/* Actions — right side of the row */}
+              <div className="flex items-center gap-2 shrink-0 pt-0.5">
+                {pub.link ? (
                   <a
                     href={pub.link}
                     target="_blank"
@@ -106,6 +106,10 @@ function Research() {
                   >
                     <FiExternalLink size={11} aria-hidden="true" /> Paper
                   </a>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 font-inter text-[0.7rem] font-medium text-on-surface-variant/60 border border-surface-variant px-2.5 py-1 cursor-default">
+                    Will be available soon
+                  </span>
                 )}
                 {pub.scholarProfile && (
                   <a
@@ -136,9 +140,9 @@ function Research() {
       <section className="mb-10">
         {researchProjects.map((p, i) => (
           <Reveal key={p.id} delay={i * 40}>
-            <article className="flex flex-col gap-2.5 py-3.5 border-b border-surface-variant group">
+            <article className="flex items-start justify-between gap-4 py-3.5 border-b border-surface-variant group">
 
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 min-w-0 flex-1">
                 {/* Index */}
                 <span className="font-inter text-[0.8rem] text-on-surface-variant/40 tabular-nums w-6 shrink-0 pt-0.5">
                   {String(i + 1).padStart(2, "0")}
@@ -172,15 +176,19 @@ function Research() {
                 </div>
               </div>
 
-              {/* Actions — lower-left, under the index column */}
-              <div className="flex items-center gap-2 pl-9">
-                {p.slug && (
+              {/* Actions — right side of the row */}
+              <div className="flex items-center gap-2 shrink-0 pt-0.5">
+                {p.slug ? (
                   <Link
                     to={`/research/${p.slug}`}
                     className="inline-flex items-center gap-1.5 font-inter text-[0.7rem] font-medium text-surface bg-ink border border-ink px-2.5 py-1 hover:bg-surface hover:text-ink transition-colors duration-150 no-underline"
                   >
                     Read Paper <FiArrowRight size={11} aria-hidden="true" />
                   </Link>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5 font-inter text-[0.7rem] font-medium text-on-surface-variant/60 border border-surface-variant px-2.5 py-1 cursor-default">
+                    Will be available soon
+                  </span>
                 )}
                 {p.visibility === "public" && p.links?.repo && (
                   <a

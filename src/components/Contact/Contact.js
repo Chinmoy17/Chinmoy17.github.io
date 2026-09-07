@@ -86,7 +86,7 @@ function ContactForm({ links }) {
           required
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
-          className="w-full bg-surface-container-low border border-surface-variant focus:border-ink outline-none font-inter text-[0.95rem] text-ink px-3 py-2.5 transition-colors placeholder:text-on-surface-variant/30"
+          className="w-full bg-surface-container-low border border-ink/20 focus:border-ink focus:ring-1 focus:ring-ink/10 outline-none font-inter text-[0.95rem] text-ink px-3 py-2.5 shadow-sm transition-colors placeholder:text-on-surface-variant/50"
           placeholder="Your name"
         />
       </div>
@@ -99,7 +99,7 @@ function ContactForm({ links }) {
           required
           value={form.email}
           onChange={(e) => setForm({ ...form, email: e.target.value })}
-          className="w-full bg-surface-container-low border border-surface-variant focus:border-ink outline-none font-inter text-[0.95rem] text-ink px-3 py-2.5 transition-colors placeholder:text-on-surface-variant/30"
+          className="w-full bg-surface-container-low border border-ink/20 focus:border-ink focus:ring-1 focus:ring-ink/10 outline-none font-inter text-[0.95rem] text-ink px-3 py-2.5 shadow-sm transition-colors placeholder:text-on-surface-variant/50"
           placeholder="you@example.com"
         />
       </div>
@@ -112,7 +112,7 @@ function ContactForm({ links }) {
           rows={5}
           value={form.message}
           onChange={(e) => setForm({ ...form, message: e.target.value })}
-          className="w-full bg-transparent border-b-2 border-surface-variant focus:border-ink outline-none font-inter text-[0.95rem] text-ink py-2.5 transition-colors resize-none placeholder:text-on-surface-variant/30"
+          className="w-full bg-surface-container-low border border-ink/20 focus:border-ink focus:ring-1 focus:ring-ink/10 outline-none font-inter text-[0.95rem] text-ink px-3 py-2.5 shadow-sm transition-colors resize-none placeholder:text-on-surface-variant/50"
           placeholder="What is on your mind?"
         />
       </div>
