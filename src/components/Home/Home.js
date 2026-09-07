@@ -19,10 +19,10 @@ const researchSummary = [
   },
   {
     status: "Accepted",
-    venue: "IEEE BECITHCON 2026",
-    question: "How small can a diagnostic model become without giving up accuracy?",
-    title: "PulmoLiteNet: Lightweight Lung Cancer Histopathology Classification",
-    signal: "PulmoLiteNet reached 99.8% test accuracy on LC25000 with an approximately 0.49 MB memory footprint.",
+    venue: "IEEE iCONNECT 2026",
+    question: "How do you stop a compromised AI agent from escalating its own privileges?",
+    title: "Trust-Gated Capability Control: Breaking the Trust-Vulnerability Paradox in Multi-Agent LLM Systems",
+    signal: "A five-layer trust stack maps composite trust into short-lived, revocable capability grants — automatically revoked on compromise.",
   },
   {
     status: "Published",

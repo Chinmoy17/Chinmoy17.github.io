@@ -34,21 +34,21 @@ function Research() {
             <Reveal delay={200}>
               <div className="h-[1px] w-16 bg-ink mb-4"></div>
               <p className="font-inter text-body-lg text-on-surface-variant max-w-xl">
-                Where academic rigour meets production constraints &mdash; I study how learning systems fail when accuracy alone looks fine, and how to evaluate, harden, and control them.
+                Hey there! I've doing independent and collaborative research in AI, LLMs and Deep Learning. I do have some idea that needs some budget regarding personalization in AI Coding. If you are interested please feel free to connect. Here are a few examples of my work:
               </p>
             </Reveal>
           </div>
 
-          {/* Focus areas — right column, compact tag row */}
-          <Reveal delay={300} className="md:col-span-5">
+          {/* Focus areas — right column, compact bullet list */}
+          <Reveal delay={300} className="md:col-span-5 md:pl-16">
             <p className="font-inter text-label-caps text-on-surface-variant uppercase tracking-[0.1em] mb-2.5">
-              Focus Areas
+              Current Focus
             </p>
-            <div className="flex flex-wrap gap-2">
-              <span className="font-inter text-[0.78rem] text-ink border border-ink/25 px-2.5 py-1">Failure-aware LLM evaluation</span>
-              <span className="font-inter text-[0.78rem] text-ink border border-ink/25 px-2.5 py-1">Robust & efficient learning</span>
-              <span className="font-inter text-[0.78rem] text-ink border border-ink/25 px-2.5 py-1">Multi-agent LLM control</span>
-            </div>
+            <ul className="list-disc pl-4 -ml-4 space-y-1.5 marker:text-on-surface-variant/50">
+              <li className="font-inter text-[0.85rem] text-ink">Failure-aware LLM evaluation</li>
+              <li className="font-inter text-[0.85rem] text-ink">Robust & efficient learning</li>
+              <li className="font-inter text-[0.85rem] text-ink">Multi-agent LLM control</li>
+            </ul>
           </Reveal>
         </div>
       </section>
