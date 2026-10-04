@@ -10,6 +10,7 @@ const RFPPlatformProject = lazy(() => import("./projects/RFPPlatform"));
 const AgentFlowProject = lazy(() => import("./projects/AgentFlow"));
 const PDFAlapProject = lazy(() => import("./projects/PDFAlap"));
 const Note2ActionProject = lazy(() => import("./projects/Note2Action"));
+const UICraftMCPProject = lazy(() => import("./projects/UICraftMCP"));
 
 /**
  * Registry mapping slug → lazy component
@@ -20,6 +21,7 @@ const projectRegistry = {
   agentflow: AgentFlowProject,
   "multilingual-pdf-chatbot-rag": PDFAlapProject,
   note2action: Note2ActionProject,
+  "ui-craft-mcp": UICraftMCPProject,
   // "blog-generator-llms": lazy(() => import("./projects/BlogGenerator")),
   // Add more as needed...
 };

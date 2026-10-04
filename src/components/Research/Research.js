@@ -34,7 +34,7 @@ function Research() {
             <Reveal delay={200}>
               <div className="h-[1px] w-16 bg-ink mb-4"></div>
               <p className="font-inter text-body-lg text-on-surface-variant max-w-xl">
-                Hey there! I've doing independent and collaborative research in AI, LLMs and Deep Learning. I do have some idea that needs some budget regarding personalization in AI Coding. If you are interested please feel free to connect. Here are a few examples of my work:
+                Hey there! I've doing independent and collaborative research in AI, LLM and Multiagent Systems. I'm mostly focused on Multiagent system security and privacy at this moment. If you are interested in collaborating please feel free to connect! 
               </p>
             </Reveal>
           </div>

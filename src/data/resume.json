@@ -227,6 +227,41 @@
       }
     },
     {
+      "id": "ui-craft-mcp",
+      "slug": "ui-craft-mcp",
+      "visibility": "public",
+      "category": "project",
+      "featured": true,
+      "title": "UI Craft — A Psychology-Backed Design Brain for Coding Agents",
+      "stack": [
+        "TypeScript",
+        "Model Context Protocol",
+        "Node.js",
+        "npm"
+      ],
+      "summary": "An open-source MCP server that plugs into GitHub Copilot, Claude Code, and Cursor — swapping 'make it look better' for a structured design brief grounded in layout, typography, color, and research-backed psychology principles.",
+      "links": {
+        "repo": "https://github.com/Chinmoy17/UI-Craft-MCP",
+        "demo": "https://www.npmjs.com/package/@chinmoy_mitra/ui-craft"
+      },
+      "caseStudy": {
+        "problem": "skill.md rules files are a context-window tax on every turn, don't adapt to page type, and evaporate mid-session — agents default to vibes instead of a reasoned design brief.",
+        "methods": [
+          "Built 7 MCP tools (run_session, design_page, start_session, context + state + usage tools) around a domain-gated JSON knowledge base.",
+          "Indexed 16 psychology principles across 5 domains (psychology, typography, color, layout, brand) with inverted indexes for fast ranking.",
+          "Designed a three-state singleton KB cache and progressive session mode to minimize repeated token cost across a session.",
+          "Shipped CI/CD auto-publish to npm on push to main, with fully local-first, opt-in-telemetry storage under .vscode/ui-assistant/."
+        ],
+        "results": [
+          "Agents get a structured layout/typography/color/principles/checklist brief instead of a vague restyle.",
+          "Zero cloud sync and no PII by design — all session/project state lives in the user's workspace."
+        ],
+        "constraints": [
+          "Open source (Apache 2.0) — code, npm package, and docs are all public."
+        ]
+      }
+    },
+    {
       "id": "rfp-platform",
       "slug": "rfp-platform",
       "visibility": "private",
