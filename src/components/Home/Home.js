@@ -68,7 +68,7 @@ function Home() {
             <div className={styles.heroContent}>
               <h1 id="home-title" className={styles.heroTitle}>Chinmoy Mitra</h1>
               <p className={styles.heroStatement}>
-                I&rsquo;m an AI Engineer at ByteMethod AI, a Dexian company, building evaluation-driven LLM and agentic systems. Alongside that, I research how learning systems stay reliable when data, users, and conditions keep shifting.
+                I&rsquo;m an AI Engineer at ByteMethod AI(a Dexian Company) building evaluation-driven LLM and agentic systems. Alongside that, I research how learning systems stay reliable when data, users, and conditions keep shifting.
               </p>
               <p className={styles.heroStatus}>Preparing for Fall 2027 PhD applications</p>
 
