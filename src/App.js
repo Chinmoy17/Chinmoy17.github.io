@@ -3,6 +3,7 @@ import Preloader from "../src/components/Pre";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
 import ScrollToTop from "./components/ScrollToTop";
+import Analytics from "./components/Analytics";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./style.css";
 import "./App.css";
@@ -39,6 +40,7 @@ function App() {
       <div className="App" id={load ? "no-scroll" : "scroll"}>
         <Navbar />
         <ScrollToTop />
+        <Analytics />
         <Suspense fallback={<div style={{ minHeight: "60vh" }} />}>
           <Routes>
             <Route path="/" element={<Home />} />
