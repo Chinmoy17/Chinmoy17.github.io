@@ -4,6 +4,7 @@ import { FiGithub, FiLinkedin } from "react-icons/fi";
 import { SiGooglescholar } from "react-icons/si";
 import resumeData from "../data/resume.json";
 
+const cvUrl = `${process.env.PUBLIC_URL || ""}/assets/Chinmoy_Mitra_CV.pdf`;
 const scholarUrl = "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ";
 
 function NavBar() {
@@ -55,6 +56,14 @@ function NavBar() {
               {link.label}
             </Link>
           ))}
+          <a
+            href={cvUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="pb-1 text-on-surface-variant hover:text-on-surface transition-colors duration-200 no-underline"
+          >
+            CV
+          </a>
         </div>
 
         {/* Right: socials + dark mode toggle */}
@@ -120,6 +129,14 @@ function NavBar() {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={cvUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="no-underline text-on-surface-variant hover:text-on-surface transition-colors duration-200"
+            >
+              CV
+            </a>
           </div>
           <div className="flex items-center gap-5 mt-6 pt-6 border-t border-surface-variant">
             {socials.map(({ label, url, Icon, hoverClass }) => (

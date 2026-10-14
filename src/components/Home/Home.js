@@ -7,7 +7,19 @@ import styles from "./Home.module.css";
 
 const scholarUrl = "https://scholar.google.com/citations?view_op=list_works&hl=en&user=kUignlYAAAAJ";
 
+const publicUrl = process.env.PUBLIC_URL || "";
+const cvUrl = `${publicUrl}/assets/Chinmoy_Mitra_CV.pdf`;
+
 const researchSummary = [
+  {
+    status: "Submitted",
+    venue: "ACL ARR 2026 (October cycle)",
+    question: "What does aggregate accuracy hide when a prompt is optimized?",
+    title: "Beyond Aggregate Accuracy: Item-Level Transitions in Prompt Optimization",
+    signal: "In five of nine configurations, churn was at least five times the net change; average validation gains of 7.9 points fell to 5.2 points on held-out tests.",
+    link: `${publicUrl}/assets/research/papers/prom_paper.pdf`,
+    linkLabel: "Read the paper",
+  },
   {
     status: "Submitted",
     venue: "EAAI · Elsevier · arXiv 2026",
@@ -18,15 +30,17 @@ const researchSummary = [
     linkLabel: "Read the preprint",
   },
   {
-    status: "Accepted",
+    status: "Presented",
     venue: "IEEE iCONNECT 2026",
     question: "How do you stop a compromised AI agent from escalating its own privileges?",
     title: "Trust-Gated Capability Control: Breaking the Trust-Vulnerability Paradox in Multi-Agent LLM Systems",
     signal: "A five-layer trust stack maps composite trust into short-lived, revocable capability grants — automatically revoked on compromise.",
+    link: `${publicUrl}/assets/research/papers/TGCC_PAPER.pdf`,
+    linkLabel: "Read the paper",
   },
   {
     status: "Published",
-    venue: "IEEE QPAN 2025",
+    venue: "IEEE QPAIN 2025",
     question: "Where did the focus on dependable healthcare AI begin?",
     title: "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
     signal: "The undergraduate thesis reached approximately 99.50% accuracy and established the first step in this research trajectory.",
@@ -145,7 +159,23 @@ function Home() {
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.sectionTrajectory}`} aria-labelledby="trajectory-heading">
+      <section id="cv" className={`${styles.section} ${styles.sectionTrajectory}`} aria-labelledby="cv-heading">
+        <div className={styles.inner}>
+          <header className={styles.sectionIntro}>
+            <div>
+              <h2 id="cv-heading" className={styles.sectionHeading}>Curriculum Vitae</h2>
+              <p className={styles.sectionLead}>
+                Education, research, publications, and industry experience in one document.
+              </p>
+            </div>
+          </header>
+          <a className={styles.primaryAction} href={cvUrl} target="_blank" rel="noreferrer">
+            View CV <FiExternalLink aria-hidden="true" />
+          </a>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.sectionPractice}`} aria-labelledby="trajectory-heading">
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
             <div>
@@ -240,7 +270,7 @@ function Home() {
         </div>
       </section>
 
-      <section className={`${styles.section} ${styles.sectionPractice}`} aria-labelledby="practice-heading">
+      <section className={`${styles.section} ${styles.sectionTrajectory}`} aria-labelledby="practice-heading">
         <div className={styles.inner}>
           <header className={styles.sectionIntro}>
             <div>

@@ -756,6 +756,23 @@
   ],
   "publications": [
     {
+      "title": "Beyond Aggregate Accuracy: Item-Level Transitions in Prompt Optimization",
+      "authors": [
+        "Chinmoy Mitra",
+        "Tarek Mahmud"
+      ],
+      "venue": "ACL ARR 2026 (October cycle)",
+      "year": 2026,
+      "status": "Submitted",
+      "notes": "Submitted to ACL ARR 2026 (October cycle)",
+      "summary": "Introduces RFDPO, a prompt optimizer that tracks recoveries, regressions, and churn across revisions, showing how aggregate accuracy hides item-level changes.",
+      "metrics": [
+        "Churn at least 5x net change in 5 of 9 configurations",
+        "7.9 pp average validation gain vs 5.2 pp on held-out tests"
+      ],
+      "link": "/assets/research/papers/prom_paper.pdf"
+    },
+    {
       "title": "Robust and Personalized Federated Learning for Aircraft-Engine Prognostics under Benign and Adversarial Client Heterogeneity",
       "authors": [
         "Chinmoy Mitra",
@@ -781,15 +798,15 @@
       "title": "Trust-Gated Capability Control: Breaking the Trust-Vulnerability Paradox in Multi-Agent LLM Systems",
       "venue": "IEEE iCONNECT",
       "year": 2026,
-      "status": "Accepted",
-      "notes": "Accepted at IEEE iCONNECT 2026",
+      "status": "Presented",
+      "notes": "Presented at IEEE iCONNECT 2026",
       "summary": "A security framework for multi-agent LLM collectives: an operational five-layer trust stack and a cross-layer synergy operator that maps composite trust into short-lived, revocable capability grants, so stealthy compromised agents cannot escalate privileges.",
       "metrics": [
         "Operational five-layer trust stack",
         "Short-lived, revocable capability grants",
         "Automatic revocation on compromise"
       ],
-      "link": null
+      "link": "/assets/research/papers/TGCC_PAPER.pdf"
     },
     {
       "title": "Ben-Misandry: Closing the Bidirectional Gap in Bengali Gender Hate Detection through Transformer Late Fusion",
@@ -807,10 +824,10 @@
     },
     {
       "title": "Transfer Learning Based Multiclass Brain Tumor Classification Using MRI Data",
-      "venue": "IEEE QPAN",
+      "venue": "IEEE QPAIN",
       "year": 2025,
       "status": "Published",
-      "notes": "IEEE QPAN 2025 · Undergraduate thesis",
+      "notes": "IEEE QPAIN 2025 · Undergraduate thesis",
       "summary": "ResNet50 transfer learning model for multiclass MRI brain tumor classification; ~99.50% accuracy and reduced training time.",
       "metrics": [
         "Approximately 99.50% test accuracy",
@@ -824,8 +841,8 @@
       "title": "PulmoLiteNet: A Memory-Efficient Lightweight Convolutional Network for Accurate Lung Cancer Histopathology Classification on Edge Device",
       "venue": "IEEE BECITHCON",
       "year": 2026,
-      "status": "Accepted",
-      "notes": "Accepted at IEEE BECITHCON 2026",
+      "status": "Presented",
+      "notes": "Presented at IEEE BECITHCON 2026",
       "summary": "A lightweight convolutional network derived from a redesigned AlexNet backbone for three-class lung histopathology classification on commodity edge hardware.",
       "metrics": [
         "99.8% test accuracy on LC25000",
@@ -838,8 +855,8 @@
       "title": "SpinoFuseNet: A Parameter-Efficient Feature-Fusion Ensemble with Dual Attention Gating for Lumbar Spine Degenerative Severity Classification",
       "venue": "IEEE COMPAS",
       "year": 2026,
-      "status": "Accepted",
-      "notes": "Accepted at IEEE COMPAS 2026",
+      "status": "Presented",
+      "notes": "Presented at IEEE COMPAS 2026",
       "summary": "A dual-attention early-fusion ensemble combining EfficientNetV2-S and VGG16 for lumbar spine degenerative severity classification, balancing accuracy against parameter cost.",
       "metrics": [
         "82.62% validation accuracy on LumbarDISC",

@@ -79,7 +79,7 @@ function Research() {
                     {pub.status && (
                       <span
                         className={`font-inter text-[0.62rem] uppercase tracking-[0.1em] ${
-                          pub.status === "Accepted" || pub.status === "Published"
+                          pub.status === "Accepted" || pub.status === "Published" || pub.status === "Presented"
                             ? "text-emerald-700"
                             : "text-on-surface-variant"
                         }`}
