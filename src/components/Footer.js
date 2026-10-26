@@ -14,7 +14,7 @@ function Footer() {
     <footer className="bg-nav-bg w-full mt-32 border-t border-surface-variant">
       <div className="max-w-container mx-auto px-8 py-16 flex flex-col md:flex-row justify-between items-center gap-8">
         <div className="font-newsreader text-xs uppercase tracking-[0.1em] text-on-surface">
-          &copy; {year} AI/ML Research Portfolio. Precision in Code.
+          &copy; {year} Chinmoy Mitra. AI Engineer.
         </div>
         <div className="flex gap-6 font-newsreader text-xs uppercase tracking-[0.1em]">
           {links.map((link) => (

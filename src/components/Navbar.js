@@ -14,8 +14,8 @@ function NavBar() {
   const navLinks = [
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
-    { label: "Research", path: "/research" },
     { label: "Projects", path: "/project" },
+    { label: "Research", path: "/research" },
     { label: "Contact", path: "/contact" },
   ];
 

@@ -11,6 +11,7 @@ const AgentFlowProject = lazy(() => import("./projects/AgentFlow"));
 const PDFAlapProject = lazy(() => import("./projects/PDFAlap"));
 const Note2ActionProject = lazy(() => import("./projects/Note2Action"));
 const UICraftMCPProject = lazy(() => import("./projects/UICraftMCP"));
+const CodeblocksProject = lazy(() => import("./projects/Codeblocks"));
 
 /**
  * Registry mapping slug → lazy component
@@ -22,6 +23,7 @@ const projectRegistry = {
   "multilingual-pdf-chatbot-rag": PDFAlapProject,
   note2action: Note2ActionProject,
   "ui-craft-mcp": UICraftMCPProject,
+  codeblocks: CodeblocksProject,
   // "blog-generator-llms": lazy(() => import("./projects/BlogGenerator")),
   // Add more as needed...
 };

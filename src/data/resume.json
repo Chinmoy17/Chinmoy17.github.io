@@ -196,6 +196,44 @@
   ],
   "projects": [
     {
+      "id": "codeblocks",
+      "slug": "codeblocks",
+      "visibility": "public",
+      "category": "project",
+      "featured": true,
+      "title": "Codeblocks — Evidence-Driven Security Analysis for Python and AI-Agent Code",
+      "tier": "Application Security · AI Agents",
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Next.js",
+        "TypeScript",
+        "HTML Canvas",
+        "Docker",
+        "Azure App Service"
+      ],
+      "summary": "A security analysis platform that parses Python and AI-agent code into a graph and ties each finding to its call path, source evidence, and fix — deterministically, without running the uploaded application or calling an LLM. Versioned project history, interactive code graph, and CWE/OWASP-classified reports.",
+      "links": {
+        "demo": "https://codeblocks-g8bvbjcgewa4cnhq.eastus-01.azurewebsites.net"
+      },
+      "caseStudy": {
+        "problem": "Security warnings without context are hard to act on: developers must work out reachability, ownership, and remediation themselves, and reviews across branches and releases are not preserved.",
+        "methods": [
+          "Parse Python into abstract syntax trees without importing or executing the uploaded code.",
+          "Resolve imports, calls, classes, and ownership into a graph, then evaluate deterministic security rules over it.",
+          "Cover application risks and AI-agent risks, including prompt-injection exposure and model-output paths to dangerous operations.",
+          "Persist each analysis as a versioned snapshot with graph, findings, and evidence excerpts."
+        ],
+        "results": [
+          "Findings carry source locations, evidence, code excerpts, CWE and OWASP classifications, and before-and-after remediation.",
+          "Reproducible results with no live LLM calls; uploaded source is deleted after analysis."
+        ],
+        "constraints": [
+          "Python only today. Findings are potential risks to review, not confirmed exploits."
+        ]
+      }
+    },
+    {
       "id": "note2action",
       "slug": "note2action",
       "visibility": "private",

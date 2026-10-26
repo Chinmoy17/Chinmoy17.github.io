@@ -566,6 +566,72 @@
   margin-top: 1rem;
 }
 
+@media (min-width: 981px) {
+  .practiceGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .practiceItem {
+    min-height: 300px;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .practiceItemFeatured {
+    grid-column: 1 / -1;
+    min-height: 0;
+    border-right: 0;
+  }
+
+  .practiceItemFeatured .practiceTitle {
+    font-size: 2rem;
+  }
+
+  .practiceItemFeatured .practiceCopy {
+    max-width: 760px;
+  }
+
+  .practiceItem:nth-child(2n + 1):not(.practiceItemFeatured) {
+    border-right: 0;
+  }
+
+  .practiceItem:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+.skillsGrid {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 0 2rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+
+.skillGroup {
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.skillGroupName {
+  margin: 0 0 0.6rem;
+  color: rgba(23, 25, 24, 0.58);
+  font-family: "Inter", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 650;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.skillItems {
+  margin: 0;
+  color: var(--ink);
+  font-family: "Inter", sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
 .closing {
   padding: 6rem 0 0;
   color: var(--ink);

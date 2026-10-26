@@ -15,8 +15,8 @@ const openTo = [
     body: "Agentic workflows, RAG pipelines, and production LLM systems. Happy to discuss architecture, evaluation strategy, or give a second opinion on a design.",
   },
   {
-    label: "PhD Opportunities",
-    body: "Targeting Fall 2027. If you know of open positions, relevant calls, or labs with strong alignment in NLP or AI systems — a quick note goes a long way. Also open to research volunteering or pre-PhD collaboration to build the right foundation.",
+    label: "Job Opportunities",
+    body: "Open to part-time and full-time AI engineering roles: LLM applications, agentic workflows, RAG pipelines, and ML products. A short note with the role and scope is all I need to get started.",
   },
   {
     label: "General Inquiry",

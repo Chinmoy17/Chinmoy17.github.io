@@ -248,7 +248,7 @@ function Research() {
       <Reveal>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 py-8 border-t border-surface-variant">
           <p className="font-inter text-[1.05rem] md:text-[1.2rem] font-semibold text-ink">
-            Open to research collaboration, co-authorship, and pre-PhD volunteering.
+            Open to research collaboration and co-authorship.
           </p>
           <Link
             to="/contact"
